@@ -1,13 +1,125 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-import BaseButton from "../components/Base/Button/Button.astro"
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Base/Section/Section.astro";
+import HomeHero from "../components/Home/HomeHero/HomeHero.astro";
+import AboutIntro from "../components/Home/AboutIntro/AboutIntro.astro";
+import CoursesGrid from "../components/Home/CoursesGrid/CoursesGrid.astro";
+import WhyChoose from "../components/Home/WhyChoose/WhyChoose.astro";
+import CareerFocus from "../components/Home/CareerFocus/CareerFocus.astro";
+import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.astro";
+import CampusLife from "../components/Home/CampusLife/CampusLife.astro";
+import EmptyStateSection from "../components/Home/EmptyStateSection/EmptyStateSection.astro";
+import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
+import { getContactDetails, resolvePhones } from "../lib/site";
+
+const entry = await getEntry("home", "home");
+if (!entry) throw new Error("Missing src/content/home.json");
+const page = entry.data;
+
+const contact = await getContactDetails();
+const bannerPhones = resolvePhones(
+    page.cta_banner.phones,
+    contact.phone_numbers,
+);
 ---
 
-<Layout>
-	<div class="flex h-screen items-center justify-center">
-		<BaseButton variant='secondary' size='md'>Hello</BaseButton> 
-	</div>
+<Layout title={page.meta_title} description={page.meta_description}>
+    <HomeHero
+        eyebrow={page.hero.eyebrow}
+        title={page.hero.title}
+        intro={page.hero.intro}
+        primaryCta={page.hero.primary_cta}
+        secondaryCta={page.hero.secondary_cta}
+        stats={page.hero.stats}
+        image={page.hero.image}
+        imageAlt={page.hero.image_alt}
+        badge={page.hero.badge}
+    />
+
+    <Section>
+        <AboutIntro
+            eyebrow={page.about.eyebrow}
+            title={page.about.title}
+            paragraphs={page.about.paragraphs}
+            cta={page.about.cta}
+            image={page.about.image}
+            imageAlt={page.about.image_alt}
+        />
+    </Section>
+
+    <Section id="courses" background="surface">
+        <CoursesGrid
+            eyebrow={page.courses.eyebrow}
+            title={page.courses.title}
+            description={page.courses.description}
+            cta={page.courses.cta}
+        />
+    </Section>
+
+    <Section>
+        <WhyChoose
+            eyebrow={page.why_choose.eyebrow}
+            title={page.why_choose.title}
+            items={page.why_choose.items}
+        />
+    </Section>
+
+    <Section background="navy">
+        <CareerFocus
+            eyebrow={page.career_focus.eyebrow}
+            title={page.career_focus.title}
+            description={page.career_focus.description}
+            items={page.career_focus.items}
+        />
+    </Section>
+
+    <Section background="surface">
+        <LeadershipGrid
+            eyebrow={page.leadership.eyebrow}
+            title={page.leadership.title}
+            cta={page.leadership.cta}
+            people={page.leadership.people}
+        />
+    </Section>
+
+    <Section>
+        <CampusLife
+            eyebrow={page.campus_life.eyebrow}
+            title={page.campus_life.title}
+            description={page.campus_life.description}
+            primaryCta={page.campus_life.primary_cta}
+            secondaryCta={page.campus_life.secondary_cta}
+            image={page.campus_life.image}
+            imageAlt={page.campus_life.image_alt}
+        />
+    </Section>
+
+    <Section>
+        <EmptyStateSection
+            eyebrow={page.achievements.eyebrow}
+            title={page.achievements.title}
+            description={page.achievements.description}
+            cta={page.achievements.cta}
+            emptyMessage={page.achievements.empty_message}
+        />
+    </Section>
+
+    <CtaBanner
+        kicker={page.cta_banner.kicker}
+        title={page.cta_banner.title}
+        description={page.cta_banner.description}
+        phones={bannerPhones}
+        cta={page.cta_banner.cta}
+    />
+
+    <Section background="surface">
+        <EmptyStateSection
+            eyebrow={page.news.eyebrow}
+            title={page.news.title}
+            description={page.news.description}
+            cta={page.news.cta}
+            emptyMessage={page.news.empty_message}
+        />
+    </Section>
 </Layout>

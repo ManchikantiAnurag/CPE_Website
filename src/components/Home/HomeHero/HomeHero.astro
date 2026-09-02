@@ -1,0 +1,101 @@
+---
+import Button from "../../Base/Button/Button.astro";
+import Figure from "../../Base/Figure/Figure.astro";
+
+interface Link {
+    label: string;
+    href: string;
+}
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    primaryCta: Link;
+    secondaryCta: Link;
+    stats: { label: string; value: string }[];
+    image?: string;
+    imageAlt: string;
+    badge?: string;
+}
+
+const {
+    eyebrow,
+    title,
+    intro,
+    primaryCta,
+    secondaryCta,
+    stats,
+    image,
+    imageAlt,
+    badge,
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-navy-deep">
+    <div
+        class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-24"
+    >
+        <div>
+            <p class="eyebrow">{eyebrow}</p>
+            <h1
+                class="mt-5 text-4xl leading-[1.08] text-primary-foreground md:text-5xl lg:text-[3.4rem]"
+            >
+                {title}
+            </h1>
+            <p
+                class="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/75 md:text-lg"
+            >
+                {intro}
+            </p>
+
+            <div class="mt-9 flex flex-wrap gap-3">
+                <Button href={primaryCta.href} variant="accent" size="lg">
+                    {primaryCta.label}
+                </Button>
+                <Button
+                    href={secondaryCta.href}
+                    variant="outline-inverse"
+                    size="lg"
+                >
+                    {secondaryCta.label}
+                </Button>
+            </div>
+
+            {
+                stats.length > 0 && (
+                    <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-primary-foreground/15 pt-8">
+                        {stats.map((stat) => (
+                            <div>
+                                <dt class="text-[11px] uppercase tracking-widest text-primary-foreground/55">
+                                    {stat.label}
+                                </dt>
+                                <dd class="mt-1 font-display text-2xl text-primary-foreground">
+                                    {stat.value}
+                                </dd>
+                            </div>
+                        ))}
+                    </dl>
+                )
+            }
+        </div>
+
+        <div class="relative">
+            <Figure
+                src={image}
+                alt={imageAlt}
+                width={1600}
+                height={1104}
+                loading="eager"
+                class="shadow-lift"
+            />
+            {
+                badge && (
+                    <div class="absolute -bottom-px left-0 hidden bg-accent px-6 py-4 text-accent-foreground sm:block">
+                        <p class="font-display text-lg leading-none">{badge}</p>
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</section>

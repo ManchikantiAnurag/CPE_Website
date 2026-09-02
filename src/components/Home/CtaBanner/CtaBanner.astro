@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../Base/Button/Button.astro";
+
+interface Props {
+    kicker: string;
+    title: string;
+    description: string;
+    phones: string[];
+    cta: { label: string; href: string };
+}
+
+const { kicker, title, description, phones, cta } = Astro.props;
+---
+
+<section class="bg-accent">
+    <div
+        class="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-14 lg:flex-row lg:items-center lg:justify-between"
+    >
+        <div class="max-w-2xl">
+            <p
+                class="text-xs font-semibold uppercase tracking-[0.2em] text-accent-foreground/80"
+            >
+                {kicker}
+            </p>
+            <h2 class="mt-3 text-3xl text-accent-foreground md:text-4xl">
+                {title}
+            </h2>
+            <p class="mt-3 text-sm text-accent-foreground/85">{description}</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+            {
+                phones.map((phone) => (
+                    <a
+                        href={`tel:${phone}`}
+                        class="inline-flex items-center gap-2 border border-accent-foreground/40 px-4 py-2.5 text-sm font-semibold text-accent-foreground hover:bg-accent-foreground hover:text-accent"
+                    >
+                        <Icon
+                            name="lucide:phone"
+                            class="h-4 w-4"
+                            aria-hidden="true"
+                        />
+                        {phone}
+                    </a>
+                ))
+            }
+            <Button href={cta.href} variant="navy" size="lg">
+                {cta.label}
+            </Button>
+        </div>
+    </div>
+</section>

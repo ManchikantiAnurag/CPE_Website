@@ -1,0 +1,28 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../Base/Button/Button.astro";
+import SectionHeadingRow from "../../Base/SectionHeadingRow/SectionHeadingRow.astro";
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    description?: string;
+    cta: { label: string; href: string };
+    emptyMessage: string;
+}
+
+const { eyebrow, title, description, cta, emptyMessage } = Astro.props;
+---
+
+<SectionHeadingRow eyebrow={eyebrow} title={title} description={description}>
+    <Button slot="action" href={cta.href} variant="outline">
+        {cta.label}
+        <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+    </Button>
+</SectionHeadingRow>
+
+<p
+    class="mt-10 border border-dashed border-border p-8 text-sm text-muted-foreground"
+>
+    {emptyMessage}
+</p>

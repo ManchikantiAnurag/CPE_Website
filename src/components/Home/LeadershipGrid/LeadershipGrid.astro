@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../Base/Button/Button.astro";
+import PersonCard from "../../Base/PersonCard/PersonCard.astro";
+import SectionHeadingRow from "../../Base/SectionHeadingRow/SectionHeadingRow.astro";
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    cta: { label: string; href: string };
+    people: { name: string; role: string; bio: string; photo?: string }[];
+}
+
+const { eyebrow, title, cta, people } = Astro.props;
+---
+
+<SectionHeadingRow eyebrow={eyebrow} title={title}>
+    <Button slot="action" href={cta.href} variant="outline">
+        {cta.label}
+        <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+    </Button>
+</SectionHeadingRow>
+
+<div class="mt-12 grid gap-6 md:grid-cols-3">
+    {
+        people.map((person) => (
+            <PersonCard
+                name={person.name}
+                role={person.role}
+                bio={person.bio}
+                photo={person.photo}
+            />
+        ))
+    }
+</div>

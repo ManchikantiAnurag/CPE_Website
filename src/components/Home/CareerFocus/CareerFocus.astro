@@ -1,0 +1,36 @@
+---
+import FeatureTile from "../../Base/FeatureTile/FeatureTile.astro";
+import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: { title: string; description: string }[];
+}
+
+const { eyebrow, title, description, items } = Astro.props;
+---
+
+<div class="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+    <SectionHeading
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        inverse
+    />
+
+    <div class="grid gap-px bg-primary-foreground/15 sm:grid-cols-2">
+        {
+            items.map((item) => (
+                <FeatureTile
+                    icon="lucide:briefcase"
+                    title={item.title}
+                    description={item.description}
+                    inverse
+                    compact
+                />
+            ))
+        }
+    </div>
+</div>

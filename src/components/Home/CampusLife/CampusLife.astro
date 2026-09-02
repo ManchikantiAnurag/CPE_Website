@@ -1,0 +1,56 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../Base/Button/Button.astro";
+import Figure from "../../Base/Figure/Figure.astro";
+
+interface Link {
+    label: string;
+    href: string;
+}
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    description: string;
+    primaryCta: Link;
+    secondaryCta: Link;
+    image?: string;
+    imageAlt: string;
+}
+
+const {
+    eyebrow,
+    title,
+    description,
+    primaryCta,
+    secondaryCta,
+    image,
+    imageAlt,
+} = Astro.props;
+---
+
+<div class="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+    <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 class="mt-3 text-3xl text-primary md:text-4xl">{title}</h2>
+        <p class="mt-5 text-base leading-relaxed text-muted-foreground">
+            {description}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+            <Button href={primaryCta.href} variant="outline">
+                {primaryCta.label}
+            </Button>
+            <Button href={secondaryCta.href} variant="ghost">
+                {secondaryCta.label}
+                <Icon
+                    name="lucide:arrow-right"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                />
+            </Button>
+        </div>
+    </div>
+
+    <Figure src={image} alt={imageAlt} width={1408} height={1008} />
+</div>
