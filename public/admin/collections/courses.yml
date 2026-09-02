@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+collections:
+  - name: courses
+    label: Courses
+    label_singular: Course
+    description: Programmes listed on the All Courses page.
+    folder: src/content/courses
+    extension: json
+    format: json
+    identifier_field: title
+    slug: '{{code}}'
+    summary: '{{code}} — {{title}}'
+    sortable_fields:
+      fields:
+        - order
+        - code
+        - title
+      default:
+        field: order
+        direction: ascending
+    fields:
+      - label: Course Code
+        name: code
+        widget: string
+        hint: Short code shown on course cards, e.g. MEC. Also becomes the filename.
+
+      - label: Course Title
+        name: title
+        widget: string
+        hint: Full programme name, e.g. Mathematics, Economics & Commerce.
+
+      - label: Tagline
+        name: tagline
+        widget: text
+        hint: One or two sentences summarising the programme.
+
+      - label: Display Order
+        name: order
+        widget: number
+        value_type: int
+        min: 1
+        hint: Position on the All Courses page. Lower numbers appear first.
+
+      # Shown in the "Course Details" panel on the course page. Each row is
+      # hidden when left empty.
+      - label: Duration
+        name: duration
+        widget: string
+        required: false
+        hint: e.g. Integrated with 2 years of Intermediate.
+
+      - label: Eligibility
+        name: eligibility
+        widget: text
+        required: false
+        hint: Who the programme is open to.
+
+      - label: Board
+        name: board
+        widget: string
+        required: false
+        hint: e.g. Board of Intermediate Education, Andhra Pradesh.
+
+      - label: Programme Overview
+        name: overview
+        widget: markdown
+        hint: The longer description shown on the course detail page.
+
+      - label: Programme Highlights
+        name: highlights
+        widget: list
+        label_singular: Highlight
+        field:
+          label: Highlight
+          name: highlight
+          widget: string
+
+      # Repeating data -> referenced, not retyped.
+      - label: Career Opportunities
+        name: careers
+        widget: relation
+        multiple: true
+        collection: _singletons
+        file: careers
+        value_field: careers.*.id
+        display_fields:
+          - careers.*.name
+        search_fields:
+          - careers.*.name
+        hint: Managed under Career outcomes. Add new ones there first.
+
+      - label: Enquiry Phone Numbers
+        name: enquiry_phones
+        widget: relation
+        required: false
+        multiple: true
+        collection: _singletons
+        file: contact-details
+        value_field: phone_numbers.*
+        display_fields:
+          - phone_numbers.*
+        search_fields:
+          - phone_numbers.*
+        hint: Managed under Contact details.
+
+      - label: Enquiry Email Addresses
+        name: enquiry_emails
+        widget: relation
+        required: false
+        multiple: true
+        collection: _singletons
+        file: contact-details
+        value_field: emails.*
+        display_fields:
+          - emails.*
+        search_fields:
+          - emails.*
+        hint: Managed under Contact details.

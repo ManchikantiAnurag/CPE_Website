@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Base configuration only. Collections and singletons are defined in
+# `collections/*.yml`; every file must also be listed in `index.html`.
+
+backend:
+  name: github
+  repo: HEITS-PVT-LTD/CPE_Website
+  branch: main
+
+media_folder: public/media
+public_folder: /media
+
+output:
+  json:
+    indent_style: space
+    indent_size: 2

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Sveltia CMS</title>
+    <!-- Config files are deep-merged in order; lists are concatenated. -->
+    <link rel="cms-config-url" type="application/yaml" href="/admin/config.yml" />
+    <link
+      rel="cms-config-url"
+      type="application/yaml"
+      href="/admin/collections/courses.yml"
+    />
+    <link
+      rel="cms-config-url"
+      type="application/yaml"
+      href="/admin/collections/careers.yml"
+    />
+    <link
+      rel="cms-config-url"
+      type="application/yaml"
+      href="/admin/collections/contact.yml"
+    />
+  </head>
+  <body>
+    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+  </body>
+</html>

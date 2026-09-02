@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Shared taxonomy. Career outcomes repeat across courses (Chartered
+# Accountancy appears under MEC and CA, BBA under MEC, CEC and IPMAT, etc.),
+# so they are stored once here and referenced by relation from each course.
+singletons:
+  - name: careers
+    label: Career outcomes
+    file: src/content/careers.json
+    icon: work
+    fields:
+      - label: Careers
+        name: careers
+        widget: list
+        label_singular: Career
+        fields:
+          - label: ID
+            name: id
+            widget: string
+            hint: Stable identifier referenced by courses. Avoid changing it.
+          - label: Name
+            name: name
+            widget: string

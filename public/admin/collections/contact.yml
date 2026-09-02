@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Single source of truth for contact details. Courses reference these by
+# relation rather than repeating the numbers per course.
+singletons:
+  - name: contact-details
+    label: Contact details
+    file: src/content/contact-details.json
+    icon: call
+    fields:
+      - label: Phone Numbers
+        name: phone_numbers
+        widget: list
+        field:
+          label: Phone Number
+          name: phone
+          widget: string
+      - label: Email Addresses
+        name: emails
+        widget: list
+        field:
+          label: Email Address
+          name: email
+          widget: string
+          type: email
