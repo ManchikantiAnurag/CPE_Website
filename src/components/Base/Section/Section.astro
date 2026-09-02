@@ -1,0 +1,42 @@
+---
+type Background = "background" | "surface" | "navy" | "accent";
+
+interface Props {
+    id?: string;
+    background?: Background;
+    /** `false` drops the vertical rhythm for full-bleed strips. */
+    padded?: boolean;
+    bordered?: boolean;
+    class?: string;
+}
+
+const {
+    id,
+    background = "background",
+    padded = true,
+    bordered = false,
+    class: className,
+} = Astro.props;
+
+const backgrounds: Record<Background, string> = {
+    background: "bg-background",
+    surface: "bg-surface",
+    navy: "bg-navy-deep text-primary-foreground",
+    accent: "bg-accent text-accent-foreground",
+};
+---
+
+<section
+    id={id}
+    class:list={[
+        backgrounds[background],
+        padded && "py-16 md:py-24",
+        bordered && "border-b border-border",
+        id && "scroll-mt-28",
+        className,
+    ]}
+>
+    <div class="mx-auto max-w-7xl px-6">
+        <slot />
+    </div>
+</section>

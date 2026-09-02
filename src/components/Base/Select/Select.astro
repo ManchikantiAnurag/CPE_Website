@@ -1,0 +1,19 @@
+---
+interface Props {
+    id: string;
+    name?: string;
+    placeholder?: string;
+    options: { value: string; label: string }[];
+}
+
+const { id, name, placeholder, options } = Astro.props;
+---
+
+<select
+    id={id}
+    name={name ?? id}
+    class="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+>
+    {placeholder && <option value="">{placeholder}</option>}
+    {options.map((option) => <option value={option.value}>{option.label}</option>)}
+</select>

@@ -1,0 +1,18 @@
+---
+interface Props {
+    label: string;
+    for: string;
+    required?: boolean;
+    /** Spans both columns of the enquiry form grid. */
+    full?: boolean;
+}
+
+const { label, for: htmlFor, required = false, full = false } = Astro.props;
+---
+
+<div class:list={["space-y-2", full && "md:col-span-2"]}>
+    <label for={htmlFor} class="text-sm font-medium leading-none">
+        {label}{required && " *"}
+    </label>
+    <slot />
+</div>

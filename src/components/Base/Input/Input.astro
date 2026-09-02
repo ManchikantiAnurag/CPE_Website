@@ -1,0 +1,20 @@
+---
+interface Props {
+    id: string;
+    name?: string;
+    type?: string;
+    maxlength?: number;
+    required?: boolean;
+}
+
+const { id, name, type = "text", maxlength, required = false } = Astro.props;
+---
+
+<input
+    id={id}
+    name={name ?? id}
+    type={type}
+    maxlength={maxlength}
+    required={required}
+    class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+/>

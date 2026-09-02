@@ -1,0 +1,25 @@
+---
+import Section from "../Section/Section.astro";
+
+interface Props {
+    eyebrow?: string;
+    title: string;
+    description?: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<Section background="navy" bordered padded={false} class="py-16 md:py-20">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 class="mt-3 max-w-3xl text-4xl text-primary-foreground md:text-5xl">
+        {title}
+    </h1>
+    {
+        description && (
+            <p class="mt-5 max-w-2xl text-base leading-relaxed text-primary-foreground/75">
+                {description}
+            </p>
+        )
+    }
+</Section>

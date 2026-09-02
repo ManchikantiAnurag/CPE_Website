@@ -1,0 +1,18 @@
+---
+interface Props {
+    id: string;
+    name?: string;
+    rows?: number;
+    maxlength?: number;
+}
+
+const { id, name, rows = 4, maxlength } = Astro.props;
+---
+
+<textarea
+    id={id}
+    name={name ?? id}
+    rows={rows}
+    maxlength={maxlength}
+    class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:text-sm"
+></textarea>
