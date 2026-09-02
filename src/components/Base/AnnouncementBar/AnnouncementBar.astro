@@ -1,31 +1,23 @@
 ---
-import PhoneText from "../PhoneText/PhoneText.astro";
+import ContactLink from "../ContactLink/ContactLink.astro";
 
 interface Props {
-    title: string;
-    phoneNumber: string;
-    email: string;
+    message: string;
+    phone?: string;
+    email?: string;
 }
-const { title, phoneNumber, email } = Astro.props;
+
+const { message, phone, email } = Astro.props;
 ---
 
-<div class="hidden bg-brand-primary text-primary-foreground md:block">
+<div class="hidden bg-navy-deep text-primary-foreground md:block">
     <div
         class="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs"
     >
-        <p class="tracking-wide opacity-80 text-secondary">
-            CPE Educational Institutions · Estd. 2007 · Affiliated to Board of
-            Intermediate Education, Andhra Pradesh
-        </p>
+        <p class="tracking-wide opacity-80">{message}</p>
         <div class="flex items-center gap-5">
-            <PhoneText
-                icon="lucide:phone"
-                phoneNumber={phoneNumber}
-            />
-            <PhoneText
-                icon="lucide:mail"
-                phoneNumber={email}
-            />
+            {phone && <ContactLink type="phone" value={phone} class="hover:opacity-80" />}
+            {email && <ContactLink type="email" value={email} class="hover:opacity-80" />}
         </div>
     </div>
 </div>

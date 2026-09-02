@@ -1,7 +1,7 @@
 ---
 import Button from "../../Base/Button/Button.astro";
 import DetailItem from "../../Base/DetailItem/DetailItem.astro";
-import { Icon } from "astro-icon/components";
+import ContactLink from "../../Base/ContactLink/ContactLink.astro";
 
 interface Props {
     duration?: string;
@@ -47,21 +47,17 @@ const details = [
         Apply Now
     </Button>
 
-    <div class="mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground">
+    <div
+        class="mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground"
+    >
         {
             phones.map((phone) => (
-                <a class="flex items-center gap-1.5 hover:text-accent" href={`tel:${phone}`}>
-                    <Icon name="lucide:phone" class="h-3.5 w-3.5" aria-hidden="true" />
-                    {phone}
-                </a>
+                <ContactLink type="phone" value={phone} class="hover:text-accent" />
             ))
         }
         {
             emails.map((email) => (
-                <a class="flex items-center gap-1.5 hover:text-accent" href={`mailto:${email}`}>
-                    <Icon name="lucide:mail" class="h-3.5 w-3.5" aria-hidden="true" />
-                    {email}
-                </a>
+                <ContactLink type="email" value={email} class="hover:text-accent" />
             ))
         }
     </div>

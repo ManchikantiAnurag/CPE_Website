@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+
+type ContactType = "phone" | "email";
+
+interface Props {
+    type?: ContactType;
+    value: string;
+    showIcon?: boolean;
+    icon?: string;
+    class?: string;
+}
+
+const {
+    type = "phone",
+    value,
+    showIcon = true,
+    icon,
+    class: className,
+} = Astro.props;
+
+const href = type === "email" ? `mailto:${value}` : `tel:${value}`;
+const defaultIcon = type === "email" ? "lucide:mail" : "lucide:phone";
+---
+
+<a class:list={["flex items-center gap-1.5", className]} href={href}>
+    {
+        showIcon && (
+            <Icon
+                name={icon ?? defaultIcon}
+                class="h-3.5 w-3.5 shrink-0"
+                aria-hidden="true"
+            />
+        )
+    }
+    {value}
+</a>
