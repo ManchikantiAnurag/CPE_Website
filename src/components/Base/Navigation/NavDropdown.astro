@@ -1,0 +1,39 @@
+---
+import type { NavLink } from "../../../lib/site";
+
+interface Props {
+    links: NavLink[];
+}
+
+const { links } = Astro.props;
+
+// Course entries carry a description, so they need a wider panel.
+const wide = links.some((link) => link.description);
+---
+
+<div
+    class:list={[
+        "invisible absolute left-0 top-full translate-y-1 rounded-md border border-border bg-popover p-1.5 opacity-0 shadow-lift transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100",
+        wide ? "w-64" : "w-56",
+    ]}
+>
+    {
+        links.map((link) => (
+            <a
+                href={link.href}
+                class="block rounded px-3 py-2 text-sm text-foreground hover:bg-secondary hover:text-accent"
+            >
+                {link.description ? (
+                    <>
+                        <span class="font-semibold">{link.label}</span>
+                        <span class="ml-2 text-xs text-muted-foreground">
+                            {link.description}
+                        </span>
+                    </>
+                ) : (
+                    link.label
+                )}
+            </a>
+        ))
+    }
+</div>

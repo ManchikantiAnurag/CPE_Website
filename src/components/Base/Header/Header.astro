@@ -1,0 +1,111 @@
+---
+import { Icon } from "astro-icon/components";
+import AnnouncementBar from "../AnnouncementBar/AnnouncementBar.astro";
+import Logo from "../Logo/Logo.astro";
+import Navigation from "../Navigation/Navigation.astro";
+import MobileNav from "../Navigation/MobileNav.astro";
+import Button from "../Button/Button.astro";
+import {
+    getContactDetails,
+    getCourseLinks,
+    getPrimaryNavigation,
+    getSiteSettings,
+} from "../../../lib/site";
+
+const site = await getSiteSettings();
+const contact = await getContactDetails();
+const items = await getPrimaryNavigation();
+const courses = await getCourseLinks();
+
+const currentPath = Astro.url.pathname;
+const announcement = [
+    site.institution_name,
+    `Estd. ${site.established_year}`,
+    `Affiliated to ${site.affiliation}`,
+].join(" · ");
+---
+
+<header class="sticky top-0 z-50 w-full">
+    <AnnouncementBar
+        message={announcement}
+        phone={contact.phone_numbers[0]}
+        email={contact.emails[0]}
+    />
+
+    <div class="border-b border-border bg-background/95 backdrop-blur">
+        <div
+            class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3"
+        >
+            <a href="/" class="flex shrink-0 items-center">
+                <Logo
+                    src={site.logo}
+                    alt={site.logo_alt}
+                    fallbackText={site.college_name}
+                    class="h-12 md:h-14"
+                />
+            </a>
+
+            <Navigation items={items} currentPath={currentPath} />
+
+            <div class="flex items-center gap-2">
+                <Button
+                    href={site.cta_href}
+                    variant="accent"
+                    size="sm"
+                    class="hidden min-w-0 sm:inline-flex"
+                >
+                    {site.cta_label}
+                </Button>
+                <button
+                    type="button"
+                    id="mobile-nav-toggle"
+                    class="rounded-md border border-border p-2 lg:hidden"
+                    aria-label="Toggle navigation"
+                    aria-controls="mobile-nav"
+                    aria-expanded="false"
+                >
+                    <Icon
+                        name="lucide:menu"
+                        class="h-5 w-5"
+                        data-nav-icon="open"
+                        aria-hidden="true"
+                    />
+                    <Icon
+                        name="lucide:x"
+                        class="hidden h-5 w-5"
+                        data-nav-icon="close"
+                        aria-hidden="true"
+                    />
+                </button>
+            </div>
+        </div>
+
+        <MobileNav
+            items={items}
+            courses={courses}
+            currentPath={currentPath}
+            ctaLabel={site.cta_label}
+            ctaHref={site.cta_href}
+        />
+    </div>
+</header>
+
+<script>
+    const toggle = document.getElementById("mobile-nav-toggle");
+    const panel = document.getElementById("mobile-nav");
+
+    toggle?.addEventListener("click", () => {
+        const open = panel?.hasAttribute("hidden");
+
+        if (open) panel?.removeAttribute("hidden");
+        else panel?.setAttribute("hidden", "");
+
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle
+            .querySelector('[data-nav-icon="open"]')
+            ?.classList.toggle("hidden", open);
+        toggle
+            .querySelector('[data-nav-icon="close"]')
+            ?.classList.toggle("hidden", !open);
+    });
+</script>

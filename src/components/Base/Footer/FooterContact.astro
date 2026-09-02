@@ -1,0 +1,69 @@
+---
+import { Icon } from "astro-icon/components";
+import ContactLink from "../ContactLink/ContactLink.astro";
+
+interface Props {
+    title: string;
+    addressLines: string[];
+    phones: string[];
+    emails: string[];
+}
+
+const { title, addressLines, phones, emails } = Astro.props;
+---
+
+<div>
+    <h4 class="text-sm font-semibold uppercase tracking-[0.14em]">{title}</h4>
+    <ul class="mt-5 space-y-4 text-sm opacity-80">
+        {
+            addressLines.length > 0 && (
+                <li class="flex gap-3">
+                    <Icon
+                        name="lucide:map-pin"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        aria-hidden="true"
+                    />
+                    <span>{addressLines.join(", ")}</span>
+                </li>
+            )
+        }
+        {
+            phones.length > 0 && (
+                <li class="flex gap-3">
+                    <Icon
+                        name="lucide:phone"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        aria-hidden="true"
+                    />
+                    <span class="flex flex-col">
+                        {phones.map((phone) => (
+                            <ContactLink
+                                type="phone"
+                                value={phone}
+                                showIcon={false}
+                                class="hover:text-accent"
+                            />
+                        ))}
+                    </span>
+                </li>
+            )
+        }
+        {
+            emails.map((email) => (
+                <li class="flex gap-3">
+                    <Icon
+                        name="lucide:mail"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        aria-hidden="true"
+                    />
+                    <ContactLink
+                        type="email"
+                        value={email}
+                        showIcon={false}
+                        class="break-all hover:text-accent"
+                    />
+                </li>
+            ))
+        }
+    </ul>
+</div>
