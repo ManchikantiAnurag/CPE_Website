@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  --background: oklch(100% 0 0);
+
+  --accent: oklch(58.5% 0.223 27.4);
+  --secondary: oklch(96.8% 0.004 255);
+
+  --brand-green: oklch(63% 0.166 149);
+
+  --brand-primary: oklch(20.3% 0.041 259);
+  --brand-secondary: oklch(26.8% 0.045 258);
+  --brand-soft: oklch(36% 0.045 259);
+
+  --primary: var(--brand-primary);
+  --accent-foreground: oklch(100% 0 0);
+  --foreground: var(--brand-primary);
+  --muted-foreground: oklch(50.5% 0.021 259);
+
+  --card: oklch(100% 0 0);
+  --surface: oklch(97.4% 0.005 259);
+  --border: oklch(90.5% 0.008 259);
+}
+
+@theme inline {
+  --color-background: var(--background);
+
+  --color-accent: var(--accent);
+  --color-secondary: var(--secondary);
+
+  --color-brand-green: var(--brand-green);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-soft: var(--brand-soft);
+
+  --color-primary: var(--primary);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-card: var(--card);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+}
