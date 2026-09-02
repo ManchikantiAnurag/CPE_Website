@@ -12,14 +12,25 @@
   --brand-secondary: oklch(26.8% 0.045 258);
   --brand-soft: oklch(36% 0.045 259);
 
+  /* Deep navy is the brand's dark ground: top bar, page heroes, footer. */
+  --navy-deep: var(--brand-primary);
+  --navy-soft: var(--brand-soft);
+
   --primary: var(--brand-primary);
+  --primary-foreground: oklch(100% 0 0);
   --accent-foreground: oklch(100% 0 0);
   --foreground: var(--brand-primary);
   --muted-foreground: oklch(50.5% 0.021 259);
 
   --card: oklch(100% 0 0);
+  --popover: oklch(100% 0 0);
   --surface: oklch(97.4% 0.005 259);
   --border: oklch(90.5% 0.008 259);
+  --input: var(--border);
+  --ring: var(--accent);
+
+  --font-display: Georgia, "Times New Roman", serif;
+  --shadow-lift: 0 10px 30px -12px oklch(20.3% 0.041 259 / 0.28);
 }
 
 @theme inline {
@@ -33,12 +44,46 @@
   --color-brand-secondary: var(--brand-secondary);
   --color-brand-soft: var(--brand-soft);
 
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-soft: var(--navy-soft);
+
   --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-foreground: var(--foreground);
   --color-muted-foreground: var(--muted-foreground);
 
   --color-card: var(--card);
+  --color-popover: var(--popover);
   --color-surface: var(--surface);
   --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-display: var(--font-display);
+  --shadow-lift: var(--shadow-lift);
+}
+
+/* Headings carry the display face site-wide so components only set size. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+}
+
+@layer components {
+  /* Small uppercase kicker above a section or page title. */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
 }
