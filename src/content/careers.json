@@ -1,0 +1,140 @@
+{
+  "careers": [
+    {
+      "id": "actuarial-science",
+      "name": "Actuarial Science"
+    },
+    {
+      "id": "audit-and-assurance",
+      "name": "Audit & Assurance"
+    },
+    {
+      "id": "b-com-hons",
+      "name": "B.Com (Hons)"
+    },
+    {
+      "id": "bba",
+      "name": "BBA"
+    },
+    {
+      "id": "chartered-accountancy",
+      "name": "Chartered Accountancy"
+    },
+    {
+      "id": "civil-services",
+      "name": "Civil Services"
+    },
+    {
+      "id": "company-secretary",
+      "name": "Company Secretary"
+    },
+    {
+      "id": "consulting",
+      "name": "Consulting"
+    },
+    {
+      "id": "corporate-finance",
+      "name": "Corporate Finance"
+    },
+    {
+      "id": "corporate-law",
+      "name": "Corporate Law"
+    },
+    {
+      "id": "cost-and-management-accountancy",
+      "name": "Cost & Management Accountancy"
+    },
+    {
+      "id": "cost-auditing",
+      "name": "Cost Auditing"
+    },
+    {
+      "id": "data-and-business-analytics",
+      "name": "Data & Business Analytics"
+    },
+    {
+      "id": "economics-honours",
+      "name": "Economics Honours"
+    },
+    {
+      "id": "financial-planning-and-analysis",
+      "name": "Financial Planning & Analysis"
+    },
+    {
+      "id": "financial-reporting",
+      "name": "Financial Reporting"
+    },
+    {
+      "id": "forensic-accounting",
+      "name": "Forensic Accounting"
+    },
+    {
+      "id": "iim-indore-ipm",
+      "name": "IIM Indore IPM"
+    },
+    {
+      "id": "iim-rohtak-ipm",
+      "name": "IIM Rohtak IPM"
+    },
+    {
+      "id": "integrated-management-programmes",
+      "name": "Integrated management programmes"
+    },
+    {
+      "id": "internal-audit",
+      "name": "Internal Audit"
+    },
+    {
+      "id": "investment-banking",
+      "name": "Investment Banking"
+    },
+    {
+      "id": "journalism-and-mass-communication",
+      "name": "Journalism & Mass Communication"
+    },
+    {
+      "id": "judicial-services",
+      "name": "Judicial Services"
+    },
+    {
+      "id": "law-at-national-law-universities",
+      "name": "Law at National Law Universities"
+    },
+    {
+      "id": "legal-consulting",
+      "name": "Legal Consulting"
+    },
+    {
+      "id": "litigation",
+      "name": "Litigation"
+    },
+    {
+      "id": "management-accounting",
+      "name": "Management Accounting"
+    },
+    {
+      "id": "political-science-honours",
+      "name": "Political Science Honours"
+    },
+    {
+      "id": "product-management",
+      "name": "Product Management"
+    },
+    {
+      "id": "public-policy",
+      "name": "Public Policy"
+    },
+    {
+      "id": "public-sector-undertakings",
+      "name": "Public Sector Undertakings"
+    },
+    {
+      "id": "risk-advisory",
+      "name": "Risk Advisory"
+    },
+    {
+      "id": "taxation",
+      "name": "Taxation"
+    }
+  ]
+}
