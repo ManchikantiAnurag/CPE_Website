@@ -1,0 +1,31 @@
+---
+import PhoneText from "../PhoneText/PhoneText.astro";
+
+interface Props {
+    title: string;
+    phoneNumber: string;
+    email: string;
+}
+const { title, phoneNumber, email } = Astro.props;
+---
+
+<div class="hidden bg-brand-primary text-primary-foreground md:block">
+    <div
+        class="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-xs"
+    >
+        <p class="tracking-wide opacity-80 text-secondary">
+            CPE Educational Institutions · Estd. 2007 · Affiliated to Board of
+            Intermediate Education, Andhra Pradesh
+        </p>
+        <div class="flex items-center gap-5">
+            <PhoneText
+                icon="lucide:phone"
+                phoneNumber={phoneNumber}
+            />
+            <PhoneText
+                icon="lucide:mail"
+                phoneNumber={email}
+            />
+        </div>
+    </div>
+</div>

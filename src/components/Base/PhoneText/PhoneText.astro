@@ -1,0 +1,19 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    showIcon?: boolean;
+    icon?: string;
+    phoneNumber: string;
+}
+
+const { showIcon = true, icon = "lucide:phone", phoneNumber } = Astro.props;
+---
+
+<a
+    class="flex items-center gap-1.5 hover:opacity-80 text-secondary"
+    href={`tel:${phoneNumber}`}
+>
+    {showIcon && <Icon name={icon} class="h-3.5 w-3.5" aria-hidden="true" />}
+    {phoneNumber}
+</a>
