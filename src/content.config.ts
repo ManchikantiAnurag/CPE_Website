@@ -99,6 +99,15 @@ const navigation = defineCollection({
     }),
 });
 
+/** A heading, a link out, and a placeholder until the college publishes items. */
+const emptyStateSection = z.object({
+    eyebrow: z.string(),
+    title: z.string(),
+    description: z.string().default(""),
+    cta: z.object({ label: z.string(), href: z.string() }),
+    empty_message: z.string(),
+});
+
 const listSection = z.object({
     title: z.string(),
     items: z.array(z.string()).default([]),
@@ -148,6 +157,104 @@ const admissions = defineCollection({
     }),
 });
 
+const cta = z.object({ label: z.string(), href: z.string() });
+
+/** Images are optional so the site builds before assets are uploaded. */
+const image = z.object({
+    image: z.string().default(""),
+    image_alt: z.string().default(""),
+});
+
+const home = defineCollection({
+    loader: singleton("src/content/home.json", "home"),
+    schema: z.object({
+        meta_title: z.string(),
+        meta_description: z.string(),
+        hero: z
+            .object({
+                eyebrow: z.string(),
+                title: z.string(),
+                intro: z.string(),
+                primary_cta: cta,
+                secondary_cta: cta,
+                stats: z
+                    .array(z.object({ label: z.string(), value: z.string() }))
+                    .default([]),
+                badge: z.string().default(""),
+            })
+            .merge(image),
+        about: z
+            .object({
+                eyebrow: z.string(),
+                title: z.string(),
+                paragraphs: z.array(z.string()).default([]),
+                cta: cta,
+            })
+            .merge(image),
+        courses: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            description: z.string(),
+            cta: cta,
+        }),
+        why_choose: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            items: z
+                .array(
+                    z.object({
+                        icon: z.string(),
+                        title: z.string(),
+                        description: z.string(),
+                    }),
+                )
+                .default([]),
+        }),
+        career_focus: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            description: z.string(),
+            items: z
+                .array(z.object({ title: z.string(), description: z.string() }))
+                .default([]),
+        }),
+        leadership: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            cta: cta,
+            people: z
+                .array(
+                    z.object({
+                        name: z.string(),
+                        role: z.string(),
+                        bio: z.string(),
+                        photo: z.string().default(""),
+                    }),
+                )
+                .default([]),
+        }),
+        campus_life: z
+            .object({
+                eyebrow: z.string(),
+                title: z.string(),
+                description: z.string(),
+                primary_cta: cta,
+                secondary_cta: cta,
+            })
+            .merge(image),
+        achievements: emptyStateSection,
+        cta_banner: z.object({
+            kicker: z.string(),
+            title: z.string(),
+            description: z.string(),
+            // Empty falls back to the shared contact details.
+            phones: z.array(z.string()).default([]),
+            cta: cta,
+        }),
+        news: emptyStateSection,
+    }),
+});
+
 export const collections = {
     courses,
     careers,
@@ -155,4 +262,5 @@ export const collections = {
     siteSettings,
     navigation,
     admissions,
+    home,
 };
