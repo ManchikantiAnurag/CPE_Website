@@ -1,1 +1,30 @@
-<h1>Map</h1>
+---
+interface Props {
+    title: string;
+    /** An explicit embed URL. Falls back to a search for `query`. */
+    src?: string;
+    query?: string;
+}
+
+const { title, src, query } = Astro.props;
+
+const embedUrl =
+    src ||
+    (query
+        ? `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`
+        : undefined);
+---
+
+{
+    embedUrl && (
+        <div class="border border-border">
+            <iframe
+                title={title}
+                src={embedUrl}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="h-[420px] w-full"
+            />
+        </div>
+    )
+}

@@ -11,9 +11,18 @@
       "href": "/about",
       "children_source": "none",
       "children": [
-        { "label": "About CPE", "href": "/about#about-cpe" },
-        { "label": "Vision & Mission", "href": "/about#vision-mission" },
-        { "label": "Leadership", "href": "/about#leadership" }
+        {
+          "label": "About CPE",
+          "href": "/about#about-cpe"
+        },
+        {
+          "label": "Vision & Mission",
+          "href": "/about#vision-mission"
+        },
+        {
+          "label": "Leadership",
+          "href": "/about#leadership"
+        }
       ]
     },
     {
@@ -48,12 +57,15 @@
     },
     {
       "label": "Contact Us",
-      "href": "/contact-us",
+      "href": "/contact",
       "children_source": "none",
       "children": []
     }
   ],
   "footer_note_links": [
-    { "label": "Admin", "href": "/admin" }
+    {
+      "label": "Admin",
+      "href": "/admin"
+    }
   ]
 }

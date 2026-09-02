@@ -1,0 +1,56 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
+import Map from "../components/Base/Map/Map.astro";
+import ContactDetails from "../components/Contact/ContactDetails/ContactDetails.astro";
+import ContactForm from "../components/Contact/ContactForm/ContactForm.astro";
+import { getContactDetails, getSection } from "../lib/site";
+
+const seo = await getSection("contactSeo");
+const hero = await getSection("contactHero");
+const location = await getSection("contactLocation");
+
+const contact = await getContactDetails();
+
+const addressLines = [
+    contact.address.line1,
+    contact.address.line2,
+    contact.address.line3,
+].filter((line): line is string => Boolean(line));
+
+// An explicit map URL wins; otherwise the address is searched for.
+const mapQuery = addressLines.join(", ");
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description}>
+    <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.intro}
+    />
+
+    <Section>
+        <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+            <ContactDetails
+                addressLines={addressLines}
+                phones={contact.phone_numbers}
+                emails={contact.emails}
+                socialLinks={contact.social_links}
+            />
+            <ContactForm />
+        </div>
+    </Section>
+
+    <Section background="surface">
+        <SectionHeading eyebrow={location.eyebrow} title={location.title} />
+        <div class="mt-10">
+            <Map
+                title={location.map_title}
+                src={contact.map_url}
+                query={mapQuery}
+            />
+        </div>
+    </Section>
+</Layout>

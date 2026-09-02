@@ -1,8 +1,11 @@
 {
   "code": "MEC",
   "title": "Mathematics, Economics & Commerce",
-  "tagline": "A strong analytical foundation combining mathematics with economics and commerce for finance and management careers.",
+  "tagline": "A strong analytical foundation combining mathematics with economics and commerce for finance and management",
   "order": 1,
+  "duration": "2 Years",
+  "eligibility": "",
+  "board": "",
   "overview": "MEC is an intermediate stream under the Board of Intermediate Education, Andhra Pradesh, designed for students who enjoy numbers and want to build careers in finance, data, economics and management. The programme blends quantitative rigour with commercial understanding, giving students the analytical base required for CA, CMA, IPMAT, actuarial studies and top-tier commerce degrees.",
   "highlights": [
     "Mathematics-driven analytical training",
@@ -27,6 +30,5 @@
   ],
   "enquiry_emails": [
     "cpejuniorcollege@gmail.com"
-  ],
-  "duration": "2 Years"
+  ]
 }

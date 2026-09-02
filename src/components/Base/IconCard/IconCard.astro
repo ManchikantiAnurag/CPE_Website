@@ -4,16 +4,30 @@ import { Icon } from "astro-icon/components";
 interface Props {
     icon: string;
     title: string;
-    description: string;
+    /** Omit to supply richer content through the default slot instead. */
+    description?: string;
+    /** h2 where the card is a page-level landmark, h3 inside a section. */
+    headingLevel?: "h2" | "h3";
 }
 
-const { icon, title, description } = Astro.props;
+const {
+    icon,
+    title,
+    description,
+    headingLevel: Heading = "h3",
+} = Astro.props;
 ---
 
 <div class="border border-border bg-card p-7">
     <Icon name={icon} class="h-6 w-6 text-accent" aria-hidden="true" />
-    <h3 class="mt-4 text-lg text-primary">{title}</h3>
-    <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
-        {description}
-    </p>
+    <Heading class="mt-4 text-lg text-primary">{title}</Heading>
+    {
+        description ? (
+            <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {description}
+            </p>
+        ) : (
+            <slot />
+        )
+    }
 </div>

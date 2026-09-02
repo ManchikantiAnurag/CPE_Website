@@ -1,0 +1,66 @@
+---
+import ContactLink from "../../Base/ContactLink/ContactLink.astro";
+import IconCard from "../../Base/IconCard/IconCard.astro";
+import SocialLinks from "../../Base/SocialLinks/SocialLinks.astro";
+
+interface Props {
+    addressLines: string[];
+    phones: string[];
+    emails: string[];
+    socialLinks: { platform: string; label: string; url: string }[];
+}
+
+const { addressLines, phones, emails, socialLinks } = Astro.props;
+---
+
+<div class="space-y-6">
+    {
+        addressLines.length > 0 && (
+            <IconCard icon="lucide:map-pin" title="Address" headingLevel="h2">
+                <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {addressLines.map((line, index) => (
+                        <>
+                            {index > 0 && <br />}
+                            {line}
+                        </>
+                    ))}
+                </p>
+            </IconCard>
+        )
+    }
+
+    {
+        phones.length > 0 && (
+            <IconCard icon="lucide:phone" title="Phone" headingLevel="h2">
+                <div class="mt-3 flex flex-col gap-1 text-sm text-muted-foreground">
+                    {phones.map((phone) => (
+                        <ContactLink
+                            type="phone"
+                            value={phone}
+                            showIcon={false}
+                            class="hover:text-accent"
+                        />
+                    ))}
+                </div>
+            </IconCard>
+        )
+    }
+
+    {
+        emails.length > 0 && (
+            <IconCard icon="lucide:mail" title="Email" headingLevel="h2">
+                <div class="mt-3 flex flex-col gap-1 text-sm text-muted-foreground">
+                    {emails.map((email) => (
+                        <ContactLink
+                            type="email"
+                            value={email}
+                            showIcon={false}
+                            class="break-all hover:text-accent"
+                        />
+                    ))}
+                </div>
+                <SocialLinks links={socialLinks} variant="light" class="mt-6" />
+            </IconCard>
+        )
+    }
+</div>

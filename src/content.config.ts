@@ -418,6 +418,28 @@ const aboutLeadership = section(
     }),
 );
 
+/* ----------------------------------------------------------- contact page */
+
+const contactSeo = section("src/content/contact/seo.json", seo);
+
+const contactHero = section(
+    "src/content/contact/hero.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+    }),
+);
+
+const contactLocation = section(
+    "src/content/contact/location.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        map_title: z.string(),
+    }),
+);
+
 export const collections = {
     courses,
     careers,
@@ -455,4 +477,8 @@ export const collections = {
     aboutVisionMission,
     aboutWhyChoose,
     aboutLeadership,
+
+    contactSeo,
+    contactHero,
+    contactLocation,
 };

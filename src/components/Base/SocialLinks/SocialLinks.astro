@@ -3,10 +3,18 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
     links: { platform: string; label: string; url: string }[];
+    /** "inverse" sits on the navy footer, "light" on a white card. */
+    variant?: "light" | "inverse";
     class?: string;
 }
 
-const { links, class: className } = Astro.props;
+const { links, variant = "inverse", class: className } = Astro.props;
+
+const styles = {
+    light: "border border-border p-2.5 text-primary hover:border-accent hover:text-accent",
+    inverse:
+        "rounded border border-primary-foreground/20 p-2 hover:border-accent hover:text-accent",
+};
 ---
 
 {
@@ -16,9 +24,9 @@ const { links, class: className } = Astro.props;
                 <a
                     href={link.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     aria-label={link.label}
-                    class="rounded border border-primary-foreground/20 p-2 hover:border-accent hover:text-accent"
+                    class={styles[variant]}
                 >
                     <Icon
                         name={`lucide:${link.platform}`}
