@@ -1,0 +1,22 @@
+---
+import SectionHeading from "../SectionHeading/SectionHeading.astro";
+
+interface Props {
+    eyebrow?: string;
+    title: string;
+    description?: string;
+    inverse?: boolean;
+}
+
+const { eyebrow, title, description, inverse } = Astro.props;
+---
+
+<div class="flex flex-wrap items-end justify-between gap-6">
+    <SectionHeading
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        inverse={inverse}
+    />
+    <slot name="action" />
+</div>

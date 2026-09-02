@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon: string;
+    title: string;
+    description: string;
+    /** Sits on the navy ground rather than a card. */
+    inverse?: boolean;
+    compact?: boolean;
+}
+
+const { icon, title, description, inverse = false, compact = false } = Astro.props;
+---
+
+<div class:list={[inverse ? "bg-navy-deep p-7" : "bg-card p-8"]}>
+    <Icon
+        name={icon}
+        class:list={["text-accent", compact ? "h-6 w-6" : "h-7 w-7"]}
+        aria-hidden="true"
+    />
+    <h3
+        class:list={[
+            compact ? "mt-4 text-base" : "mt-5 text-lg",
+            inverse ? "text-primary-foreground" : "text-primary",
+        ]}
+    >
+        {title}
+    </h3>
+    <p
+        class:list={[
+            compact ? "mt-2" : "mt-3",
+            "text-sm leading-relaxed",
+            inverse ? "text-primary-foreground/70" : "text-muted-foreground",
+        ]}
+    >
+        {description}
+    </p>
+</div>

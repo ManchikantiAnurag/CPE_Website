@@ -1,0 +1,44 @@
+---
+interface Props {
+    src?: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    loading?: "eager" | "lazy";
+    class?: string;
+}
+
+const {
+    src,
+    alt,
+    width,
+    height,
+    loading = "lazy",
+    class: className,
+} = Astro.props;
+---
+
+{
+    src ? (
+        <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            loading={loading}
+            class:list={["w-full object-cover", className]}
+        />
+    ) : (
+        /* Placeholder until the image is uploaded through the CMS. */
+        <div
+            role="img"
+            aria-label={alt}
+            class:list={[
+                "flex aspect-[4/3] w-full items-center justify-center border border-dashed border-border bg-surface p-6 text-center text-sm text-muted-foreground",
+                className,
+            ]}
+        >
+            {alt}
+        </div>
+    )
+}

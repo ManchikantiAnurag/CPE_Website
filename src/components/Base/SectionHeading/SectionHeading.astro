@@ -4,6 +4,8 @@ interface Props {
     title: string;
     description?: string;
     centered?: boolean;
+    /** Light type, for headings sitting on the navy ground. */
+    inverse?: boolean;
     class?: string;
 }
 
@@ -12,16 +14,31 @@ const {
     title,
     description,
     centered = false,
+    inverse = false,
     class: className,
 } = Astro.props;
 ---
 
 <div class:list={["max-w-3xl", centered && "mx-auto text-center", className]}>
     {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h2 class="mt-3 text-3xl text-primary md:text-4xl">{title}</h2>
+    <h2
+        class:list={[
+            "mt-3 text-3xl md:text-4xl",
+            inverse ? "text-primary-foreground" : "text-primary",
+        ]}
+    >
+        {title}
+    </h2>
     {
         description && (
-            <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+            <p
+                class:list={[
+                    "mt-4 text-base leading-relaxed",
+                    inverse
+                        ? "text-primary-foreground/75"
+                        : "text-muted-foreground",
+                ]}
+            >
                 {description}
             </p>
         )
