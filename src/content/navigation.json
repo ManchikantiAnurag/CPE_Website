@@ -1,0 +1,59 @@
+{
+  "primary": [
+    {
+      "label": "Home",
+      "href": "/",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "About Us",
+      "href": "/about",
+      "children_source": "none",
+      "children": [
+        { "label": "About CPE", "href": "/about#about-cpe" },
+        { "label": "Vision & Mission", "href": "/about#vision-mission" },
+        { "label": "Leadership", "href": "/about#leadership" }
+      ]
+    },
+    {
+      "label": "Courses",
+      "href": "/courses",
+      "children_source": "courses",
+      "children": []
+    },
+    {
+      "label": "Campus Life",
+      "href": "/campus-life",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "Admissions",
+      "href": "/admissions",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "News & Events",
+      "href": "/news",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "Contact Us",
+      "href": "/contact-us",
+      "children_source": "none",
+      "children": []
+    }
+  ],
+  "footer_note_links": [
+    { "label": "Admin", "href": "/admin" }
+  ]
+}

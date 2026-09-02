@@ -1,9 +1,32 @@
 {
   "phone_numbers": [
     "9666829555",
-    "9666829554"
+    "9666829925"
   ],
   "emails": [
     "cpejuniorcollege@gmail.com"
+  ],
+  "address": {
+    "line1": "10-5-7, Sri Sai Surya Building",
+    "line2": "Ram Nagar, Visakhapatnam",
+    "line3": "Andhra Pradesh – 530002"
+  },
+  "map_url": "",
+  "social_links": [
+    {
+      "platform": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/"
+    },
+    {
+      "platform": "instagram",
+      "label": "Instagram",
+      "url": "https://www.instagram.com/"
+    },
+    {
+      "platform": "youtube",
+      "label": "YouTube",
+      "url": "https://www.youtube.com/"
+    }
   ]
 }
