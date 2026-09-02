@@ -1,0 +1,26 @@
+---
+import IconCard from "../../Base/IconCard/IconCard.astro";
+import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    items: { icon: string; title: string; description: string }[];
+}
+
+const { eyebrow, title, items } = Astro.props;
+---
+
+<SectionHeading eyebrow={eyebrow} title={title} />
+
+<div class="mt-10 grid gap-6 md:grid-cols-3">
+    {
+        items.map((item) => (
+            <IconCard
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+            />
+        ))
+    }
+</div>

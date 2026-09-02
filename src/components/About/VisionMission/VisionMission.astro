@@ -1,0 +1,31 @@
+---
+interface Props {
+    vision: { eyebrow: string; title: string; description: string };
+    mission: { eyebrow: string; items: string[] };
+}
+
+const { vision, mission } = Astro.props;
+---
+
+<div class="grid gap-12 md:grid-cols-2">
+    <div>
+        <p class="eyebrow">{vision.eyebrow}</p>
+        <h2 class="mt-3 text-3xl text-primary-foreground">{vision.title}</h2>
+        <p class="mt-5 text-base leading-relaxed text-primary-foreground/75">
+            {vision.description}
+        </p>
+    </div>
+
+    <div>
+        <p class="eyebrow">{mission.eyebrow}</p>
+        <ul
+            class="mt-5 space-y-4 text-base leading-relaxed text-primary-foreground/80"
+        >
+            {
+                mission.items.map((item) => (
+                    <li class="border-l-2 border-accent pl-4">{item}</li>
+                ))
+            }
+        </ul>
+    </div>
+</div>

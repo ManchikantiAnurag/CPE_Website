@@ -2,12 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Base/Section/Section.astro";
 import HomeHero from "../components/Home/HomeHero/HomeHero.astro";
-import AboutIntro from "../components/Home/AboutIntro/AboutIntro.astro";
+import MediaText from "../components/Base/MediaText/MediaText.astro";
+import Button from "../components/Base/Button/Button.astro";
+import { Icon } from "astro-icon/components";
 import CoursesGrid from "../components/Home/CoursesGrid/CoursesGrid.astro";
 import WhyChoose from "../components/Home/WhyChoose/WhyChoose.astro";
 import CareerFocus from "../components/Home/CareerFocus/CareerFocus.astro";
 import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.astro";
-import CampusLife from "../components/Home/CampusLife/CampusLife.astro";
 import EmptyStateSection from "../components/Home/EmptyStateSection/EmptyStateSection.astro";
 import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
 import { getContactDetails, getSection, resolvePhones } from "../lib/site";
@@ -42,14 +43,23 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
     />
 
     <Section>
-        <AboutIntro
+        <MediaText
             eyebrow={about.eyebrow}
             title={about.title}
             paragraphs={about.paragraphs}
-            cta={about.cta}
             image={about.image}
             imageAlt={about.image_alt}
-        />
+            imagePosition="start"
+        >
+            <Button slot="actions" href={about.cta.href} variant="outline">
+                {about.cta.label}
+                <Icon
+                    name="lucide:arrow-right"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                />
+            </Button>
+        </MediaText>
     </Section>
 
     <Section id="courses" background="surface">
@@ -83,20 +93,31 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
             eyebrow={leadership.eyebrow}
             title={leadership.title}
             cta={leadership.cta}
-            people={leadership.people}
         />
     </Section>
 
     <Section>
-        <CampusLife
+        <MediaText
             eyebrow={campusLife.eyebrow}
             title={campusLife.title}
-            description={campusLife.description}
-            primaryCta={campusLife.primary_cta}
-            secondaryCta={campusLife.secondary_cta}
+            paragraphs={[campusLife.description]}
             image={campusLife.image}
             imageAlt={campusLife.image_alt}
-        />
+        >
+            <Fragment slot="actions">
+                <Button href={campusLife.primary_cta.href} variant="outline">
+                    {campusLife.primary_cta.label}
+                </Button>
+                <Button href={campusLife.secondary_cta.href} variant="ghost">
+                    {campusLife.secondary_cta.label}
+                    <Icon
+                        name="lucide:arrow-right"
+                        class="h-4 w-4"
+                        aria-hidden="true"
+                    />
+                </Button>
+            </Fragment>
+        </MediaText>
     </Section>
 
     <Section>

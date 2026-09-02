@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# The founder, management and principal appear on both the home page and the
+# about page, so they are described once here and read by both.
+singletons:
+  - name: leadership
+    label: "Site: Leadership"
+    file: src/content/leadership.json
+    icon: groups
+    fields:
+      - label: People
+        name: people
+        widget: list
+        label_singular: Person
+        summary: "{{fields.name}} — {{fields.role}}"
+        fields:
+          - label: ID
+            name: id
+            widget: string
+            hint: Stable identifier. Avoid changing it.
+          - label: Display Order
+            name: order
+            widget: number
+            value_type: int
+            min: 1
+            hint: Lower numbers appear first.
+          - label: Name
+            name: name
+            widget: string
+          - label: Role
+            name: role
+            widget: string
+          - label: Biography
+            name: bio
+            widget: text
+          - label: Photograph
+            name: photo
+            widget: image
+            required: false
+            hint: The first letter of the name shows until a photo is added.

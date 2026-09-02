@@ -1,0 +1,21 @@
+{
+  "eyebrow": "Our History",
+  "title": "Serving Visakhapatnam since 2007",
+  "items": [
+    {
+      "icon": "lucide:history",
+      "title": "Founded in 2007",
+      "description": "CPE Educational Institutions was established with a commitment to disciplined teaching and genuine student care."
+    },
+    {
+      "icon": "lucide:compass",
+      "title": "Commerce Specialisation",
+      "description": "The junior college concentrated on MEC and CEC, building faculty depth in accountancy, economics, commerce and civics."
+    },
+    {
+      "icon": "lucide:flag",
+      "title": "Integrated Coaching",
+      "description": "CA, CMA, IPMAT and CLAT preparation was brought into the college timetable so students prepare without a parallel institute."
+    }
+  ]
+}

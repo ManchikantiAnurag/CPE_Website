@@ -35,6 +35,14 @@ export async function getSection<C extends keyof DataEntryMap>(collection: C) {
     return entry.data;
 }
 
+/** The shared leadership list, in display order. */
+export async function getLeadership() {
+    const people = await getCollection("leadership");
+    return people
+        .sort((a, b) => a.data.order - b.data.order)
+        .map((person) => person.data);
+}
+
 export async function getSiteSettings() {
     const entry = await getEntry("siteSettings", "site-settings");
     if (!entry) throw new Error("Missing src/content/site-settings.json");

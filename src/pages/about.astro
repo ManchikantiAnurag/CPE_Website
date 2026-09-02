@@ -1,1 +1,69 @@
-<h1>About</h1>
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
+import MediaText from "../components/Base/MediaText/MediaText.astro";
+import BulletGrid from "../components/Base/BulletGrid/BulletGrid.astro";
+import PeopleGrid from "../components/Base/PeopleGrid/PeopleGrid.astro";
+import AboutHistory from "../components/About/AboutHistory/AboutHistory.astro";
+import VisionMission from "../components/About/VisionMission/VisionMission.astro";
+import { getLeadership, getSection } from "../lib/site";
+
+const seo = await getSection("aboutSeo");
+const hero = await getSection("aboutHero");
+const aboutCpe = await getSection("aboutCpe");
+const history = await getSection("aboutHistory");
+const visionMission = await getSection("aboutVisionMission");
+const whyChoose = await getSection("aboutWhyChoose");
+const leadership = await getSection("aboutLeadership");
+
+const people = await getLeadership();
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description}>
+    <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.intro}
+    />
+
+    <Section id="about-cpe">
+        <MediaText
+            eyebrow={aboutCpe.eyebrow}
+            title={aboutCpe.title}
+            paragraphs={aboutCpe.paragraphs}
+            image={aboutCpe.image}
+            imageAlt={aboutCpe.image_alt}
+        />
+    </Section>
+
+    <Section background="surface">
+        <AboutHistory
+            eyebrow={history.eyebrow}
+            title={history.title}
+            items={history.items}
+        />
+    </Section>
+
+    <Section id="vision-mission" background="navy">
+        <VisionMission
+            vision={visionMission.vision}
+            mission={visionMission.mission}
+        />
+    </Section>
+
+    <Section>
+        <SectionHeading eyebrow={whyChoose.eyebrow} title={whyChoose.title} />
+        <BulletGrid items={whyChoose.items} class="mt-10" />
+    </Section>
+
+    <Section id="leadership" background="surface">
+        <SectionHeading
+            eyebrow={leadership.eyebrow}
+            title={leadership.title}
+            description={leadership.description}
+        />
+        <PeopleGrid people={people} class="mt-12" />
+    </Section>
+</Layout>

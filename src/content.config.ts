@@ -77,6 +77,21 @@ const careers = defineCollection({
     }),
 });
 
+/** Shared across the home and about pages, so people are described once. */
+const leadership = defineCollection({
+    loader: file("src/content/leadership.json", {
+        parser: (text) => JSON.parse(text).people,
+    }),
+    schema: z.object({
+        id: z.string(),
+        order: z.number(),
+        name: z.string(),
+        role: z.string(),
+        bio: z.string(),
+        photo: z.string().default(""),
+    }),
+});
+
 const contactDetails = defineCollection({
     loader: singleton("src/content/contact-details.json", "contact-details"),
     schema: z.object({
@@ -220,16 +235,6 @@ const homeLeadership = section(
         eyebrow: z.string(),
         title: z.string(),
         cta: cta,
-        people: z
-            .array(
-                z.object({
-                    name: z.string(),
-                    role: z.string(),
-                    bio: z.string(),
-                    photo: z.string().default(""),
-                }),
-            )
-            .default([]),
     }),
 );
 
@@ -339,9 +344,84 @@ const admissionsEnquiry = section(
     }),
 );
 
+/* ------------------------------------------------------------- about page */
+
+const aboutSeo = section("src/content/about/seo.json", seo);
+
+const aboutHero = section(
+    "src/content/about/hero.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+    }),
+);
+
+const aboutCpe = section(
+    "src/content/about/about-cpe.json",
+    z
+        .object({
+            eyebrow: z.string(),
+            title: z.string(),
+            paragraphs: z.array(z.string()).default([]),
+        })
+        .merge(image),
+);
+
+const aboutHistory = section(
+    "src/content/about/history.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z
+            .array(
+                z.object({
+                    icon: z.string(),
+                    title: z.string(),
+                    description: z.string(),
+                }),
+            )
+            .default([]),
+    }),
+);
+
+const aboutVisionMission = section(
+    "src/content/about/vision-mission.json",
+    z.object({
+        vision: z.object({
+            eyebrow: z.string(),
+            title: z.string(),
+            description: z.string(),
+        }),
+        mission: z.object({
+            eyebrow: z.string(),
+            items: z.array(z.string()).default([]),
+        }),
+    }),
+);
+
+const aboutWhyChoose = section(
+    "src/content/about/why-choose.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z.array(z.string()).default([]),
+    }),
+);
+
+const aboutLeadership = section(
+    "src/content/about/leadership.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        description: z.string(),
+    }),
+);
+
 export const collections = {
     courses,
     careers,
+    leadership,
     contactDetails,
     siteSettings,
     navigation,
@@ -367,4 +447,12 @@ export const collections = {
     admissionsDates,
     admissionsProspectus,
     admissionsEnquiry,
+
+    aboutSeo,
+    aboutHero,
+    aboutCpe,
+    aboutHistory,
+    aboutVisionMission,
+    aboutWhyChoose,
+    aboutLeadership,
 };

@@ -205,6 +205,7 @@ singletons:
     label: "Home: Leadership"
     file: src/content/home/leadership.json
     icon: groups
+    hint: "The people themselves are managed under Site: Leadership."
     fields:
       - label: Eyebrow
         name: eyebrow
@@ -222,26 +223,6 @@ singletons:
           - label: Link
             name: href
             widget: string
-      - label: People
-        name: people
-        widget: list
-        label_singular: Person
-        summary: "{{fields.name}}"
-        fields:
-          - label: Name
-            name: name
-            widget: string
-          - label: Role
-            name: role
-            widget: string
-          - label: Biography
-            name: bio
-            widget: text
-          - label: Photograph
-            name: photo
-            widget: image
-            required: false
-            hint: The first letter of the name shows until a photo is added.
 
   - name: home-campus-life
     label: "Home: Campus and Student Life"

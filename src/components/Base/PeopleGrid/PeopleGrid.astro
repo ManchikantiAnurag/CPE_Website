@@ -1,0 +1,23 @@
+---
+import PersonCard from "../PersonCard/PersonCard.astro";
+
+interface Props {
+    people: { name: string; role: string; bio: string; photo?: string }[];
+    class?: string;
+}
+
+const { people, class: className } = Astro.props;
+---
+
+<div class:list={["grid gap-6 md:grid-cols-3", className]}>
+    {
+        people.map((person) => (
+            <PersonCard
+                name={person.name}
+                role={person.role}
+                bio={person.bio}
+                photo={person.photo}
+            />
+        ))
+    }
+</div>
