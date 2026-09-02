@@ -1,0 +1,61 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import CourseOverview from "../../components/Courses/CourseOverview/CourseOverview.astro";
+import CourseSidebar from "../../components/Courses/CourseSidebar/CourseSidebar.astro";
+
+export async function getStaticPaths() {
+    const courses = await getCollection("courses");
+
+    return courses.map((course) => ({
+        params: { slug: course.id },
+        props: { course: course.data },
+    }));
+}
+
+const { course } = Astro.props;
+
+const careers = await getCollection("careers");
+const careerNames = course.careers.map(
+    (id) => careers.find((career) => career.data.id === id)?.data.name ?? id,
+);
+
+const contactDetails = await getEntry("contactDetails", "contact-details");
+const phones = course.enquiry_phones.length
+    ? course.enquiry_phones
+    : (contactDetails?.data.phone_numbers ?? []);
+const emails = course.enquiry_emails.length
+    ? course.enquiry_emails
+    : (contactDetails?.data.emails ?? []);
+---
+
+<Layout>
+    <main class="mx-auto max-w-7xl px-6 py-12">
+        <header class="max-w-3xl">
+            <p
+                class="text-[11px] font-semibold uppercase tracking-widest text-accent"
+            >
+                {course.code}
+            </p>
+            <h1 class="mt-2 text-4xl text-primary">{course.title}</h1>
+            <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+                {course.tagline}
+            </p>
+        </header>
+
+        <div class="mt-12 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
+            <CourseOverview
+                overview={course.overview}
+                highlights={course.highlights}
+                careers={careerNames}
+            />
+            <CourseSidebar
+                duration={course.duration}
+                eligibility={course.eligibility}
+                board={course.board}
+                phones={phones}
+                emails={emails}
+            />
+        </div>
+    </main>
+</Layout>

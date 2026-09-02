@@ -1,0 +1,45 @@
+---
+import CheckList from "../../Base/CheckList/CheckList.astro";
+import Tag from "../../Base/Tag/Tag.astro";
+
+interface Props {
+    overview: string;
+    highlights: string[];
+    careers: string[];
+}
+
+const { overview, highlights, careers } = Astro.props;
+---
+
+<div>
+    <h2 class="text-2xl text-primary">Programme Overview</h2>
+    <p
+        class="mt-4 whitespace-pre-line text-base leading-relaxed text-muted-foreground"
+    >
+        {overview}
+    </p>
+
+    {
+        highlights.length > 0 && (
+            <>
+                <h3 class="mt-10 text-xl text-primary">Programme Highlights</h3>
+                <CheckList items={highlights} class="mt-5" />
+            </>
+        )
+    }
+
+    {
+        careers.length > 0 && (
+            <>
+                <h3 class="mt-10 text-xl text-primary">Career Opportunities</h3>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                    {careers.map((career) => (
+                        <li>
+                            <Tag>{career}</Tag>
+                        </li>
+                    ))}
+                </ul>
+            </>
+        )
+    }
+</div>

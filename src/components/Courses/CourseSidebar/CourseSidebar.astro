@@ -1,0 +1,68 @@
+---
+import Button from "../../Base/Button/Button.astro";
+import DetailItem from "../../Base/DetailItem/DetailItem.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    duration?: string;
+    eligibility?: string;
+    board?: string;
+    phones?: string[];
+    emails?: string[];
+}
+
+const {
+    duration,
+    eligibility,
+    board,
+    phones = [],
+    emails = [],
+} = Astro.props;
+
+const details = [
+    { icon: "lucide:clock", term: "Duration", description: duration },
+    { icon: "lucide:target", term: "Eligibility", description: eligibility },
+    { icon: "lucide:graduation-cap", term: "Board", description: board },
+].filter((detail) => Boolean(detail.description));
+---
+
+<aside class="h-fit border border-border bg-surface p-7">
+    <h3 class="text-lg text-primary">Course Details</h3>
+
+    {
+        details.length > 0 && (
+            <dl class="mt-6 space-y-6">
+                {details.map((detail) => (
+                    <DetailItem
+                        icon={detail.icon}
+                        term={detail.term}
+                        description={detail.description!}
+                    />
+                ))}
+            </dl>
+        )
+    }
+
+    <Button href="/admissions" variant="accent" class="mt-8 w-full">
+        Apply Now
+    </Button>
+
+    <div class="mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground">
+        {
+            phones.map((phone) => (
+                <a class="flex items-center gap-1.5 hover:text-accent" href={`tel:${phone}`}>
+                    <Icon name="lucide:phone" class="h-3.5 w-3.5" aria-hidden="true" />
+                    {phone}
+                </a>
+            ))
+        }
+        {
+            emails.map((email) => (
+                <a class="flex items-center gap-1.5 hover:text-accent" href={`mailto:${email}`}>
+                    <Icon name="lucide:mail" class="h-3.5 w-3.5" aria-hidden="true" />
+                    {email}
+                </a>
+            ))
+        }
+    </div>
+</aside>

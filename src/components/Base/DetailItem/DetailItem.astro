@@ -1,0 +1,27 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon: string;
+    term: string;
+    description: string;
+}
+
+const { icon, term, description } = Astro.props;
+---
+
+<div class="flex gap-3">
+    <Icon
+        name={icon}
+        class="mt-0.5 h-5 w-5 shrink-0 text-accent"
+        aria-hidden="true"
+    />
+    <div>
+        <dt
+            class="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
+        >
+            {term}
+        </dt>
+        <dd class="mt-1 text-sm text-foreground/85">{description}</dd>
+    </div>
+</div>
