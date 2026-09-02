@@ -1,0 +1,98 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
+import AdmissionsCallout from "../components/Admissions/AdmissionsCallout/AdmissionsCallout.astro";
+import AdmissionsProcess from "../components/Admissions/AdmissionsProcess/AdmissionsProcess.astro";
+import AdmissionsChecklist from "../components/Admissions/AdmissionsChecklist/AdmissionsChecklist.astro";
+import AdmissionsDates from "../components/Admissions/AdmissionsDates/AdmissionsDates.astro";
+import AdmissionsProspectus from "../components/Admissions/AdmissionsProspectus/AdmissionsProspectus.astro";
+import EnquiryForm from "../components/Admissions/EnquiryForm/EnquiryForm.astro";
+import { getContactDetails, getCourseLinks, resolvePhones } from "../lib/site";
+
+const entry = await getEntry("admissions", "admissions");
+if (!entry) throw new Error("Missing src/content/admissions.json");
+const page = entry.data;
+
+const contact = await getContactDetails();
+const phones = resolvePhones(page.callout.phones, contact.phone_numbers);
+
+const courseOptions = (await getCourseLinks()).map((course) => ({
+    value: course.label,
+    label: `${course.label} — ${course.description}`,
+}));
+
+const { footnote } = page.enquiry;
+---
+
+<Layout title={page.meta_title} description={page.meta_description}>
+    <PageHero
+        eyebrow={page.eyebrow}
+        title={page.title}
+        description={page.intro}
+    />
+
+    <AdmissionsCallout title={page.callout.title} phones={phones} />
+
+    <Section>
+        <div class="grid gap-12 lg:grid-cols-2">
+            <AdmissionsProcess
+                eyebrow={page.process.eyebrow}
+                title={page.process.title}
+                steps={page.process.steps}
+            />
+
+            <div class="space-y-10">
+                <AdmissionsChecklist
+                    icon="lucide:user-check"
+                    title={page.eligibility.title}
+                    items={page.eligibility.items}
+                />
+                <AdmissionsChecklist
+                    icon="lucide:list-checks"
+                    title={page.documents.title}
+                    items={page.documents.items}
+                />
+                <AdmissionsDates
+                    title={page.important_dates.title}
+                    items={page.important_dates.items}
+                />
+                <AdmissionsProspectus
+                    title={page.prospectus.title}
+                    description={page.prospectus.description}
+                />
+            </div>
+        </div>
+    </Section>
+
+    <Section id="enquiry" background="surface">
+        <div class="mx-auto max-w-3xl">
+            <SectionHeading
+                eyebrow={page.enquiry.eyebrow}
+                title={page.enquiry.title}
+                description={page.enquiry.description}
+                centered
+            />
+
+            <div class="mt-10">
+                <EnquiryForm
+                    title={page.enquiry.form_title}
+                    description={page.enquiry.form_description}
+                    submitLabel={page.enquiry.submit_label}
+                    courses={courseOptions}
+                    action={page.enquiry.form_endpoint}
+                />
+            </div>
+
+            <p class="mt-6 text-center text-sm text-muted-foreground">
+                {footnote.text}{" "}
+                <a href={footnote.link_href} class="font-semibold text-accent">
+                    {footnote.link_label}
+                </a>{" "}
+                {footnote.call_prefix} {contact.phone_numbers.join(" / ")}.
+            </p>
+        </div>
+    </Section>
+</Layout>

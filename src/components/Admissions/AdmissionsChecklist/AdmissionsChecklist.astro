@@ -1,0 +1,29 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon: string;
+    title: string;
+    items: string[];
+}
+
+const { icon, title, items } = Astro.props;
+---
+
+<div>
+    <div class="flex items-center gap-3">
+        <Icon name={icon} class="h-6 w-6 text-accent" aria-hidden="true" />
+        <h3 class="text-xl text-primary">{title}</h3>
+    </div>
+
+    <ul class="mt-5 space-y-3">
+        {
+            items.map((item) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-muted-foreground">
+                    <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                    {item}
+                </li>
+            ))
+        }
+    </ul>
+</div>

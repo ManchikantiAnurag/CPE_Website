@@ -1,0 +1,57 @@
+---
+import Button from "../../Base/Button/Button.astro";
+import Field from "../../Base/Field/Field.astro";
+import Input from "../../Base/Input/Input.astro";
+import Select from "../../Base/Select/Select.astro";
+import Textarea from "../../Base/Textarea/Textarea.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    submitLabel: string;
+    courses: { value: string; label: string }[];
+    /** Empty until a form handler is configured in the CMS. */
+    action?: string;
+}
+
+const { title, description, submitLabel, courses, action } = Astro.props;
+---
+
+<form
+    method="post"
+    action={action || undefined}
+    class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2"
+>
+    <div class="md:col-span-2">
+        <h3 class="text-xl text-primary">{title}</h3>
+        <p class="mt-1 text-sm text-muted-foreground">{description}</p>
+    </div>
+
+    <Field label="Student Name" for="student_name" required>
+        <Input id="student_name" maxlength={100} required />
+    </Field>
+
+    <Field label="Parent Name" for="parent_name">
+        <Input id="parent_name" maxlength={100} />
+    </Field>
+
+    <Field label="Mobile Number" for="mobile" required>
+        <Input id="mobile" type="tel" maxlength={15} required />
+    </Field>
+
+    <Field label="Email" for="email">
+        <Input id="email" type="email" maxlength={255} />
+    </Field>
+
+    <Field label="Course Interested In" for="course" full>
+        <Select id="course" placeholder="Select a course" options={courses} />
+    </Field>
+
+    <Field label="Message" for="message" full>
+        <Textarea id="message" rows={4} maxlength={1000} />
+    </Field>
+
+    <div class="md:col-span-2">
+        <Button variant="accent" size="lg" class="px-8">{submitLabel}</Button>
+    </div>
+</form>
