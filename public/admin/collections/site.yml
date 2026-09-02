@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Institution identity used by the header top bar, the footer and page titles.
+singletons:
+  - name: site-settings
+    label: Site settings
+    file: src/content/site-settings.json
+    icon: settings
+    fields:
+      - label: Institution Name
+        name: institution_name
+        widget: string
+        hint: Umbrella name, e.g. CPE Educational Institutions.
+
+      - label: College Name
+        name: college_name
+        widget: string
+        hint: Used in page titles and the footer copyright.
+
+      - label: Established Year
+        name: established_year
+        widget: number
+        value_type: int
+        min: 1900
+
+      - label: Affiliation
+        name: affiliation
+        widget: string
+        hint: Shown in the top bar and the footer.
+
+      - label: Logo
+        name: logo
+        widget: image
+        required: false
+        hint: Leave empty to show the college name as text instead.
+
+      - label: Logo Alt Text
+        name: logo_alt
+        widget: string
+        required: false
+
+      - label: Description
+        name: description
+        widget: text
+        hint: Footer blurb, also the default meta description.
+
+      - label: Call To Action Label
+        name: cta_label
+        widget: string
+        hint: Header button text, e.g. Apply Now.
+
+      - label: Call To Action Link
+        name: cta_href
+        widget: string
+        hint: Where the header button points, e.g. /admissions.

@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Drives the header menu, the mobile menu and the footer Quick Links.
+singletons:
+  - name: navigation
+    label: Navigation
+    file: src/content/navigation.json
+    icon: menu
+    fields:
+      - label: Primary Menu
+        name: primary
+        widget: list
+        label_singular: Menu Item
+        summary: '{{fields.label}}'
+        fields:
+          - label: Label
+            name: label
+            widget: string
+
+          - label: Link
+            name: href
+            widget: string
+            hint: Path on this site, e.g. /admissions.
+
+          - label: Dropdown Source
+            name: children_source
+            widget: select
+            default: none
+            options:
+              - label: Use the sub-items below
+                value: none
+              - label: Fill automatically from Courses
+                value: courses
+            hint: >-
+              Choose Courses to build the dropdown from the Courses collection.
+              New courses then appear in the menu without editing this list.
+
+          - label: Sub Items
+            name: children
+            widget: list
+            required: false
+            label_singular: Sub Item
+            summary: '{{fields.label}}'
+            fields:
+              - label: Label
+                name: label
+                widget: string
+              - label: Link
+                name: href
+                widget: string
+
+      - label: Footer Note Links
+        name: footer_note_links
+        widget: list
+        required: false
+        label_singular: Link
+        summary: '{{fields.label}}'
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string

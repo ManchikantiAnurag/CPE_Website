@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Single source of truth for contact details. Courses reference these by
-# relation rather than repeating the numbers per course.
+# Single source of truth for contact details. Courses, the admissions callout
+# and the footer reference these by relation rather than repeating them.
 singletons:
   - name: contact-details
     label: Contact details
@@ -23,3 +23,51 @@ singletons:
           name: email
           widget: string
           type: email
+
+      - label: Address
+        name: address
+        widget: object
+        fields:
+          - label: Line 1
+            name: line1
+            widget: string
+            required: false
+          - label: Line 2
+            name: line2
+            widget: string
+            required: false
+          - label: Line 3
+            name: line3
+            widget: string
+            required: false
+
+      - label: Map URL
+        name: map_url
+        widget: string
+        required: false
+        hint: Google Maps embed or share link for the campus.
+
+      - label: Social Links
+        name: social_links
+        widget: list
+        required: false
+        label_singular: Social Link
+        summary: '{{fields.label}}'
+        fields:
+          - label: Platform
+            name: platform
+            widget: select
+            options:
+              - facebook
+              - instagram
+              - youtube
+              - twitter
+              - linkedin
+            hint: Picks the icon shown in the footer.
+          - label: Label
+            name: label
+            widget: string
+            hint: Accessible name, e.g. Facebook.
+          - label: URL
+            name: url
+            widget: string
