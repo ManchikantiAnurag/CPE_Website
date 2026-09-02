@@ -1,181 +1,187 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Every piece of copy on /admissions. Icons and layout live in the components,
-# so this file stays purely editorial.
+# The admissions page, one editable section per collection. Icons and layout
+# live in the components, so these stay purely editorial.
 singletons:
-  - name: admissions
-    label: Admissions page
-    file: src/content/admissions.json
-    icon: how_to_reg
+  - name: admissions-seo
+    label: "Admissions: Search & Social"
+    file: src/content/admissions/seo.json
+    icon: search
     fields:
       - label: Meta Title
         name: meta_title
         widget: string
-        hint: Browser tab title, appended with the college name.
-
       - label: Meta Description
         name: meta_description
         widget: text
-        hint: Search engine summary for this page.
 
+  - name: admissions-hero
+    label: "Admissions: Hero"
+    file: src/content/admissions/hero.json
+    icon: featured_video
+    fields:
       - label: Eyebrow
         name: eyebrow
         widget: string
-        hint: Small kicker above the page title.
-
       - label: Page Title
         name: title
         widget: string
-
       - label: Intro
         name: intro
         widget: text
 
-      - label: Phone Callout
-        name: callout
-        widget: object
-        fields:
-          - label: Title
-            name: title
-            widget: string
-          - label: Phone Numbers
-            name: phones
-            widget: relation
-            required: false
-            multiple: true
-            collection: _singletons
-            file: contact-details
-            value_field: phone_numbers.*
-            display_fields:
-              - phone_numbers.*
-            search_fields:
-              - phone_numbers.*
-            hint: Leave empty to show every number from Contact details.
+  - name: admissions-callout
+    label: "Admissions: Phone Callout"
+    file: src/content/admissions/callout.json
+    icon: call
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Phone Numbers
+        name: phones
+        widget: relation
+        required: false
+        multiple: true
+        collection: _singletons
+        file: contact-details
+        value_field: phone_numbers.*
+        display_fields:
+          - phone_numbers.*
+        search_fields:
+          - phone_numbers.*
+        hint: Leave empty to show every number from Contact details.
 
-      - label: Application Process
-        name: process
-        widget: object
-        fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Steps
-            name: steps
-            widget: list
-            label_singular: Step
-            field:
-              label: Step
-              name: step
-              widget: string
-            hint: Do not number these — the page numbers them automatically.
+  - name: admissions-process
+    label: "Admissions: Application Process"
+    file: src/content/admissions/process.json
+    icon: list_alt
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Steps
+        name: steps
+        widget: list
+        label_singular: Step
+        field:
+          label: Step
+          name: step
+          widget: string
+        hint: Do not number these — the page numbers them automatically.
 
-      - label: Eligibility
-        name: eligibility
-        widget: object
-        fields:
-          - label: Title
-            name: title
-            widget: string
-          - label: Points
-            name: items
-            widget: list
-            label_singular: Point
-            field:
-              label: Point
-              name: item
-              widget: text
+  - name: admissions-eligibility
+    label: "Admissions: Eligibility"
+    file: src/content/admissions/eligibility.json
+    icon: how_to_reg
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Points
+        name: items
+        widget: list
+        label_singular: Point
+        field:
+          label: Point
+          name: item
+          widget: text
 
-      - label: Documents Required
-        name: documents
-        widget: object
-        fields:
-          - label: Title
-            name: title
-            widget: string
-          - label: Documents
-            name: items
-            widget: list
-            label_singular: Document
-            field:
-              label: Document
-              name: item
-              widget: string
+  - name: admissions-documents
+    label: "Admissions: Documents Required"
+    file: src/content/admissions/documents.json
+    icon: folder_open
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Documents
+        name: items
+        widget: list
+        label_singular: Document
+        field:
+          label: Document
+          name: item
+          widget: string
 
-      - label: Important Dates
-        name: important_dates
-        widget: object
-        fields:
-          - label: Title
-            name: title
-            widget: string
-          - label: Dates
-            name: items
-            widget: list
-            label_singular: Date
-            field:
-              label: Date
-              name: item
-              widget: string
+  - name: admissions-important-dates
+    label: "Admissions: Important Dates"
+    file: src/content/admissions/important-dates.json
+    icon: calendar_month
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Dates
+        name: items
+        widget: list
+        label_singular: Date
+        field:
+          label: Date
+          name: item
+          widget: string
 
-      - label: Prospectus
-        name: prospectus
-        widget: object
-        fields:
-          - label: Title
-            name: title
-            widget: string
-          - label: Description
-            name: description
-            widget: text
+  - name: admissions-prospectus
+    label: "Admissions: Prospectus"
+    file: src/content/admissions/prospectus.json
+    icon: description
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
 
-      - label: Enquiry Section
-        name: enquiry
+  - name: admissions-enquiry
+    label: "Admissions: Enquiry Form"
+    file: src/content/admissions/enquiry.json
+    icon: contact_mail
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Form Heading
+        name: form_title
+        widget: string
+      - label: Form Description
+        name: form_description
+        widget: text
+      - label: Submit Button Label
+        name: submit_label
+        widget: string
+      - label: Form Endpoint
+        name: form_endpoint
+        widget: string
+        required: false
+        hint: >-
+          URL that receives the submitted form, e.g. a Formspree or Netlify
+          Forms endpoint. Submissions go nowhere while this is empty.
+      - label: Footnote
+        name: footnote
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Text
+            name: text
             widget: string
-          - label: Title
-            name: title
+          - label: Link Label
+            name: link_label
             widget: string
-          - label: Description
-            name: description
-            widget: text
-          - label: Form Heading
-            name: form_title
+          - label: Link
+            name: link_href
             widget: string
-          - label: Form Description
-            name: form_description
-            widget: text
-          - label: Submit Button Label
-            name: submit_label
+          - label: Phone Prefix
+            name: call_prefix
             widget: string
-          - label: Form Endpoint
-            name: form_endpoint
-            widget: string
-            required: false
             hint: >-
-              URL that receives the submitted form, e.g. a Formspree or Netlify
-              Forms endpoint. Submissions go nowhere while this is empty.
-          - label: Footnote
-            name: footnote
-            widget: object
-            fields:
-              - label: Text
-                name: text
-                widget: string
-              - label: Link Label
-                name: link_label
-                widget: string
-              - label: Link
-                name: link_href
-                widget: string
-              - label: Phone Prefix
-                name: call_prefix
-                widget: string
-                hint: >-
-                  Words before the phone numbers, which are pulled from Contact
-                  details.
+              Words before the phone numbers, which are pulled from Contact
+              details.

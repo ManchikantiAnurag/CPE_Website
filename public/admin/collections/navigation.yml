@@ -3,7 +3,7 @@
 # Drives the header menu, the mobile menu and the footer Quick Links.
 singletons:
   - name: navigation
-    label: Navigation
+    label: "Site: Navigation"
     file: src/content/navigation.json
     icon: menu
     fields:

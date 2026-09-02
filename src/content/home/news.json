@@ -1,0 +1,10 @@
+{
+  "eyebrow": "News & Events",
+  "title": "Latest from the college",
+  "description": "",
+  "cta": {
+    "label": "View All News",
+    "href": "/news"
+  },
+  "empty_message": "News and events will be published here by the college as they are announced."
+}

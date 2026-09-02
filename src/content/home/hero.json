@@ -1,0 +1,30 @@
+{
+  "eyebrow": "CPE Educational Institutions · Estd. 2007",
+  "title": "Shape Your Future with Excellence in Commerce Education",
+  "intro": "Build a strong academic foundation with MEC and CEC and prepare for future opportunities in CA, CMA, IPMAT and CLAT.",
+  "primary_cta": {
+    "label": "Apply Now",
+    "href": "/admissions"
+  },
+  "secondary_cta": {
+    "label": "Explore Courses",
+    "href": "/courses"
+  },
+  "stats": [
+    {
+      "label": "Established",
+      "value": "2007"
+    },
+    {
+      "label": "Streams",
+      "value": "MEC · CEC"
+    },
+    {
+      "label": "Location",
+      "value": "Vizag"
+    }
+  ],
+  "image": "",
+  "image_alt": "Students of CPE Junior College in Visakhapatnam",
+  "badge": "Hands for Excellence"
+}

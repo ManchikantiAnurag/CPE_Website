@@ -1,0 +1,10 @@
+{
+  "kicker": "Admissions Open",
+  "title": "Take the first step toward a professional career",
+  "description": "Speak to our admissions team about the right stream for your child.",
+  "phones": [],
+  "cta": {
+    "label": "Apply Now",
+    "href": "/admissions"
+  }
+}

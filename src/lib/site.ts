@@ -1,4 +1,4 @@
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, type DataEntryMap } from "astro:content";
 
 export interface NavLink {
     label: string;
@@ -21,6 +21,18 @@ export async function getCourseLinks(): Promise<NavLink[]> {
             href: `/courses/${course.id}`,
             description: course.data.title,
         }));
+}
+
+/**
+ * Reads one page-section collection. Every section document is stored under
+ * the entry id "content", so pages name only the collection.
+ */
+export async function getSection<C extends keyof DataEntryMap>(collection: C) {
+    const entry = await getEntry(collection, "content");
+    if (!entry) {
+        throw new Error(`Missing content for the "${String(collection)}" collection`);
+    }
+    return entry.data;
 }
 
 export async function getSiteSettings() {

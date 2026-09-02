@@ -3,7 +3,7 @@
 # Institution identity used by the header top bar, the footer and page titles.
 singletons:
   - name: site-settings
-    label: Site settings
+    label: "Site: Settings"
     file: src/content/site-settings.json
     icon: settings
     fields:

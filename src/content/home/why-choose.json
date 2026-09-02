@@ -1,0 +1,26 @@
+{
+  "eyebrow": "Why Choose CPE",
+  "title": "What makes the difference here",
+  "items": [
+    {
+      "icon": "lucide:book-open-check",
+      "title": "Concept-First Teaching",
+      "description": "Small, focused batches where fundamentals are taught until every student is genuinely clear."
+    },
+    {
+      "icon": "lucide:target",
+      "title": "Integrated Competitive Coaching",
+      "description": "CA, CMA, IPMAT and CLAT preparation runs inside the college timetable — no second institute."
+    },
+    {
+      "icon": "lucide:users",
+      "title": "Mentoring & Parent Communication",
+      "description": "Every student is mentored individually, and parents are kept informed of real progress."
+    },
+    {
+      "icon": "lucide:shield-check",
+      "title": "Discipline With Care",
+      "description": "A structured, respectful campus environment that keeps students consistent through two demanding years."
+    }
+  ]
+}

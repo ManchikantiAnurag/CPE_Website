@@ -1,5 +1,4 @@
 ---
-import { getEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Base/Section/Section.astro";
 import HomeHero from "../components/Home/HomeHero/HomeHero.astro";
@@ -11,115 +10,120 @@ import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.ast
 import CampusLife from "../components/Home/CampusLife/CampusLife.astro";
 import EmptyStateSection from "../components/Home/EmptyStateSection/EmptyStateSection.astro";
 import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
-import { getContactDetails, resolvePhones } from "../lib/site";
+import { getContactDetails, getSection, resolvePhones } from "../lib/site";
 
-const entry = await getEntry("home", "home");
-if (!entry) throw new Error("Missing src/content/home.json");
-const page = entry.data;
+const seo = await getSection("homeSeo");
+const hero = await getSection("homeHero");
+const about = await getSection("homeAbout");
+const courses = await getSection("homeCourses");
+const whyChoose = await getSection("homeWhyChoose");
+const careerFocus = await getSection("homeCareerFocus");
+const leadership = await getSection("homeLeadership");
+const campusLife = await getSection("homeCampusLife");
+const achievements = await getSection("homeAchievements");
+const banner = await getSection("homeAdmissionsBanner");
+const news = await getSection("homeNews");
 
 const contact = await getContactDetails();
-const bannerPhones = resolvePhones(
-    page.cta_banner.phones,
-    contact.phone_numbers,
-);
+const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
 ---
 
-<Layout title={page.meta_title} description={page.meta_description}>
+<Layout title={seo.meta_title} description={seo.meta_description}>
     <HomeHero
-        eyebrow={page.hero.eyebrow}
-        title={page.hero.title}
-        intro={page.hero.intro}
-        primaryCta={page.hero.primary_cta}
-        secondaryCta={page.hero.secondary_cta}
-        stats={page.hero.stats}
-        image={page.hero.image}
-        imageAlt={page.hero.image_alt}
-        badge={page.hero.badge}
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        intro={hero.intro}
+        primaryCta={hero.primary_cta}
+        secondaryCta={hero.secondary_cta}
+        stats={hero.stats}
+        image={hero.image}
+        imageAlt={hero.image_alt}
+        badge={hero.badge}
     />
 
     <Section>
         <AboutIntro
-            eyebrow={page.about.eyebrow}
-            title={page.about.title}
-            paragraphs={page.about.paragraphs}
-            cta={page.about.cta}
-            image={page.about.image}
-            imageAlt={page.about.image_alt}
+            eyebrow={about.eyebrow}
+            title={about.title}
+            paragraphs={about.paragraphs}
+            cta={about.cta}
+            image={about.image}
+            imageAlt={about.image_alt}
         />
     </Section>
 
     <Section id="courses" background="surface">
         <CoursesGrid
-            eyebrow={page.courses.eyebrow}
-            title={page.courses.title}
-            description={page.courses.description}
-            cta={page.courses.cta}
+            eyebrow={courses.eyebrow}
+            title={courses.title}
+            description={courses.description}
+            cta={courses.cta}
         />
     </Section>
 
     <Section>
         <WhyChoose
-            eyebrow={page.why_choose.eyebrow}
-            title={page.why_choose.title}
-            items={page.why_choose.items}
+            eyebrow={whyChoose.eyebrow}
+            title={whyChoose.title}
+            items={whyChoose.items}
         />
     </Section>
 
     <Section background="navy">
         <CareerFocus
-            eyebrow={page.career_focus.eyebrow}
-            title={page.career_focus.title}
-            description={page.career_focus.description}
-            items={page.career_focus.items}
+            eyebrow={careerFocus.eyebrow}
+            title={careerFocus.title}
+            description={careerFocus.description}
+            items={careerFocus.items}
         />
     </Section>
 
     <Section background="surface">
         <LeadershipGrid
-            eyebrow={page.leadership.eyebrow}
-            title={page.leadership.title}
-            cta={page.leadership.cta}
-            people={page.leadership.people}
+            eyebrow={leadership.eyebrow}
+            title={leadership.title}
+            cta={leadership.cta}
+            people={leadership.people}
         />
     </Section>
 
     <Section>
         <CampusLife
-            eyebrow={page.campus_life.eyebrow}
-            title={page.campus_life.title}
-            description={page.campus_life.description}
-            primaryCta={page.campus_life.primary_cta}
-            secondaryCta={page.campus_life.secondary_cta}
-            image={page.campus_life.image}
-            imageAlt={page.campus_life.image_alt}
+            eyebrow={campusLife.eyebrow}
+            title={campusLife.title}
+            description={campusLife.description}
+            primaryCta={campusLife.primary_cta}
+            secondaryCta={campusLife.secondary_cta}
+            image={campusLife.image}
+            imageAlt={campusLife.image_alt}
         />
     </Section>
 
     <Section>
         <EmptyStateSection
-            eyebrow={page.achievements.eyebrow}
-            title={page.achievements.title}
-            description={page.achievements.description}
-            cta={page.achievements.cta}
-            emptyMessage={page.achievements.empty_message}
+            eyebrow={achievements.eyebrow}
+            title={achievements.title}
+            description={achievements.description}
+            cta={achievements.cta}
+            emptyMessage={achievements.empty_message}
         />
     </Section>
 
     <CtaBanner
-        kicker={page.cta_banner.kicker}
-        title={page.cta_banner.title}
-        description={page.cta_banner.description}
+        kicker={banner.kicker}
+        title={banner.title}
+        description={banner.description}
         phones={bannerPhones}
-        cta={page.cta_banner.cta}
+        cta={banner.cta}
     />
 
     <Section background="surface">
         <EmptyStateSection
-            eyebrow={page.news.eyebrow}
-            title={page.news.title}
-            description={page.news.description}
-            cta={page.news.cta}
-            emptyMessage={page.news.empty_message}
+            eyebrow={news.eyebrow}
+            title={news.title}
+            description={news.description}
+            cta={news.cta}
+            emptyMessage={news.empty_message}
         />
     </Section>
 </Layout>

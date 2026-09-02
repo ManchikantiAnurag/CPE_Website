@@ -4,7 +4,7 @@
 # and the footer reference these by relation rather than repeating them.
 singletons:
   - name: contact-details
-    label: Contact details
+    label: "Site: Contact details"
     file: src/content/contact-details.json
     icon: call
     fields:

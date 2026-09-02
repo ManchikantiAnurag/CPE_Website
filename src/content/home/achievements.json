@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Achievements",
+  "title": "Recognising our students",
+  "description": "Student achievements, awards and academic recognition, published by the college.",
+  "cta": {
+    "label": "View Achievements",
+    "href": "/achievements"
+  },
+  "empty_message": "Achievements will be published here by the college as they are recorded."
+}

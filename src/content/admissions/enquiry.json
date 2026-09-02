@@ -1,0 +1,15 @@
+{
+  "eyebrow": "Apply Now",
+  "title": "Submit an admission enquiry",
+  "description": "Our team will call you back to discuss streams, timings and fees.",
+  "form_title": "Admission Enquiry",
+  "form_description": "Share a few details and our admissions team will get in touch.",
+  "submit_label": "Submit Enquiry",
+  "form_endpoint": "",
+  "footnote": {
+    "text": "Prefer to talk first?",
+    "link_label": "Contact us",
+    "link_href": "/contact-us",
+    "call_prefix": "or call"
+  }
+}

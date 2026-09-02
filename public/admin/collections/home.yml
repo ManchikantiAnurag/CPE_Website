@@ -1,375 +1,384 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Every piece of copy on the home page. The course cards are not listed here —
-# they are generated from the Courses collection.
+# The home page, one editable section per collection. The course cards are not
+# listed here — they are generated from the Courses collection.
 singletons:
-  - name: home
-    label: Home page
-    file: src/content/home.json
-    icon: home
+  - name: home-seo
+    label: "Home: Search & Social"
+    file: src/content/home/seo.json
+    icon: search
     fields:
       - label: Meta Title
         name: meta_title
         widget: string
-
       - label: Meta Description
         name: meta_description
         widget: text
 
-      - label: Hero
-        name: hero
+  - name: home-hero
+    label: "Home: Hero"
+    file: src/content/home/hero.json
+    icon: featured_video
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Intro
+        name: intro
+        widget: text
+      - label: Primary Button
+        name: primary_cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
+          - label: Link
+            name: href
+            widget: string
+      - label: Secondary Button
+        name: secondary_cta
+        widget: object
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string
+      - label: Stats
+        name: stats
+        widget: list
+        label_singular: Stat
+        summary: "{{fields.label}}: {{fields.value}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Value
+            name: value
+            widget: string
+      - label: Image
+        name: image
+        widget: image
+        required: false
+        hint: A placeholder box with the alt text shows until this is set.
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+      - label: Image Badge
+        name: badge
+        widget: string
+        required: false
+        hint: Small accent caption over the bottom of the hero image.
+
+  - name: home-about
+    label: "Home: About the College"
+    file: src/content/home/about.json
+    icon: info
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Paragraphs
+        name: paragraphs
+        widget: list
+        label_singular: Paragraph
+        field:
+          label: Paragraph
+          name: paragraph
+          widget: text
+      - label: Button
+        name: cta
+        widget: object
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+
+  - name: home-courses
+    label: "Home: Courses"
+    file: src/content/home/courses.json
+    icon: menu_book
+    hint: The cards come from the Courses collection automatically.
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Button
+        name: cta
+        widget: object
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string
+
+  - name: home-why-choose
+    label: "Home: Why Choose CPE"
+    file: src/content/home/why-choose.json
+    icon: star
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Points
+        name: items
+        widget: list
+        label_singular: Point
+        summary: "{{fields.title}}"
+        fields:
+          - label: Icon
+            name: icon
+            widget: select
+            options:
+              - lucide:book-open-check
+              - lucide:target
+              - lucide:users
+              - lucide:shield-check
+              - lucide:graduation-cap
+              - lucide:award
+              - lucide:clock
+              - lucide:building-2
           - label: Title
             name: title
             widget: string
-          - label: Intro
-            name: intro
+          - label: Description
+            name: description
             widget: text
-          - label: Primary Button
-            name: primary_cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Secondary Button
-            name: secondary_cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Stats
-            name: stats
-            widget: list
-            label_singular: Stat
-            summary: "{{fields.label}}: {{fields.value}}"
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Value
-                name: value
-                widget: string
-          - label: Image
-            name: image
+
+  - name: home-career-focus
+    label: "Home: Career-Focused Learning"
+    file: src/content/home/career-focus.json
+    icon: work
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Destinations
+        name: items
+        widget: list
+        label_singular: Destination
+        summary: "{{fields.title}}"
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+
+  - name: home-leadership
+    label: "Home: Leadership"
+    file: src/content/home/leadership.json
+    icon: groups
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Button
+        name: cta
+        widget: object
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string
+      - label: People
+        name: people
+        widget: list
+        label_singular: Person
+        summary: "{{fields.name}}"
+        fields:
+          - label: Name
+            name: name
+            widget: string
+          - label: Role
+            name: role
+            widget: string
+          - label: Biography
+            name: bio
+            widget: text
+          - label: Photograph
+            name: photo
             widget: image
             required: false
-            hint: A placeholder box with the alt text shows until this is set.
-          - label: Image Alt Text
-            name: image_alt
-            widget: string
-          - label: Image Badge
-            name: badge
-            widget: string
-            required: false
-            hint: Small accent caption over the bottom of the hero image.
+            hint: The first letter of the name shows until a photo is added.
 
-      - label: About Section
-        name: about
+  - name: home-campus-life
+    label: "Home: Campus and Student Life"
+    file: src/content/home/campus-life.json
+    icon: diversity_3
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Primary Button
+        name: primary_cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
-          - label: Title
-            name: title
+          - label: Link
+            name: href
             widget: string
-          - label: Paragraphs
-            name: paragraphs
-            widget: list
-            label_singular: Paragraph
-            field:
-              label: Paragraph
-              name: paragraph
-              widget: text
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Image
-            name: image
-            widget: image
-            required: false
-          - label: Image Alt Text
-            name: image_alt
-            widget: string
-
-      - label: Courses Section
-        name: courses
-        widget: object
-        hint: The cards come from the Courses collection automatically.
-        fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Description
-            name: description
-            widget: text
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-
-      - label: Why Choose CPE
-        name: why_choose
+      - label: Secondary Button
+        name: secondary_cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
-          - label: Title
-            name: title
+          - label: Link
+            name: href
             widget: string
-          - label: Points
-            name: items
-            widget: list
-            label_singular: Point
-            summary: "{{fields.title}}"
-            fields:
-              - label: Icon
-                name: icon
-                widget: select
-                options:
-                  - lucide:book-open-check
-                  - lucide:target
-                  - lucide:users
-                  - lucide:shield-check
-                  - lucide:graduation-cap
-                  - lucide:award
-                  - lucide:clock
-                  - lucide:building-2
-              - label: Title
-                name: title
-                widget: string
-              - label: Description
-                name: description
-                widget: text
+      - label: Image
+        name: image
+        widget: image
+        required: false
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
 
-      - label: Career-Focused Learning
-        name: career_focus
+  - name: home-achievements
+    label: "Home: Achievements"
+    file: src/content/home/achievements.json
+    icon: trophy
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Button
+        name: cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
-          - label: Title
-            name: title
+          - label: Link
+            name: href
             widget: string
-          - label: Description
-            name: description
-            widget: text
-          - label: Destinations
-            name: items
-            widget: list
-            label_singular: Destination
-            summary: "{{fields.title}}"
-            fields:
-              - label: Title
-                name: title
-                widget: string
-              - label: Description
-                name: description
-                widget: text
+      - label: Placeholder Message
+        name: empty_message
+        widget: text
+        hint: Shown until achievements are published.
 
-      - label: Leadership
-        name: leadership
+  - name: home-admissions-banner
+    label: "Home: Admissions Banner"
+    file: src/content/home/admissions-banner.json
+    icon: campaign
+    fields:
+      - label: Kicker
+        name: kicker
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Phone Numbers
+        name: phones
+        widget: relation
+        required: false
+        multiple: true
+        collection: _singletons
+        file: contact-details
+        value_field: phone_numbers.*
+        display_fields:
+          - phone_numbers.*
+        search_fields:
+          - phone_numbers.*
+        hint: Leave empty to show every number from Contact details.
+      - label: Button
+        name: cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: People
-            name: people
-            widget: list
-            label_singular: Person
-            summary: "{{fields.name}}"
-            fields:
-              - label: Name
-                name: name
-                widget: string
-              - label: Role
-                name: role
-                widget: string
-              - label: Biography
-                name: bio
-                widget: text
-              - label: Photograph
-                name: photo
-                widget: image
-                required: false
-                hint: The first letter of the name shows until a photo is added.
-
-      - label: Campus and Student Life
-        name: campus_life
-        widget: object
-        fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Description
-            name: description
-            widget: text
-          - label: Primary Button
-            name: primary_cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Secondary Button
-            name: secondary_cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Image
-            name: image
-            widget: image
-            required: false
-          - label: Image Alt Text
-            name: image_alt
+          - label: Link
+            name: href
             widget: string
 
-      - label: Achievements
-        name: achievements
+  - name: home-news
+    label: "Home: News and Events"
+    file: src/content/home/news.json
+    icon: newspaper
+    fields:
+      - label: Eyebrow
+        name: eyebrow
+        widget: string
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Button
+        name: cta
         widget: object
         fields:
-          - label: Eyebrow
-            name: eyebrow
+          - label: Label
+            name: label
             widget: string
-          - label: Title
-            name: title
+          - label: Link
+            name: href
             widget: string
-          - label: Description
-            name: description
-            widget: text
-            required: false
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Placeholder Message
-            name: empty_message
-            widget: text
-            hint: Shown until achievements are published.
-
-      - label: Admissions Banner
-        name: cta_banner
-        widget: object
-        fields:
-          - label: Kicker
-            name: kicker
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Description
-            name: description
-            widget: text
-          - label: Phone Numbers
-            name: phones
-            widget: relation
-            required: false
-            multiple: true
-            collection: _singletons
-            file: contact-details
-            value_field: phone_numbers.*
-            display_fields:
-              - phone_numbers.*
-            search_fields:
-              - phone_numbers.*
-            hint: Leave empty to show every number from Contact details.
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-
-      - label: News and Events
-        name: news
-        widget: object
-        fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-          - label: Description
-            name: description
-            widget: text
-            required: false
-          - label: Button
-            name: cta
-            widget: object
-            fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
-          - label: Placeholder Message
-            name: empty_message
-            widget: text
-            hint: Shown until news items are published.
+      - label: Placeholder Message
+        name: empty_message
+        widget: text
+        hint: Shown until news items are published.

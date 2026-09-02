@@ -1,0 +1,23 @@
+{
+  "eyebrow": "Career-Focused Learning",
+  "title": "Intermediate today, professional qualification tomorrow",
+  "description": "Every stream at CPE is mapped to a clear professional destination, so students know exactly what they are working toward.",
+  "items": [
+    {
+      "title": "Chartered Accountancy",
+      "description": "ICAI Foundation groundwork built alongside intermediate accounting."
+    },
+    {
+      "title": "Cost & Management Accountancy",
+      "description": "ICMAI-aligned costing and management accounting fundamentals."
+    },
+    {
+      "title": "Management (IPM)",
+      "description": "Aptitude, verbal and reasoning training for IIM integrated programmes."
+    },
+    {
+      "title": "Law (CLAT)",
+      "description": "Legal reasoning, comprehension and current affairs for National Law Universities."
+    }
+  ]
+}
