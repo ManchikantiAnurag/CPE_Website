@@ -1,73 +1,56 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Single source of truth for contact details. Courses, the admissions callout
-# and the footer reference these by relation rather than repeating them.
-singletons:
-  - name: contact-details
-    label: "Site: Contact details"
-    file: src/content/contact-details.json
-    icon: call
-    fields:
-      - label: Phone Numbers
-        name: phone_numbers
-        widget: list
-        field:
-          label: Phone Number
-          name: phone
-          widget: string
-      - label: Email Addresses
-        name: emails
-        widget: list
-        field:
-          label: Email Address
-          name: email
-          widget: string
-          type: email
+# The contact page. The address, phone, email and social cards render from
+# Contact details, and the message form is fixed in code, so only the page
+# headings are editable here.
 
-      - label: Address
-        name: address
-        widget: object
+collections:
+  - name: contact
+    label: Contact page
+    icon: contact_mail
+    files:
+      - name: seo
+        label: "Search & Social"
+        file: src/content/contact/seo.json
+        icon: search
         fields:
-          - label: Line 1
-            name: line1
+          - label: Meta Title
+            name: meta_title
             widget: string
-            required: false
-          - label: Line 2
-            name: line2
-            widget: string
-            required: false
-          - label: Line 3
-            name: line3
-            widget: string
-            required: false
+          - label: Meta Description
+            name: meta_description
+            widget: text
 
-      - label: Map URL
-        name: map_url
-        widget: string
-        required: false
-        hint: Google Maps embed or share link for the campus.
-
-      - label: Social Links
-        name: social_links
-        widget: list
-        required: false
-        label_singular: Social Link
-        summary: '{{fields.label}}'
+      - name: hero
+        label: "Hero"
+        file: src/content/contact/hero.json
+        icon: featured_video
         fields:
-          - label: Platform
-            name: platform
-            widget: select
-            options:
-              - facebook
-              - instagram
-              - youtube
-              - twitter
-              - linkedin
-            hint: Picks the icon shown in the footer.
-          - label: Label
-            name: label
+          - label: Eyebrow
+            name: eyebrow
             widget: string
-            hint: Accessible name, e.g. Facebook.
-          - label: URL
-            name: url
+          - label: Page Title
+            name: title
             widget: string
+          - label: Intro
+            name: intro
+            widget: text
+
+      - name: location
+        label: "Location"
+        file: src/content/contact/location.json
+        icon: location_on
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+            hint: >-
+              The map points at the address in Contact details, or at the Map
+              URL set there if one is given.
+          - label: Map Description
+            name: map_title
+            widget: string
+            hint: Read aloud by screen readers in place of the map.

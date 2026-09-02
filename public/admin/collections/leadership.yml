@@ -4,7 +4,7 @@
 # about page, so they are described once here and read by both.
 singletons:
   - name: leadership
-    label: "Site: Leadership"
+    label: Leadership
     file: src/content/leadership.json
     icon: groups
     fields:

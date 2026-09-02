@@ -1,168 +1,175 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# The about page, one editable section per collection. The leadership cards are
-# not listed here — they come from Site: Leadership.
-singletons:
-  - name: about-seo
-    label: "About: Search & Social"
-    file: src/content/about/seo.json
-    icon: search
-    fields:
-      - label: Meta Title
-        name: meta_title
-        widget: string
-      - label: Meta Description
-        name: meta_description
-        widget: text
+# Every editable section of the about page. The leadership cards are not
+# listed here — they come from the Leadership singleton.
 
-  - name: about-hero
-    label: "About: Hero"
-    file: src/content/about/hero.json
-    icon: featured_video
-    fields:
-      - label: Eyebrow
-        name: eyebrow
-        widget: string
-      - label: Page Title
-        name: title
-        widget: string
-      - label: Intro
-        name: intro
-        widget: text
-
-  - name: about-cpe
-    label: "About: About CPE"
-    file: src/content/about/about-cpe.json
+collections:
+  - name: about
+    label: About page
     icon: info
-    hint: Linked from the header menu as /about#about-cpe.
-    fields:
-      - label: Eyebrow
-        name: eyebrow
-        widget: string
-      - label: Title
-        name: title
-        widget: string
-      - label: Paragraphs
-        name: paragraphs
-        widget: list
-        label_singular: Paragraph
-        field:
-          label: Paragraph
-          name: paragraph
-          widget: text
-      - label: Image
-        name: image
-        widget: image
-        required: false
-        hint: A placeholder box with the alt text shows until this is set.
-      - label: Image Alt Text
-        name: image_alt
-        widget: string
-
-  - name: about-history
-    label: "About: Our History"
-    file: src/content/about/history.json
-    icon: history
-    fields:
-      - label: Eyebrow
-        name: eyebrow
-        widget: string
-      - label: Title
-        name: title
-        widget: string
-      - label: Milestones
-        name: items
-        widget: list
-        label_singular: Milestone
-        summary: "{{fields.title}}"
+    files:
+      - name: seo
+        label: "Search & Social"
+        file: src/content/about/seo.json
+        icon: search
         fields:
-          - label: Icon
-            name: icon
-            widget: select
-            options:
-              - lucide:history
-              - lucide:compass
-              - lucide:flag
-              - lucide:award
-              - lucide:building-2
-              - lucide:graduation-cap
-              - lucide:users
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+
+      - name: hero
+        label: "Hero"
+        file: src/content/about/hero.json
+        icon: featured_video
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Page Title
+            name: title
+            widget: string
+          - label: Intro
+            name: intro
+            widget: text
+
+      - name: cpe
+        label: "About CPE"
+        file: src/content/about/about-cpe.json
+        icon: info
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
           - label: Title
             name: title
             widget: string
-          - label: Description
-            name: description
-            widget: text
+            hint: This section is linked from the header menu as /about#about-cpe.
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            label_singular: Paragraph
+            field:
+              label: Paragraph
+              name: paragraph
+              widget: text
+          - label: Image
+            name: image
+            widget: image
+            required: false
+            hint: A placeholder box with the alt text shows until this is set.
+          - label: Image Alt Text
+            name: image_alt
+            widget: string
 
-  - name: about-vision-mission
-    label: "About: Vision and Mission"
-    file: src/content/about/vision-mission.json
-    icon: visibility
-    hint: Linked from the header menu as /about#vision-mission.
-    fields:
-      - label: Vision
-        name: vision
-        widget: object
+      - name: history
+        label: "Our History"
+        file: src/content/about/history.json
+        icon: history
         fields:
           - label: Eyebrow
             name: eyebrow
             widget: string
-          - label: Statement
+          - label: Title
             name: title
-            widget: text
-          - label: Description
-            name: description
-            widget: text
-      - label: Mission
-        name: mission
-        widget: object
-        fields:
-          - label: Eyebrow
-            name: eyebrow
             widget: string
-          - label: Commitments
+          - label: Milestones
             name: items
             widget: list
-            label_singular: Commitment
+            label_singular: Milestone
+            summary: "{{fields.title}}"
+            fields:
+              - label: Icon
+                name: icon
+                widget: select
+                options:
+                  - lucide:history
+                  - lucide:compass
+                  - lucide:flag
+                  - lucide:award
+                  - lucide:building-2
+                  - lucide:graduation-cap
+                  - lucide:users
+              - label: Title
+                name: title
+                widget: string
+              - label: Description
+                name: description
+                widget: text
+
+      - name: vision-mission
+        label: "Vision and Mission"
+        file: src/content/about/vision-mission.json
+        icon: visibility
+        fields:
+          - label: Vision
+            name: vision
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Statement
+                name: title
+                widget: text
+                hint: >-
+                  This section is linked from the header menu as
+                  /about#vision-mission.
+              - label: Description
+                name: description
+                widget: text
+          - label: Mission
+            name: mission
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Commitments
+                name: items
+                widget: list
+                label_singular: Commitment
+                field:
+                  label: Commitment
+                  name: item
+                  widget: text
+
+      - name: why-choose
+        label: "Why Choose CPE"
+        file: src/content/about/why-choose.json
+        icon: star
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+          - label: Reasons
+            name: items
+            widget: list
+            label_singular: Reason
             field:
-              label: Commitment
+              label: Reason
               name: item
               widget: text
 
-  - name: about-why-choose
-    label: "About: Why Choose CPE"
-    file: src/content/about/why-choose.json
-    icon: star
-    fields:
-      - label: Eyebrow
-        name: eyebrow
-        widget: string
-      - label: Title
-        name: title
-        widget: string
-      - label: Reasons
-        name: items
-        widget: list
-        label_singular: Reason
-        field:
-          label: Reason
-          name: item
-          widget: text
-
-  - name: about-leadership
-    label: "About: Leadership"
-    file: src/content/about/leadership.json
-    icon: groups
-    hint: >-
-      Linked from the header menu as /about#leadership. The people themselves
-      are managed under Site: Leadership.
-    fields:
-      - label: Eyebrow
-        name: eyebrow
-        widget: string
-      - label: Title
-        name: title
-        widget: string
-      - label: Description
-        name: description
-        widget: text
+      - name: leadership
+        label: "Leadership"
+        file: src/content/about/leadership.json
+        icon: groups
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+            hint: >-
+              This section is linked from the header menu as /about#leadership.
+              The people themselves are managed under the Leadership singleton.
+          - label: Description
+            name: description
+            widget: text

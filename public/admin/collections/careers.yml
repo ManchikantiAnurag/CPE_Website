@@ -5,7 +5,7 @@
 # so they are stored once here and referenced by relation from each course.
 singletons:
   - name: careers
-    label: "Site: Career outcomes"
+    label: Career outcomes
     file: src/content/careers.json
     icon: work
     fields:
