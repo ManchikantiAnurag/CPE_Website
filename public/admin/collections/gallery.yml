@@ -1,0 +1,128 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+# Gallery items are one file each, so adding a photo or video is a single
+# "New Gallery Item". The page copy and the category chips live below.
+
+collections:
+  - name: gallery
+    label: Gallery items
+    label_singular: Gallery Item
+    description: Photos and videos shown on the Gallery page.
+    folder: src/content/gallery
+    extension: json
+    format: json
+    create: true
+    identifier_field: title
+    summary: '{{title}} — {{date}}'
+    view_groups:
+      - label: Category
+        field: category
+    sortable_fields:
+      fields:
+        - date
+        - title
+      default:
+        field: date
+        direction: descending
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: Caption shown under the tile.
+
+      - label: Category
+        name: category
+        widget: relation
+        collection: _singletons
+        file: gallery-categories
+        value_field: categories.*.id
+        display_fields:
+          - categories.*.name
+        search_fields:
+          - categories.*.name
+        hint: Decides which filter chip shows this item. Managed under Gallery categories.
+
+      - label: Date
+        name: date
+        widget: datetime
+        time_format: false
+        format: 'yyyy-MM-dd'
+        date_format: 'dd MMM yyyy'
+        hint: Newest items appear first.
+
+      - label: Image
+        name: image
+        widget: image
+        required: false
+        hint: A placeholder box with the alt text shows until this is set.
+
+      - label: Image Alt Text
+        name: image_alt
+        widget: string
+
+      - label: Video Link
+        name: video_url
+        widget: string
+        required: false
+        hint: Leave empty for a photo. Set a YouTube link to turn the tile into a video link.
+
+  - name: gallery-page
+    label: Gallery page
+    icon: photo_library
+    files:
+      - name: seo
+        label: "Search & Social"
+        file: src/content/gallery-page/seo.json
+        icon: search
+        fields:
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+
+      - name: hero
+        label: "Hero"
+        file: src/content/gallery-page/hero.json
+        icon: featured_video
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Page Title
+            name: title
+            widget: string
+          - label: Intro
+            name: intro
+            widget: text
+          - label: Empty Message
+            name: empty_message
+            widget: text
+            hint: Shown when the selected category has no items yet.
+
+singletons:
+  - name: gallery-categories
+    label: Gallery categories
+    file: src/content/gallery-categories.json
+    icon: label
+    fields:
+      - label: Categories
+        name: categories
+        widget: list
+        label_singular: Category
+        summary: '{{fields.name}}'
+        fields:
+          - label: ID
+            name: id
+            widget: string
+            hint: Stable identifier referenced by gallery items. Avoid changing it.
+          - label: Name
+            name: name
+            widget: string
+          - label: Order
+            name: order
+            widget: number
+            value_type: int
+            min: 1
+            hint: Position of the filter chip. Lower numbers appear first.

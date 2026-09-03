@@ -117,3 +117,35 @@ collections:
         search_fields:
           - emails.*
         hint: Managed under Contact details.
+
+  # The All Courses page itself. The course rows come from the collection above.
+  - name: courses-page
+    label: Courses page
+    icon: menu_book
+    files:
+      - name: seo
+        label: "Search & Social"
+        file: src/content/courses-page/seo.json
+        icon: search
+        fields:
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+
+      - name: hero
+        label: "Hero"
+        file: src/content/courses-page/hero.json
+        icon: featured_video
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Page Title
+            name: title
+            widget: string
+          - label: Intro
+            name: intro
+            widget: text

@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+collections:
+  - name: campus-life
+    label: Campus Life page
+    icon: diversity_3
+    files:
+      - name: seo
+        label: "Search & Social"
+        file: src/content/campus-life/seo.json
+        icon: search
+        fields:
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+
+      - name: hero
+        label: "Hero"
+        file: src/content/campus-life/hero.json
+        icon: featured_video
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Page Title
+            name: title
+            widget: string
+          - label: Intro
+            name: intro
+            widget: text
+
+      - name: life-at-cpe
+        label: "Life at CPE"
+        file: src/content/campus-life/life-at-cpe.json
+        icon: diversity_3
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            label_singular: Paragraph
+            field:
+              label: Paragraph
+              name: paragraph
+              widget: text
+          - label: Image
+            name: image
+            widget: image
+            required: false
+            hint: A placeholder box with the alt text shows until this is set.
+          - label: Image Alt Text
+            name: image_alt
+            widget: string
+
+      - name: on-campus
+        label: "On Campus"
+        file: src/content/campus-life/on-campus.json
+        icon: apartment
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+          - label: Tiles
+            name: items
+            widget: list
+            label_singular: Tile
+            summary: "{{fields.title}}"
+            fields:
+              - label: Icon
+                name: icon
+                widget: select
+                options:
+                  - lucide:school
+                  - lucide:landmark
+                  - lucide:presentation
+                  - lucide:users
+                  - lucide:mic-vocal
+                  - lucide:calendar-days
+                  - lucide:book-open
+                  - lucide:trophy
+              - label: Title
+                name: title
+                widget: string
+              - label: Description
+                name: description
+                widget: text
+
+      - name: academics
+        label: "Academics"
+        file: src/content/campus-life/academics.json
+        icon: menu_book
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            label_singular: Paragraph
+            field:
+              label: Paragraph
+              name: paragraph
+              widget: text
+          - label: Button
+            name: cta
+            widget: object
+            fields:
+              - label: Label
+                name: label
+                widget: string
+              - label: Link
+                name: href
+                widget: string
+          - label: Image
+            name: image
+            widget: image
+            required: false
+            hint: A placeholder box with the alt text shows until this is set.
+          - label: Image Alt Text
+            name: image_alt
+            widget: string
