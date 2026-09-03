@@ -1,69 +1,150 @@
 ---
 type Variant =
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "outline"
-    | "outline-inverse"
-    | "navy"
-    | "ghost"
-    | "danger";
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "outline"
+  | "outline-inverse"
+  | "navy"
+  | "ghost"
+  | "danger";
+
 type Size = "sm" | "md" | "lg";
 
 interface Props {
-    variant?: Variant;
-    size?: Size;
-    href?: string;
-    disabled?: boolean;
-    class?: string;
+  variant?: Variant;
+  size?: Size;
+  href?: string;
+  disabled?: boolean;
+  class?: string;
 }
 
 const {
-    variant = "primary",
-    size = "md",
-    href,
-    disabled = false,
-    class: className,
+  variant = "primary",
+  size = "md",
+  href,
+  disabled = false,
+  class: className,
 } = Astro.props;
 
 const base =
-    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 transition-all duration-300";
 
 const variants: Record<Variant, string> = {
-    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
-    secondary: "bg-secondary text-primary hover:bg-secondary/80",
-    accent: "bg-accent text-accent-foreground shadow-sm hover:bg-accent/90",
-    outline:
-        "border border-primary/25 text-primary hover:bg-primary hover:text-primary-foreground",
-    // For use on the navy ground, where the outline above would disappear.
-    "outline-inverse":
-        "border border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground hover:text-primary",
-    navy: "bg-navy-deep text-primary-foreground shadow hover:bg-navy-deep/90",
-    ghost: "hover:bg-secondary hover:text-primary",
-    danger: "bg-red-600 text-white hover:bg-red-700",
+  primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+
+  secondary: "bg-secondary text-primary hover:bg-secondary/80",
+
+  accent: "bg-accent text-accent-foreground shadow-sm hover:bg-accent/90",
+
+  outline:
+    "direction-fill direction-fill-primary relative isolate overflow-hidden border border-primary/25 text-primary hover:text-primary-foreground",
+
+  "outline-inverse":
+    "direction-fill direction-fill-inverse relative isolate overflow-hidden border border-primary-foreground/40 text-primary-foreground hover:text-primary",
+
+  navy: "bg-navy-deep text-primary-foreground shadow hover:bg-navy-deep/90",
+
+  ghost: "hover:bg-secondary hover:text-primary",
+
+  danger: "bg-red-600 text-white hover:bg-red-700",
 };
 
 const sizes: Record<Size, string> = {
-    sm: "h-8 px-3 text-xs",
-    md: "h-9 px-4 py-2 text-sm",
-    lg: "h-10 px-8 text-sm",
+  sm: "h-8 px-3 text-xs",
+  md: "h-9 px-4 py-2 text-sm",
+  lg: "h-10 px-8 text-sm",
 };
+
+const isDirectionFill = variant === "outline" || variant === "outline-inverse";
 ---
 
 {
-    href ? (
-        <a
-            href={href}
-            class:list={[base, variants[variant], sizes[size], className]}
-        >
-            <slot />
-        </a>
-    ) : (
-        <button
-            disabled={disabled}
-            class:list={[base, variants[variant], sizes[size], className]}
-        >
-            <slot />
-        </button>
-    )
+  href ? (
+    <a
+      href={href}
+      data-direction-fill={isDirectionFill ? "" : undefined}
+      class:list={[base, variants[variant], sizes[size], className]}
+    >
+      <span class="relative z-10 inline-flex items-center gap-2">
+        <slot />
+      </span>
+    </a>
+  ) : (
+    <button
+      disabled={disabled}
+      data-direction-fill={isDirectionFill ? "" : undefined}
+      class:list={[base, variants[variant], sizes[size], className]}
+    >
+      <span class="relative z-10 inline-flex items-center gap-2">
+        <slot />
+      </span>
+    </button>
+  )
 }
+
+<style>
+  .direction-fill {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+
+  .direction-fill-primary {
+    --fill-color: var(--color-primary);
+  }
+
+  .direction-fill-inverse {
+    --fill-color: var(--color-primary-foreground);
+  }
+
+  .direction-fill::before {
+    content: "";
+    position: absolute;
+
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+
+    width: 250%;
+    aspect-ratio: 1;
+
+    background: var(--fill-color);
+    border-radius: 9999px;
+
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+
+    transition: transform 350ms ease;
+
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .direction-fill:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+</style>
+
+<script>
+  document.addEventListener("pointerover", (event) => {
+    if (!(event.target instanceof HTMLElement)) return;
+
+    const target = event.target.closest<HTMLElement>("[data-direction-fill]");
+
+    if (!target) return;
+
+    if (
+      event.relatedTarget instanceof Node &&
+      target.contains(event.relatedTarget)
+    ) {
+      return;
+    }
+
+    const rect = target.getBoundingClientRect();
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    target.style.setProperty("--mouse-x", `${x}px`);
+    target.style.setProperty("--mouse-y", `${y}px`);
+  });
+</script>
