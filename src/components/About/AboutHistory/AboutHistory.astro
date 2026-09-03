@@ -1,6 +1,7 @@
 ---
 import IconCard from "../../Base/IconCard/IconCard.astro";
 import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
+import Reveal from "../../Base/Reveal/Reveal.astro";
 
 interface Props {
     eyebrow: string;
@@ -13,7 +14,7 @@ const { eyebrow, title, items } = Astro.props;
 
 <SectionHeading eyebrow={eyebrow} title={title} />
 
-<div class="mt-10 grid gap-6 md:grid-cols-3">
+<Reveal stagger={100} class="mt-10 grid gap-6 md:grid-cols-3">
     {
         items.map((item) => (
             <IconCard
@@ -23,4 +24,4 @@ const { eyebrow, title, items } = Astro.props;
             />
         ))
     }
-</div>
+</Reveal>

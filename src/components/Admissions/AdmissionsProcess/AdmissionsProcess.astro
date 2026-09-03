@@ -1,5 +1,6 @@
 ---
 import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
+import Reveal from "../../Base/Reveal/Reveal.astro";
 
 interface Props {
     eyebrow: string;
@@ -13,7 +14,7 @@ const { eyebrow, title, steps } = Astro.props;
 <div>
     <SectionHeading eyebrow={eyebrow} title={title} />
 
-    <ol class="mt-8 space-y-5">
+    <Reveal as="ol" stagger={90} class="mt-8 space-y-5">
         {
             steps.map((step, index) => (
                 <li class="flex gap-4 border border-border bg-card p-5">
@@ -26,5 +27,5 @@ const { eyebrow, title, steps } = Astro.props;
                 </li>
             ))
         }
-    </ol>
+    </Reveal>
 </div>

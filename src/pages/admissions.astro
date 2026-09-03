@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
+import Reveal from "../components/Base/Reveal/Reveal.astro";
 import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
 import AdmissionsCallout from "../components/Admissions/AdmissionsCallout/AdmissionsCallout.astro";
 import AdmissionsProcess from "../components/Admissions/AdmissionsProcess/AdmissionsProcess.astro";
@@ -54,7 +55,7 @@ const { footnote } = enquiry;
                 steps={process.steps}
             />
 
-            <div class="space-y-10">
+            <Reveal variant="right" stagger={120} class="space-y-10">
                 <AdmissionsChecklist
                     icon="lucide:user-check"
                     title={eligibility.title}
@@ -70,7 +71,7 @@ const { footnote } = enquiry;
                     title={prospectus.title}
                     description={prospectus.description}
                 />
-            </div>
+            </Reveal>
         </div>
     </Section>
 
@@ -83,7 +84,7 @@ const { footnote } = enquiry;
                 centered
             />
 
-            <div class="mt-10">
+            <Reveal class="mt-10">
                 <EnquiryForm
                     title={enquiry.form_title}
                     description={enquiry.form_description}
@@ -91,7 +92,7 @@ const { footnote } = enquiry;
                     courses={courseOptions}
                     action={enquiry.form_endpoint}
                 />
-            </div>
+            </Reveal>
 
             <p class="mt-6 text-center text-sm text-muted-foreground">
                 {footnote.text}{" "}

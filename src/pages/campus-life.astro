@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
+import Reveal from "../components/Base/Reveal/Reveal.astro";
 import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
 import MediaText from "../components/Base/MediaText/MediaText.astro";
 import FeatureTile from "../components/Base/FeatureTile/FeatureTile.astro";
@@ -38,7 +39,8 @@ const academics = await getSection("campusLifeAcademics");
         <SectionHeading eyebrow={onCampus.eyebrow} title={onCampus.title} />
 
         <!-- gap-px over a bordered background draws the hairline grid between tiles. -->
-        <div
+        <Reveal
+            stagger={90}
             class="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
         >
             {
@@ -50,7 +52,7 @@ const academics = await getSection("campusLifeAcademics");
                     />
                 ))
             }
-        </div>
+        </Reveal>
     </Section>
 
     <Section>

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
+import Reveal from "../components/Base/Reveal/Reveal.astro";
 import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
 import Map from "../components/Base/Map/Map.astro";
 import ContactDetails from "../components/Contact/ContactDetails/ContactDetails.astro";
@@ -33,24 +34,28 @@ const mapQuery = addressLines.join(", ");
 
     <Section>
         <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
-            <ContactDetails
-                addressLines={addressLines}
-                phones={contact.phone_numbers}
-                emails={contact.emails}
-                socialLinks={contact.social_links}
-            />
-            <ContactForm />
+            <Reveal variant="left">
+                <ContactDetails
+                    addressLines={addressLines}
+                    phones={contact.phone_numbers}
+                    emails={contact.emails}
+                    socialLinks={contact.social_links}
+                />
+            </Reveal>
+            <Reveal variant="right" delay={120}>
+                <ContactForm />
+            </Reveal>
         </div>
     </Section>
 
     <Section background="surface">
         <SectionHeading eyebrow={location.eyebrow} title={location.title} />
-        <div class="mt-10">
+        <Reveal variant="zoom" class="mt-10">
             <Map
                 title={location.map_title}
                 src={contact.map_url}
                 query={mapQuery}
             />
-        </div>
+        </Reveal>
     </Section>
 </Layout>

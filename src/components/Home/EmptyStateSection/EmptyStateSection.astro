@@ -1,4 +1,5 @@
 ---
+import Reveal from "../../Base/Reveal/Reveal.astro";
 import { Icon } from "astro-icon/components";
 import Button from "../../Base/Button/Button.astro";
 import SectionHeadingRow from "../../Base/SectionHeadingRow/SectionHeadingRow.astro";
@@ -21,8 +22,10 @@ const { eyebrow, title, description, cta, emptyMessage } = Astro.props;
     </Button>
 </SectionHeadingRow>
 
-<p
+<Reveal
+    as="p"
+    variant="fade"
     class="mt-10 border border-dashed border-border p-8 text-sm text-muted-foreground"
 >
     {emptyMessage}
-</p>
+</Reveal>
