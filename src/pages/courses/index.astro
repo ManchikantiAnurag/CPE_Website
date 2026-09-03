@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/Base/PageHero/PageHero.astro";
 import Section from "../../components/Base/Section/Section.astro";
 import CourseRow from "../../components/Courses/CourseRow/CourseRow.astro";
+import Reveal from "../../components/Base/Reveal/Reveal.astro";
 import { getCareerNames, getSection } from "../../lib/site";
 
 const seo = await getSection("coursesSeo");
@@ -28,7 +29,7 @@ const courses = await Promise.all(
     />
 
     <Section>
-        <div class="grid gap-8">
+        <Reveal stagger={120} class="grid gap-8">
             {
                 courses.map((course) => (
                     <CourseRow
@@ -42,6 +43,6 @@ const courses = await Promise.all(
                     />
                 ))
             }
-        </div>
+        </Reveal>
     </Section>
 </Layout>

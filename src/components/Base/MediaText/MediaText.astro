@@ -1,5 +1,6 @@
 ---
 import Figure from "../Figure/Figure.astro";
+import Reveal from "../Reveal/Reveal.astro";
 
 interface Props {
     eyebrow: string;
@@ -32,11 +33,13 @@ const hasActions = Astro.slots.has("actions");
 >
     {
         imageFirst && (
-            <Figure src={image} alt={imageAlt} width={1408} height={1008} />
+            <Reveal variant="left">
+                <Figure src={image} alt={imageAlt} width={1408} height={1008} />
+            </Reveal>
         )
     }
 
-    <div>
+    <Reveal variant={imageFirst ? "right" : "left"} stagger={80}>
         <p class="eyebrow">{eyebrow}</p>
         <h2 class="mt-3 text-3xl text-primary md:text-4xl">{title}</h2>
         {
@@ -58,11 +61,13 @@ const hasActions = Astro.slots.has("actions");
                 </div>
             )
         }
-    </div>
+    </Reveal>
 
     {
         !imageFirst && (
-            <Figure src={image} alt={imageAlt} width={1408} height={1008} />
+            <Reveal variant="right">
+                <Figure src={image} alt={imageAlt} width={1408} height={1008} />
+            </Reveal>
         )
     }
 </div>

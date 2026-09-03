@@ -1,6 +1,7 @@
 ---
 import FeatureTile from "../../Base/FeatureTile/FeatureTile.astro";
 import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
+import Reveal from "../../Base/Reveal/Reveal.astro";
 
 interface Props {
     eyebrow: string;
@@ -14,7 +15,8 @@ const { eyebrow, title, items } = Astro.props;
 <SectionHeading eyebrow={eyebrow} title={title} />
 
 <!-- gap-px over a bordered background draws the hairline grid between tiles. -->
-<div
+<Reveal
+    stagger={90}
     class="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
 >
     {
@@ -26,4 +28,4 @@ const { eyebrow, title, items } = Astro.props;
             />
         ))
     }
-</div>
+</Reveal>

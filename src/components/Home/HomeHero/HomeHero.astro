@@ -1,6 +1,7 @@
 ---
 import Button from "../../Base/Button/Button.astro";
 import Figure from "../../Base/Figure/Figure.astro";
+import Reveal from "../../Base/Reveal/Reveal.astro";
 
 interface Link {
     label: string;
@@ -36,7 +37,7 @@ const {
     <div
         class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-24"
     >
-        <div>
+        <Reveal immediate stagger={90} duration={800}>
             <p class="eyebrow">{eyebrow}</p>
             <h1
                 class="mt-5 text-4xl leading-[1.08] text-primary-foreground md:text-5xl lg:text-[3.4rem]"
@@ -78,9 +79,9 @@ const {
                     </dl>
                 )
             }
-        </div>
+        </Reveal>
 
-        <div class="relative">
+        <Reveal variant="right" immediate delay={220} class="relative">
             <Figure
                 src={image}
                 alt={imageAlt}
@@ -96,6 +97,6 @@ const {
                     </div>
                 )
             }
-        </div>
+        </Reveal>
     </div>
 </section>

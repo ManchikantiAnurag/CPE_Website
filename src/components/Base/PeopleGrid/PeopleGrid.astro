@@ -1,5 +1,6 @@
 ---
 import PersonCard from "../PersonCard/PersonCard.astro";
+import Reveal from "../Reveal/Reveal.astro";
 
 interface Props {
     people: { name: string; role: string; bio: string; photo?: string }[];
@@ -9,7 +10,11 @@ interface Props {
 const { people, class: className } = Astro.props;
 ---
 
-<div class:list={["grid gap-6 md:grid-cols-3", className]}>
+<Reveal
+    stagger={110}
+    variant="zoom"
+    class={["grid gap-6 md:grid-cols-3", className]}
+>
     {
         people.map((person) => (
             <PersonCard
@@ -20,4 +25,4 @@ const { people, class: className } = Astro.props;
             />
         ))
     }
-</div>
+</Reveal>

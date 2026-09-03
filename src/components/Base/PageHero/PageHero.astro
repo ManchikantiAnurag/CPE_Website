@@ -1,5 +1,6 @@
 ---
 import Section from "../Section/Section.astro";
+import Reveal from "../Reveal/Reveal.astro";
 
 interface Props {
     eyebrow?: string;
@@ -11,7 +12,8 @@ const { eyebrow, title, description } = Astro.props;
 ---
 
 <Section background="navy" bordered padded={false} class="py-16 md:py-20">
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <Reveal immediate stagger={90} duration={800}>
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
     <h1 class="mt-3 max-w-3xl text-4xl text-primary-foreground md:text-5xl">
         {title}
     </h1>
@@ -21,5 +23,6 @@ const { eyebrow, title, description } = Astro.props;
                 {description}
             </p>
         )
-    }
+        }
+    </Reveal>
 </Section>

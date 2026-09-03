@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { categories, emptyMessage, gridClass } = Astro.props;
+import Reveal from "../Reveal/Reveal.astro";
 ---
 
 <!--
@@ -38,9 +39,9 @@ const { categories, emptyMessage, gridClass } = Astro.props;
         {emptyMessage}
     </p>
 
-    <div data-items class:list={["mt-10", gridClass]}>
+    <Reveal data-items stagger={80} class={["mt-10", gridClass]}>
         <slot />
-    </div>
+    </Reveal>
 </div>
 
 <script>
