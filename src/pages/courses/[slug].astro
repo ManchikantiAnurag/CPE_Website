@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import { getCareerNames } from "../../lib/site";
 import Layout from "../../layouts/Layout.astro";
 import CourseOverview from "../../components/Courses/CourseOverview/CourseOverview.astro";
 import CourseSidebar from "../../components/Courses/CourseSidebar/CourseSidebar.astro";
@@ -15,10 +16,7 @@ export async function getStaticPaths() {
 
 const { course } = Astro.props;
 
-const careers = await getCollection("careers");
-const careerNames = course.careers.map(
-    (id) => careers.find((career) => career.data.id === id)?.data.name ?? id,
-);
+const careerNames = await getCareerNames(course.careers);
 
 const contactDetails = await getEntry("contactDetails", "contact-details");
 const phones = course.enquiry_phones.length

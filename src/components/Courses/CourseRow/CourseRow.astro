@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../Base/Button/Button.astro";
+
+interface Props {
+    code: string;
+    title: string;
+    tagline: string;
+    duration?: string;
+    eligibility?: string;
+    careers?: string[];
+    href: string;
+}
+
+const {
+    code,
+    title,
+    tagline,
+    duration,
+    eligibility,
+    careers = [],
+    href,
+} = Astro.props;
+
+const details = [
+    { term: "Eligibility", description: eligibility },
+    { term: "Career Opportunities", description: careers.join(", ") },
+].filter((detail) => Boolean(detail.description));
+---
+
+<article
+    class="grid gap-8 border border-border bg-card p-8 md:grid-cols-[auto_1fr] md:p-10"
+>
+    <div class="md:w-40">
+        <span class="font-display text-4xl font-semibold text-primary">
+            {code}
+        </span>
+        {
+            duration && (
+                <p class="mt-2 text-xs font-semibold uppercase tracking-widest text-accent">
+                    {duration}
+                </p>
+            )
+        }
+    </div>
+
+    <div>
+        <h2 class="text-2xl text-primary">{title}</h2>
+        <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
+            {tagline}
+        </p>
+
+        {
+            details.length > 0 && (
+                <dl class="mt-6 grid gap-6 sm:grid-cols-2">
+                    {details.map((detail) => (
+                        <div>
+                            <dt class="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                                {detail.term}
+                            </dt>
+                            <dd class="mt-1.5 text-sm text-foreground/85">
+                                {detail.description}
+                            </dd>
+                        </div>
+                    ))}
+                </dl>
+            )
+        }
+
+        <div class="mt-7 flex flex-wrap gap-3">
+            <Button href={href} variant="outline">
+                Learn More
+                <Icon
+                    name="lucide:arrow-right"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                />
+            </Button>
+            <Button href="/admissions" variant="accent">Apply Now</Button>
+        </div>
+    </div>
+</article>

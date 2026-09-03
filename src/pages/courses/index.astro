@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/Base/PageHero/PageHero.astro";
+import Section from "../../components/Base/Section/Section.astro";
+import CourseRow from "../../components/Courses/CourseRow/CourseRow.astro";
+import { getCareerNames, getSection } from "../../lib/site";
+
+const seo = await getSection("coursesSeo");
+const hero = await getSection("coursesHero");
+
+const courses = await Promise.all(
+    (await getCollection("courses"))
+        .sort((a, b) => a.data.order - b.data.order)
+        .map(async (course) => ({
+            ...course.data,
+            href: `/courses/${course.id}`,
+            careerNames: await getCareerNames(course.data.careers),
+        })),
+);
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description}>
+    <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.intro}
+    />
+
+    <Section>
+        <div class="grid gap-8">
+            {
+                courses.map((course) => (
+                    <CourseRow
+                        code={course.code}
+                        title={course.title}
+                        tagline={course.tagline}
+                        duration={course.duration}
+                        eligibility={course.eligibility}
+                        careers={course.careerNames}
+                        href={course.href}
+                    />
+                ))
+            }
+        </div>
+    </Section>
+</Layout>
