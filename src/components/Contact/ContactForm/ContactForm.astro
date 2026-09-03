@@ -4,12 +4,9 @@ import Field from "../../Base/Field/Field.astro";
 import Input from "../../Base/Input/Input.astro";
 import Textarea from "../../Base/Textarea/Textarea.astro";
 
-// Deliberately not CMS-managed: the labels and fields of this form are fixed,
-// so they live here rather than in Sveltia. Set `action` below once a form
-// handler (Formspree, Netlify Forms, or similar) is chosen.
 ---
 
-<form method="post" class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2">
+<form method="post" action="/api/form" class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2">
     <div class="md:col-span-2">
         <h2 class="text-xl text-primary">Send us a message</h2>
         <p class="mt-1 text-sm text-muted-foreground">

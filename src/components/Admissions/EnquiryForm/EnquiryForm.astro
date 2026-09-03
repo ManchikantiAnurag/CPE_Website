@@ -10,7 +10,7 @@ interface Props {
     description: string;
     submitLabel: string;
     courses: { value: string; label: string }[];
-    /** Empty until a form handler is configured in the CMS. */
+    /** Overrides the default /api/form handler. */
     action?: string;
 }
 
@@ -19,7 +19,7 @@ const { title, description, submitLabel, courses, action } = Astro.props;
 
 <form
     method="post"
-    action={action || undefined}
+    action={action || "/api/form"}
     class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2"
 >
     <div class="md:col-span-2">
