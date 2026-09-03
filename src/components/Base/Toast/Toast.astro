@@ -1,0 +1,142 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+{/*
+  One snackbar for the whole page, in the top layer via the Popover API so it
+  sits above sticky headers without a z-index race. `popover="manual"` keeps it
+  up until the close button is pressed — no light dismiss, no timeout.
+
+  Any `form[data-toast]` on the page is submitted through fetch by the script
+  below and reports its result here. Without JS the form posts normally, so
+  submission still works.
+*/}
+<div
+    id="site-toast"
+    popover="manual"
+    role="status"
+    aria-live="polite"
+    class="flex w-[min(24rem,calc(100vw-2rem))] items-start gap-3 border-l-4 bg-card p-4 text-sm shadow-lift"
+>
+    <Icon
+        data-toast-icon="success"
+        name="lucide:circle-check"
+        class="mt-0.5 h-5 w-5 shrink-0 text-[#16a34a]"
+        aria-hidden="true"
+    />
+    <Icon
+        data-toast-icon="error"
+        name="lucide:circle-alert"
+        class="mt-0.5 h-5 w-5 shrink-0 text-red-600"
+        aria-hidden="true"
+    />
+    <p data-toast-message class="flex-1 leading-relaxed text-foreground"></p>
+    <button
+        type="button"
+        data-toast-close
+        aria-label="Dismiss"
+        class="-m-1 shrink-0 rounded p-1 text-muted-foreground hover:text-foreground"
+    >
+        <Icon name="lucide:x" class="h-4 w-4" aria-hidden="true" />
+    </button>
+</div>
+
+<style>
+    /* The UA centres a popover; pin it to the top-right instead. */
+    #site-toast {
+        position: fixed;
+        inset: auto 1.5rem auto auto;
+        top: 1.5rem;
+        margin: 0;
+        border-style: solid;
+        border-width: 0 0 0 4px;
+        border-color: var(--border);
+        padding: 1rem;
+    }
+
+    #site-toast:popover-open {
+        animation: toast-in 200ms ease-out;
+    }
+
+    /* Green and red are literals: the brand palette has no status colours,
+       and the accent orange reads too close to the error red. */
+    #site-toast[data-variant="success"] {
+        border-color: #16a34a;
+    }
+
+    #site-toast[data-variant="error"] {
+        border-color: #dc2626;
+    }
+
+    /* Both glyphs are rendered; the variant decides which one is shown. */
+    #site-toast [data-toast-icon] {
+        display: none;
+    }
+
+    #site-toast[data-variant="success"] [data-toast-icon="success"],
+    #site-toast[data-variant="error"] [data-toast-icon="error"] {
+        display: block;
+    }
+
+    @keyframes toast-in {
+        from {
+            opacity: 0;
+            transform: translateY(-0.5rem);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #site-toast:popover-open {
+            animation: none;
+        }
+    }
+</style>
+
+<script>
+    const toast = document.getElementById("site-toast") as HTMLElement | null;
+
+    if (toast) {
+        const message = toast.querySelector<HTMLElement>("[data-toast-message]")!;
+
+        const show = (text: string, variant: "success" | "error") => {
+            message.textContent = text;
+            toast.dataset.variant = variant;
+            // Re-show so a second submission replays the animation.
+            toast.hidePopover();
+            toast.showPopover();
+        };
+
+        toast
+            .querySelector("[data-toast-close]")!
+            .addEventListener("click", () => toast.hidePopover());
+
+        document.querySelectorAll<HTMLFormElement>("form[data-toast]").forEach((form) => {
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const submit = form.querySelector<HTMLButtonElement>("button:not([type=button])");
+                if (submit) submit.disabled = true;
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: new FormData(form),
+                        headers: { accept: "application/json" },
+                    });
+                    if (!response.ok) throw new Error(String(response.status));
+
+                    show(
+                        form.dataset.toast ||
+                            "Thank you. Your details have been submitted.",
+                        "success",
+                    );
+                    form.reset();
+                } catch {
+                    show("Failed to submit. Please try again.", "error");
+                } finally {
+                    if (submit) submit.disabled = false;
+                }
+            });
+        });
+    }
+</script>

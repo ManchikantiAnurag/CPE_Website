@@ -6,7 +6,12 @@ import Textarea from "../../Base/Textarea/Textarea.astro";
 
 ---
 
-<form method="post" action="/api/form" class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2">
+<form
+    method="post"
+    action="/api/form"
+    data-toast="Thank you. Your message has been sent — we usually respond within one working day."
+    class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2"
+>
     <div class="md:col-span-2">
         <h2 class="text-xl text-primary">Send us a message</h2>
         <p class="mt-1 text-sm text-muted-foreground">

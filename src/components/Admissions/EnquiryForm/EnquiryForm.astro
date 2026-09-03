@@ -20,6 +20,7 @@ const { title, description, submitLabel, courses, action } = Astro.props;
 <form
     method="post"
     action={action || "/api/form"}
+    data-toast="Thank you. Your enquiry has been submitted — our admissions team will call you shortly."
     class="grid gap-5 border border-border bg-card p-7 md:grid-cols-2"
 >
     <div class="md:col-span-2">
