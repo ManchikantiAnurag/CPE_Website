@@ -1,0 +1,80 @@
+---
+/**
+ * Wraps content in a scroll-triggered reveal. All the motion lives in
+ * global.css; this only stamps the attributes and runs the observer.
+ */
+interface Props {
+    variant?: "fade" | "up" | "down" | "left" | "right" | "zoom" | "blur";
+    /** ms to wait before this element starts. */
+    delay?: number;
+    duration?: number;
+    /** ms between each direct child — set it to run a list in sequence. */
+    stagger?: number;
+    /** Reveal on load rather than on scroll, for content above the fold. */
+    immediate?: boolean;
+    /** Element to render; the default `div` is a block, so pick `span` inline. */
+    as?: string;
+    class?: string | (string | false | null | undefined)[];
+}
+
+const {
+    variant = "up",
+    delay = 0,
+    duration,
+    stagger = 0,
+    immediate = false,
+    as: Tag = "div",
+    class: className,
+    ...rest
+} = Astro.props;
+
+const style = [
+    delay && `--rv-delay:${delay}ms`,
+    duration && `--rv-duration:${duration}ms`,
+    stagger && `--rv-stagger:${stagger}ms`,
+]
+    .filter(Boolean)
+    .join(";");
+---
+
+<Tag
+    {...rest}
+    data-reveal={variant}
+    data-reveal-stagger={stagger ? "" : undefined}
+    data-reveal-now={immediate ? "" : undefined}
+    style={style || undefined}
+    class:list={className}><slot /></Tag
+>
+
+<script>
+    // Tells Layout's fallback timer that the reveals are in hand.
+    (window as any).__revealReady = true;
+
+    // One observer for the page; each element is released once it has played.
+    const observer = new IntersectionObserver(
+        (entries, obs) => {
+            for (const entry of entries) {
+                if (!entry.isIntersecting) continue;
+                entry.target.classList.add("reveal-in");
+                obs.unobserve(entry.target);
+            }
+        },
+        // Hold off until the element is a little way in, not just touching.
+        { rootMargin: "0px 0px -10% 0px" },
+    );
+
+    for (const el of document.querySelectorAll<HTMLElement>("[data-reveal]")) {
+        if (el.hasAttribute("data-reveal-stagger")) {
+            Array.from(el.children).forEach((child, i) =>
+                (child as HTMLElement).style.setProperty("--i", String(i)),
+            );
+        }
+
+        // A frame's grace so the hidden state paints first and the transition runs.
+        if (el.hasAttribute("data-reveal-now")) {
+            requestAnimationFrame(() => el.classList.add("reveal-in"));
+        } else {
+            observer.observe(el);
+        }
+    }
+</script>

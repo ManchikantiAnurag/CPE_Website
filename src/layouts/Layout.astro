@@ -8,15 +8,21 @@ import { getSiteSettings } from "../lib/site";
 interface Props {
     title?: string;
     description?: string;
+    /** Which cross-document view transition this page arrives with. */
+    transition?: "fade" | "lift" | "slide";
 }
 
 const site = await getSiteSettings();
-const { title, description = site.description } = Astro.props;
+const {
+    title,
+    description = site.description,
+    transition = "lift",
+} = Astro.props;
 const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page-transition={transition}>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
@@ -25,6 +31,17 @@ const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
         <title>{pageTitle}</title>
+        <!-- Marks JS as available before first paint, so the reveal styles
+             only hide content that something is going to bring back. If the
+             reveal script never arrives, drop the flag so nothing stays
+             invisible — an unanimated page beats a blank one. -->
+        <script is:inline>
+            document.documentElement.classList.add("js");
+            setTimeout(() => {
+                if (!window.__revealReady)
+                    document.documentElement.classList.remove("js");
+            }, 3000);
+        </script>
     </head>
     <body class="flex min-h-screen flex-col bg-background text-foreground">
         <Header />

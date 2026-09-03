@@ -87,3 +87,130 @@
     color: var(--accent);
   }
 }
+
+/*
+  Page transitions — native cross-document view transitions, no router script.
+  Browsers without support just navigate normally. The page picks its flavour
+  with Layout's `transition` prop, which lands on <html data-page-transition>.
+*/
+@view-transition {
+  navigation: auto;
+}
+
+/* The sticky header keeps its own snapshot so it stays put while the page moves. */
+header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root) {
+  animation: vt-exit 160ms ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: vt-enter 320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes vt-exit {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-enter {
+  from {
+    opacity: 0;
+  }
+}
+
+/* `transition="lift"` — content rises into place. */
+[data-page-transition="lift"]::view-transition-new(root) {
+  animation-name: vt-enter, vt-lift;
+}
+
+@keyframes vt-lift {
+  from {
+    transform: translateY(18px);
+  }
+}
+
+/* `transition="slide"` — for moving sideways through a set of sibling pages. */
+[data-page-transition="slide"]::view-transition-old(root) {
+  animation-name: vt-exit, vt-slide-out;
+}
+
+[data-page-transition="slide"]::view-transition-new(root) {
+  animation-name: vt-enter, vt-slide-in;
+}
+
+@keyframes vt-slide-out {
+  to {
+    transform: translateX(-3%);
+  }
+}
+
+@keyframes vt-slide-in {
+  from {
+    transform: translateX(4%);
+  }
+}
+
+/*
+  Reveal — one transition steered by custom properties, so a variant is four
+  values rather than its own keyframe. The hidden state is gated on `html.js`
+  so a visitor without JS gets plain, visible content instead of a blank page.
+*/
+[data-reveal] {
+  --rv-x: 0px;
+  --rv-y: 0px;
+  --rv-scale: 1;
+  --rv-duration: 700ms;
+  --rv-delay: 0ms;
+  --rv-stagger: 0ms;
+  --rv-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-reveal="up"] { --rv-y: 28px; }
+[data-reveal="down"] { --rv-y: -28px; }
+[data-reveal="left"] { --rv-x: -32px; }
+[data-reveal="right"] { --rv-x: 32px; }
+[data-reveal="zoom"] { --rv-scale: 0.94; }
+[data-reveal="blur"] { --rv-y: 12px; }
+
+/*
+  Without `stagger` the element itself moves; with it the element holds still
+  and its direct children move, each offset by the `--i` the script stamps on.
+*/
+[data-reveal]:not([data-reveal-stagger]),
+[data-reveal-stagger] > * {
+  transition-property: opacity, transform, filter;
+  transition-duration: var(--rv-duration);
+  transition-timing-function: var(--rv-ease);
+  transition-delay: calc(var(--rv-delay) + var(--i, 0) * var(--rv-stagger));
+}
+
+html.js [data-reveal]:not([data-reveal-stagger]):not(.reveal-in),
+html.js [data-reveal-stagger]:not(.reveal-in) > * {
+  opacity: 0;
+  transform: translate3d(var(--rv-x), var(--rv-y), 0) scale(var(--rv-scale));
+}
+
+/* Blur is its own rule so the other variants never pay for a filter layer. */
+html.js [data-reveal="blur"]:not([data-reveal-stagger]):not(.reveal-in),
+html.js [data-reveal="blur"][data-reveal-stagger]:not(.reveal-in) > * {
+  filter: blur(10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal]:not(.reveal-in),
+  html.js [data-reveal-stagger]:not(.reveal-in) > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
