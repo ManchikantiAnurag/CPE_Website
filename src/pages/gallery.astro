@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import CategoryFilter from "../components/Base/CategoryFilter/CategoryFilter.astro";
+import GalleryCard from "../components/Gallery/GalleryCard/GalleryCard.astro";
+import { getSection } from "../lib/site";
+
+const seo = await getSection("gallerySeo");
+const hero = await getSection("galleryHero");
+
+const categories = (await getCollection("galleryCategories"))
+    .map((category) => category.data)
+    .sort((a, b) => a.order - b.order);
+const categoryNames = new Map(categories.map((c) => [c.id, c.name]));
+
+/** Newest first; `date` is an ISO string, so it sorts as text. */
+const items = (await getCollection("gallery"))
+    .map((item) => item.data)
+    .sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description}>
+    <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.intro}
+    />
+
+    <Section>
+        <CategoryFilter
+            categories={categories}
+            emptyMessage={hero.empty_message}
+            gridClass="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+        >
+            {
+                items.map((item) => (
+                    <div data-category={item.category}>
+                        <GalleryCard
+                            title={item.title}
+                            categoryName={
+                                categoryNames.get(item.category) ?? item.category
+                            }
+                            image={item.image}
+                            imageAlt={item.image_alt}
+                            videoUrl={item.video_url}
+                        />
+                    </div>
+                ))
+            }
+        </CategoryFilter>
+    </Section>
+</Layout>

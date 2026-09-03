@@ -1,0 +1,46 @@
+---
+import { Icon } from "astro-icon/components";
+import Figure from "../../Base/Figure/Figure.astro";
+
+interface Props {
+    title: string;
+    categoryName: string;
+    image?: string;
+    imageAlt: string;
+    /** When set the tile links out to the video instead of standing alone. */
+    videoUrl?: string;
+}
+
+const { title, categoryName, image, imageAlt, videoUrl } = Astro.props;
+
+const Wrapper = videoUrl ? "a" : "div";
+---
+
+<Wrapper
+    href={videoUrl || undefined}
+    target={videoUrl ? "_blank" : undefined}
+    rel={videoUrl ? "noreferrer" : undefined}
+    class="group block border border-border bg-card transition-colors hover:border-primary/30"
+>
+    <div class="relative">
+        <Figure src={image} alt={imageAlt} width={800} height={600} />
+        {
+            videoUrl && (
+                <span class="absolute inset-0 flex items-center justify-center bg-navy-deep/40 text-primary-foreground">
+                    <Icon
+                        name="lucide:play"
+                        class="h-10 w-10"
+                        aria-hidden="true"
+                    />
+                </span>
+            )
+        }
+    </div>
+
+    <div class="p-5">
+        <p class="text-[11px] font-semibold uppercase tracking-widest text-accent">
+            {categoryName}
+        </p>
+        <h3 class="mt-2 text-base text-primary">{title}</h3>
+    </div>
+</Wrapper>

@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "id": "campus",
+      "name": "Campus",
+      "order": 1
+    },
+    {
+      "id": "events",
+      "name": "Events",
+      "order": 2
+    },
+    {
+      "id": "workshops",
+      "name": "Workshops",
+      "order": 3
+    },
+    {
+      "id": "student-activities",
+      "name": "Student Activities",
+      "order": 4
+    },
+    {
+      "id": "achievements",
+      "name": "Achievements",
+      "order": 5
+    }
+  ]
+}
