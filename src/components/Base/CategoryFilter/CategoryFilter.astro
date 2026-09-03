@@ -1,0 +1,73 @@
+---
+interface Props {
+    categories: { id: string; name: string }[];
+    /** Shown when the active chip has no items — including when there are none. */
+    emptyMessage: string;
+    /** Grid classes for the items, which differ per page. */
+    gridClass: string;
+}
+
+const { categories, emptyMessage, gridClass } = Astro.props;
+---
+
+<!--
+  Items in the slot carry `data-category`; the script below hides the ones the
+  active chip filters out. No JS means every item stays visible, which is the
+  right fallback for a list page.
+-->
+<div data-category-filter>
+    <div class="flex flex-wrap gap-2">
+        {
+            [{ id: "all", name: "All" }, ...categories].map((category, index) => (
+                <button
+                    type="button"
+                    data-filter={category.id}
+                    aria-pressed={index === 0 ? "true" : "false"}
+                    class="border px-4 py-2 text-sm font-medium transition-colors border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-primary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+                >
+                    {category.name}
+                </button>
+            ))
+        }
+    </div>
+
+    <p
+        data-empty
+        class="mt-10 border border-dashed border-border p-8 text-sm text-muted-foreground"
+    >
+        {emptyMessage}
+    </p>
+
+    <div data-items class:list={["mt-10", gridClass]}>
+        <slot />
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll<HTMLElement>("[data-category-filter]").forEach((root) => {
+        const buttons = root.querySelectorAll<HTMLButtonElement>("[data-filter]");
+        const items = root.querySelectorAll<HTMLElement>("[data-category]");
+        const empty = root.querySelector<HTMLElement>("[data-empty]")!;
+
+        const apply = (active: string) => {
+            let visible = 0;
+            items.forEach((item) => {
+                const shown = active === "all" || item.dataset.category === active;
+                item.hidden = !shown;
+                if (shown) visible += 1;
+            });
+            empty.hidden = visible > 0;
+        };
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                buttons.forEach((other) =>
+                    other.setAttribute("aria-pressed", String(other === button)),
+                );
+                apply(button.dataset.filter!);
+            });
+        });
+
+        apply("all");
+    });
+</script>

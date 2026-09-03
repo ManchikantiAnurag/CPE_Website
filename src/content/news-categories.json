@@ -1,0 +1,34 @@
+{
+  "categories": [
+    {
+      "id": "news",
+      "name": "News",
+      "order": 1
+    },
+    {
+      "id": "announcement",
+      "name": "Announcement",
+      "order": 2
+    },
+    {
+      "id": "event",
+      "name": "Event",
+      "order": 3
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "order": 4
+    },
+    {
+      "id": "seminar",
+      "name": "Seminar",
+      "order": 5
+    },
+    {
+      "id": "admission-update",
+      "name": "Admission Update",
+      "order": 6
+    }
+  ]
+}
