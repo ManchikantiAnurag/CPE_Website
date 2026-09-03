@@ -214,3 +214,83 @@ html.js [data-reveal="blur"][data-reveal-stagger]:not(.reveal-in) > * {
     animation: none;
   }
 }
+
+/*
+  Menus open in two beats: the container arrives first, then its text fades in
+  behind it. The text's delay is just the container's duration, so the second
+  beat starts as the first one lands. Closing runs both at once — a menu should
+  get out of the way immediately.
+*/
+.nav-dropdown a {
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.group:hover > .nav-dropdown a,
+.group:focus-within > .nav-dropdown a {
+  opacity: 1;
+  transition-delay: 100ms;
+}
+
+/*
+  Mobile menu — the toggle keeps flipping the `hidden` attribute, so the
+  semantics and the no-JS fallback stay exactly as they were; `allow-discrete`
+  plus `@starting-style` is what lets a display:none element animate both ways.
+  Browsers without them simply snap open, as before.
+*/
+#mobile-nav {
+  /* 0fr -> 1fr animates the real height, so the panel pushes the page down
+     as it opens rather than sliding over it. The inner nav does the clipping,
+     since it is the grid item being squeezed. */
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    display 260ms allow-discrete;
+}
+
+#mobile-nav > nav {
+  overflow: hidden;
+}
+
+#mobile-nav[hidden] {
+  display: none;
+  grid-template-rows: 0fr;
+}
+
+@starting-style {
+  #mobile-nav:not([hidden]) {
+    grid-template-rows: 0fr;
+  }
+}
+
+/* Second beat: the links fade in once the panel has finished coming down. */
+#mobile-nav:not([hidden]) nav {
+  animation: nav-text-in 260ms ease 240ms both;
+}
+
+@keyframes nav-text-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-dropdown a,
+  .group:hover > .nav-dropdown a,
+  .group:focus-within > .nav-dropdown a {
+    opacity: 1;
+    transition: none;
+  }
+
+  #mobile-nav {
+    transition: none;
+  }
+
+  #mobile-nav:not([hidden]) nav {
+    animation: none;
+  }
+}
