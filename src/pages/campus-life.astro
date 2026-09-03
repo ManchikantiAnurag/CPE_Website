@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
+import MediaText from "../components/Base/MediaText/MediaText.astro";
+import FeatureTile from "../components/Base/FeatureTile/FeatureTile.astro";
+import Button from "../components/Base/Button/Button.astro";
+import { getSection } from "../lib/site";
+
+const seo = await getSection("campusLifeSeo");
+const hero = await getSection("campusLifeHero");
+const intro = await getSection("campusLifeIntro");
+const onCampus = await getSection("campusLifeOnCampus");
+const academics = await getSection("campusLifeAcademics");
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description}>
+    <PageHero
+        eyebrow={hero.eyebrow}
+        title={hero.title}
+        description={hero.intro}
+    />
+
+    <Section>
+        <MediaText
+            eyebrow={intro.eyebrow}
+            title={intro.title}
+            paragraphs={intro.paragraphs}
+            image={intro.image}
+            imageAlt={intro.image_alt}
+            imagePosition="start"
+        />
+    </Section>
+
+    <Section background="surface">
+        <SectionHeading eyebrow={onCampus.eyebrow} title={onCampus.title} />
+
+        <!-- gap-px over a bordered background draws the hairline grid between tiles. -->
+        <div
+            class="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
+        >
+            {
+                onCampus.items.map((item) => (
+                    <FeatureTile
+                        icon={item.icon}
+                        title={item.title}
+                        description={item.description}
+                    />
+                ))
+            }
+        </div>
+    </Section>
+
+    <Section>
+        <MediaText
+            eyebrow={academics.eyebrow}
+            title={academics.title}
+            paragraphs={academics.paragraphs}
+            image={academics.image}
+            imageAlt={academics.image_alt}
+        >
+            <Button slot="actions" href={academics.cta.href} variant="outline">
+                {academics.cta.label}
+                <Icon
+                    name="lucide:arrow-right"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                />
+            </Button>
+        </MediaText>
+    </Section>
+</Layout>

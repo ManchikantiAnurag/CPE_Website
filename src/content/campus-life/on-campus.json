@@ -1,0 +1,36 @@
+{
+  "eyebrow": "On Campus",
+  "title": "What student life includes",
+  "items": [
+    {
+      "icon": "lucide:school",
+      "title": "Classrooms",
+      "description": "Well-lit, quiet classrooms arranged for small batches so every student stays within reach of the teacher."
+    },
+    {
+      "icon": "lucide:landmark",
+      "title": "Campus",
+      "description": "A compact, secure campus in Ram Nagar with dedicated study space, library access and staff rooms open to students."
+    },
+    {
+      "icon": "lucide:presentation",
+      "title": "Academic Activities",
+      "description": "Daily practice sessions, weekly tests, revision cycles and structured doubt-clearing built into the timetable."
+    },
+    {
+      "icon": "lucide:users",
+      "title": "Student Activities",
+      "description": "Commerce club discussions, quizzes, group presentations and peer study circles that build confidence."
+    },
+    {
+      "icon": "lucide:mic-vocal",
+      "title": "Workshops",
+      "description": "Skill workshops on accountancy practice, aptitude, legal reasoning and examination technique."
+    },
+    {
+      "icon": "lucide:calendar-days",
+      "title": "Seminars & Events",
+      "description": "Career seminars, parent interactions and college days that connect academics with real professional pathways."
+    }
+  ]
+}
