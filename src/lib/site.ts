@@ -23,6 +23,14 @@ export async function getCourseLinks(): Promise<NavLink[]> {
         }));
 }
 
+/** Career ids as stored on a course, resolved to their display names. */
+export async function getCareerNames(ids: string[]): Promise<string[]> {
+    const careers = await getCollection("careers");
+    return ids.map(
+        (id) => careers.find((career) => career.data.id === id)?.data.name ?? id,
+    );
+}
+
 /**
  * Reads one page-section collection. Every section document is stored under
  * the entry id "content", so pages name only the collection.

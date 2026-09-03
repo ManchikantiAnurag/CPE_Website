@@ -67,6 +67,40 @@ const courses = defineCollection({
     }),
 });
 
+/** Chip filters on the gallery and news pages, referenced by each item. */
+const categoryList = (path: string) =>
+    defineCollection({
+        loader: file(path, { parser: (text) => JSON.parse(text).categories }),
+        schema: z.object({ id: z.string(), name: z.string(), order: z.number() }),
+    });
+
+const galleryCategories = categoryList("src/content/gallery-categories.json");
+const newsCategories = categoryList("src/content/news-categories.json");
+
+const gallery = defineCollection({
+    loader: glob({ base: "src/content/gallery", pattern: "**/*.json" }),
+    schema: z.object({
+        title: z.string(),
+        category: z.string(),
+        /** ISO date, newest first on the page. */
+        date: z.string(),
+        /** Set to link the tile out to a video instead of showing a photo. */
+        video_url: z.string().default(""),
+    }).merge(image),
+});
+
+const news = defineCollection({
+    loader: glob({ base: "src/content/news", pattern: "**/*.json" }),
+    schema: z.object({
+        title: z.string(),
+        category: z.string(),
+        date: z.string(),
+        summary: z.string(),
+        /** Optional link out to a notice, form or full article. */
+        link: cta.partial().default({}),
+    }).merge(image),
+});
+
 const careers = defineCollection({
     loader: file("src/content/careers.json", {
         parser: (text) => JSON.parse(text).careers,
@@ -344,6 +378,19 @@ const admissionsEnquiry = section(
     }),
 );
 
+/* ----------------------------------------------------------- courses page */
+
+const coursesSeo = section("src/content/courses-page/seo.json", seo);
+
+const coursesHero = section(
+    "src/content/courses-page/hero.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+    }),
+);
+
 /* ------------------------------------------------------------- about page */
 
 const aboutSeo = section("src/content/about/seo.json", seo);
@@ -418,6 +465,75 @@ const aboutLeadership = section(
     }),
 );
 
+/* -------------------------------------------- gallery and news index pages */
+
+/** Hero for a page whose body is a filtered list that may still be empty. */
+const listPageHero = z.object({
+    eyebrow: z.string(),
+    title: z.string(),
+    intro: z.string(),
+    empty_message: z.string(),
+});
+
+const gallerySeo = section("src/content/gallery-page/seo.json", seo);
+const galleryHero = section("src/content/gallery-page/hero.json", listPageHero);
+
+const newsSeo = section("src/content/news-page/seo.json", seo);
+const newsHero = section("src/content/news-page/hero.json", listPageHero);
+
+/* ------------------------------------------------------- campus life page */
+
+const campusLifeSeo = section("src/content/campus-life/seo.json", seo);
+
+const campusLifeHero = section(
+    "src/content/campus-life/hero.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+    }),
+);
+
+const campusLifeIntro = section(
+    "src/content/campus-life/life-at-cpe.json",
+    z
+        .object({
+            eyebrow: z.string(),
+            title: z.string(),
+            paragraphs: z.array(z.string()).default([]),
+        })
+        .merge(image),
+);
+
+const campusLifeOnCampus = section(
+    "src/content/campus-life/on-campus.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z
+            .array(
+                z.object({
+                    icon: z.string(),
+                    title: z.string(),
+                    description: z.string(),
+                }),
+            )
+            .default([]),
+    }),
+);
+
+const campusLifeAcademics = section(
+    "src/content/campus-life/academics.json",
+    z
+        .object({
+            eyebrow: z.string(),
+            title: z.string(),
+            paragraphs: z.array(z.string()).default([]),
+            cta: cta,
+        })
+        .merge(image),
+);
+
 /* ----------------------------------------------------------- contact page */
 
 const contactSeo = section("src/content/contact/seo.json", seo);
@@ -442,6 +558,10 @@ const contactLocation = section(
 
 export const collections = {
     courses,
+    gallery,
+    galleryCategories,
+    news,
+    newsCategories,
     careers,
     leadership,
     contactDetails,
@@ -470,6 +590,9 @@ export const collections = {
     admissionsProspectus,
     admissionsEnquiry,
 
+    coursesSeo,
+    coursesHero,
+
     aboutSeo,
     aboutHero,
     aboutCpe,
@@ -477,6 +600,17 @@ export const collections = {
     aboutVisionMission,
     aboutWhyChoose,
     aboutLeadership,
+
+    campusLifeSeo,
+    campusLifeHero,
+    campusLifeIntro,
+    campusLifeOnCampus,
+    campusLifeAcademics,
+
+    gallerySeo,
+    galleryHero,
+    newsSeo,
+    newsHero,
 
     contactSeo,
     contactHero,
