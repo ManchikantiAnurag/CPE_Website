@@ -1,46 +1,49 @@
-# Astro Starter Kit: Basics
+# CPE Website
+
+Astro website with Sveltia CMS, deployed to AWS Amplify Hosting using
+`astro-aws-amplify`. Pages and `/api/form` run on Node.js 22; assets are served
+from Amplify's static hosting.
+
+## Development
+
+Use Node.js 22.12 or newer and npm:
 
 ```sh
-npm create astro@latest -- --template basics
+npm ci
+npm run dev -- --background
+npm run astro -- dev status
+npm run astro -- dev logs
+npm run astro -- dev stop
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deploy to AWS Amplify
 
-## 🚀 Project Structure
+1. Connect this repository and your deployment branch in Amplify Hosting.
+2. Use the Amazon Linux 2023 build image and enable SSR hosting
+   (`WEB_COMPUTE` if configuring the app through the AWS CLI).
+3. Use the checked-in `amplify.yml`. It selects Node.js 22, installs from the
+   lockfile, builds, and packages dependencies into the compute bundle.
+4. Remove any default SPA rewrite to `/index.html`; Astro handles page routing.
+5. Deploy. The artifact directory is `.amplify-hosting`, not `dist`.
 
-Inside of your Astro project, you'll see the following folders and files:
+The CMS is available at `/admin` (redirecting to `/admin/index.html`). Its GitHub
+backend remains configured in `public/admin/config.yml`; publishing commits to
+the connected branch triggers Amplify rebuilds.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+The contact and admissions endpoint currently **only logs submissions**. This
+migration preserves that behavior; email delivery and database storage are not
+configured. No environment variables are currently required.
+
+## Verify locally
+
+```sh
+npm run build
+node .amplify-hosting/compute/default/entry.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+In another terminal, run `npm run test:deployment`. The production server listens
+on port 3000. Stop it with Ctrl+C after checking. The Amplify adapter does not
+support `astro preview`.
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+References: [Astro on AWS](https://docs.astro.build/en/guides/deploy/aws/),
+[Amplify deployment specification](https://docs.aws.amazon.com/amplify/latest/userguide/ssr-deployment-specification.html).
