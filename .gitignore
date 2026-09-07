@@ -1,5 +1,7 @@
 # build output
 dist/
+.amplify-hosting/
+.npm/
 
 # generated types
 .astro/
