@@ -4,14 +4,13 @@ import Figure from "../../Base/Figure/Figure.astro";
 
 interface Props {
     title: string;
-    categoryName: string;
     image?: string;
     imageAlt: string;
     /** When set the tile links out to the video instead of standing alone. */
     videoUrl?: string;
 }
 
-const { title, categoryName, image, imageAlt, videoUrl } = Astro.props;
+const { title, image, imageAlt, videoUrl } = Astro.props;
 
 const Wrapper = videoUrl ? "a" : "div";
 ---
@@ -20,27 +19,23 @@ const Wrapper = videoUrl ? "a" : "div";
     href={videoUrl || undefined}
     target={videoUrl ? "_blank" : undefined}
     rel={videoUrl ? "noreferrer" : undefined}
-    class="group block border border-border bg-card transition-colors hover:border-primary/30"
+    class="group relative block overflow-hidden"
 >
-    <div class="relative">
-        <Figure src={image} alt={imageAlt} width={800} height={600} />
-        {
-            videoUrl && (
-                <span class="absolute inset-0 flex items-center justify-center bg-navy-deep/40 text-primary-foreground">
-                    <Icon
-                        name="lucide:play"
-                        class="h-10 w-10"
-                        aria-hidden="true"
-                    />
-                </span>
-            )
-        }
-    </div>
-
-    <div class="p-5">
-        <p class="text-[11px] font-semibold uppercase tracking-widest text-accent">
-            {categoryName}
-        </p>
-        <h3 class="mt-2 text-base text-primary">{title}</h3>
-    </div>
+    <Figure
+        src={image}
+        alt={imageAlt}
+        width={800}
+        height={880}
+        class="aspect-[404/444] transition-transform duration-500 group-hover:scale-105"
+    />
+    {
+        videoUrl && (
+            <span class="absolute inset-0 flex items-center justify-center bg-navy-deep/40 text-primary-foreground">
+                <Icon name="lucide:play" class="h-10 w-10" aria-hidden="true" />
+            </span>
+        )
+    }
+    <p class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 pt-12 text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        {title}
+    </p>
 </Wrapper>
