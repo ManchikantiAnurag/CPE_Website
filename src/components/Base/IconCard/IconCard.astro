@@ -8,6 +8,8 @@ interface Props {
     description?: string;
     /** h2 where the card is a page-level landmark, h3 inside a section. */
     headingLevel?: "h2" | "h3";
+    /** Roomier rounded card used on the contact page. */
+    large?: boolean;
 }
 
 const {
@@ -15,12 +17,13 @@ const {
     title,
     description,
     headingLevel: Heading = "h3",
+    large = false,
 } = Astro.props;
 ---
 
-<div class="border border-border bg-card p-7">
-    <Icon name={icon} class="h-6 w-6 text-accent" aria-hidden="true" />
-    <Heading class="mt-4 text-lg text-primary">{title}</Heading>
+<div class:list={["border border-border bg-card", large ? "rounded-[20px] p-[30px]" : "p-7"]}>
+    <Icon name={icon} class:list={["text-accent", large ? "h-8 w-8" : "h-6 w-6"]} aria-hidden="true" />
+    <Heading class:list={["text-primary", large ? "mt-3 text-3xl md:text-[32px]" : "mt-4 text-lg"]}>{title}</Heading>
     {
         description ? (
             <p class="mt-3 text-sm leading-relaxed text-muted-foreground">
