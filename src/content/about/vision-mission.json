@@ -12,5 +12,38 @@
       "Mentor each student individually and communicate honestly with parents.",
       "Maintain a disciplined, safe and encouraging campus for two formative years."
     ]
+  },
+  "core_values": {
+    "eyebrow": "Core Values",
+    "items": [
+      {
+        "name": "Excellence",
+        "description": "Pursuing high standards in academics and professional achievement"
+      },
+      {
+        "name": "Integrity",
+        "description": "Honesty, ethics and accountability"
+      },
+      {
+        "name": "Knowledge",
+        "description": "Conceptual understanding and lifelong learning"
+      },
+      {
+        "name": "Discipline",
+        "description": "Consistency, responsibility and commitment"
+      },
+      {
+        "name": "Student-Centricity",
+        "description": "Understanding and supporting individual student needs"
+      },
+      {
+        "name": "Growth",
+        "description": "Continuous academic, personal and professional development"
+      },
+      {
+        "name": "Responsibility",
+        "description": "Developing socially responsible and ethical professionals"
+      }
+    ]
   }
 }

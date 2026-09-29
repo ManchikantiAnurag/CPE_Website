@@ -1,32 +1,65 @@
 ---
+import { Icon } from "astro-icon/components";
 import Reveal from "../../Base/Reveal/Reveal.astro";
+
 interface Props {
     vision: { eyebrow: string; title: string; description: string };
     mission: { eyebrow: string; items: string[] };
+    coreValues: { eyebrow: string; items: { name: string; description: string }[] };
 }
 
-const { vision, mission } = Astro.props;
+const { vision, mission, coreValues } = Astro.props;
 ---
 
-<div class="grid gap-12 md:grid-cols-2">
+<div class="grid gap-14 md:grid-cols-2">
     <Reveal variant="left" stagger={90}>
-        <p class="eyebrow">{vision.eyebrow}</p>
-        <h2 class="mt-3 text-3xl text-primary-foreground">{vision.title}</h2>
-        <p class="mt-5 text-base leading-relaxed text-primary-foreground/75">
-            {vision.description}
-        </p>
-    </Reveal>
-
-    <Reveal variant="right" stagger={90} delay={120}>
-        <p class="eyebrow">{mission.eyebrow}</p>
-        <ul
-            class="mt-5 space-y-4 text-base leading-relaxed text-primary-foreground/80"
-        >
+        <h2 class="flex items-center gap-4 text-3xl text-primary md:text-4xl">
+            <Icon name="lucide:target" class="h-8 w-8 text-accent" aria-hidden="true" />
+            Our {mission.eyebrow}
+        </h2>
+        <ul class="mt-8 space-y-3 text-base leading-relaxed text-muted-foreground">
             {
                 mission.items.map((item) => (
-                    <li class="border-l-2 border-accent pl-4">{item}</li>
+                    <li class="flex gap-3.5">
+                        <Icon name="lucide:check" class="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                        {item}
+                    </li>
                 ))
             }
         </ul>
     </Reveal>
+
+    <div class="space-y-12">
+        <Reveal variant="right" stagger={90}>
+            <h2 class="flex items-center gap-4 text-3xl text-primary md:text-4xl">
+                <Icon name="lucide:eye" class="h-8 w-8 text-accent" aria-hidden="true" />
+                Our {vision.eyebrow}
+            </h2>
+            <p class="mt-6 text-base font-medium leading-relaxed text-primary">
+                {vision.title}
+            </p>
+            <p class="mt-3 text-base leading-relaxed text-muted-foreground">
+                {vision.description}
+            </p>
+        </Reveal>
+
+        {
+            coreValues.items.length > 0 && (
+                <Reveal variant="right" stagger={90} delay={120}>
+                    <h2 class="flex items-center gap-4 text-3xl text-primary md:text-4xl">
+                        <Icon name="lucide:gem" class="h-8 w-8 text-accent" aria-hidden="true" />
+                        {coreValues.eyebrow}
+                    </h2>
+                    <dl class="mt-6 space-y-1.5 text-base leading-relaxed text-muted-foreground">
+                        {coreValues.items.map((value) => (
+                            <div class="flex flex-wrap gap-x-4">
+                                <dt class="font-semibold">{value.name}:</dt>
+                                <dd>{value.description}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </Reveal>
+            )
+        }
+    </div>
 </div>

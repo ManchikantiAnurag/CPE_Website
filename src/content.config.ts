@@ -423,7 +423,8 @@ const aboutHistory = section(
         items: z
             .array(
                 z.object({
-                    icon: z.string(),
+                    year: z.string().default(""),
+                    icon: z.string().default(""),
                     title: z.string(),
                     description: z.string(),
                 }),
@@ -444,6 +445,14 @@ const aboutVisionMission = section(
             eyebrow: z.string(),
             items: z.array(z.string()).default([]),
         }),
+        core_values: z
+            .object({
+                eyebrow: z.string(),
+                items: z
+                    .array(z.object({ name: z.string(), description: z.string() }))
+                    .default([]),
+            })
+            .default({ eyebrow: "Core Values", items: [] }),
     }),
 );
 

@@ -1,21 +1,36 @@
 {
-  "eyebrow": "Our History",
-  "title": "Serving Visakhapatnam since 2007",
+  "eyebrow": "CPE's Journey",
+  "title": "College History",
   "items": [
     {
-      "icon": "lucide:history",
-      "title": "Founded in 2007",
-      "description": "CPE Educational Institutions was established with a commitment to disciplined teaching and genuine student care."
+      "year": "2007",
+      "title": "CPE Begins Its Journey",
+      "description": "CPE was established with a focus on CA education, beginning its journey as a professional education institution."
     },
     {
-      "icon": "lucide:compass",
-      "title": "Commerce Specialisation",
-      "description": "The junior college concentrated on MEC and CEC, building faculty depth in accountancy, economics, commerce and civics."
+      "year": "2008",
+      "title": "CA Academy",
+      "description": "The institution continued strengthening its CA Academy and CA Intermediate programme."
     },
     {
-      "icon": "lucide:flag",
-      "title": "Integrated Coaching",
-      "description": "CA, CMA, IPMAT and CLAT preparation was brought into the college timetable so students prepare without a parallel institute."
+      "year": "2011",
+      "title": "All India Rank 5",
+      "description": "CPE recorded an All India Rank 5, marking an important milestone in its professional-course results."
+    },
+    {
+      "year": "2013",
+      "title": "CPE Junior College",
+      "description": "CPE expanded into Junior College education, bringing its commerce-focused academic approach to the Intermediate level."
+    },
+    {
+      "year": "2015",
+      "title": "CA Final",
+      "description": "CPE extended its professional education journey to CA Final, strengthening its end-to-end CA pathway."
+    },
+    {
+      "year": "2017",
+      "title": "Junior Intermediate State 1st",
+      "description": "CPE achieved a significant milestone with a Junior Intermediate State 1st result."
     }
   ]
 }

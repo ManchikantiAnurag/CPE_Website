@@ -8,7 +8,9 @@ import BulletGrid from "../components/Base/BulletGrid/BulletGrid.astro";
 import PeopleGrid from "../components/Base/PeopleGrid/PeopleGrid.astro";
 import AboutHistory from "../components/About/AboutHistory/AboutHistory.astro";
 import VisionMission from "../components/About/VisionMission/VisionMission.astro";
-import { getLeadership, getSection } from "../lib/site";
+import Button from "../components/Base/Button/Button.astro";
+import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
+import { getContactDetails, getLeadership, getSection, resolvePhones } from "../lib/site";
 
 const seo = await getSection("aboutSeo");
 const hero = await getSection("aboutHero");
@@ -17,6 +19,10 @@ const history = await getSection("aboutHistory");
 const visionMission = await getSection("aboutVisionMission");
 const whyChoose = await getSection("aboutWhyChoose");
 const leadership = await getSection("aboutLeadership");
+
+const banner = await getSection("homeAdmissionsBanner");
+const contact = await getContactDetails();
+const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
 
 const people = await getLeadership();
 ---
@@ -35,10 +41,15 @@ const people = await getLeadership();
             paragraphs={aboutCpe.paragraphs}
             image={aboutCpe.image}
             imageAlt={aboutCpe.image_alt}
-        />
+            imagePosition="start"
+        >
+            <Fragment slot="actions">
+                <Button href="#history" variant="outline">Our Milestones</Button>
+            </Fragment>
+        </MediaText>
     </Section>
 
-    <Section background="surface">
+    <Section id="history">
         <AboutHistory
             eyebrow={history.eyebrow}
             title={history.title}
@@ -46,10 +57,11 @@ const people = await getLeadership();
         />
     </Section>
 
-    <Section id="vision-mission" background="navy">
+    <Section id="vision-mission" background="surface">
         <VisionMission
             vision={visionMission.vision}
             mission={visionMission.mission}
+            coreValues={visionMission.core_values}
         />
     </Section>
 
@@ -57,6 +69,14 @@ const people = await getLeadership();
         <SectionHeading eyebrow={whyChoose.eyebrow} title={whyChoose.title} />
         <BulletGrid items={whyChoose.items} class="mt-10" />
     </Section>
+
+    <CtaBanner
+        kicker={banner.kicker}
+        title={banner.title}
+        description={banner.description}
+        phones={bannerPhones}
+        cta={banner.cta}
+    />
 
     <Section id="leadership" background="surface">
         <SectionHeading

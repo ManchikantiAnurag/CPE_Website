@@ -81,9 +81,14 @@ collections:
             label_singular: Milestone
             summary: "{{fields.title}}"
             fields:
+              - label: Year
+                name: year
+                widget: string
+                required: false
               - label: Icon
                 name: icon
                 widget: select
+                required: false
                 options:
                   - lucide:history
                   - lucide:compass
@@ -135,6 +140,25 @@ collections:
                   label: Commitment
                   name: item
                   widget: text
+          - label: Core Values
+            name: core_values
+            widget: object
+            fields:
+              - label: Eyebrow
+                name: eyebrow
+                widget: string
+              - label: Values
+                name: items
+                widget: list
+                label_singular: Value
+                summary: "{{fields.name}}"
+                fields:
+                  - label: Name
+                    name: name
+                    widget: string
+                  - label: Description
+                    name: description
+                    widget: string
 
       - name: why-choose
         label: "Why Choose CPE"
