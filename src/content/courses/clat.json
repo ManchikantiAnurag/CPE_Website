@@ -1,9 +1,9 @@
 {
   "code": "CLAT",
-  "title": "CLAT Entrance Preparation",
-  "tagline": "Focused preparation for the Common Law Admission Test and admission to the National Law Universities.",
+  "title": "Intermediate MEC / CEC with CLAT Integration",
+  "tagline": "Structured CLAT coaching for students aiming at National Law Universities.",
   "order": 6,
-  "overview": "CLAT is the national entrance examination for admission to the undergraduate law programmes at the National Law Universities and several other law schools. The paper is comprehension-driven, testing English, current affairs and general knowledge, legal reasoning, logical reasoning and quantitative techniques. Coaching runs alongside the intermediate programme and pairs naturally with the CEC stream.",
+  "overview": "This programme is designed for students pursuing Intermediate MEC/CEC who want to build a strong foundation in Commerce, Economics, Mathematics, and Business Studies while preparing simultaneously for the Common Law Admission Test (CLAT). The integrated curriculum combines Intermediate academics with structured CLAT preparation, helping students develop skills in English, Current Affairs, Legal Reasoning, Logical Reasoning, and Quantitative Techniques.",
   "highlights": [
     "Legal reasoning and legal aptitude",
     "English comprehension and vocabulary",
@@ -26,5 +26,59 @@
   "enquiry_emails": [
     "cpejuniorcollege@gmail.com"
   ],
-  "duration": "Integrated with 2 years of Intermediate"
+  "duration": "Integrated with 2 years of Intermediate",
+  "eligibility": "Class 10 pass required. CLAT-UG has no upper age limit.",
+  "board": "Board of Intermediate Education, Andhra Pradesh",
+  "sections": [
+    {
+      "heading": "What is CLAT?",
+      "paragraphs": [
+        "The Common Law Admission Test (CLAT) is the national-level entrance examination conducted by the Consortium of National Law Universities for admission to the five-year integrated LL.B. programmes (B.A. LL.B., B.B.A. LL.B., B.Com. LL.B., etc.) at the National Law Universities (NLUs), and to LL.M. programmes. It is held once a year, in December, in offline pen-and-paper mode. Confirm dates at consortiumofnlus.ac.in."
+      ],
+      "items": []
+    },
+    {
+      "heading": "CLAT Course Structure & Examination Pattern",
+      "paragraphs": [
+        "120 multiple-choice questions, 2 hours, 1 mark each; −0.25 for every wrong answer. All questions are passage-based, with the difficulty pegged at Class 12 level."
+      ],
+      "items": [
+        "English Language — 22–26 questions (about 20%)",
+        "Current Affairs including General Knowledge — 28–32 questions (about 25%)",
+        "Legal Reasoning — 28–32 questions (about 25%)",
+        "Logical Reasoning",
+        "Quantitative Techniques — 10–14 questions (about 10%)"
+      ]
+    },
+    {
+      "heading": "NLUs and law schools reached through CLAT",
+      "paragraphs": [
+        "NLSIU Bengaluru; NALSAR Hyderabad; NLIU Bhopal; WBNUJS Kolkata; NLU Jodhpur; HNLU Raipur; GNLU Gandhinagar; RMLNLU Lucknow; RGNUL Patiala; CNLU Patna; NUALS Kochi; NLUO Cuttack; NUSRL Ranchi; NLUJA Assam; DSNLU Visakhapatnam (Andhra Pradesh's own NLU); TNNLU Tiruchirappalli; MNLU Mumbai, Nagpur and Aurangabad; HPNLU Shimla; DNLU Jabalpur; DBRANLU Sonipat; and others.",
+        "Over 60 private and affiliated law colleges also accept CLAT scores. NLU Delhi conducts its own exam, AILET, whose preparation overlaps almost entirely with CLAT. The same preparation covers SLAT, LSAT-India, MH-CET Law and AP LAWCET."
+      ],
+      "items": []
+    },
+    {
+      "heading": "MEC or CEC for CLAT?",
+      "paragraphs": [
+        "Both are accepted. CEC (Civics, Economics, Commerce) gives direct exposure to political science and constitutional concepts that feed the Legal Reasoning and GK sections; MEC keeps the CA/IPMAT doors open while still preparing for CLAT. Our counsellors help students choose based on aptitude and back-up plans."
+      ],
+      "items": []
+    },
+    {
+      "heading": "Specializations",
+      "paragraphs": [
+        "CLAT/AILET focus; AP LAWCET focus; Law + Commerce (B.B.A. LL.B. / B.Com. LL.B. orientation)."
+      ],
+      "items": []
+    },
+    {
+      "heading": "Admission requirements",
+      "paragraphs": [],
+      "items": [
+        "Class 10 marks memo / pass certificate",
+        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs"
+      ]
+    }
+  ]
 }

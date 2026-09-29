@@ -1,12 +1,12 @@
 {
   "code": "MEC",
-  "title": "Mathematics, Economics & Commerce",
-  "tagline": "A strong analytical foundation combining mathematics with economics and commerce for finance and management",
+  "title": "Intermediate (MEC) with Integrated CA / CMA Foundation",
+  "tagline": "MEC combines Intermediate studies with CA/CMA Foundation coaching, preparing students for accounting and finance careers.",
   "order": 1,
-  "duration": "2 Years",
-  "eligibility": "",
-  "board": "",
-  "overview": "MEC is an intermediate stream under the Board of Intermediate Education, Andhra Pradesh, designed for students who enjoy numbers and want to build careers in finance, data, economics and management. The programme blends quantitative rigour with commercial understanding, giving students the analytical base required for CA, CMA, IPMAT, actuarial studies and top-tier commerce degrees.",
+  "duration": "2 Years (1st Year & 2nd Year Intermediate)",
+  "eligibility": "Pass in Class 10 (SSC) or equivalent from a recognised board.",
+  "board": "Board of Intermediate Education, Andhra Pradesh",
+  "overview": "The MEC group (Mathematics, Economics, Commerce) is the natural launch-pad for a career in accounting and finance. In this integrated programme, students complete the regular two-year Intermediate course (Part I English, Part II Second Language, Part III Mathematics, Economics, Commerce) while receiving structured coaching for the CA Foundation or CMA Foundation examination, so that they are exam-ready by the time they finish Second Year.",
   "highlights": [
     "Mathematics-driven analytical training",
     "Integrated CA / CMA foundation coaching",
@@ -30,5 +30,52 @@
   ],
   "enquiry_emails": [
     "cpejuniorcollege@gmail.com"
+  ],
+  "sections": [
+    {
+      "heading": "Eligibility",
+      "paragraphs": [
+        "Pass in Class 10 (SSC / CBSE / ICSE or equivalent). Students register with ICAI (for CA) or ICMAI (for CMA) at the Foundation level after Class 10; they can appear for the Foundation examination only after appearing for / passing Class 12 (Intermediate)."
+      ],
+      "items": []
+    },
+    {
+      "heading": "CA Course Structure & Examination Pattern",
+      "paragraphs": [],
+      "items": [
+        "Stage 1 — CA Foundation: entry-level examination conducted by ICAI, held three times a year. Four papers of 100 marks each: Accounting, Business Laws, Quantitative Aptitude, Business Economics. Papers 3 and 4 are objective with negative marking (0.25 mark per wrong answer). Pass with minimum 40% in each paper and 50% aggregate in one sitting.",
+        "Stage 2 — CA Intermediate: six papers in two groups (each paper 100 marks), held three times a year. Students may attempt one group at a time or both together. ICITSS must be completed before articleship.",
+        "Stage 3 — Articleship: two years of practical training under a practising Chartered Accountant, with a stipend as per ICAI norms.",
+        "Stage 4 — CA Final: six papers in two groups, plus the self-paced online modules and Advanced ICITSS. On passing and completing training, the student becomes a member of ICAI — a Chartered Accountant.",
+        "Students who later complete a commerce degree with 55% (or non-commerce with 60%) can enter CA Intermediate directly without the Foundation (Direct Entry route)."
+      ]
+    },
+    {
+      "heading": "CMA Course Structure & Examination Pattern",
+      "paragraphs": [
+        "Conducted by the Institute of Cost Accountants of India (ICMAI). Examinations are held in June and December.",
+        "CMA specialises in cost control, management accounting, costing systems and performance management — highly valued in manufacturing, infrastructure, PSUs and consulting."
+      ],
+      "items": [
+        "CMA Foundation: four papers — Fundamentals of Business Laws and Business Communication; Fundamentals of Financial and Cost Accounting; Fundamentals of Business Mathematics and Statistics; Fundamentals of Business Economics and Management.",
+        "CMA Intermediate: eight papers in two groups.",
+        "CMA Final: eight papers in two groups, plus mandatory practical training (approximately 15 months) before qualifying."
+      ]
+    },
+    {
+      "heading": "Specializations",
+      "paragraphs": [
+        "CA Foundation track / CMA Foundation track (students choose one; the Intermediate MEC syllabus is common to both)."
+      ],
+      "items": []
+    },
+    {
+      "heading": "Admission requirements",
+      "paragraphs": [],
+      "items": [
+        "Class 10 marks memo / pass certificate",
+        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs"
+      ]
+    }
   ]
 }

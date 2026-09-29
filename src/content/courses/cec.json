@@ -1,9 +1,9 @@
 {
   "code": "CEC",
-  "title": "Civics, Economics & Commerce",
-  "tagline": "A humanities-led commerce stream pairing civics with economics, suited to law, civil services and management careers.",
+  "title": "Intermediate MEC / CEC (Regular)",
+  "tagline": "A commerce-focused programme preparing students for careers in law, management, commerce and civil services.",
   "order": 2,
-  "overview": "CEC is an intermediate stream under the Board of Intermediate Education, Andhra Pradesh, for students drawn to law, public policy, civil services and commerce. In place of mathematics it builds reading, reasoning and writing strength alongside a grounding in economics and commerce, the foundation that CLAT, CUET and undergraduate law and social science programmes look for.",
+  "overview": "This programme is designed for students pursuing Intermediate MEC/CEC who want to develop a strong foundation in commerce, economics, mathematics, and related subjects. The curriculum focuses on conceptual understanding, academic excellence, and essential skills needed for higher education. Through structured classroom learning, regular assessments, and academic guidance, students are prepared for a wide range of future pathways in Commerce, Management, Economics, Finance, Law, and other professional fields.",
   "highlights": [
     "Civics and public policy foundation",
     "Integrated CLAT and law entrance coaching",
@@ -28,5 +28,42 @@
   "enquiry_emails": [
     "cpejuniorcollege@gmail.com"
   ],
-  "duration": "2 Years"
+  "duration": "2 Years (1st Year & 2nd Year Intermediate)",
+  "eligibility": "Pass in Class 10 (SSC / CBSE / ICSE or equivalent).",
+  "board": "Board of Intermediate Education, Andhra Pradesh",
+  "sections": [
+    {
+      "heading": "MEC / CEC Course Structure & Examination Pattern",
+      "paragraphs": [
+        "The Intermediate course under BIE-AP has two public examinations — at the end of First Year and Second Year — and is structured as:"
+      ],
+      "items": [
+        "Part I: English",
+        "Part II: Second Language (Sanskrit / Telugu / Hindi)",
+        "Part III: Group subjects, each with two papers (one per year) — MEC: Mathematics (IA & IB in First Year; IIA & IIB in Second Year), Economics, Commerce; CEC: Civics, Economics, Commerce"
+      ]
+    },
+    {
+      "heading": "Choosing between MEC and CEC",
+      "paragraphs": [
+        "MEC is the recommended group for students targeting CA, CMA, CS, IPM/BBA at IIMs, B.Com. (Hons.), Economics (Hons.), actuarial science, statistics and data-driven careers. CEC suits students who prefer a non-mathematical route into commerce, law, civil services, public administration, journalism and management."
+      ],
+      "items": []
+    },
+    {
+      "heading": "Specializations",
+      "paragraphs": [
+        "MEC / CEC. Integrated add-ons: CA/CMA Foundation, IPMAT, CLAT."
+      ],
+      "items": []
+    },
+    {
+      "heading": "Admission requirements",
+      "paragraphs": [],
+      "items": [
+        "Class 10 marks memo / pass certificate",
+        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs"
+      ]
+    }
+  ]
 }
