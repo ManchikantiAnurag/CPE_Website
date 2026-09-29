@@ -4,7 +4,6 @@ import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
 import Reveal from "../components/Base/Reveal/Reveal.astro";
-import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
 import MediaText from "../components/Base/MediaText/MediaText.astro";
 import FeatureTile from "../components/Base/FeatureTile/FeatureTile.astro";
 import Button from "../components/Base/Button/Button.astro";
@@ -35,26 +34,6 @@ const academics = await getSection("campusLifeAcademics");
         />
     </Section>
 
-    <Section background="surface">
-        <SectionHeading eyebrow={onCampus.eyebrow} title={onCampus.title} />
-
-        <!-- gap-px over a bordered background draws the hairline grid between tiles. -->
-        <Reveal
-            stagger={90}
-            class="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
-        >
-            {
-                onCampus.items.map((item) => (
-                    <FeatureTile
-                        icon={item.icon}
-                        title={item.title}
-                        description={item.description}
-                    />
-                ))
-            }
-        </Reveal>
-    </Section>
-
     <Section>
         <MediaText
             eyebrow={academics.eyebrow}
@@ -72,5 +51,22 @@ const academics = await getSection("campusLifeAcademics");
                 />
             </Button>
         </MediaText>
+    </Section>
+    <Section>
+        <!-- gap-px over a coloured background draws the hairline dividers between tiles. -->
+        <Reveal
+            stagger={90}
+            class="grid gap-px bg-slate-300 sm:grid-cols-2 lg:grid-cols-3"
+        >
+            {
+                onCampus.items.map((item) => (
+                    <FeatureTile
+                        icon={item.icon}
+                        title={item.title}
+                        description={item.description}
+                    />
+                ))
+            }
+        </Reveal>
     </Section>
 </Layout>
