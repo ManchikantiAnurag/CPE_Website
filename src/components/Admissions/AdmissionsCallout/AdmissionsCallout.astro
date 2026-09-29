@@ -12,8 +12,13 @@ const edge = "px-6 md:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] md:pr-6";
 const slant = "md:[clip-path:polygon(0_0,100%_0,100%_100%,13.27%_100%)] md:pl-[calc(13.27%+3rem)]";
 ---
 
-<section class="grid bg-highlight md:grid-cols-[1fr_52.85%]">
-    <div class:list={["flex items-center py-8", edge]}>
+<section class="relative grid bg-hero md:grid-cols-[1fr_52.85%]">
+    <div
+        class="absolute inset-0 bg-highlight md:[clip-path:polygon(0_0,calc(47.15%-24px)_0,calc(54.16%-24px)_100%,0_100%)]"
+        aria-hidden="true"
+    >
+    </div>
+    <div class:list={["relative flex items-center py-8", edge]}>
         <p class="font-hero text-2xl font-semibold text-primary">{title}</p>
     </div>
     <div class:list={["flex flex-wrap items-center gap-x-10 gap-y-3 bg-navy-deep py-8", edge, slant]}>
