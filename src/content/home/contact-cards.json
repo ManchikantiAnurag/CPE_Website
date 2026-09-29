@@ -1,0 +1,10 @@
+{
+  "eyebrow": "",
+  "title": "Visit, call or write",
+  "cards": {
+    "visit": "Visit Us",
+    "call": "Call Admissions",
+    "write": "Write to Us",
+    "link_label": "Contact Us"
+  }
+}

@@ -368,3 +368,53 @@ collections:
             name: empty_message
             widget: text
             hint: Shown until news items are published.
+
+      - name: testimonials
+        label: "Testimonials"
+        file: src/content/home/testimonials.json
+        icon: format_quote
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: string
+          - label: Testimonials
+            name: items
+            widget: list
+            label_singular: Testimonial
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - label: Quote
+                name: quote
+                widget: text
+              - label: Name
+                name: name
+                widget: string
+              - label: Role
+                name: role
+                widget: string
+
+      - name: contact-cards
+        label: "Contact Cards"
+        file: src/content/home/contact-cards.json
+        icon: contact_mail
+        hint: The address, phone numbers and email come from Contact Details.
+        fields:
+          - label: Card titles
+            name: cards
+            widget: object
+            fields:
+              - label: Visit card
+                name: visit
+                widget: string
+              - label: Call card
+                name: call
+                widget: string
+              - label: Write card
+                name: write
+                widget: string
+              - label: Link label
+                name: link_label
+                widget: string

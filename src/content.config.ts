@@ -313,6 +313,31 @@ const homeAdmissionsBanner = section(
 
 const homeNews = section("src/content/home/news.json", emptyStateSection);
 
+const homeTestimonials = section(
+    "src/content/home/testimonials.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z
+            .array(z.object({ quote: z.string(), name: z.string(), role: z.string() }))
+            .default([]),
+    }),
+);
+
+const homeContactCards = section(
+    "src/content/home/contact-cards.json",
+    z.object({
+        eyebrow: z.string().default(""),
+        title: z.string().default(""),
+        cards: z.object({
+            visit: z.string(),
+            call: z.string(),
+            write: z.string(),
+            link_label: z.string(),
+        }),
+    }),
+);
+
 /* -------------------------------------------------------- admissions page */
 
 const admissionsSeo = section("src/content/admissions/seo.json", seo);
@@ -597,6 +622,8 @@ export const collections = {
     homeAchievements,
     homeAdmissionsBanner,
     homeNews,
+    homeTestimonials,
+    homeContactCards,
 
     admissionsSeo,
     admissionsHero,

@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+import Reveal from "../../Base/Reveal/Reveal.astro";
+
+interface Props {
+    titles: { visit: string; call: string; write: string; link_label: string };
+    addressLines: string[];
+    phones: string[];
+    email?: string;
+}
+
+const { titles, addressLines, phones, email } = Astro.props;
+
+const card = "flex flex-col gap-2 rounded-lg border border-border bg-card p-8 shadow-sm";
+---
+
+<Reveal stagger={100} class="grid gap-6 md:grid-cols-3">
+    <div class={card}>
+        <Icon name="lucide:map-pin" class="h-6 w-6 text-accent" aria-hidden="true" />
+        <h3 class="pt-2 text-lg text-primary">{titles.visit}</h3>
+        <p class="text-sm leading-relaxed text-muted-foreground">{addressLines.join(", ")}</p>
+    </div>
+    <div class={card}>
+        <Icon name="lucide:phone" class="h-6 w-6 text-accent" aria-hidden="true" />
+        <h3 class="pt-2 text-lg text-primary">{titles.call}</h3>
+        <p class="text-sm leading-relaxed text-muted-foreground">{phones.join(" ")}</p>
+    </div>
+    <div class={card}>
+        <Icon name="lucide:mail" class="h-6 w-6 text-accent" aria-hidden="true" />
+        <h3 class="pt-2 text-lg text-primary">{titles.write}</h3>
+        <p class="text-sm leading-relaxed text-muted-foreground">{email}</p>
+        <a href="/contact" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-accent">
+            {titles.link_label}
+            <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" aria-hidden="true" />
+        </a>
+    </div>
+</Reveal>

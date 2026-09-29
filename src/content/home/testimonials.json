@@ -1,0 +1,21 @@
+{
+  "eyebrow": "Testimonials",
+  "title": "What students and parents say",
+  "items": [
+    {
+      "quote": "The faculty explain accounting concepts until every doubt is cleared. The integrated CA coaching saved me from running between college and a separate institute.",
+      "name": "Student",
+      "role": "CA Foundation programme"
+    },
+    {
+      "quote": "Daily current affairs sessions and legal reasoning practice made CLAT preparation feel manageable alongside my intermediate syllabus.",
+      "name": "Student",
+      "role": "CLAT programme"
+    },
+    {
+      "quote": "What impressed us most is the regular communication. We always know how our daughter is performing and where she needs support.",
+      "name": "Parent",
+      "role": "Parent of a CPE student"
+    }
+  ]
+}

@@ -10,6 +10,8 @@ import WhyChoose from "../components/Home/WhyChoose/WhyChoose.astro";
 import CareerFocus from "../components/Home/CareerFocus/CareerFocus.astro";
 import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.astro";
 import EmptyStateSection from "../components/Home/EmptyStateSection/EmptyStateSection.astro";
+import Testimonials from "../components/Base/Testimonials/Testimonials.astro";
+import ContactCards from "../components/Home/ContactCards/ContactCards.astro";
 import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
 import { getContactDetails, getSection, resolvePhones } from "../lib/site";
 
@@ -24,8 +26,11 @@ const campusLife = await getSection("homeCampusLife");
 const achievements = await getSection("homeAchievements");
 const banner = await getSection("homeAdmissionsBanner");
 const news = await getSection("homeNews");
+const testimonials = await getSection("homeTestimonials");
+const contactCards = await getSection("homeContactCards");
 
 const contact = await getContactDetails();
+const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter(Boolean) as string[];
 const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
 ---
 
@@ -130,6 +135,15 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
         />
     </Section>
 
+    <Section background="surface">
+        <EmptyStateSection
+            eyebrow={news.eyebrow}
+            title={news.title}
+            description={news.description}
+            cta={news.cta}
+            emptyMessage={news.empty_message}
+        />
+    </Section>
     <CtaBanner
         kicker={banner.kicker}
         title={banner.title}
@@ -138,13 +152,20 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
         cta={banner.cta}
     />
 
+    <Section>
+        <Testimonials
+            eyebrow={testimonials.eyebrow}
+            title={testimonials.title}
+            items={testimonials.items}
+        />
+    </Section>
+
     <Section background="surface">
-        <EmptyStateSection
-            eyebrow={news.eyebrow}
-            title={news.title}
-            description={news.description}
-            cta={news.cta}
-            emptyMessage={news.empty_message}
+        <ContactCards
+            titles={contactCards.cards}
+            addressLines={addressLines}
+            phones={contact.phone_numbers}
+            email={contact.emails[0]}
         />
     </Section>
 </Layout>
