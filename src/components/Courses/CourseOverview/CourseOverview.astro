@@ -6,9 +6,10 @@ interface Props {
     overview: string;
     highlights: string[];
     careers: string[];
+    sections?: { heading: string; paragraphs: string[]; items: string[] }[];
 }
 
-const { overview, highlights, careers } = Astro.props;
+const { overview, highlights, careers, sections = [] } = Astro.props;
 ---
 
 <div>
@@ -26,6 +27,22 @@ const { overview, highlights, careers } = Astro.props;
                 <CheckList items={highlights} class="mt-5" />
             </>
         )
+    }
+
+    {
+        sections.map((section) => (
+            <>
+                <h3 class="mt-10 text-xl text-primary">{section.heading}</h3>
+                {section.paragraphs.map((paragraph) => (
+                    <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+                        {paragraph}
+                    </p>
+                ))}
+                {section.items.length > 0 && (
+                    <CheckList items={section.items} class="mt-5" />
+                )}
+            </>
+        ))
     }
 
     {

@@ -64,6 +64,15 @@ const courses = defineCollection({
         duration: z.string().optional(),
         eligibility: z.string().optional(),
         board: z.string().optional(),
+        sections: z
+            .array(
+                z.object({
+                    heading: z.string(),
+                    paragraphs: z.array(z.string()).default([]),
+                    items: z.array(z.string()).default([]),
+                }),
+            )
+            .default([]),
     }),
 });
 

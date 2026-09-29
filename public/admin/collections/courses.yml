@@ -76,6 +76,34 @@ collections:
           name: highlight
           widget: string
 
+      - label: Detail Sections
+        name: sections
+        widget: list
+        required: false
+        label_singular: Section
+        summary: "{{fields.heading}}"
+        hint: Extra headings on the course page, such as course structure or admission requirements.
+        fields:
+          - label: Heading
+            name: heading
+            widget: string
+          - label: Paragraphs
+            name: paragraphs
+            widget: list
+            required: false
+            field:
+              label: Paragraph
+              name: paragraph
+              widget: text
+          - label: Bullet points
+            name: items
+            widget: list
+            required: false
+            field:
+              label: Point
+              name: item
+              widget: text
+
       # Repeating data -> referenced, not retyped.
       - label: Career Opportunities
         name: careers
