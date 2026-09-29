@@ -33,19 +33,19 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-navy-deep">
+<section class="relative overflow-hidden bg-hero">
     <div
         class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-24"
     >
         <Reveal immediate stagger={90} duration={800}>
             <p class="eyebrow">{eyebrow}</p>
             <h1
-                class="mt-5 text-4xl leading-[1.08] text-primary-foreground md:text-5xl lg:text-[3.4rem]"
+                class="mt-5 text-4xl leading-[1.08] text-black md:text-5xl lg:text-[3.4rem]"
             >
                 {title}
             </h1>
             <p
-                class="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/75 md:text-lg"
+                class="mt-6 max-w-xl text-base leading-relaxed text-black md:text-lg"
             >
                 {intro}
             </p>
@@ -56,7 +56,7 @@ const {
                 </Button>
                 <Button
                     href={secondaryCta.href}
-                    variant="outline-inverse"
+                    variant="outline"
                     size="lg"
                 >
                     {secondaryCta.label}
@@ -65,13 +65,13 @@ const {
 
             {
                 stats.length > 0 && (
-                    <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-primary-foreground/15 pt-8">
+                    <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-black/20 pt-8">
                         {stats.map((stat) => (
                             <div>
-                                <dt class="text-[11px] uppercase tracking-widest text-primary-foreground/55">
+                                <dt class="text-[11px] uppercase tracking-widest text-black">
                                     {stat.label}
                                 </dt>
-                                <dd class="mt-1 font-display text-2xl text-primary-foreground">
+                                <dd class="mt-1 font-display text-2xl text-black">
                                     {stat.value}
                                 </dd>
                             </div>
