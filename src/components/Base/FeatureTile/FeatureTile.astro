@@ -8,12 +8,14 @@ interface Props {
     /** Sits on the navy ground rather than a card. */
     inverse?: boolean;
     compact?: boolean;
+    /** No card or ground, for sitting directly on a coloured section. */
+    plain?: boolean;
 }
 
-const { icon, title, description, inverse = false, compact = false } = Astro.props;
+const { icon, title, description, inverse = false, compact = false, plain = false } = Astro.props;
 ---
 
-<div class:list={[inverse ? "bg-navy-deep p-7" : "bg-card p-8"]}>
+<div class:list={[plain ? "" : inverse ? "bg-navy-deep p-7" : "bg-card p-8"]}>
     <Icon
         name={icon}
         class:list={["text-accent", compact ? "h-6 w-6" : "h-7 w-7"]}

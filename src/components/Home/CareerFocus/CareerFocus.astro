@@ -18,17 +18,16 @@ const { eyebrow, title, description, items } = Astro.props;
         eyebrow={eyebrow}
         title={title}
         description={description}
-        inverse
     />
 
-    <Reveal stagger={90} class="grid gap-px bg-primary-foreground/15 sm:grid-cols-2">
+    <Reveal stagger={90} class="grid gap-x-8 gap-y-10 sm:grid-cols-2">
         {
             items.map((item) => (
                 <FeatureTile
                     icon="lucide:briefcase"
                     title={item.title}
                     description={item.description}
-                    inverse
+                    plain
                     compact
                 />
             ))

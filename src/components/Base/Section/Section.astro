@@ -1,5 +1,5 @@
 ---
-type Background = "background" | "surface" | "navy" | "accent";
+type Background = "background" | "surface" | "navy" | "accent" | "hero";
 
 interface Props {
     id?: string;
@@ -23,6 +23,7 @@ const backgrounds: Record<Background, string> = {
     surface: "bg-surface",
     navy: "bg-navy-deep text-primary-foreground",
     accent: "bg-accent text-accent-foreground",
+    hero: "bg-hero",
 };
 ---
 
