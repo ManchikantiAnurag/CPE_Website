@@ -1,62 +1,37 @@
 ---
-import CheckList from "../../Base/CheckList/CheckList.astro";
-import Tag from "../../Base/Tag/Tag.astro";
-
 interface Props {
     overview: string;
-    highlights: string[];
-    careers: string[];
     sections?: { heading: string; paragraphs: string[]; items: string[] }[];
 }
 
-const { overview, highlights, careers, sections = [] } = Astro.props;
+const { overview, sections = [] } = Astro.props;
 ---
 
-<div>
-    <h2 class="text-2xl text-primary">Programme Overview</h2>
-    <p
-        class="mt-4 whitespace-pre-line text-base leading-relaxed text-muted-foreground"
-    >
-        {overview}
-    </p>
-
-    {
-        highlights.length > 0 && (
-            <>
-                <h3 class="mt-10 text-xl text-primary">Programme Highlights</h3>
-                <CheckList items={highlights} class="mt-5" />
-            </>
-        )
-    }
+<div class="space-y-10">
+    <section>
+        <h2 class="text-3xl text-primary md:text-[32px]">Programme Overview</h2>
+        <p class="mt-6 whitespace-pre-line text-base leading-relaxed text-muted-foreground">
+            {overview}
+        </p>
+    </section>
 
     {
         sections.map((section) => (
-            <>
-                <h3 class="mt-10 text-xl text-primary">{section.heading}</h3>
+            <section>
+                <h2 class="text-3xl text-primary md:text-[32px]">{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => (
-                    <p class="mt-4 text-base leading-relaxed text-muted-foreground">
+                    <p class="mt-6 text-base leading-relaxed text-muted-foreground">
                         {paragraph}
                     </p>
                 ))}
                 {section.items.length > 0 && (
-                    <CheckList items={section.items} class="mt-5" />
+                    <ul class="mt-6 list-disc space-y-3 pl-6 text-base leading-relaxed text-muted-foreground marker:text-muted-foreground">
+                        {section.items.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
                 )}
-            </>
+            </section>
         ))
-    }
-
-    {
-        careers.length > 0 && (
-            <>
-                <h3 class="mt-10 text-xl text-primary">Career Opportunities</h3>
-                <ul class="mt-5 flex flex-wrap gap-2">
-                    {careers.map((career) => (
-                        <li>
-                            <Tag>{career}</Tag>
-                        </li>
-                    ))}
-                </ul>
-            </>
-        )
     }
 </div>

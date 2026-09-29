@@ -13,15 +13,13 @@ const { icon, term, description } = Astro.props;
 <div class="flex gap-3">
     <Icon
         name={icon}
-        class="mt-0.5 h-5 w-5 shrink-0 text-accent"
+        class="mt-0.5 h-6 w-6 shrink-0 text-accent"
         aria-hidden="true"
     />
     <div>
-        <dt
-            class="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground"
-        >
+        <dt class="text-lg font-semibold uppercase text-muted-foreground">
             {term}
         </dt>
-        <dd class="mt-1 text-sm text-foreground/85">{description}</dd>
+        <dd class="mt-2.5 text-base text-muted-foreground">{description}</dd>
     </div>
 </div>

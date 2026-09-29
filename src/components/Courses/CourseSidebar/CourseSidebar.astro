@@ -26,12 +26,12 @@ const details = [
 ].filter((detail) => Boolean(detail.description));
 ---
 
-<aside class="h-fit border border-border bg-surface p-7">
-    <h3 class="text-lg text-primary">Course Details</h3>
+<aside class="h-fit rounded-[10px] border border-border bg-surface p-[30px]">
+    <h2 class="text-3xl text-primary md:text-[32px]">Course Details</h2>
 
     {
         details.length > 0 && (
-            <dl class="mt-6 space-y-6">
+            <dl class="mt-8 space-y-7">
                 {details.map((detail) => (
                     <DetailItem
                         icon={detail.icon}
@@ -43,7 +43,7 @@ const details = [
         )
     }
 
-    <Button href="/admissions" variant="accent" class="mt-8 w-full">
+    <Button href="/admissions" variant="accent" size="lg" class="mt-9 w-full rounded">
         Apply Now
     </Button>
 
