@@ -10,8 +10,8 @@ interface Props {
 const { label, for: htmlFor, required = false, full = false } = Astro.props;
 ---
 
-<div class:list={["space-y-2", full && "md:col-span-2"]}>
-    <label for={htmlFor} class="text-sm font-medium leading-none">
+<div class:list={["space-y-4", full && "md:col-span-2"]}>
+    <label for={htmlFor} class="text-lg font-medium leading-none text-black">
         {label}{required && " *"}
     </label>
     <slot />
