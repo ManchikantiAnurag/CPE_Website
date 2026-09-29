@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import Section from "../../Base/Section/Section.astro";
 
 interface Props {
     title: string;
@@ -8,27 +7,29 @@ interface Props {
 }
 
 const { title, phones } = Astro.props;
+
+const edge = "px-6 md:pl-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] md:pr-6";
 ---
 
-<Section background="accent" bordered padded={false} class="py-0">
-    <div class="flex flex-wrap items-center justify-between gap-6 py-8">
-        <p class="font-display text-xl text-accent-foreground">{title}</p>
-        <div class="flex flex-wrap gap-3">
-            {
-                phones.map((phone) => (
-                    <a
-                        href={`tel:${phone}`}
-                        class="inline-flex items-center gap-2 bg-navy-deep px-5 py-3 text-base font-semibold text-primary-foreground hover:bg-navy-deep/90"
-                    >
-                        <Icon
-                            name="lucide:phone"
-                            class="h-4 w-4"
-                            aria-hidden="true"
-                        />
-                        {phone}
-                    </a>
-                ))
-            }
-        </div>
+<section class="grid md:grid-cols-2">
+    <div class:list={["flex items-center bg-highlight py-8", edge]}>
+        <p class="font-hero text-2xl font-semibold text-primary">{title}</p>
     </div>
-</Section>
+    <div class:list={["flex flex-wrap items-center gap-x-10 gap-y-3 bg-navy-deep py-8", edge]}>
+        {
+            phones.map((phone) => (
+                <a
+                    href={`tel:${phone}`}
+                    class="inline-flex items-center gap-4 font-hero text-2xl font-semibold text-primary-foreground hover:opacity-80"
+                >
+                    <Icon
+                        name="lucide:phone"
+                        class="h-6 w-6"
+                        aria-hidden="true"
+                    />
+                    {phone}
+                </a>
+            ))
+        }
+    </div>
+</section>
