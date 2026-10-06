@@ -1,6 +1,7 @@
 # build output
 dist/
 .amplify-hosting/
+public/og/
 .npm/
 
 # generated types
@@ -27,3 +28,4 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+.dev.vars

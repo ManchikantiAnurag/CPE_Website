@@ -8,7 +8,6 @@ import { getSiteSettings } from "../lib/site";
 interface Props {
     title?: string;
     description?: string;
-    /** Which cross-document view transition this page arrives with. */
     transition?: "fade" | "lift" | "slide";
 }
 
@@ -19,6 +18,11 @@ const {
     transition = "lift",
 } = Astro.props;
 const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogName = Astro.url.pathname === "/"
+    ? "home"
+    : Astro.url.pathname.replace(/^\/+|\/+$/g, "").replaceAll("/", "-");
+const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -36,6 +40,18 @@ const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
         />
         <meta name="generator" content={Astro.generator} />
         <meta name="description" content={description} />
+        <link rel="canonical" href={canonical.href} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonical.href} />
+        <meta property="og:image" content={ogImage.href} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage.href} />
         <title>{pageTitle}</title>
         <!-- Marks JS as available before first paint, so the reveal styles
              only hide content that something is going to bring back. If the

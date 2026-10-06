@@ -2,12 +2,11 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
-import awsAmplify from "astro-aws-amplify";
+import cloudflare from "@astrojs/cloudflare";
 
-// https://astro.build/config
 export default defineConfig({
-  output: "server",
-  adapter: awsAmplify(),
+  site: "https://cpecolg.com",
+  adapter: cloudflare({ imageService: "compile" }),
   integrations: [icon()],
   vite: {
     plugins: [tailwindcss()],

@@ -1,4 +1,6 @@
 ---
+import OptimizedImage from "../OptimizedImage.astro";
+
 interface Props {
     src?: string;
     alt: string;
@@ -20,7 +22,7 @@ const {
 
 {
     src ? (
-        <img
+        <OptimizedImage
             src={src}
             alt={alt}
             width={width}
@@ -29,7 +31,6 @@ const {
             class:list={["w-full object-cover", className]}
         />
     ) : (
-        /* Placeholder until the image is uploaded through the CMS. */
         <div
             role="img"
             aria-label={alt}
