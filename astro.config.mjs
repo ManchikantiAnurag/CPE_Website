@@ -5,7 +5,7 @@ import icon from "astro-icon";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  site: "https://cpecolg.com",
+  site: process.env.SITE_URL ?? "https://cpecolg.com",
   adapter: cloudflare({ imageService: "compile" }),
   integrations: [icon()],
   vite: {
