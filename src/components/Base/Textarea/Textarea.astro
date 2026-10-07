@@ -7,7 +7,7 @@ interface Props {
     required?: boolean;
 }
 
-const { id, name, rows = 4, maxlength, required = false } = Astro.props;
+const { id, name, rows = 3, maxlength, required = false } = Astro.props;
 ---
 
 <textarea
@@ -16,5 +16,5 @@ const { id, name, rows = 4, maxlength, required = false } = Astro.props;
     rows={rows}
     maxlength={maxlength}
     required={required}
-    class="flex min-h-[174px] w-full rounded-[5px] border-[0.5px] border-[#aeaeae] bg-white px-5 py-4 text-lg placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring "
+    class="flex min-h-[120px] w-full rounded-[5px] border-[0.5px] border-[#aeaeae] bg-white px-5 py-3 text-lg placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
 ></textarea>

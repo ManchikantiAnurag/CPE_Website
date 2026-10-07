@@ -12,7 +12,7 @@ const { id, name, placeholder, options } = Astro.props;
 <select
     id={id}
     name={name ?? id}
-    class="h-[60px] w-full rounded-[5px] border-[0.5px] border-[#aeaeae] bg-white px-5 text-lg"
+    class="h-12 w-full rounded-[5px] border-[0.5px] border-[#aeaeae] bg-white px-5 text-lg md:h-11"
 >
     {placeholder && <option value="">{placeholder}</option>}
     {options.map((option) => <option value={option.value}>{option.label}</option>)}
