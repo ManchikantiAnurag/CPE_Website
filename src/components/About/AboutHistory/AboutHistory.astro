@@ -17,25 +17,26 @@ const initialCount = 6;
 <Reveal
     as="ol"
     stagger={100}
-    class="relative mt-14 space-y-10 before:absolute before:left-4 before:top-0 before:h-full before:w-px before:bg-[#475569] md:before:left-1/2"
+    class="relative mt-16 flex flex-col gap-12 py-8 before:absolute before:left-4 before:top-0 before:h-full before:w-px before:bg-[#94A3B8] md:gap-16 md:py-16 md:before:left-1/2"
 >
     {
         items.map((item, index) => (
             <li
                 data-history-extra={index >= initialCount ? "" : undefined}
-                class="relative grid items-center gap-x-10 pl-12 md:grid-cols-2 md:pl-0"
+                class="relative grid items-center gap-y-4 pl-12 md:min-h-[92px] md:grid-cols-2 md:gap-x-16 md:pl-0"
             >
-                <span class="absolute left-4 top-1/2 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#DC2626] md:left-1/2" />
+                <span class="absolute left-4 top-5.5 h-[15px] w-[15px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#DC2626] md:left-1/2 md:top-1/2" />
                 <div
                     class:list={[
+                        "flex",
                         index % 2 === 0
-                            ? "md:col-start-2 md:pl-10"
-                            : "md:col-start-1 md:row-start-1 md:pr-10 md:text-right",
+                            ? "md:col-start-1 md:row-start-1 md:justify-end"
+                            : "md:col-start-2 md:row-start-1",
                     ]}
                 >
                     <span
                         class:list={[
-                            "inline-flex h-11 min-w-[100px] items-center justify-center rounded-[5px] px-3 text-lg font-semibold",
+                            "inline-flex h-11 min-w-[100px] items-center justify-center rounded-[5px] px-3 font-sans text-lg font-semibold leading-6",
                             index % 2 === 0
                                 ? "bg-[#DC2626] text-white"
                                 : "border border-[#DC2626] bg-[#DC2626]/10 text-[#DC2626]",
@@ -43,7 +44,15 @@ const initialCount = 6;
                     >
                         {item.year}
                     </span>
-                    <h3 class="mt-[15px] font-sans text-lg font-semibold leading-6 text-[#475569]">
+                </div>
+                <div
+                    class:list={[
+                        index % 2 === 0
+                            ? "md:col-start-2 md:row-start-1"
+                            : "md:col-start-1 md:row-start-1 md:text-right",
+                    ]}
+                >
+                    <h3 class="font-sans text-lg font-semibold leading-6 tracking-normal text-[#475569]">
                         {item.title}
                     </h3>
                     <p class="mt-[15px] text-base leading-6 text-[#475569]">
@@ -60,7 +69,7 @@ const initialCount = 6;
         type="button"
         data-history-toggle
         aria-expanded="false"
-        class="mx-auto mt-10 hidden h-[38px] w-[143px] cursor-pointer items-center justify-center rounded border border-[#CBD5E1] bg-white px-4 font-sans text-sm font-medium leading-5 text-[#1E293B] shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-colors hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E293B]"
+        class="mx-auto mt-8 hidden h-[38px] w-[143px] cursor-pointer items-center justify-center rounded border border-[#CBD5E1] bg-white px-4 font-sans text-sm font-medium leading-5 text-[#1E293B] shadow-[0_1px_2px_rgba(0,0,0,0.05)] transition-colors hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1E293B]"
     >
         Load More
     </button>

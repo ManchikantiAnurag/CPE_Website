@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Our Impact",
+  "title": "Creating Opportunities for Brighter Tomorrows",
+  "items": [
+    { "icon": "lucide:users", "value": "10,000 +", "label": "Students Mentored" },
+    { "icon": "lucide:trophy", "value": "48 +", "label": "All India Ranks" },
+    { "icon": "lucide:graduation-cap", "value": "5", "label": "IIM Admissions" },
+    { "icon": "lucide:star", "value": "14", "label": "Pratibha Awards" }
+  ]
+}

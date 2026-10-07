@@ -498,7 +498,21 @@ const aboutVisionMission = section(
                     .default([]),
             })
             .default({ eyebrow: "Core Values", items: [] }),
+    }).merge(image),
+);
+
+const aboutImpact = section(
+    "src/content/about/impact.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z.array(z.object({ icon: z.string(), value: z.string(), label: z.string() })),
     }),
+);
+
+const aboutAdmissionsBanner = section(
+    "src/content/about/admissions-banner.json",
+    z.object({ kicker: z.string(), title: z.string(), description: z.string(), cta }),
 );
 
 const aboutWhyChoose = section(
@@ -506,7 +520,9 @@ const aboutWhyChoose = section(
     z.object({
         eyebrow: z.string(),
         title: z.string(),
-        items: z.array(z.string()).default([]),
+        items: z
+            .array(z.object({ title: z.string(), description: z.string() }))
+            .default([]),
     }),
 );
 
@@ -516,6 +532,7 @@ const aboutLeadership = section(
         eyebrow: z.string(),
         title: z.string(),
         description: z.string(),
+        cta,
     }),
 );
 
@@ -654,6 +671,8 @@ export const collections = {
     aboutCpe,
     aboutHistory,
     aboutVisionMission,
+    aboutImpact,
+    aboutAdmissionsBanner,
     aboutWhyChoose,
     aboutLeadership,
 

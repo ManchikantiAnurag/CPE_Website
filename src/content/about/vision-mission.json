@@ -1,16 +1,21 @@
 {
   "vision": {
     "eyebrow": "Vision",
-    "title": "To be Visakhapatnam's most trusted junior college for commerce and professional career preparation.",
-    "description": "We want every CPE student to leave intermediate education with genuine subject mastery, a clear career direction, and the confidence to compete at a national level."
+    "title": "To be a centre of excellence in commerce education that empowers students with knowledge, professional competence, confidence and character to excel in higher education, competitive examinations, careers and life.",
+    "description": ""
   },
   "mission": {
     "eyebrow": "Mission",
     "items": [
-      "Teach fundamentals thoroughly, never superficially, in every subject we offer.",
-      "Integrate professional-course preparation so students are not overloaded by external coaching.",
-      "Mentor each student individually and communicate honestly with parents.",
-      "Maintain a disciplined, safe and encouraging campus for two formative years."
+      "Providing concept-driven, high-quality education in commerce and related disciplines.",
+      "Building strong academic foundations at the Intermediate level.",
+      "Creating structured pathways towards CA, CMA, management, law and higher education.",
+      "Integrating academic education with professional and competitive-examination preparation.",
+      "Providing individual attention, mentoring and continuous academic guidance.",
+      "Developing students' analytical thinking, communication, confidence and leadership abilities.",
+      "Encouraging discipline, consistency, integrity and perseverance.",
+      "Providing opportunities for experiential learning, extracurricular activities and personality development.",
+      "Preparing students not merely for examinations, but for long-term professional success and responsible citizenship."
     ]
   },
   "core_values": {
@@ -33,6 +38,10 @@
         "description": "Consistency, responsibility and commitment"
       },
       {
+        "name": "Perseverance",
+        "description": "Honesty, ethics and accountability"
+      },
+      {
         "name": "Student-Centricity",
         "description": "Understanding and supporting individual student needs"
       },
@@ -45,5 +54,7 @@
         "description": "Developing socially responsible and ethical professionals"
       }
     ]
-  }
+  },
+  "image": "/media/mission-classroom.png",
+  "image_alt": "Graduation cap and books in a sunlit classroom"
 }
