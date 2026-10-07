@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import OptimizedImage from "../../components/Base/OptimizedImage.astro";
+import Reveal from "../../components/Base/Reveal/Reveal.astro";
 
 export async function getStaticPaths() {
     const events = await getCollection("events");
@@ -43,26 +44,30 @@ const details = [
                     ))}
                 </dl>
             </div>
-            <OptimizedImage
-                src={event.image}
-                alt={event.image_alt}
-                width={1214}
-                sizes="(min-width: 1302px) 638px, (min-width: 1024px) calc((100vw - 104px) / 1.9), calc(100vw - 48px)"
-                loading="eager"
-                class="aspect-[644/364] w-full rounded-md object-cover shadow-xl"
-            />
+            <Reveal variant="right" immediate delay={220}>
+                <OptimizedImage
+                    src={event.image}
+                    alt={event.image_alt}
+                    width={1214}
+                    sizes="(min-width: 1302px) 638px, (min-width: 1024px) calc((100vw - 104px) / 1.9), calc(100vw - 48px)"
+                    loading="eager"
+                    class="aspect-[644/364] w-full rounded-md object-cover shadow-xl"
+                />
+            </Reveal>
         </div>
     </section>
 
     <div class="event-container event-content">
         <section class="event-overview" aria-labelledby="about-event-heading">
-            <OptimizedImage
-                src={event.about_image}
-                alt={event.about_image_alt}
-                width={1200}
-                sizes="(min-width: 1302px) 592px, (min-width: 1024px) calc((100vw - 96px) / 2), calc(100vw - 48px)"
-                class="aspect-[592/552] w-full object-cover"
-            />
+            <Reveal variant="left">
+                <OptimizedImage
+                    src={event.about_image}
+                    alt={event.about_image_alt}
+                    width={1200}
+                    sizes="(min-width: 1302px) 592px, (min-width: 1024px) calc((100vw - 96px) / 2), calc(100vw - 48px)"
+                    class="aspect-[592/552] w-full object-cover"
+                />
+            </Reveal>
             <div class="event-about-copy">
                 <h2 id="about-event-heading">{event.about_title}</h2>
                 {event.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
@@ -90,7 +95,7 @@ const details = [
                 <h2 id="event-gallery-heading">{event.gallery_title}</h2>
                 <div class="event-gallery-grid">
                     {event.gallery.map((photo) => (
-                        <figure>
+                        <Reveal as="figure">
                             <OptimizedImage
                                 src={photo.image}
                                 alt={photo.image_alt}
@@ -98,7 +103,7 @@ const details = [
                                 sizes="(min-width: 1302px) 397px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 48px)"
                                 class="aspect-[395/444] w-full object-cover"
                             />
-                        </figure>
+                        </Reveal>
                     ))}
                 </div>
             </section>
