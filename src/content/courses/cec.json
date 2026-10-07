@@ -1,25 +1,24 @@
 {
   "code": "CEC",
   "title": "Intermediate MEC / CEC (Regular)",
-  "tagline": "A commerce-focused programme preparing students for careers in law, management, commerce and civil services.",
+  "tagline": "Build a strong academic foundation in Mathematics, Economics, Commerce, and Civics with a structured Intermediate programme designed to prepare students for higher education and diverse career opportunities.",
   "order": 4,
-  "overview": "This programme is designed for students pursuing Intermediate MEC/CEC who want to develop a strong foundation in commerce, economics, mathematics, and related subjects. The curriculum focuses on conceptual understanding, academic excellence, and essential skills needed for higher education. Through structured classroom learning, regular assessments, and academic guidance, students are prepared for a wide range of future pathways in Commerce, Management, Economics, Finance, Law, and other professional fields.",
+  "overview": "This programme is designed for students pursuing Intermediate MEC/CEC who want to develop a strong foundation in commerce, economics, mathematics, and related subjects. The curriculum focuses on conceptual understanding, academic excellence, and essential skills needed for higher education.\nThrough structured classroom learning, regular assessments, and academic guidance, students are prepared for a wide range of future pathways in Commerce, Management, Economics, Finance, Law, and other professional fields.",
   "highlights": [
-    "Civics and public policy foundation",
-    "Integrated CLAT and law entrance coaching",
-    "Current affairs and general awareness sessions",
-    "Essay writing and debate practice"
+    "Choice of MEC or CEC stream",
+    "Strong foundation in Economics and Commerce",
+    "Regular assessments and academic guidance",
+    "Career guidance for higher education and professional courses"
   ],
   "careers": [
-    "law-at-national-law-universities",
+    "law",
     "civil-services",
+    "chartered-accountancy",
     "company-secretary",
-    "journalism-and-mass-communication",
+    "management",
+    "commerce",
     "public-policy",
-    "b-com-hons",
-    "bba",
-    "economics-honours",
-    "political-science-honours"
+    "journalism-and-mass-communication"
   ],
   "enquiry_phones": [
     "9666829555",
@@ -33,37 +32,65 @@
   "board": "Board of Intermediate Education, Andhra Pradesh",
   "sections": [
     {
+      "heading": "Eligibility",
+      "paragraphs": [
+        "Pass in Class 10 (SSC / CBSE / ICSE or equivalent)"
+      ],
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
+    },
+    {
       "heading": "MEC / CEC Course Structure & Examination Pattern",
       "paragraphs": [
         "The Intermediate course under BIE-AP has two public examinations — at the end of First Year and Second Year — and is structured as:"
       ],
       "items": [
-        "Part I: English",
-        "Part II: Second Language (Sanskrit / Telugu / Hindi)",
-        "Part III: Group subjects, each with two papers (one per year) — MEC: Mathematics (IA & IB in First Year; IIA & IIB in Second Year), Economics, Commerce; CEC: Civics, Economics, Commerce"
-      ]
-    },
-    {
-      "heading": "Choosing between MEC and CEC",
-      "paragraphs": [
+        {
+          "text": "Part I: English",
+          "children": []
+        },
+        {
+          "text": "Part II: Second Language (Sanskrit / Telugu / Hindi)",
+          "children": []
+        },
+        {
+          "text": "Part III: Group subjects, each with two papers (one per year)",
+          "children": []
+        }
+      ],
+      "closing_paragraphs": [
+        "MEC: Mathematics (IA & IB in First Year; IIA & IIB in Second Year), Economics, Commerce",
+        "CEC: Civics, Economics, Commerce",
         "MEC is the recommended group for students targeting CA, CMA, CS, IPM/BBA at IIMs, B.Com. (Hons.), Economics (Hons.), actuarial science, statistics and data-driven careers. CEC suits students who prefer a non-mathematical route into commerce, law, civil services, public administration, journalism and management."
       ],
-      "items": []
+      "subsections": []
     },
     {
       "heading": "Specializations",
       "paragraphs": [
-        "MEC / CEC. Integrated add-ons: CA/CMA Foundation, IPMAT, CLAT."
+        "MEC / CEC. Integrated add-ons: CA/CMA Foundation, IPMAT, CLAT. CA Foundation track / CMA Foundation track (students choose one; the Intermediate MEC syllabus is common to both). CLAT/AILET focus; AP LAWCET focus; Law + Commerce (B.B.A. LL.B. / B.Com. LL.B. orientation)."
       ],
-      "items": []
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "Admission requirements",
       "paragraphs": [],
       "items": [
-        "Class 10 marks memo / pass certificate",
-        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs"
-      ]
+        {
+          "text": "Class 10 marks memo / pass certificate",
+          "children": []
+        },
+        {
+          "text": "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs",
+          "children": []
+        }
+      ],
+      "closing_paragraphs": [],
+      "subsections": []
     }
-  ]
+  ],
+  "display_code": "MEC / CEC"
 }

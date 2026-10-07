@@ -29,30 +29,30 @@ const details = [
 ---
 
 <article
-    class="grid gap-8 border border-border bg-card p-8 md:grid-cols-[130px_1fr] md:gap-12 md:p-10"
+    class="grid gap-6 border border-border bg-card p-6 sm:p-8 md:grid-cols-[130px_minmax(0,1fr)] md:gap-12 md:p-10"
 >
     <div>
-        <span class="font-display text-[44px] leading-10 text-primary">
+        <span class="block font-display text-4xl leading-tight text-primary md:text-[44px]">
             {code}
         </span>
         {
             duration && (
-                <p class="mt-4 text-[10px] font-bold uppercase leading-[18px] text-accent">
+                <p class="mt-3 max-w-[180px] text-[10px] font-bold uppercase leading-[18px] text-accent md:mt-4 md:max-w-[120px]">
                     {duration}
                 </p>
             )
         }
     </div>
 
-    <div>
-        <h2 class="text-3xl text-primary md:text-4xl">{title}</h2>
+    <div class="min-w-0">
+        <h2 class="text-2xl text-primary sm:text-3xl md:text-4xl">{title}</h2>
         <p class="mt-5 text-base leading-relaxed text-muted-foreground">
             {tagline}
         </p>
 
         {
             details.length > 0 && (
-                <dl class="mt-8 grid gap-8 sm:grid-cols-2">
+                <dl class="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-12">
                     {details.map((detail) => (
                         <div>
                             <dt class="text-base font-semibold uppercase tracking-[1px] text-muted-foreground">
@@ -67,8 +67,8 @@ const details = [
             )
         }
 
-        <div class="mt-7 flex flex-wrap gap-3">
-            <Button href={href} variant="outline" class="rounded">
+        <div class="mt-8 flex flex-wrap gap-4 md:mt-12 md:gap-6">
+            <Button href={href} variant="outline" class="h-11 rounded-sm border-border px-5 max-[360px]:w-full">
                 Learn More
                 <Icon
                     name="lucide:arrow-right"
@@ -76,7 +76,7 @@ const details = [
                     aria-hidden="true"
                 />
             </Button>
-            <Button href="/admissions" variant="accent" class="rounded">Apply Now</Button>
+            <Button href="/admissions" variant="accent" class="h-11 rounded-sm px-5 max-[360px]:w-full">Apply Now</Button>
         </div>
     </div>
 </article>

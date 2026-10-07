@@ -1,6 +1,10 @@
 {
   "careers": [
     {
+      "id": "accounting-and-finance",
+      "name": "Accounting and Finance"
+    },
+    {
       "id": "actuarial-science",
       "name": "Actuarial Science"
     },
@@ -9,8 +13,20 @@
       "name": "Audit & Assurance"
     },
     {
+      "id": "auditing-and-taxation",
+      "name": "Auditing & Taxation"
+    },
+    {
       "id": "b-com-hons",
       "name": "B.Com (Hons)"
+    },
+    {
+      "id": "banking",
+      "name": "Banking"
+    },
+    {
+      "id": "banking-and-financial-services",
+      "name": "Banking & Financial Services"
     },
     {
       "id": "bba",
@@ -25,12 +41,24 @@
       "name": "Civil Services"
     },
     {
+      "id": "commerce",
+      "name": "Commerce"
+    },
+    {
       "id": "company-secretary",
       "name": "Company Secretary"
     },
     {
       "id": "consulting",
       "name": "Consulting"
+    },
+    {
+      "id": "corporate-careers",
+      "name": "Corporate Careers"
+    },
+    {
+      "id": "corporate-compliance",
+      "name": "Corporate Compliance"
     },
     {
       "id": "corporate-finance",
@@ -49,12 +77,28 @@
       "name": "Cost Auditing"
     },
     {
+      "id": "cost-management",
+      "name": "Cost Management"
+    },
+    {
       "id": "data-and-business-analytics",
       "name": "Data & Business Analytics"
     },
     {
       "id": "economics-honours",
       "name": "Economics Honours"
+    },
+    {
+      "id": "entrepreneurship",
+      "name": "Entrepreneurship"
+    },
+    {
+      "id": "finance",
+      "name": "Finance"
+    },
+    {
+      "id": "financial-analysis",
+      "name": "Financial Analysis"
     },
     {
       "id": "financial-planning-and-analysis",
@@ -69,12 +113,28 @@
       "name": "Forensic Accounting"
     },
     {
+      "id": "government-services",
+      "name": "Government Services"
+    },
+    {
+      "id": "higher-education",
+      "name": "Higher Education"
+    },
+    {
       "id": "iim-indore-ipm",
       "name": "IIM Indore IPM"
     },
     {
       "id": "iim-rohtak-ipm",
       "name": "IIM Rohtak IPM"
+    },
+    {
+      "id": "iims-and-mba",
+      "name": "IIMs & MBA"
+    },
+    {
+      "id": "integrated-law-degrees",
+      "name": "5-year integrated B.A. LL.B. / B.B.A. LL.B."
     },
     {
       "id": "integrated-management-programmes",
@@ -97,6 +157,10 @@
       "name": "Judicial Services"
     },
     {
+      "id": "law",
+      "name": "Law"
+    },
+    {
       "id": "law-at-national-law-universities",
       "name": "Law at National Law Universities"
     },
@@ -109,8 +173,16 @@
       "name": "Litigation"
     },
     {
+      "id": "management",
+      "name": "Management"
+    },
+    {
       "id": "management-accounting",
       "name": "Management Accounting"
+    },
+    {
+      "id": "national-law-universities",
+      "name": "National Law Universities"
     },
     {
       "id": "political-science-honours",

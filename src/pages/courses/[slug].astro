@@ -2,8 +2,6 @@
 import { getCollection, getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/Base/PageHero/PageHero.astro";
-import Section from "../../components/Base/Section/Section.astro";
-import SectionHeading from "../../components/Base/SectionHeading/SectionHeading.astro";
 import CourseOverview from "../../components/Courses/CourseOverview/CourseOverview.astro";
 import CourseSidebar from "../../components/Courses/CourseSidebar/CourseSidebar.astro";
 import EnquiryForm from "../../components/Admissions/EnquiryForm/EnquiryForm.astro";
@@ -22,10 +20,6 @@ const contactDetails = await getEntry("contactDetails", "contact-details");
 const phones = course.enquiry_phones.length
     ? course.enquiry_phones
     : (contactDetails?.data.phone_numbers ?? []);
-const emails = course.enquiry_emails.length
-    ? course.enquiry_emails
-    : (contactDetails?.data.emails ?? []);
-
 const enquiry = await getSection("admissionsEnquiry");
 const courseOptions = (await getCourseLinks()).map((item) => ({
     value: item.label,
@@ -33,40 +27,89 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
 }));
 ---
 
-<Layout title={course.title} description={course.tagline}>
-    <PageHero title={course.title} description={course.tagline} />
+<Layout title={course.title} description={course.tagline} headerBackground="hero">
+    <PageHero
+        eyebrow={course.display_code || course.code}
+        title={course.title}
+        description={course.tagline}
+        variant="course"
+    />
 
-    <Section>
-        <div class="grid gap-12 lg:grid-cols-[1.45fr_1fr]">
-            <Reveal variant="left">
+    <section class="course-content">
+        <div class="course-container course-columns">
+            <Reveal variant="left" class="min-w-0">
                 <CourseOverview
                     overview={course.overview}
                     sections={course.sections}
                 />
             </Reveal>
-            <Reveal variant="right" delay={120}>
+            <Reveal variant="right" delay={120} class="min-w-0">
                 <CourseSidebar
                     duration={course.duration}
                     eligibility={course.eligibility}
                     board={course.board}
                     phones={phones}
-                    emails={emails}
                 />
             </Reveal>
         </div>
-    </Section>
+    </section>
 
-    <Section id="enquiry" background="surface">
-        <div class="mx-auto max-w-4xl">
-            <Reveal>
-                <EnquiryForm
-                    title={enquiry.form_title}
-                    description={enquiry.form_description}
-                    submitLabel={enquiry.submit_label}
-                    courses={courseOptions}
-                    action={enquiry.form_endpoint}
-                />
-            </Reveal>
+    <section id="enquiry" class="course-enquiry-section">
+        <div class="course-container">
+            <div class="mx-auto max-w-[960px]">
+                <Reveal>
+                    <EnquiryForm
+                        title={enquiry.form_title}
+                        description={enquiry.form_description}
+                        submitLabel={enquiry.submit_label}
+                        courses={courseOptions}
+                        action={enquiry.form_endpoint}
+                        variant="course"
+                    />
+                </Reveal>
+            </div>
         </div>
-    </Section>
+    </section>
 </Layout>
+
+<style>
+    .course-container {
+        width: min(100% - 48px, 1269px);
+        margin-inline: auto;
+    }
+
+    .course-content {
+        padding-block: 68px 88px;
+    }
+
+    .course-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 712fr) minmax(0, 492fr);
+        align-items: start;
+        gap: 65px;
+    }
+
+    .course-enquiry-section {
+        padding-block: 96px;
+        background: #fffce7;
+        scroll-margin-top: 160px;
+    }
+
+    @media (min-width: 1320px) {
+        .course-content {
+            padding-left: 15px;
+        }
+    }
+
+    @media (max-width: 1023px) {
+        .course-columns {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 40px;
+        }
+
+        .course-content,
+        .course-enquiry-section {
+            padding-block: 48px;
+        }
+    }
+</style>

@@ -1,28 +1,77 @@
 ---
-import Section from "../Section/Section.astro";
 import Reveal from "../Reveal/Reveal.astro";
 
 interface Props {
     eyebrow?: string;
     title: string;
     description?: string;
+    variant?: "default" | "course";
 }
 
-const { eyebrow, title, description } = Astro.props;
+const { eyebrow, title, description, variant = "default" } = Astro.props;
 ---
 
-<Section background="background" padded={false} class="bg-hero py-16 md:py-20">
-    <Reveal immediate stagger={90} duration={800}>
-        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    <h1 class="mt-3 max-w-3xl text-4xl text-black md:text-5xl">
-        {title}
-    </h1>
-    {
-        description && (
-            <p class="mt-5 max-w-2xl text-base leading-relaxed text-foreground">
-                {description}
-            </p>
-        )
+<section class:list={["bg-hero", variant === "course" ? "course-hero" : "py-16 md:py-20"]}>
+    <div class:list={["mx-auto px-6", variant === "course" ? "max-w-[1302px]" : "max-w-7xl"]}>
+        <Reveal immediate stagger={90} duration={800}>
+            {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+            <h1 class={variant === "course" ? "course-title" : "mt-3 max-w-3xl text-4xl text-black md:text-5xl"}>
+                {title}
+            </h1>
+            {description && (
+                <p class={variant === "course" ? "course-description" : "mt-5 max-w-2xl text-base leading-relaxed text-foreground"}>
+                    {description}
+                </p>
+            )}
+        </Reveal>
+    </div>
+</section>
+
+<style>
+    .course-hero {
+        min-height: 388px;
+        padding-block: 64px 48px;
+        background-size: 100% 820px;
+        background-position: center -264px;
+    }
+
+    .course-hero .eyebrow {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .course-title {
+        max-width: 760px;
+        margin-top: 22px;
+        color: #000;
+        font-size: 56px;
+        line-height: 56px;
+    }
+
+    .course-description {
+        max-width: 1040px;
+        margin-top: 26px;
+        color: #0f172a;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    @media (max-width: 767px) {
+        .course-hero {
+            min-height: 0;
+            padding-block: 40px 48px;
+            background-size: auto 100%;
+            background-position: center;
         }
-    </Reveal>
-</Section>
+
+        .course-title {
+            font-size: 36px;
+            line-height: 40px;
+        }
+
+        .course-description {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+</style>

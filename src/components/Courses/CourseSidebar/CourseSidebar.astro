@@ -1,6 +1,6 @@
 ---
 import Button from "../../Base/Button/Button.astro";
-import DetailItem from "../../Base/DetailItem/DetailItem.astro";
+import { Icon } from "astro-icon/components";
 import ContactLink from "../../Base/ContactLink/ContactLink.astro";
 
 interface Props {
@@ -26,39 +26,114 @@ const details = [
 ].filter((detail) => Boolean(detail.description));
 ---
 
-<aside class="h-fit rounded-[10px] border border-border bg-surface p-[30px]">
-    <h2 class="text-3xl text-primary md:text-[32px]">Course Details</h2>
-
-    {
-        details.length > 0 && (
-            <dl class="mt-8 space-y-7">
+<aside class="course-sidebar">
+    <h2>Course Details</h2>
+    <div class="course-sidebar-body">
+        {details.length > 0 && (
+            <dl>
                 {details.map((detail) => (
-                    <DetailItem
-                        icon={detail.icon}
-                        term={detail.term}
-                        description={detail.description!}
-                    />
+                    <div class="course-detail">
+                        <Icon name={detail.icon} aria-hidden="true" />
+                        <div>
+                            <dt>{detail.term}</dt>
+                            <dd>{detail.description}</dd>
+                        </div>
+                    </div>
                 ))}
             </dl>
-        )
-    }
-
-    <Button href="/admissions" variant="accent" size="lg" class="mt-9 w-full rounded">
-        Apply Now
-    </Button>
-
-    <div
-        class="mt-4 flex flex-col items-center gap-1 text-sm text-muted-foreground"
-    >
-        {
-            phones.map((phone) => (
-                <ContactLink type="phone" value={phone} class="hover:text-accent" />
-            ))
-        }
-        {
-            emails.map((email) => (
-                <ContactLink type="email" value={email} class="hover:text-accent" />
-            ))
-        }
+        )}
+        <div class="course-sidebar-actions">
+            <Button href="#enquiry" variant="accent" size="lg" class="w-full rounded bg-[#dc2626]">
+                Apply Now
+            </Button>
+            {(phones.length > 0 || emails.length > 0) && (
+                <div class="course-contacts">
+                    {phones.map((phone) => (
+                        <ContactLink type="phone" value={phone} showIcon={false} class="hover:text-accent" />
+                    ))}
+                    {emails.map((email) => (
+                        <ContactLink type="email" value={email} showIcon={false} class="break-all hover:text-accent" />
+                    ))}
+                </div>
+            )}
+        </div>
     </div>
 </aside>
+
+<style>
+    .course-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 31px;
+        padding: 30px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #fffce7;
+        color: #475569;
+    }
+
+    h2 {
+        color: #0f172a;
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .course-sidebar-body {
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+    }
+
+    dl {
+        display: flex;
+        flex-direction: column;
+        gap: 27px;
+    }
+
+    .course-detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 19px;
+    }
+
+    .course-detail :global(svg) {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        color: #dc2626;
+    }
+
+    dt {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 24px;
+        text-transform: uppercase;
+    }
+
+    dd {
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .course-sidebar-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .course-contacts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    @media (max-width: 639px) {
+        .course-sidebar {
+            padding: 24px;
+        }
+    }
+</style>

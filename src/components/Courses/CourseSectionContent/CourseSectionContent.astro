@@ -1,0 +1,69 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type CourseSection = CollectionEntry<"courses">["data"]["sections"][number];
+type Props = Pick<CourseSection, "paragraphs" | "items" | "closing_paragraphs">;
+
+const { paragraphs = [], items = [], closing_paragraphs = [] } = Astro.props;
+---
+
+<div class="course-copy">
+    {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    {items.length > 0 && (
+        <ul class="course-items">
+            {items.map((item) => (
+                <li>
+                    {typeof item === "string" ? item : item.text}
+                    {typeof item !== "string" && item.children.length > 0 && (
+                        <ul class="course-item-children">
+                            {item.children.map((child) => <li>{child}</li>)}
+                        </ul>
+                    )}
+                </li>
+            ))}
+        </ul>
+    )}
+    {closing_paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+</div>
+
+<style>
+    .course-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        color: #475569;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    p {
+        white-space: pre-line;
+    }
+
+    .course-items {
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        padding-left: 24px;
+        list-style: disc;
+    }
+
+    .course-item-children {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 11px;
+        list-style: none;
+    }
+
+    .course-item-children li {
+        padding-left: 14px;
+        position: relative;
+    }
+
+    .course-item-children li::before {
+        position: absolute;
+        left: 0;
+        content: "-";
+    }
+</style>

@@ -1,37 +1,72 @@
 ---
+import type { CollectionEntry } from "astro:content";
+import CourseSectionContent from "../CourseSectionContent/CourseSectionContent.astro";
+
 interface Props {
     overview: string;
-    sections?: { heading: string; paragraphs: string[]; items: string[] }[];
+    sections?: CollectionEntry<"courses">["data"]["sections"];
 }
 
 const { overview, sections = [] } = Astro.props;
 ---
 
-<div class="space-y-10">
-    <section>
-        <h2 class="text-3xl text-primary md:text-[32px]">Programme Overview</h2>
-        <p class="mt-6 whitespace-pre-line text-base leading-relaxed text-muted-foreground">
-            {overview}
-        </p>
+<div class="course-overview">
+    <section class="course-section">
+        <h2>Programme Overview</h2>
+        <CourseSectionContent paragraphs={[overview]} items={[]} closing_paragraphs={[]} />
     </section>
 
     {
         sections.map((section) => (
-            <section>
-                <h2 class="text-3xl text-primary md:text-[32px]">{section.heading}</h2>
-                {section.paragraphs.map((paragraph) => (
-                    <p class="mt-6 text-base leading-relaxed text-muted-foreground">
-                        {paragraph}
-                    </p>
-                ))}
-                {section.items.length > 0 && (
-                    <ul class="mt-6 list-disc space-y-3 pl-6 text-base leading-relaxed text-muted-foreground marker:text-muted-foreground">
-                        {section.items.map((item) => (
-                            <li>{item}</li>
-                        ))}
-                    </ul>
+            <section class="course-section">
+                <h2>{section.heading}</h2>
+                {(section.paragraphs.length > 0 || section.items.length > 0 || section.closing_paragraphs.length > 0) && (
+                    <CourseSectionContent {...section} />
                 )}
+                {section.subsections.map((subsection) => (
+                    <section class="course-subsection">
+                        <h3>{subsection.heading}</h3>
+                        <CourseSectionContent {...subsection} />
+                    </section>
+                ))}
             </section>
         ))
     }
 </div>
+
+<style>
+    .course-overview,
+    .course-section {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+    }
+
+    h2 {
+        color: #0f172a;
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .course-subsection {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    h3 {
+        color: #475569;
+        font-family: var(--font-sans);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: normal;
+        line-height: 24px;
+    }
+
+    @media (max-width: 639px) {
+        h2 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+    }
+</style>

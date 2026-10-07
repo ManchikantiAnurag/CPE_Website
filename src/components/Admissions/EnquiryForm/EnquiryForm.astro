@@ -10,21 +10,24 @@ interface Props {
     description: string;
     submitLabel: string;
     courses: { value: string; label: string }[];
-    /** Overrides the default /api/form handler. */
     action?: string;
+    variant?: "default" | "course";
 }
 
-const { title, description, submitLabel, courses, action } = Astro.props;
+const { title, description, submitLabel, courses, action, variant = "default" } = Astro.props;
 ---
 
 <form
     method="post"
     action={action || "/api/form"}
     data-toast="Thank you. Your enquiry has been submitted — our admissions team will call you shortly."
-    class="grid gap-6 rounded-[20px] border border-border bg-card p-8 md:grid-cols-2 md:p-10"
+    class:list={[
+        "grid gap-6 rounded-[20px] border border-border bg-card p-8 md:grid-cols-2 md:p-10",
+        variant === "course" && "course-enquiry",
+    ]}
 >
-    <div class="md:col-span-2">
-        <h3 class="text-3xl text-primary md:text-[32px]">{title}</h3>
+    <div class="enquiry-heading md:col-span-2">
+        <h2 class="text-3xl text-primary md:text-[32px]">{title}</h2>
         <p class="mt-1 text-sm text-muted-foreground">{description}</p>
     </div>
 
@@ -45,7 +48,7 @@ const { title, description, submitLabel, courses, action } = Astro.props;
     </Field>
 
     <Field label="Course Interested In" for="course" full>
-        <Select id="course" placeholder="Select a course" options={courses} />
+        <Select id="course" placeholder={variant === "course" ? "Select" : "Select a course"} options={courses} />
     </Field>
 
     <Field label="Message" for="message" full>
@@ -56,3 +59,67 @@ const { title, description, submitLabel, courses, action } = Astro.props;
         <Button variant="accent" size="lg">{submitLabel}</Button>
     </div>
 </form>
+
+<style>
+    .course-enquiry {
+        gap: 40px 32px;
+        padding: 40px;
+    }
+
+    .course-enquiry .enquiry-heading {
+        margin-bottom: 16px;
+    }
+
+    .course-enquiry h2 {
+        color: #0f172a;
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .course-enquiry .enquiry-heading p {
+        margin-top: 20px;
+        color: #475569;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .course-enquiry :global(label) {
+        display: block;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    .course-enquiry :global(input),
+    .course-enquiry :global(select),
+    .course-enquiry :global(textarea) {
+        border: 1px solid #d9d9d9;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .course-enquiry :global(button) {
+        width: 240px;
+        height: 60px;
+        margin-top: 20px;
+        border-radius: 4px;
+        background: #dc2626;
+    }
+
+    @media (max-width: 639px) {
+        .course-enquiry {
+            gap: 24px;
+            padding: 24px;
+        }
+
+        .course-enquiry h2 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        .course-enquiry :global(button) {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>

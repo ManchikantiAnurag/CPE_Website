@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import PageHero from "../../components/Base/PageHero/PageHero.astro";
 import Section from "../../components/Base/Section/Section.astro";
 import CourseRow from "../../components/Courses/CourseRow/CourseRow.astro";
 import Reveal from "../../components/Base/Reveal/Reveal.astro";
@@ -21,19 +20,25 @@ const courses = await Promise.all(
 );
 ---
 
-<Layout title={seo.meta_title} description={seo.meta_description}>
-    <PageHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.intro}
-    />
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
+    <Section background="hero" padded={false} class="courses-hero pt-12 pb-16 md:pt-16 md:pb-[100px] [&>div]:max-w-[1298px]">
+        <Reveal immediate stagger={90}>
+            <p class="eyebrow">{hero.eyebrow}</p>
+            <h1 class="mt-6 max-w-[800px] font-display text-4xl font-normal leading-tight text-black md:text-[56px] md:leading-[56px]">
+                {hero.title}
+            </h1>
+            <p class="mt-8 max-w-[1100px] text-base leading-7 text-black md:text-lg">
+                {hero.intro}
+            </p>
+        </Reveal>
+    </Section>
 
-    <Section>
-        <Reveal stagger={120} class="grid gap-8">
+    <Section padded={false} class="py-16 md:py-20 [&>div]:max-w-[1298px]">
+        <Reveal stagger={120} class="grid gap-8 md:gap-12">
             {
                 courses.map((course) => (
                     <CourseRow
-                        code={course.code}
+                        code={course.display_code || course.code}
                         title={course.title}
                         tagline={course.tagline}
                         duration={course.duration}
@@ -46,3 +51,17 @@ const courses = await Promise.all(
         </Reveal>
     </Section>
 </Layout>
+
+<style>
+    :global(.courses-hero) {
+        background-size: 100% 820px;
+        background-position: center -264px;
+    }
+
+    @media (max-width: 767px) {
+        :global(.courses-hero) {
+            background-size: cover;
+            background-position: center;
+        }
+    }
+</style>

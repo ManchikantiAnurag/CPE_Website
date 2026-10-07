@@ -10,20 +10,18 @@ export interface NavItem extends NavLink {
     children: NavLink[];
 }
 
-/** Courses sorted for display, with the route each one lives at. */
 export async function getCourseLinks(): Promise<NavLink[]> {
     const courses = await getCollection("courses");
 
     return courses
         .sort((a, b) => a.data.order - b.data.order)
         .map((course) => ({
-            label: course.data.code,
+            label: course.data.display_code || course.data.code,
             href: `/courses/${course.id}`,
             description: course.data.title,
         }));
 }
 
-/** Career ids as stored on a course, resolved to their display names. */
 export async function getCareerNames(ids: string[]): Promise<string[]> {
     const careers = await getCollection("careers");
     return ids.map(
@@ -43,7 +41,6 @@ export async function getSection<C extends keyof DataEntryMap>(collection: C) {
     return entry.data;
 }
 
-/** The shared leadership list, in display order. */
 export async function getLeadership() {
     const people = await getCollection("leadership");
     return people
@@ -63,10 +60,6 @@ export async function getContactDetails() {
     return entry.data;
 }
 
-/**
- * Primary navigation with the course dropdown filled from the courses
- * collection, so adding a course in the CMS updates the menu automatically.
- */
 export async function getPrimaryNavigation(): Promise<NavItem[]> {
     const entry = await getEntry("navigation", "navigation");
     if (!entry) throw new Error("Missing src/content/navigation.json");
@@ -85,7 +78,6 @@ export async function getFooterNoteLinks(): Promise<NavLink[]> {
     return entry?.data.footer_note_links ?? [];
 }
 
-/** Uses the page-specific numbers when set, otherwise the shared ones. */
 export function resolvePhones(preferred: string[], fallback: string[]) {
     return preferred.length ? preferred : fallback;
 }

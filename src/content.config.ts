@@ -49,10 +49,22 @@ const listSection = z.object({
 
 /* -------------------------------------------------------------- site-wide */
 
+const courseContent = z.object({
+    paragraphs: z.array(z.string()).default([]),
+    items: z.array(z.union([
+        z.string(),
+        z.object({ text: z.string(), children: z.array(z.string()).default([]) }),
+    ])).default([]),
+    closing_paragraphs: z.array(z.string()).default([]),
+});
+
+const courseSubsection = courseContent.extend({ heading: z.string() });
+
 const courses = defineCollection({
     loader: glob({ base: "src/content/courses", pattern: "**/*.json" }),
     schema: z.object({
         code: z.string(),
+        display_code: z.string().trim().optional(),
         title: z.string(),
         tagline: z.string(),
         order: z.number(),
@@ -66,10 +78,9 @@ const courses = defineCollection({
         board: z.string().optional(),
         sections: z
             .array(
-                z.object({
+                courseContent.extend({
                     heading: z.string(),
-                    paragraphs: z.array(z.string()).default([]),
-                    items: z.array(z.string()).default([]),
+                    subsections: z.array(courseSubsection).default([]),
                 }),
             )
             .default([]),
