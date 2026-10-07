@@ -35,6 +35,7 @@ const { title, summary, image, imageAlt, href } = Astro.props;
 
 <style>
     .event-card {
+        position: relative;
         display: flex;
         height: 100%;
         flex-direction: column;
@@ -84,6 +85,12 @@ const { title, summary, image, imageAlt, href } = Astro.props;
         transition: border-color 180ms, background-color 180ms, color 180ms;
     }
 
+    a::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+    }
+
     a:hover {
         border-color: var(--accent);
         background: var(--secondary);
@@ -91,6 +98,10 @@ const { title, summary, image, imageAlt, href } = Astro.props;
     }
 
     a:focus-visible {
+        outline: none;
+    }
+
+    a:focus-visible::after {
         outline: 2px solid var(--accent);
         outline-offset: 4px;
     }
