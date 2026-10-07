@@ -1,0 +1,334 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Layout from "../../layouts/Layout.astro";
+import OptimizedImage from "../../components/Base/OptimizedImage.astro";
+
+export async function getStaticPaths() {
+    const events = await getCollection("events");
+    return events.map((event) => ({
+        params: { slug: event.id },
+        props: { event },
+    }));
+}
+
+interface Props {
+    event: CollectionEntry<"events">;
+}
+
+const { event: { data: event } } = Astro.props;
+const details = [
+    { icon: "lucide:calendar-days", label: "Event", value: event.title.replace(/ Celebrations$/, "") },
+    { icon: "lucide:map-pin", label: "Venue", value: event.venue },
+    { icon: "lucide:users-round", label: "Participants", value: event.participants },
+];
+---
+
+<Layout title={event.title} description={event.tagline} headerBackground="hero">
+    <section class="event-hero bg-hero">
+        <div class="event-container event-hero-columns">
+            <div>
+                <a href="/news" class="eyebrow event-back-link">News & Events</a>
+                <h1>{event.title}</h1>
+                <p class="event-tagline">{event.tagline}</p>
+                <dl class="event-details">
+                    {details.map((detail) => (
+                        <div class="event-detail">
+                            <Icon name={detail.icon} class="mt-1 h-7 w-7 shrink-0 text-accent" aria-hidden="true" />
+                            <div>
+                                <dt>{detail.label}</dt>
+                                <dd>{detail.value}</dd>
+                            </div>
+                        </div>
+                    ))}
+                </dl>
+            </div>
+            <OptimizedImage
+                src={event.image}
+                alt={event.image_alt}
+                width={1214}
+                sizes="(min-width: 1302px) 638px, (min-width: 1024px) calc((100vw - 104px) / 1.9), calc(100vw - 48px)"
+                loading="eager"
+                class="aspect-[644/364] w-full rounded-md object-cover shadow-xl"
+            />
+        </div>
+    </section>
+
+    <div class="event-container event-content">
+        <section class="event-overview" aria-labelledby="about-event-heading">
+            <OptimizedImage
+                src={event.about_image}
+                alt={event.about_image_alt}
+                width={1200}
+                sizes="(min-width: 1302px) 592px, (min-width: 1024px) calc((100vw - 96px) / 2), calc(100vw - 48px)"
+                class="aspect-[592/552] w-full object-cover"
+            />
+            <div class="event-about-copy">
+                <h2 id="about-event-heading">{event.about_title}</h2>
+                {event.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+        </section>
+
+        {event.activities.length > 0 && (
+            <section class="event-talent" aria-labelledby="event-talent-heading">
+                <h2 id="event-talent-heading">{event.activities_title}</h2>
+                <ul class="event-activities">
+                    {event.activities.map((activity) => (
+                        <li>
+                            <span class="activity-icon">
+                                <Icon name={activity.icon} class="h-10 w-10 text-accent" aria-hidden="true" />
+                            </span>
+                            <h3>{activity.title}</h3>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        )}
+
+        {event.gallery.length > 0 && (
+            <section class="event-gallery" aria-labelledby="event-gallery-heading">
+                <h2 id="event-gallery-heading">{event.gallery_title}</h2>
+                <div class="event-gallery-grid">
+                    {event.gallery.map((photo) => (
+                        <figure>
+                            <OptimizedImage
+                                src={photo.image}
+                                alt={photo.image_alt}
+                                width={800}
+                                sizes="(min-width: 1302px) 397px, (min-width: 1024px) calc((100vw - 112px) / 3), (min-width: 640px) calc((100vw - 72px) / 2), calc(100vw - 48px)"
+                                class="aspect-[395/444] w-full object-cover"
+                            />
+                        </figure>
+                    ))}
+                </div>
+            </section>
+        )}
+    </div>
+</Layout>
+
+<style>
+    .event-container {
+        width: min(100% - 48px, 1254px);
+        margin-inline: auto;
+    }
+
+    .event-hero {
+        padding-block: 64px 124px;
+        background-size: 100% 820px;
+        background-position: center -264px;
+    }
+
+    .event-hero-columns {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 56px;
+    }
+
+    .event-back-link {
+        display: inline-block;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .event-back-link:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+    h1 {
+        margin-top: 22px;
+        color: #000;
+        font-size: 56px;
+        line-height: 56px;
+    }
+
+    .event-tagline {
+        max-width: 520px;
+        margin-top: 28px;
+        color: #000;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .event-details {
+        display: grid;
+        grid-template-columns: 0.9fr 0.9fr 1.2fr;
+        gap: 20px;
+        margin-top: 28px;
+        color: #000;
+    }
+
+    .event-detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    dt {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+    }
+
+    dd {
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .event-content {
+        padding-block: 128px;
+    }
+
+    .event-overview {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
+        gap: 48px;
+    }
+
+    h2 {
+        color: #0f172a;
+        font-size: 42px;
+        line-height: 58px;
+    }
+
+    .event-about-copy p {
+        margin-top: 24px;
+        color: #000;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .event-talent,
+    .event-gallery {
+        margin-top: 112px;
+    }
+
+    .event-talent h2,
+    .event-gallery h2 {
+        text-align: center;
+    }
+
+    .event-activities {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 52px;
+        text-align: center;
+    }
+
+    .activity-icon {
+        display: flex;
+        width: 100px;
+        height: 100px;
+        align-items: center;
+        justify-content: center;
+        margin-inline: auto;
+        border-radius: 50%;
+        background: var(--secondary);
+    }
+
+    .event-activities h3 {
+        margin-top: 24px;
+        color: #000;
+        font-size: 22px;
+        line-height: 30px;
+    }
+
+    .event-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 32px;
+        margin-top: 52px;
+    }
+
+    @media (max-width: 1023px) {
+        .event-hero {
+            padding-block: 48px 64px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .event-hero-columns,
+        .event-overview {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 40px;
+        }
+
+        .event-content {
+            padding-block: 64px;
+        }
+
+        .event-about-copy {
+            max-width: 720px;
+        }
+
+        .event-talent,
+        .event-gallery {
+            margin-top: 72px;
+        }
+
+        .event-activities {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            row-gap: 32px;
+        }
+
+        .event-gallery-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+    }
+
+    @media (max-width: 639px) {
+        h1 {
+            font-size: 36px;
+            line-height: 40px;
+        }
+
+        h2 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        .event-tagline,
+        .event-about-copy p {
+            font-size: 16px;
+            line-height: 26px;
+        }
+
+        .event-details {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 16px;
+        }
+
+        dd {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .event-activities {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px 16px;
+            margin-top: 32px;
+        }
+
+        .activity-icon {
+            width: 80px;
+            height: 80px;
+        }
+
+        .event-activities h3 {
+            margin-top: 16px;
+            font-size: 18px;
+            line-height: 26px;
+        }
+
+        .event-gallery-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+    }
+</style>

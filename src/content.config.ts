@@ -121,6 +121,26 @@ const news = defineCollection({
     }).merge(image),
 });
 
+const events = defineCollection({
+    loader: glob({ base: "src/content/events", pattern: "**/*.json" }),
+    schema: z.object({
+        title: z.string(),
+        date: z.string(),
+        summary: z.string(),
+        tagline: z.string(),
+        venue: z.string(),
+        participants: z.string(),
+        about_title: z.string().default("About the Event"),
+        about_image: z.string(),
+        about_image_alt: z.string(),
+        paragraphs: z.array(z.string()),
+        activities_title: z.string().default("Celebrating Student Talent"),
+        activities: z.array(z.object({ title: z.string(), icon: z.string() })).default([]),
+        gallery_title: z.string().default("Event Gallery"),
+        gallery: z.array(image).default([]),
+    }).merge(image),
+});
+
 const careers = defineCollection({
     loader: file("src/content/careers.json", {
         parser: (text) => JSON.parse(text).careers,
@@ -550,7 +570,10 @@ const gallerySeo = section("src/content/gallery-page/seo.json", seo);
 const galleryHero = section("src/content/gallery-page/hero.json", listPageHero);
 
 const newsSeo = section("src/content/news-page/seo.json", seo);
-const newsHero = section("src/content/news-page/hero.json", listPageHero);
+const newsHero = section(
+    "src/content/news-page/hero.json",
+    listPageHero.extend({ events_title: z.string().default("Our Events") }),
+);
 
 /* ------------------------------------------------------- campus life page */
 
@@ -632,6 +655,7 @@ export const collections = {
     gallery,
     galleryCategories,
     news,
+    events,
     newsCategories,
     careers,
     leadership,

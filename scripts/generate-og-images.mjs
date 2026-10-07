@@ -66,3 +66,8 @@ for (const filename of await readdir(join(content, "courses"))) {
     const { title } = JSON.parse(await readFile(join(content, "courses", filename), "utf8"));
     await render(`courses-${filename.slice(0, -5)}`, title);
 }
+for (const filename of await readdir(join(content, "events"))) {
+    if (!filename.endsWith(".json")) continue;
+    const { title } = JSON.parse(await readFile(join(content, "events", filename), "utf8"));
+    await render(`news-${filename.slice(0, -5)}`, title);
+}

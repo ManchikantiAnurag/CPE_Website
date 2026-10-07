@@ -1,0 +1,113 @@
+---
+import { Icon } from "astro-icon/components";
+import OptimizedImage from "../../Base/OptimizedImage.astro";
+
+interface Props {
+    title: string;
+    summary: string;
+    image: string;
+    imageAlt: string;
+    href: string;
+}
+
+const { title, summary, image, imageAlt, href } = Astro.props;
+---
+
+<article class="event-card">
+    <OptimizedImage
+        src={image}
+        alt={imageAlt}
+        width={1214}
+        sizes="(min-width: 1302px) 607px, (min-width: 768px) calc((100vw - 88px) / 2), calc(100vw - 48px)"
+        class="aspect-[607/444] w-full object-cover"
+    />
+    <div class="event-card-body">
+        <div class="event-card-copy">
+            <h3>{title}</h3>
+            <p>{summary}</p>
+        </div>
+        <a href={href} aria-label={`View More about ${title}`}>
+            View More
+            <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+        </a>
+    </div>
+</article>
+
+<style>
+    .event-card {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .event-card-body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 26px;
+        padding: 20px;
+        border: 1px solid #cbd5e1;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .event-card-copy {
+        display: grid;
+        gap: 12px;
+    }
+
+    h3 {
+        color: #0f172a;
+        font-size: 28px;
+        line-height: 40px;
+    }
+
+    p {
+        color: #000;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    a {
+        display: flex;
+        min-height: 55px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: auto;
+        padding: 10px 20px;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        color: #1e293b;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 20px;
+        transition: border-color 180ms, background-color 180ms, color 180ms;
+    }
+
+    a:hover {
+        border-color: var(--accent);
+        background: var(--secondary);
+        color: var(--accent);
+    }
+
+    a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+    }
+
+    @media (max-width: 767px) {
+        h3 {
+            font-size: 24px;
+            line-height: 32px;
+        }
+
+        p,
+        a {
+            font-size: 16px;
+        }
+
+        p {
+            line-height: 26px;
+        }
+    }
+</style>
