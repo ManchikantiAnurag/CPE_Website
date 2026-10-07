@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import logo from "../assets/media/logo.png";
 import Header from "../components/Base/Header/Header.astro";
 import Footer from "../components/Base/Footer/Footer.astro";
 import Toast from "../components/Base/Toast/Toast.astro";
@@ -9,6 +10,7 @@ interface Props {
     title?: string;
     description?: string;
     transition?: "fade" | "lift" | "slide";
+    headerBackground?: "default" | "hero";
 }
 
 const site = await getSiteSettings();
@@ -16,6 +18,7 @@ const {
     title,
     description = site.description,
     transition = "lift",
+    headerBackground = "default",
 } = Astro.props;
 const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -30,8 +33,7 @@ const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href={logo.src} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
@@ -53,10 +55,7 @@ const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage.href} />
         <title>{pageTitle}</title>
-        <!-- Marks JS as available before first paint, so the reveal styles
-             only hide content that something is going to bring back. If the
-             reveal script never arrives, drop the flag so nothing stays
-             invisible — an unanimated page beats a blank one. -->
+        <!-- Recover visible content if the reveal script never loads. -->
         <script is:inline>
             document.documentElement.classList.add("js");
             setTimeout(() => {
@@ -66,8 +65,8 @@ const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
         </script>
     </head>
     <body class="flex min-h-screen flex-col bg-background text-foreground">
-        <Header />
-        <main class="flex-1">
+        <Header background={headerBackground} />
+        <main class="flex-1 overflow-x-clip">
             <slot />
         </main>
         <Footer />

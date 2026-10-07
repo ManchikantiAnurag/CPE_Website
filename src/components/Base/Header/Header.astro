@@ -12,6 +12,11 @@ import {
     getSiteSettings,
 } from "../../../lib/site";
 
+interface Props {
+    background?: "default" | "hero";
+}
+
+const { background = "default" } = Astro.props;
 const site = await getSiteSettings();
 const contact = await getContactDetails();
 const items = await getPrimaryNavigation();
@@ -32,9 +37,14 @@ const announcement = [
         email={contact.emails[0]}
     />
 
-    <div class="border-b border-border bg-background/95 backdrop-blur">
+    <div class:list={[
+        background === "hero" ? "hero-navigation bg-hero" : "border-b border-border bg-background/95 backdrop-blur",
+    ]}>
         <div
-            class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3"
+            class:list={[
+                "mx-auto flex items-center justify-between gap-4 px-6",
+                background === "hero" ? "max-w-[1328px] py-6" : "max-w-7xl py-3",
+            ]}
         >
             <a href="/" class="flex shrink-0 items-center">
                 <Logo
@@ -51,8 +61,8 @@ const announcement = [
                 <Button
                     href={site.cta_href}
                     variant="accent"
-                    size="sm"
-                    class="hidden sm:inline-flex"
+                    size={background === "hero" ? "lg" : "sm"}
+                    class={background === "hero" ? "hidden! rounded-sm px-5 sm:inline-flex!" : "hidden! sm:inline-flex!"}
                 >
                     {site.cta_label}
                 </Button>
@@ -89,6 +99,13 @@ const announcement = [
         />
     </div>
 </header>
+
+<style>
+    .hero-navigation {
+        background-size: 100% 820px;
+        background-position: center -160px;
+    }
+</style>
 
 <script>
     const toggle = document.getElementById("mobile-nav-toggle");
