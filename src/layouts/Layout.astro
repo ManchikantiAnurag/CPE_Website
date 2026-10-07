@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import logo from "../assets/media/logo.png";
 import Header from "../components/Base/Header/Header.astro";
 import Footer from "../components/Base/Footer/Footer.astro";
 import Toast from "../components/Base/Toast/Toast.astro";
@@ -33,7 +32,8 @@ const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/png" href={logo.src} />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
