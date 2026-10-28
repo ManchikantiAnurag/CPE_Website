@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/Base/PageHero/PageHero.astro";
 import CourseOverview from "../../components/Courses/CourseOverview/CourseOverview.astro";
@@ -8,12 +8,8 @@ import EnquiryForm from "../../components/Admissions/EnquiryForm/EnquiryForm.ast
 import Reveal from "../../components/Base/Reveal/Reveal.astro";
 import { getCourseLinks, getSection } from "../../lib/site";
 
-export async function getStaticPaths() {
-    const courses = await getCollection("courses");
-    return courses.map(({ id }) => ({ params: { slug: id } }));
-}
-
 const entry = await getEntry("courses", Astro.params.slug!);
+if (!entry) return new Response(null, { status: 404 });
 const course = entry.data;
 
 const contactDetails = await getEntry("contactDetails", "contact-details");

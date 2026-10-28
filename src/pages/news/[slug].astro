@@ -1,22 +1,12 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import OptimizedImage from "../../components/Base/OptimizedImage.astro";
 
-export async function getStaticPaths() {
-    const events = await getCollection("events");
-    return events.map((event) => ({
-        params: { slug: event.id },
-        props: { event },
-    }));
-}
-
-interface Props {
-    event: CollectionEntry<"events">;
-}
-
-const { event: { data: event } } = Astro.props;
+const entry = await getEntry("events", Astro.params.slug!);
+if (!entry) return new Response(null, { status: 404 });
+const event = entry.data;
 const details = [
     { icon: "lucide:calendar-days", label: "Event", value: event.title.replace(/ Celebrations$/, "") },
     { icon: "lucide:map-pin", label: "Venue", value: event.venue },
