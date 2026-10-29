@@ -5,7 +5,6 @@ import FooterColumn from "./FooterColumn.astro";
 import FooterContact from "./FooterContact.astro";
 import {
     getContactDetails,
-    getCourseLinks,
     getFooterNoteLinks,
     getPrimaryNavigation,
     getSiteSettings,
@@ -14,7 +13,10 @@ import {
 const site = await getSiteSettings();
 const contact = await getContactDetails();
 const quickLinks = await getPrimaryNavigation();
-const courses = await getCourseLinks();
+const networkLinks = [
+    { label: "CPE Euro Kids", href: "/" },
+    { label: "CPE Degree College", href: "/" },
+];
 const noteLinks = await getFooterNoteLinks();
 
 const addressLines = [
@@ -40,13 +42,13 @@ const year = new Date().getFullYear();
                 />
             </div>
             <p class="mt-5 max-w-xs text-sm leading-relaxed opacity-75">
-                {site.description}
+                CPE Educational Institutions, established in 2007, began with a focused mission of providing quality education and professional guidance in the field of Chartered Accountancy.
             </p>
             <SocialLinks links={contact.social_links} class="mt-5" />
         </div>
 
         <FooterColumn title="Quick Links" links={quickLinks} />
-        <FooterColumn title="Courses" links={courses} joinDescription />
+        <FooterColumn title="CPE Knowledge Network" links={networkLinks} />
         <FooterContact
             title="Contact"
             addressLines={addressLines}
