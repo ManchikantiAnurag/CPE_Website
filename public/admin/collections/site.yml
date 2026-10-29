@@ -47,7 +47,7 @@ singletons:
       - label: Call To Action Label
         name: cta_label
         widget: string
-        hint: Header button text, e.g. Apply Now.
+        hint: Header button text, e.g. Enquire Now.
 
       - label: Call To Action Link
         name: cta_href

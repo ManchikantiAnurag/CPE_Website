@@ -196,7 +196,7 @@ collections:
               - { label: Link, name: href, widget: string }
 
       - name: why-choose
-        label: "Why Choose CPE"
+        label: "Why CPE"
         file: src/content/about/why-choose.json
         icon: star
         fields:

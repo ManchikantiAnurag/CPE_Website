@@ -144,7 +144,7 @@ collections:
                 widget: string
 
       - name: why-choose
-        label: "Why Choose CPE"
+        label: "Why CPE"
         file: src/content/home/why-choose.json
         icon: star
         fields:
