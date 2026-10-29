@@ -44,14 +44,20 @@
       "children": []
     },
     {
-      "label": "Admissions",
-      "href": "/admissions",
+      "label": "Meet Our Faculty",
+      "href": "/faculty",
       "children_source": "none",
       "children": []
     },
     {
-      "label": "News & Events",
+      "label": "What's Trending",
       "href": "/news",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "Exams/Downloads",
+      "href": "/exams-downloads",
       "children_source": "none",
       "children": []
     },
