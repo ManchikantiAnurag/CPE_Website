@@ -4,7 +4,7 @@ import AnnouncementBar from "../AnnouncementBar/AnnouncementBar.astro";
 import Logo from "../Logo/Logo.astro";
 import Navigation from "../Navigation/Navigation.astro";
 import MobileNav from "../Navigation/MobileNav.astro";
-import Button from "../Button/Button.astro";
+import SocialLinks from "../SocialLinks/SocialLinks.astro";
 import {
     getContactDetails,
     getCourseLinks,
@@ -38,12 +38,12 @@ const announcement = [
     />
 
     <div class:list={[
-        background === "hero" ? "hero-navigation bg-hero" : "border-b border-border bg-background/95 backdrop-blur",
+        background === "hero" ? "hero-navigation bg-hero" : "bg-hero",
     ]}>
         <div
             class:list={[
-                "mx-auto flex items-center justify-between gap-4 px-6",
-                background === "hero" ? "max-w-[1328px] py-6" : "max-w-7xl py-3",
+                "mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6",
+                background === "hero" ? "py-6" : "py-3",
             ]}
         >
             <a href="/" class="flex shrink-0 items-center">
@@ -57,19 +57,12 @@ const announcement = [
 
             <Navigation items={items} currentPath={currentPath} />
 
-            <div class="flex items-center gap-2">
-                <Button
-                    href={site.cta_href}
-                    variant="accent"
-                    size={background === "hero" ? "lg" : "sm"}
-                    class={background === "hero" ? "hidden! rounded-sm px-5 sm:inline-flex!" : "hidden! sm:inline-flex!"}
-                >
-                    {site.cta_label}
-                </Button>
+            <div class="flex shrink-0 items-center gap-2">
+                <SocialLinks links={contact.social_links} variant="header" class="hidden min-[1360px]:flex" />
                 <button
                     type="button"
                     id="mobile-nav-toggle"
-                    class="rounded-md border border-border p-2 lg:hidden"
+                    class="rounded-md border border-border p-2 min-[1360px]:hidden"
                     aria-label="Toggle navigation"
                     aria-controls="mobile-nav"
                     aria-expanded="false"
@@ -94,8 +87,6 @@ const announcement = [
             items={items}
             courses={courses}
             currentPath={currentPath}
-            ctaLabel={site.cta_label}
-            ctaHref={site.cta_href}
         />
     </div>
 </header>

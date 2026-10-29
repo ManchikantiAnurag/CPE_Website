@@ -4,13 +4,14 @@ import { Icon } from "astro-icon/components";
 interface Props {
     links: { platform: string; label: string; url: string }[];
     /** "inverse" sits on the navy footer, "light" on a white card. */
-    variant?: "light" | "inverse";
+    variant?: "light" | "inverse" | "header";
     class?: string;
 }
 
 const { links, variant = "inverse", class: className } = Astro.props;
 
 const styles = {
+    header: "flex h-[30px] w-[30px] items-center justify-center rounded bg-black text-white transition-colors hover:bg-accent",
     light: "border border-border p-2.5 text-primary hover:border-accent hover:text-accent",
     inverse:
         "rounded border border-primary-foreground/20 p-2 hover:border-accent hover:text-accent",
@@ -19,7 +20,7 @@ const styles = {
 
 {
     links.length > 0 && (
-        <div class:list={["flex gap-3", className]}>
+        <div class:list={["flex", variant === "header" ? "gap-2.5" : "gap-3", className]}>
             {links.map((link) => (
                 <a
                     href={link.url}

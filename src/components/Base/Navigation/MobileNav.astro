@@ -1,16 +1,13 @@
 ---
-import Button from "../Button/Button.astro";
 import type { NavItem, NavLink } from "../../../lib/site";
 
 interface Props {
     items: NavItem[];
     courses: NavLink[];
     currentPath: string;
-    ctaLabel: string;
-    ctaHref: string;
 }
 
-const { items, courses, currentPath, ctaLabel, ctaHref } = Astro.props;
+const { items, courses, currentPath } = Astro.props;
 
 const isActive = (href: string) =>
     href === "/" ? currentPath === "/" : currentPath.startsWith(href);
@@ -19,7 +16,7 @@ const isActive = (href: string) =>
 <div
     id="mobile-nav"
     hidden
-    class="border-t border-border bg-background lg:hidden"
+    class="border-t border-border bg-background min-[1360px]:hidden"
 >
     <nav class="mx-auto flex max-w-7xl flex-col px-6 py-3" aria-label="Mobile">
         {
@@ -49,9 +46,5 @@ const isActive = (href: string) =>
                 ))
             }
         </div>
-
-        <Button href={ctaHref} variant="accent" class="mb-3 w-full">
-            {ctaLabel}
-        </Button>
     </nav>
 </div>
