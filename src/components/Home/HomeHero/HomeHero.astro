@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import Button from "../../Base/Button/Button.astro";
 import Figure from "../../Base/Figure/Figure.astro";
 import Reveal from "../../Base/Reveal/Reveal.astro";
@@ -31,6 +32,13 @@ const {
     imageAlt,
     badge,
 } = Astro.props;
+
+const courseShortcuts = [
+    { label: "MEC", href: "/courses/cec", icon: "lucide:chart-no-axes-combined" },
+    { label: "IPMAT", href: "/courses/ipmat", icon: "lucide:graduation-cap" },
+    { label: "CLAT", href: "/courses/clat", icon: "lucide:scale" },
+    { label: "CA/CMA", href: "/courses/mec", icon: "lucide:book-open" },
+];
 ---
 
 <section class="relative overflow-hidden bg-hero">
@@ -63,6 +71,15 @@ const {
                     {secondaryCta.label}
                 </Button>
             </div>
+
+            <nav class="mt-7 flex flex-wrap gap-3" aria-label="Course shortcuts">
+                {courseShortcuts.map((course) => (
+                    <a href={course.href} class="inline-flex items-center gap-2 rounded border border-black/20 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                        <Icon name={course.icon} class="h-4 w-4" aria-hidden="true" />
+                        {course.label}
+                    </a>
+                ))}
+            </nav>
 
             {
                 stats.length > 0 && (
