@@ -16,7 +16,7 @@ const { eyebrow, title, items } = Astro.props;
 <Reveal stagger={100} class="mt-12 grid gap-6 md:grid-cols-3">
     {
         items.map((item) => (
-            <figure class="flex flex-col justify-between rounded-lg border border-border bg-card p-8 shadow-sm">
+            <figure class="flex flex-col justify-between rounded-lg border border-border bg-card p-8 shadow-sm min-h-[296px]">
                 <blockquote>
                     <span class="block font-display text-3xl leading-none text-[#ef4444]" aria-hidden="true">“</span>
                     <p class="mt-4 text-sm leading-[23px] text-slate-700">{item.quote}</p>
