@@ -30,7 +30,8 @@ collections:
             widget: string
           - label: Title
             name: title
-            widget: string
+            widget: text
+            hint: Line breaks are preserved in the hero heading.
           - label: Intro
             name: intro
             widget: text

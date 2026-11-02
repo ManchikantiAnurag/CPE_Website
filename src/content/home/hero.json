@@ -1,14 +1,14 @@
 {
   "eyebrow": "CPE Educational Institutions · Estd. 2007",
-  "title": "Think Commerce Think CPE",
+  "title": "Think Commerce\nThink CPE",
   "intro": "Build a strong academic foundation with MEC and CEC and prepare for future opportunities in CA, CMA, IPMAT and CLAT.",
   "primary_cta": {
     "label": "Enquire Now",
     "href": "/admissions"
   },
   "secondary_cta": {
-    "label": "Explore Courses",
-    "href": "/courses"
+    "label": "Campus Connect",
+    "href": "/contact"
   },
   "stats": [
     {
@@ -24,7 +24,7 @@
       "value": "Vizag"
     }
   ],
-  "image": "/media/cpe-student-awards.png",
+  "image": "/media/trophy-winners.jpg",
   "image_alt": "CPE students holding award trophies alongside faculty",
   "badge": "Hands for Excellence"
 }
