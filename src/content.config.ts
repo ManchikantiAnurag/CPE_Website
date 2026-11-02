@@ -566,6 +566,33 @@ const listPageHero = z.object({
     empty_message: z.string(),
 });
 
+const achievementsSeo = section("src/content/achievements-page/seo.json", seo);
+const achievementsPage = section(
+    "src/content/achievements-page/content.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+        academics: z.object({
+            label: z.string(),
+            stats: z.array(z.object({ icon: z.string(), value: z.string(), label: z.string(), detail: z.string() })),
+            toppers_title: z.string(),
+            toppers: z.array(z.object({ name: z.string(), subtitle: z.string(), result: z.string(), detail: z.string() }).merge(image)),
+            posters_title: z.string(),
+            posters: z.array(z.object({ caption: z.string(), inset: z.boolean().default(false) }).merge(image)),
+        }),
+        categories: z.array(z.object({
+            id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+            label: z.string(),
+            title: z.string(),
+            paragraphs: z.array(z.string()),
+            highlights: z.array(z.string()),
+            date: z.string().default(""),
+            date_label: z.string().default(""),
+        }).merge(image)),
+    }),
+);
+
 const gallerySeo = section("src/content/gallery-page/seo.json", seo);
 const galleryHero = section("src/content/gallery-page/hero.json", listPageHero);
 
@@ -706,6 +733,8 @@ export const collections = {
     campusLifeOnCampus,
     campusLifeAcademics,
 
+    achievementsSeo,
+    achievementsPage,
     gallerySeo,
     galleryHero,
     newsSeo,

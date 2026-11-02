@@ -12,6 +12,7 @@ const pageSources = new Map([
     ["contact", "contact"],
     ["courses", "courses-page"],
     ["gallery", "gallery-page"],
+    ["achievements", "achievements-page"],
     ["news", "news-page"],
 ]);
 
