@@ -1,8 +1,39 @@
 {
   "eyebrow": "Leadership",
-  "title": "Guided by experienced educators",
-  "cta": {
-    "label": "Meet the Leadership",
-    "href": "/about#leadership"
-  }
+  "title": "From The Chairman’s Desk",
+  "image": "/media/chairman-group.png",
+  "image_alt": "CPE leadership group portrait",
+  "paragraphs": [
+    "The dream of providing quality commerce education in Visakhapatnam, with particular focus on CA course, has resulted in us establishing CPE. We are proud to have become the most preferred destination for CA in coastal Andhra and Visakhapatnam over a period of 20 years.",
+    "With strong focus on discipline and holistic development of the student, we continue to innovate and initiate a range of programs to help the student develop a broader perspective of things. Our past students are now “partners in nation building” by associating with MNC’s, Audit firms, NGO’s and other organizations. We welcome all the future nation builders to carry forward the legacy of CPE."
+  ],
+  "quote": "“Education for the self and prosperity for the society, with excellence and honesty as pillars is the need of the nation”.",
+  "messages": [
+    {
+      "title": "From The CEO’s Desk",
+      "name": "B. Adinarayana",
+      "greeting": "Dear Parents and Students,",
+      "paragraphs": [
+        "In the changing and competitive environment of the 21st century, organizations need performance-enhancing competencies, i.e., knowledgeable, dynamic, self-driven and result-oriented professionals. Commerce is all about the understanding of business or trade. Commerce is a broad orbit of interdisciplinary branches, viz. accountancy, business administration, finance, economics, marketing, advertisement, e-commerce, and so many. Hence, we have decided to set up a unique coaching institute at Visakhapatnam for Commerce students coming from in and around Visakhapatnam to pursue studies, make their career and achieve their dream objectives. Our aim is to provide the best infrastructure and knowledge with a total practical working approach so that the understanding of the subject becomes easy and also to provide a platform so that students can face the challenges of the future boldly and build a strong character and face the challenges of the competitive world with ease. Hence, CPE Educational Institutions is dedicated to shaping the careers of its students. The CPE value system and culture are friendly and open. We insist that our students learn result-driven attitudes and discipline. We aim to promote a strong work ethic with accountability, equality, and an uncompromising quest for performance with social responsibility, which involves learning beyond the classroom. We welcome you to experience superior professionalism as you pass through CPE and let the change begin within you through CPE. We assure you that our students will definitely benefit from studying with us and will achieve their dream objectives. We wish the best to all our students, and surely, I personally will always be available for our students to assist and help ease the way for their successful career and life."
+      ],
+      "image": "",
+      "image_alt": "B. Adinarayana"
+    },
+    {
+      "title": "From The Principal’s Desk",
+      "name": "B. Shyamala",
+      "greeting": "Warm greetings to all from the College.",
+      "paragraphs": [
+        "We are going through an unprecedented global predicament at present. Each one of us and the entire world is affected by the COVID-19 pandemic; our economy, our families, communities and our entire way of life are adversely affected by the scare of infection and contagion. I would like to share your anxiety and preoccupations and express my sympathy with you and your family. Sarve jana sukhino bhavantu.",
+        "As Principal, I am hugely impressed by the commitment of the college staff to the provision of an excellent all-round education for our students in the present state. Under my leadership, and as a team working together, we strongly promote academic achievement among our students.",
+        "The College has a rich tradition of soaring high with academic excellence and overall personal growth of the students. The purpose of education is to teach our students to think and develop a capacity to reason out facts, and this is achieved by providing them with an excellent academic environment.",
+        "The institution has achieved so many feathers to its crown since its inception. My heartfelt congratulations to CA Inter and CMA Inter students for scoring high even in adversity. My special congratulations to all 14 Pratibha awardees; all Junior College students performed well by flying colours despite the pandemic.",
+        "The efforts taken by the Faculty, Staff and Students to achieve this success are commendable. Hope the success sustains. As the captain of the CPE team, I am proud of the achievements of the institution. In the days to come, it will act as a game changer for the institution by helping students in their professional and personal development.",
+        "I wish all students a very happy and academically rewarding life at CPE and hope that you all will enhance the pride and prestige of this esteemed institution.",
+        "I can foresee that every child who has entered this temple of learning, CPE College, with its vision “Hands for Excellence,” will certainly go out as a responsible citizen with human values."
+      ],
+      "image": "",
+      "image_alt": "B. Shyamala"
+    }
+  ]
 }

@@ -214,27 +214,33 @@ collections:
                 widget: text
 
       - name: leadership
-        label: "Leadership"
+        label: "Leadership Messages"
         file: src/content/home/leadership.json
         icon: groups
         fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-            hint: The people themselves are managed under the Leadership singleton.
-          - label: Button
-            name: cta
-            widget: object
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Chairman Heading, name: title, widget: string }
+          - { label: Chairman Image, name: image, widget: image }
+          - { label: Chairman Image Alt Text, name: image_alt, widget: string }
+          - label: Chairman Paragraphs
+            name: paragraphs
+            widget: list
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - { label: Chairman Quote, name: quote, widget: text }
+          - label: Messages
+            name: messages
+            widget: list
+            summary: "{{fields.title}}"
             fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
+              - { label: Heading, name: title, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Greeting, name: greeting, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: paragraph, widget: text }
+              - { label: Portrait, name: image, widget: image, required: false }
+              - { label: Portrait Alt Text, name: image_alt, widget: string }
 
       - name: campus-life
         label: "Campus and Student Life"

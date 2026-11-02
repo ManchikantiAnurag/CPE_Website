@@ -308,7 +308,18 @@ const homeLeadership = section(
     z.object({
         eyebrow: z.string(),
         title: z.string(),
-        cta: cta,
+        image: z.string(),
+        image_alt: z.string(),
+        paragraphs: z.array(z.string()),
+        quote: z.string(),
+        messages: z.array(z.object({
+            title: z.string(),
+            name: z.string(),
+            greeting: z.string(),
+            paragraphs: z.array(z.string()),
+            image: z.string().default(""),
+            image_alt: z.string(),
+        })),
     }),
 );
 
