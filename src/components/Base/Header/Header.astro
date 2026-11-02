@@ -23,6 +23,7 @@ const items = await getPrimaryNavigation();
 const courses = await getCourseLinks();
 
 const currentPath = Astro.url.pathname;
+const showApplyButton = currentPath === "/achievements";
 const announcement = [
     site.institution_name,
     `Estd. ${site.established_year}`,
@@ -30,7 +31,7 @@ const announcement = [
 ].join(" · ");
 ---
 
-<header class="sticky top-0 z-50 w-full">
+<header class:list={["top-0 z-50 w-full", background === "hero" ? "relative home-header" : "sticky"]}>
     <AnnouncementBar
         message={announcement}
         phone={contact.phone_numbers[0]}
@@ -38,11 +39,11 @@ const announcement = [
     />
 
     <div class:list={[
-        background === "hero" ? "hero-navigation bg-hero" : "bg-hero",
+        background === "hero" ? "hero-navigation" : "bg-hero",
     ]}>
         <div
             class:list={[
-                "mx-auto flex max-w-[1600px] items-center justify-between gap-4 px-6",
+                "mx-auto flex max-w-[1328px] items-center justify-between gap-4 px-6",
                 background === "hero" ? "py-6" : "py-3",
             ]}
         >
@@ -51,18 +52,22 @@ const announcement = [
                     src={site.logo}
                     alt={site.logo_alt}
                     fallbackText={site.college_name}
-                    class="h-12 md:h-14"
+                    class="h-12 md:h-12"
                 />
             </a>
 
             <Navigation items={items} currentPath={currentPath} />
 
             <div class="flex shrink-0 items-center gap-2">
-                <SocialLinks links={contact.social_links} variant="header" class="hidden min-[1360px]:flex" />
+                {showApplyButton ? (
+                    <a href={site.cta_href} class="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-medium text-white hover:bg-accent/90 min-[1280px]:px-5">Apply Now</a>
+                ) : (
+                    <SocialLinks links={contact.social_links} variant="header" class="hidden min-[1280px]:flex" />
+                )}
                 <button
                     type="button"
                     id="mobile-nav-toggle"
-                    class="rounded-md border border-border p-2 min-[1360px]:hidden"
+                    class="rounded-md border border-border p-2 min-[1280px]:hidden"
                     aria-label="Toggle navigation"
                     aria-controls="mobile-nav"
                     aria-expanded="false"
@@ -93,8 +98,9 @@ const announcement = [
 
 <style>
     .hero-navigation {
-        background-size: 100% 820px;
-        background-position: center -160px;
+        position: absolute;
+        inset: 100% 0 auto;
+        background: transparent;
     }
 </style>
 
