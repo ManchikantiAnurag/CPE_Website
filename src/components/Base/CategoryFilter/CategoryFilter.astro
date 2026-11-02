@@ -22,6 +22,7 @@ import Reveal from "../Reveal/Reveal.astro";
             [{ id: "all", name: "All" }, ...categories].map((category, index) => (
                 <button
                     type="button"
+                    id={category.id}
                     data-filter={category.id}
                     aria-pressed={index === 0 ? "true" : "false"}
                     class="rounded-[5px] border border-black/80 px-6 py-2.5 text-base uppercase tracking-[0.02em] text-primary transition-colors hover:border-accent hover:text-accent aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-[#f9f6ed]"
@@ -69,6 +70,8 @@ import Reveal from "../Reveal/Reveal.astro";
             });
         });
 
-        apply("all");
+        const initial = Array.from(buttons).find(button => button.dataset.filter === window.location.hash.slice(1));
+        if (initial) initial.click();
+        else apply("all");
     });
 </script>
