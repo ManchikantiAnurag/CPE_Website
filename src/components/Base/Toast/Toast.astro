@@ -54,6 +54,10 @@ import { Icon } from "astro-icon/components";
         padding: 1rem;
     }
 
+    #site-toast:not(:popover-open) {
+        display: none;
+    }
+
     #site-toast:popover-open {
         animation: toast-in 200ms ease-out;
     }
@@ -86,7 +90,11 @@ import { Icon } from "astro-icon/components";
     }
 
     @media (prefers-reduced-motion: reduce) {
-        #site-toast:popover-open {
+        #site-toast:not(:popover-open) {
+        display: none;
+    }
+
+    #site-toast:popover-open {
             animation: none;
         }
     }
