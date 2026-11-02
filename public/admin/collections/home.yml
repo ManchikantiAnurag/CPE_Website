@@ -173,12 +173,18 @@ collections:
                   - lucide:award
                   - lucide:clock
                   - lucide:building-2
+                  - lucide:tv
+                  - lucide:clipboard-check
+                  - lucide:laptop
+                  - lucide:contact
+                  - lucide:calendar-check
               - label: Title
                 name: title
                 widget: string
               - label: Description
                 name: description
                 widget: text
+                hint: Put each bullet point on its own line.
 
       - name: career-focus
         label: "Career-Focused Learning"
