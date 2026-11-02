@@ -1,83 +1,63 @@
 ---
+import { Icon } from "astro-icon/components";
 import Logo from "../Logo/Logo.astro";
 import SocialLinks from "../SocialLinks/SocialLinks.astro";
-import FooterColumn from "./FooterColumn.astro";
 import FooterContact from "./FooterContact.astro";
-import {
-    getContactDetails,
-    getFooterNoteLinks,
-    getPrimaryNavigation,
-    getSiteSettings,
-} from "../../../lib/site";
-
+import { getContactDetails, getFooterNoteLinks, getSiteSettings } from "../../../lib/site";
 const site = await getSiteSettings();
 const contact = await getContactDetails();
-const quickLinks = await getPrimaryNavigation();
 const networkLinks = [
-    { label: "CPE Euro Kids", href: "/" },
-    { label: "CPE Degree College", href: "/" },
+    { label: "CPE Euro kids", href: "/contact" },
+    { label: "CPE Degree College", href: "/contact" },
+    { label: "CPE Academy", href: "/contact" },
 ];
 const noteLinks = await getFooterNoteLinks();
-
-const addressLines = [
-    contact.address.line1,
-    contact.address.line2,
-    contact.address.line3,
-].filter((line): line is string => Boolean(line));
-
+const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter((line): line is string => Boolean(line));
 const year = new Date().getFullYear();
 ---
-
-<footer class="bg-navy-deep text-primary-foreground">
-    <div
-        class="mx-auto grid max-w-[1328px] gap-10 px-6 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_1.1fr_1.1fr]"
-    >
-        <div>
-            <div class="inline-block rounded bg-background p-3 text-primary">
-                <Logo
-                    src={site.logo}
-                    alt={site.logo_alt}
-                    fallbackText={site.college_name}
-                    class="h-14"
-                />
+<footer>
+    <div class="footer-main bg-hero">
+        <div class="footer-layout">
+            <div class="footer-brand">
+                <Logo src={site.logo} alt={site.logo_alt} fallbackText={site.college_name} class="h-16" />
+                <p>CPE Educational Institutions, established in 2007, began with a focused mission of providing quality education and professional guidance in the field of Chartered Accountancy.</p>
+                <SocialLinks links={contact.social_links} variant="header" class="footer-socials" />
             </div>
-            <p class="mt-5 max-w-xs text-sm leading-relaxed opacity-75">
-                CPE Educational Institutions, established in 2007, began with a focused mission of providing quality education and professional guidance in the field of Chartered Accountancy.
-            </p>
-            <SocialLinks links={contact.social_links} class="mt-5" />
+            <div class="footer-network">
+                <h4>CPE Knowledge Network</h4>
+                <ul>{networkLinks.map(link => <li><Icon name="lucide:chevron-right" class="h-4 w-4 text-accent" aria-hidden="true" /><a href={link.href}>{link.label}</a></li>)}</ul>
+            </div>
+            <FooterContact title="Contact" addressLines={addressLines} phones={contact.phone_numbers} emails={contact.emails} />
         </div>
-
-        <FooterColumn title="Quick Links" links={quickLinks} />
-        <FooterColumn title="CPE Knowledge Network" links={networkLinks} />
-        <FooterContact
-            title="Contact"
-            addressLines={addressLines}
-            phones={contact.phone_numbers}
-            emails={contact.emails}
-        />
     </div>
-
-    <div class="border-t border-primary-foreground/10">
-        <div
-            class="mx-auto flex max-w-[1328px] flex-col gap-2 px-6 py-5 text-xs opacity-70 md:flex-row md:items-center md:justify-between"
-        >
-            <p>
-                © {year} {site.college_name}, {site.institution_name}. All rights
-                reserved.
-            </p>
-            <p>
-                Affiliated to {site.affiliation}
-                {
-                    noteLinks.map((link) => (
-                        <>
-                            {" · "}
-                            <a href={link.href} class="hover:text-accent">
-                                {link.label}
-                            </a>
-                        </>
-                    ))
-                }
-            </p>
+    <div class="footer-bottom">
+        <div>
+            <p>© {year} {site.college_name}, {site.institution_name}. All rights reserved.</p>
+            <p>Affiliated to {site.affiliation}{noteLinks.map(link => <>{" · "}<a href={link.href}>{link.label}</a></>)}</p>
         </div>
     </div>
 </footer>
+<style>
+    .footer-main { min-height: 337px; padding: 64px 24px; background-size: 100% auto; background-repeat: no-repeat; color: #334155; }
+    .footer-layout { max-width: 1280px; margin-inline: auto; display: grid; grid-template-columns: 1.5fr 1fr 1.1fr; gap: 50px; }
+    .footer-brand { padding-right: 24px; }
+    .footer-brand p { max-width: 480px; margin-top: 24px; font-size: 14px; line-height: 20px; }
+    .footer-brand :global(.footer-socials) { margin-top: 24px; gap: 10px; }
+    .footer-brand :global(.footer-socials a) { height: 24px; width: 24px; }
+    .footer-layout > :global(:not(:first-child)) { border-left: 1px solid #0005; padding-left: 50px; }
+    h4, .footer-layout :global(h4) { font: 16px/24px var(--font-display); color: #0f172a; text-transform: uppercase; letter-spacing: 0; }
+    ul { margin-top: 16px; display: grid; gap: 12px; font-size: 14px; line-height: 20px; }
+    li { display: flex; align-items: center; gap: 8px; }
+    a:hover { color: #d92228; }
+    .footer-layout :global(h4 + ul) { margin-top: 16px; opacity: 1; }
+    .footer-layout :global(h4 + ul svg) { height: 20px; width: 20px; }
+    .footer-bottom { background: #000; color: #ffffffbf; font-size: 12px; line-height: 16px; padding: 16px 24px; }
+    .footer-bottom > div { max-width: 1280px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    @media (max-width: 1023px) {
+        .footer-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
+        .footer-brand { grid-column: 1 / -1; }
+        .footer-layout > :global(:not(:first-child)) { padding-left: 0; border-left: 0; }
+        .footer-bottom > div { flex-direction: column; align-items: start; gap: 12px; }
+    }
+    @media (max-width: 639px) { .footer-layout { grid-template-columns: 1fr; } .footer-main { padding-block: 48px; background-size: cover; } }
+</style>
