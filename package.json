@@ -11,7 +11,8 @@
     "build": "node scripts/generate-og-images.mjs && astro build",
     "preview": "astro preview",
     "test:deployment": "node scripts/check-deployment.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "test:cms": "node scripts/check-cms.mjs"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.147",
