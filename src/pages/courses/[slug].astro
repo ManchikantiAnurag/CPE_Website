@@ -23,7 +23,15 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
 }));
 ---
 
-<Layout title={course.title} description={course.tagline} headerBackground="hero">
+<Layout title={course.title} description={course.tagline} headerBackground="hero"
+    structuredData={{
+        "@type": "Course",
+        name: course.title,
+        description: course.tagline,
+        url: new URL(Astro.url.pathname, Astro.site).href,
+        provider: { "@id": new URL("/#organization", Astro.site).href },
+    }}
+>
     <PageHero
         eyebrow={course.display_code || course.code}
         title={course.title}

@@ -28,7 +28,7 @@ pnpm astro dev stop
 5. Deploy. The artifact directory is `.amplify-hosting`, not `dist`.
 
 `customHttp.yml` configures cache headers for built assets and OG images.
-Set the optional build variable `SITE_URL` to override `https://cpecolg.com`
+Set the optional build variable `SITE_URL` to override `https://cpecollege.com`
 for canonical URLs and social metadata.
 The SSR host allowlist accepts that domain, Amplify's `*.amplifyapp.com`
 deployment URLs, and `http://localhost:3000` for local checks.
@@ -53,6 +53,11 @@ node .amplify-hosting/compute/default/entry.mjs
 In another terminal, run `pnpm test:deployment`. The production server listens
 on port 3000. Stop it with Ctrl+C after checking. The Amplify adapter does not
 support `astro preview`.
+
+Run `node scripts/check-seo.mjs` against that server to check the sitemap,
+canonical URLs, headings, structured data, and social images. `SEO_TEST_URL`
+overrides the test server URL. If Amplify has a `SITE_URL` override, set it to
+`https://cpecollege.com` for production.
 
 References: [Astro on AWS](https://docs.astro.build/en/guides/deploy/aws/),
 [Amplify deployment specification](https://docs.aws.amazon.com/amplify/latest/userguide/ssr-deployment-specification.html).

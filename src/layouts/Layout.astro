@@ -4,28 +4,63 @@ import logo from "../assets/media/logo.png";
 import Header from "../components/Base/Header/Header.astro";
 import Footer from "../components/Base/Footer/Footer.astro";
 import Toast from "../components/Base/Toast/Toast.astro";
-import { getSiteSettings } from "../lib/site";
+import { getContactDetails, getSiteSettings } from "../lib/site";
 
 interface Props {
     title?: string;
     description?: string;
     transition?: "fade" | "lift" | "slide";
     headerBackground?: "default" | "hero";
+    structuredData?: Record<string, unknown>;
 }
 
 const site = await getSiteSettings();
+const contact = await getContactDetails();
 const {
     title,
     description = site.description,
     transition = "lift",
     headerBackground = "default",
+    structuredData,
 } = Astro.props;
-const pageTitle = title ? `${title} | ${site.college_name}` : site.college_name;
+const pageTitle = title?.includes(site.college_name)
+    ? title
+    : title ? `${title} | ${site.college_name}` : site.college_name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogName = Astro.url.pathname === "/"
     ? "home"
     : Astro.url.pathname.replace(/^\/+|\/+$/g, "").replaceAll("/", "-");
 const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
+const organizationId = new URL("/#organization", Astro.site).href;
+const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "EducationalOrganization",
+            "@id": organizationId,
+            name: site.college_name,
+            url: Astro.site!.href,
+            logo: new URL(logo.src, Astro.site).href,
+            description: site.description,
+            foundingDate: String(site.established_year),
+            telephone: contact.phone_numbers.map((phone) => `+91${phone}`),
+            email: contact.emails,
+            address: {
+                "@type": "PostalAddress",
+                streetAddress: Object.values(contact.address).filter(Boolean).join(", "),
+                addressCountry: "IN",
+            },
+        },
+        {
+            "@type": "WebSite",
+            "@id": new URL("/#website", Astro.site).href,
+            name: site.college_name,
+            url: Astro.site!.href,
+            publisher: { "@id": organizationId },
+        },
+        ...(structuredData ? [structuredData] : []),
+    ],
+};
 ---
 
 <!doctype html>
@@ -55,6 +90,7 @@ const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage.href} />
         <title>{pageTitle}</title>
+        <script type="application/ld+json" set:html={JSON.stringify(schema).replaceAll("<", "\\u003c")} />
         <!-- Recover visible content if the reveal script never loads. -->
         <script is:inline>
             document.documentElement.classList.add("js");

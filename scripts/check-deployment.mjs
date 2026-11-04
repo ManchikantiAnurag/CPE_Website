@@ -38,7 +38,7 @@ for (const page of ["contact", "admissions"]) {
     else assert.equal(response.headers.get("location"), `${base}/${page}`);
   }
 }
-for (const origin of [process.env.SITE_URL ?? "https://cpecolg.com", "https://main.deployment-check.amplifyapp.com"]) {
+for (const origin of [process.env.SITE_URL ?? "https://cpecollege.com", "https://main.deployment-check.amplifyapp.com"]) {
   const response = await fetch(`${base}/api/form`, {
     method: "POST",
     body: new URLSearchParams({ name: "Deployment check" }),

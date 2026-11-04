@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import awsAmplify from "astro-aws-amplify";
 
-const site = process.env.SITE_URL ?? "https://cpecolg.com";
+const site = process.env.SITE_URL ?? "https://cpecollege.com";
 
 export default defineConfig({
   site,
