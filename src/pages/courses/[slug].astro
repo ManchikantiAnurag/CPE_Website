@@ -45,6 +45,7 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
                     eligibility={course.eligibility}
                     board={course.board}
                     phones={phones}
+                    emails={course.enquiry_emails.length ? course.enquiry_emails : (contactDetails?.data.emails ?? [])}
                 />
             </Reveal>
         </div>

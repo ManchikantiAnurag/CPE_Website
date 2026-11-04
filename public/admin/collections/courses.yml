@@ -8,6 +8,7 @@ collections:
     folder: src/content/courses
     extension: json
     format: json
+    create: true
     identifier_field: title
     slug: '{{code}}'
     summary: '{{code}} — {{title}}'
@@ -156,17 +157,10 @@ collections:
 
       - label: Enquiry Phone Numbers
         name: enquiry_phones
-        widget: relation
+        widget: list
         required: false
-        multiple: true
-        collection: _singletons
-        file: contact-details
-        value_field: phone_numbers.*
-        display_fields:
-          - phone_numbers.*
-        search_fields:
-          - phone_numbers.*
-        hint: Managed under Contact details.
+        hint: Course-specific numbers. Leave empty to use Contact details.
+        field: { label: Phone Number, name: phone, widget: string }
 
       - label: Enquiry Email Addresses
         name: enquiry_emails
