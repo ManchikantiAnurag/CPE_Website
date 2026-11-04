@@ -53,8 +53,3 @@ singletons:
         name: cta_href
         widget: string
         hint: Where the header button points, e.g. /admissions.
-
-      - label: Apply Button Label
-        name: apply_label
-        widget: string
-        hint: Header button shown on the Achievements page.

@@ -207,7 +207,6 @@ const siteSettings = defineCollection({
         logo: z.string().default(""),
         logo_alt: z.string().default(""),
         description: z.string(),
-        apply_label: z.string().default("Apply Now"),
         cta_label: z.string().default("Enquire Now"),
         cta_href: z.string().default("/admissions"),
     }),
