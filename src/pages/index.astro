@@ -87,6 +87,9 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
     .campus-layout :global(.campus-image) { width: 100%; aspect-ratio: 720 / 431; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px #0003; }
     @media (max-width: 1340px) { :global(.home-section > div) { padding-inline: 24px; } }
     @media (max-width: 1023px) { .campus-layout { grid-template-columns: 1fr; gap: 32px; } }
+    @media (max-width: 767px) {
+        :global(.career-section) { background-size: cover; background-repeat: no-repeat; }
+    }
     @media (max-width: 639px) {
         :global(.home-section) { padding-block: 56px; }
         :global(.home-section h2) { font-size: 30px; line-height: 36px; }
