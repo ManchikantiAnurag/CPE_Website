@@ -1,0 +1,99 @@
+{
+  "eyebrow": "Faculty",
+  "title": "Meet Our Experienced\nFaculty",
+  "intro": "Our dedicated faculty members bring extensive knowledge, academic expertise, and a passion for teaching. They guide students through every stage of their learning journey, providing quality education, personalized attention, and the support needed to excel in academics and competitive examinations.",
+  "directory_label": "Our faculty",
+  "empty_message": "Faculty details will be published here soon.",
+  "members": [
+    {
+      "name": "M. Vidyavathi",
+      "department": "English Department - VIP Campus",
+      "photo": "/media/faculty/m-vidyavathi.webp"
+    },
+    {
+      "name": "K. Anupama Vaidehi",
+      "department": "English Department",
+      "photo": "/media/faculty/k-anupama-vaidehi.webp"
+    },
+    {
+      "name": "A. Kamala Sujana",
+      "department": "Sanskrit Department - VIP Campus",
+      "photo": "/media/faculty/a-kamala-sujana.webp"
+    },
+    {
+      "name": "U. Santoshi",
+      "department": "Sanskrit Faculty",
+      "photo": "/media/faculty/u-santoshi.webp"
+    },
+    {
+      "name": "Y. Krishna Prasad",
+      "department": "Mathematics Department",
+      "photo": "/media/faculty/y-krishna-prasad.webp"
+    },
+    {
+      "name": "M. Kalyan Kumar",
+      "department": "Mathematics Department",
+      "photo": "/media/faculty/m-kalyan-kumar.webp"
+    },
+    {
+      "name": "B. Mohan Chandu",
+      "department": "Mathematics Department",
+      "photo": "/media/faculty/b-mohan-chandu.webp"
+    },
+    {
+      "name": "Y. Butchi Naidu",
+      "department": "Mathematics Department - VIP Campus",
+      "photo": "/media/faculty/y-butchi-naidu.webp"
+    },
+    {
+      "name": "D. Jagatt",
+      "department": "Mathematics Department - VIP Campus",
+      "photo": "/media/faculty/d-jagatt.webp"
+    },
+    {
+      "name": "G. Malini",
+      "department": "Economics Department - VIP Campus",
+      "photo": "/media/faculty/g-malini.webp"
+    },
+    {
+      "name": "V. Suneel Kumar",
+      "department": "Economics Department",
+      "photo": "/media/faculty/v-suneel-kumar.webp"
+    },
+    {
+      "name": "Dr. R Ramu",
+      "department": "Economics Department",
+      "photo": "/media/faculty/dr-r-ramu.webp"
+    },
+    {
+      "name": "K. Srinivasa Rao",
+      "department": "Accounts Faculty",
+      "photo": "/media/faculty/k-srinivasa-rao.webp"
+    },
+    {
+      "name": "P. Vijaya Sarvani",
+      "department": "Accounts Faculty",
+      "photo": "/media/faculty/p-vijaya-sarvani.webp"
+    },
+    {
+      "name": "B. Raja Babu",
+      "department": "Accounts Faculty - VIP Campus",
+      "photo": "/media/faculty/b-raja-babu.webp"
+    },
+    {
+      "name": "B. Satya Rao",
+      "department": "Accounts Faculty - VIP Campus",
+      "photo": "/media/faculty/b-satya-rao-headshot.webp"
+    },
+    {
+      "name": "V. Yasodha",
+      "department": "Civics Department - VIP Campus",
+      "photo": "/media/faculty/v-yasodha-portrait.webp"
+    },
+    {
+      "name": "B. Nandini",
+      "department": "Law Faculty",
+      "photo": "/media/faculty/b-nandini.webp"
+    }
+  ]
+}

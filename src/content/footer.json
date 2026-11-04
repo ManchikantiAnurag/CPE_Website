@@ -1,0 +1,20 @@
+{
+  "description": "CPE Educational Institutions, established in 2007, began with a focused mission of providing quality education and professional guidance in the field of Chartered Accountancy.",
+  "network_title": "CPE Knowledge Network",
+  "network_links": [
+    {
+      "label": "CPE Euro kids",
+      "href": "/contact"
+    },
+    {
+      "label": "CPE Degree College",
+      "href": "/contact"
+    },
+    {
+      "label": "CPE Academy",
+      "href": "/contact"
+    }
+  ],
+  "contact_title": "Contact",
+  "copyright_notice": "All rights reserved."
+}

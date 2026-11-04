@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# Drives the header menu, the mobile menu and the footer Quick Links.
+# Drives the header menu, the mobile menu and footer note links.
 singletons:
   - name: navigation
     label: Navigation

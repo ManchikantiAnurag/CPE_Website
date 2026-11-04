@@ -170,7 +170,7 @@ collections:
             required: false
             hint: >-
               URL that receives the submitted form, e.g. a Formspree or Netlify
-              Forms endpoint. Submissions go nowhere while this is empty.
+              Forms endpoint. Leave empty to use the built-in /api/form handler.
           - label: Footnote
             name: footnote
             widget: object
@@ -190,3 +190,35 @@ collections:
                 hint: >-
                   Words before the phone numbers, which are pulled from Contact
                   details.
+
+          - label: Success Message
+            name: success_message
+            widget: text
+          - label: Form Field Labels
+            name: labels
+            widget: object
+            fields:
+              - label: Student Name
+                name: student_name
+                widget: string
+              - label: Parent Name
+                name: parent_name
+                widget: string
+              - label: Mobile Number
+                name: mobile
+                widget: string
+              - label: Email
+                name: email
+                widget: string
+              - label: Course Interested In
+                name: course
+                widget: string
+              - label: Message
+                name: message
+                widget: string
+          - label: Course Placeholder
+            name: course_placeholder
+            widget: string
+          - label: Course Detail Placeholder
+            name: course_page_placeholder
+            widget: string

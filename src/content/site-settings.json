@@ -7,5 +7,6 @@
   "logo_alt": "CPE Educational Institutions logo",
   "description": "CPE Junior College is part of CPE Educational Institutions, serving Visakhapatnam since 2007 with career-focused commerce education.",
   "cta_label": "Enquire Now",
-  "cta_href": "/admissions"
+  "cta_href": "/admissions",
+  "apply_label": "Apply Now"
 }

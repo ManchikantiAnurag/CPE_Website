@@ -13,15 +13,10 @@ interface Props {
     image?: string;
     imageAlt: string;
     badge?: string;
+    courseShortcuts: { label: string; href: string; icon: string }[];
 }
-const { eyebrow, title, intro, primaryCta, secondaryCta, stats, image, imageAlt, badge } = Astro.props;
-const courseShortcuts = [
-    { label: "MEC", href: "/courses/cec", icon: "lucide:chart-no-axes-combined" },
-    { label: "CEC", href: "/courses/cec", icon: "lucide:calculator" },
-    { label: "CA/CMA", href: "/courses/mec", icon: "lucide:book-open" },
-    { label: "IPMAT", href: "/courses/ipmat", icon: "lucide:graduation-cap" },
-    { label: "CLAT", href: "/courses/clat", icon: "lucide:gavel" },
-];
+const { eyebrow, title, intro, primaryCta, secondaryCta, stats, image, imageAlt, badge, courseShortcuts } = Astro.props;
+
 ---
 <section class="home-hero bg-hero">
     <div class="hero-layout">

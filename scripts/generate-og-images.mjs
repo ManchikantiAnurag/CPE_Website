@@ -14,6 +14,8 @@ const pageSources = new Map([
     ["gallery", "gallery-page"],
     ["achievements", "achievements-page"],
     ["news", "news-page"],
+    ["faculty", "faculty-page"],
+    ["exams-downloads", "exams-downloads"],
 ]);
 
 const escapeXml = (value) => value.replace(/[&<>"']/g, (character) => ({

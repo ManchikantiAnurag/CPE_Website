@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+singletons:
+  - name: footer
+    label: Footer
+    file: src/content/footer.json
+    icon: bottom_navigation
+    fields:
+      - label: Institution Description
+        name: description
+        widget: text
+      - label: Knowledge Network Heading
+        name: network_title
+        widget: string
+      - label: Knowledge Network Links
+        name: network_links
+        widget: list
+        required: false
+        summary: "{{fields.label}}"
+        fields:
+          - label: Label
+            name: label
+            widget: string
+          - label: Link
+            name: href
+            widget: string
+      - label: Contact Heading
+        name: contact_title
+        widget: string
+      - label: Copyright Notice
+        name: copyright_notice
+        widget: string

@@ -7,7 +7,7 @@ interface Props {
     image_alt: string;
     paragraphs: string[];
     quote: string;
-    messages: { title: string; name: string; greeting: string; paragraphs: string[]; image: string; image_alt: string }[];
+    messages: { title: string; name: string; greeting: string; sign_off: string; paragraphs: string[]; image: string; image_alt: string }[];
 }
 const { eyebrow, title, image, image_alt, paragraphs, quote, messages } = Astro.props;
 ---
@@ -28,7 +28,7 @@ const { eyebrow, title, image, image_alt, paragraphs, quote, messages } = Astro.
             <div class:list={["message-layout", index % 2 === 1 && "portrait-right"]}>
                 <figure>
                     {message.image ? <OptimizedImage src={message.image} alt={message.image_alt} width={620} class="message-image" /> : <div class="portrait-placeholder" aria-hidden="true" />}
-                    <figcaption><span>- With warm wishes</span><strong>{message.name}</strong></figcaption>
+                    <figcaption><span>{message.sign_off}</span><strong>{message.name}</strong></figcaption>
                 </figure>
                 <div class="message-copy">
                     <p><strong>{message.greeting}</strong></p>

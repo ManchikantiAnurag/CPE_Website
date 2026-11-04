@@ -1,4 +1,5 @@
 ---
+import { getSection } from "../../../lib/site";
 import Button from "../../Base/Button/Button.astro";
 import Field from "../../Base/Field/Field.astro";
 import Input from "../../Base/Input/Input.astro";
@@ -14,13 +15,14 @@ interface Props {
     variant?: "default" | "course";
 }
 
+const copy = await getSection("admissionsEnquiry");
 const { title, description, submitLabel, courses, action, variant = "default" } = Astro.props;
 ---
 
 <form
     method="post"
     action={action || "/api/form"}
-    data-toast="Thank you. Your enquiry has been submitted — our admissions team will call you shortly."
+    data-toast={copy.success_message}
     class:list={[
         "grid gap-6 rounded-[20px] border border-border bg-card p-8 md:grid-cols-2 md:p-10",
         variant === "course" && "course-enquiry",
@@ -31,27 +33,27 @@ const { title, description, submitLabel, courses, action, variant = "default" } 
         <p class="mt-1 text-sm text-muted-foreground">{description}</p>
     </div>
 
-    <Field label="Student Name" for="student_name" required>
+    <Field label={copy.labels.student_name} for="student_name" required>
         <Input id="student_name" maxlength={100} required />
     </Field>
 
-    <Field label="Parent Name" for="parent_name">
+    <Field label={copy.labels.parent_name} for="parent_name">
         <Input id="parent_name" maxlength={100} />
     </Field>
 
-    <Field label="Mobile Number" for="mobile" required>
+    <Field label={copy.labels.mobile} for="mobile" required>
         <Input id="mobile" type="tel" maxlength={15} required />
     </Field>
 
-    <Field label="Email" for="email">
+    <Field label={copy.labels.email} for="email">
         <Input id="email" type="email" maxlength={255} />
     </Field>
 
-    <Field label="Course Interested In" for="course" full>
-        <Select id="course" placeholder={variant === "course" ? "Select" : "Select a course"} options={courses} />
+    <Field label={copy.labels.course} for="course" full>
+        <Select id="course" placeholder={variant === "course" ? copy.course_page_placeholder : copy.course_placeholder} options={courses} />
     </Field>
 
-    <Field label="Message" for="message" full>
+    <Field label={copy.labels.message} for="message" full>
         <Textarea id="message" maxlength={1000} />
     </Field>
 

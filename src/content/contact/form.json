@@ -1,0 +1,13 @@
+{
+  "title": "Send us a message",
+  "description": "We usually respond within one working day.",
+  "submit_label": "Send Message",
+  "success_message": "Thank you. Your message has been sent — we usually respond within one working day.",
+  "labels": {
+    "name": "Name",
+    "mobile": "Mobile Number",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message"
+  }
+}

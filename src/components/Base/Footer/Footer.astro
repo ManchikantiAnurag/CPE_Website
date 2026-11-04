@@ -3,14 +3,11 @@ import { Icon } from "astro-icon/components";
 import Logo from "../Logo/Logo.astro";
 import SocialLinks from "../SocialLinks/SocialLinks.astro";
 import FooterContact from "./FooterContact.astro";
-import { getContactDetails, getFooterNoteLinks, getSiteSettings } from "../../../lib/site";
+import { getContactDetails, getFooterNoteLinks, getSiteSettings, getSection } from "../../../lib/site";
 const site = await getSiteSettings();
 const contact = await getContactDetails();
-const networkLinks = [
-    { label: "CPE Euro kids", href: "/contact" },
-    { label: "CPE Degree College", href: "/contact" },
-    { label: "CPE Academy", href: "/contact" },
-];
+const footer = await getSection("footer");
+const networkLinks = footer.network_links;
 const noteLinks = await getFooterNoteLinks();
 const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter((line): line is string => Boolean(line));
 const year = new Date().getFullYear();
@@ -20,19 +17,19 @@ const year = new Date().getFullYear();
         <div class="footer-layout">
             <div class="footer-brand">
                 <Logo src={site.logo} alt={site.logo_alt} fallbackText={site.college_name} class="h-16" />
-                <p>CPE Educational Institutions, established in 2007, began with a focused mission of providing quality education and professional guidance in the field of Chartered Accountancy.</p>
+                <p>{footer.description}</p>
                 <SocialLinks links={contact.social_links} variant="header" class="footer-socials" />
             </div>
             <div class="footer-network">
-                <h4>CPE Knowledge Network</h4>
+                <h4>{footer.network_title}</h4>
                 <ul>{networkLinks.map(link => <li><Icon name="lucide:chevron-right" class="h-4 w-4 text-accent" aria-hidden="true" /><a href={link.href}>{link.label}</a></li>)}</ul>
             </div>
-            <FooterContact title="Contact" addressLines={addressLines} phones={contact.phone_numbers} emails={contact.emails} />
+            <FooterContact title={footer.contact_title} addressLines={addressLines} phones={contact.phone_numbers} emails={contact.emails} />
         </div>
     </div>
     <div class="footer-bottom">
         <div>
-            <p>© {year} {site.college_name}, {site.institution_name}. All rights reserved.</p>
+            <p>© {year} {site.college_name}, {site.institution_name}. {footer.copyright_notice}</p>
             <p>Affiliated to {site.affiliation}{noteLinks.map(link => <>{" · "}<a href={link.href}>{link.label}</a></>)}</p>
         </div>
     </div>

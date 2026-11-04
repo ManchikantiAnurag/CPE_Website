@@ -42,7 +42,7 @@ singletons:
       - label: Description
         name: description
         widget: text
-        hint: Footer blurb, also the default meta description.
+        hint: Default page meta description. The footer blurb is managed under Footer.
 
       - label: Call To Action Label
         name: cta_label
@@ -53,3 +53,8 @@ singletons:
         name: cta_href
         widget: string
         hint: Where the header button points, e.g. /admissions.
+
+      - label: Apply Button Label
+        name: apply_label
+        widget: string
+        hint: Header button shown on the Achievements page.

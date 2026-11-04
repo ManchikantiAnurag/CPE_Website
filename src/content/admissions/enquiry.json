@@ -11,5 +11,16 @@
     "link_label": "Contact us",
     "link_href": "/contact",
     "call_prefix": "or call"
-  }
+  },
+  "success_message": "Thank you. Your enquiry has been submitted — our admissions team will call you shortly.",
+  "labels": {
+    "student_name": "Student Name",
+    "parent_name": "Parent Name",
+    "mobile": "Mobile Number",
+    "email": "Email",
+    "course": "Course Interested In",
+    "message": "Message"
+  },
+  "course_placeholder": "Select a course",
+  "course_page_placeholder": "Select"
 }

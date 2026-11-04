@@ -55,7 +55,7 @@ const announcement = [
             <div class="flex shrink-0 flex-wrap items-center justify-end gap-2 max-lg:max-w-[calc(100%-112px)]">
                 <SocialLinks links={contact.social_links} variant="header" />
                 {showApplyButton && (
-                    <a href={site.cta_href} class="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-medium text-white hover:bg-accent/90">Apply Now</a>
+                    <a href={site.cta_href} class="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-medium text-white hover:bg-accent/90">{site.apply_label}</a>
                 )}
                 <button
                     type="button"
