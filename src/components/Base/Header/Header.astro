@@ -16,7 +16,6 @@ interface Props {
     background?: "default" | "hero";
 }
 
-const { background = "default" } = Astro.props;
 const site = await getSiteSettings();
 const contact = await getContactDetails();
 const items = await getPrimaryNavigation();
@@ -31,21 +30,16 @@ const announcement = [
 ].join(" · ");
 ---
 
-<header class:list={["top-0 z-50 w-full", background === "hero" ? "relative home-header" : "sticky"]}>
+<header class="relative z-50 w-full">
     <AnnouncementBar
         message={announcement}
         phone={contact.phone_numbers[0]}
         email={contact.emails[0]}
     />
 
-    <div class:list={[
-        background === "hero" ? "hero-navigation" : "bg-hero",
-    ]}>
+    <div class="header-navigation">
         <div
-            class:list={[
-                "mx-auto flex max-w-[1328px] items-center justify-between gap-4 px-6",
-                background === "hero" ? "py-6" : "py-3",
-            ]}
+            class="mx-auto flex max-w-[1328px] items-center justify-between gap-4 px-6 py-6"
         >
             <a href="/" class="flex shrink-0 items-center">
                 <Logo
@@ -58,16 +52,15 @@ const announcement = [
 
             <Navigation items={items} currentPath={currentPath} />
 
-            <div class="flex shrink-0 items-center gap-2">
-                {showApplyButton ? (
-                    <a href={site.cta_href} class="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-medium text-white hover:bg-accent/90 min-[1280px]:px-5">Apply Now</a>
-                ) : (
-                    <SocialLinks links={contact.social_links} variant="header" class="hidden min-[1280px]:flex" />
+            <div class="flex shrink-0 flex-wrap items-center justify-end gap-2 max-lg:max-w-[calc(100%-112px)]">
+                <SocialLinks links={contact.social_links} variant="header" />
+                {showApplyButton && (
+                    <a href={site.cta_href} class="inline-flex h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-medium text-white hover:bg-accent/90">Apply Now</a>
                 )}
                 <button
                     type="button"
                     id="mobile-nav-toggle"
-                    class="rounded-md border border-border p-2 min-[1280px]:hidden"
+                    class="rounded-md border border-border p-2 lg:hidden"
                     aria-label="Toggle navigation"
                     aria-controls="mobile-nav"
                     aria-expanded="false"
@@ -97,10 +90,14 @@ const announcement = [
 </header>
 
 <style>
-    .hero-navigation {
-        position: absolute;
-        inset: 100% 0 auto;
+    .header-navigation {
         background: transparent;
+    }
+
+    @media (max-width: 1023px) {
+        .header-navigation {
+            background: #FDF6B0;
+        }
     }
 </style>
 
