@@ -29,19 +29,9 @@
   "badge": "Hands for Excellence",
   "course_shortcuts": [
     {
-      "label": "MEC",
-      "href": "/courses/cec",
-      "icon": "lucide:chart-no-axes-combined"
-    },
-    {
-      "label": "CEC",
-      "href": "/courses/cec",
-      "icon": "lucide:calculator"
-    },
-    {
-      "label": "CA/CMA",
+      "label": "MEC CA/CMA",
       "href": "/courses/mec",
-      "icon": "lucide:book-open"
+      "icon": "lucide:chart-no-axes-combined"
     },
     {
       "label": "IPMAT",
@@ -52,6 +42,11 @@
       "label": "CLAT",
       "href": "/courses/clat",
       "icon": "lucide:gavel"
+    },
+    {
+      "label": "MEC/CEC",
+      "href": "/courses/cec",
+      "icon": "lucide:calculator"
     }
   ]
 }
