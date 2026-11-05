@@ -101,7 +101,9 @@ const schema = {
         </script>
     </head>
     <body class="flex min-h-screen flex-col bg-background text-foreground">
-        <Header background={headerBackground} />
+        <div class="bg-hero">
+            <Header background={headerBackground} />
+        </div>
         <main class="flex-1 overflow-x-clip">
             <slot />
         </main>
