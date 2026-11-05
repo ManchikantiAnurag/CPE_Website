@@ -130,6 +130,8 @@ const events = defineCollection({
         tagline: z.string(),
         venue: z.string(),
         participants: z.string(),
+        card_image: z.string().default(""),
+        card_image_alt: z.string().default(""),
         about_title: z.string().default("About the Event"),
         about_image: z.string(),
         about_image_alt: z.string(),
