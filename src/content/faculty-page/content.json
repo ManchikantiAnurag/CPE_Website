@@ -7,17 +7,17 @@
   "members": [
     {
       "name": "M. Vidyavathi",
-      "department": "English Department - VIP Campus",
+      "department": "English Faculty - VIP Campus",
       "photo": "/media/faculty/m-vidyavathi.webp"
     },
     {
       "name": "K. Anupama Vaidehi",
-      "department": "English Department",
+      "department": "English Faculty",
       "photo": "/media/faculty/k-anupama-vaidehi.webp"
     },
     {
       "name": "A. Kamala Sujana",
-      "department": "Sanskrit Department - VIP Campus",
+      "department": "Sanskrit Faculty - VIP Campus",
       "photo": "/media/faculty/a-kamala-sujana.webp"
     },
     {
@@ -27,42 +27,42 @@
     },
     {
       "name": "Y. Krishna Prasad",
-      "department": "Mathematics Department",
+      "department": "Mathematics Faculty",
       "photo": "/media/faculty/y-krishna-prasad.webp"
     },
     {
       "name": "M. Kalyan Kumar",
-      "department": "Mathematics Department",
+      "department": "Mathematics Faculty",
       "photo": "/media/faculty/m-kalyan-kumar.webp"
     },
     {
       "name": "B. Mohan Chandu",
-      "department": "Mathematics Department",
+      "department": "Mathematics Faculty",
       "photo": "/media/faculty/b-mohan-chandu.webp"
     },
     {
       "name": "Y. Butchi Naidu",
-      "department": "Mathematics Department - VIP Campus",
+      "department": "Mathematics Faculty - VIP Campus",
       "photo": "/media/faculty/y-butchi-naidu.webp"
     },
     {
       "name": "D. Jagatt",
-      "department": "Mathematics Department - VIP Campus",
+      "department": "Mathematics Faculty - VIP Campus",
       "photo": "/media/faculty/d-jagatt.webp"
     },
     {
       "name": "G. Malini",
-      "department": "Economics Department - VIP Campus",
+      "department": "Economics Faculty - VIP Campus",
       "photo": "/media/faculty/g-malini.webp"
     },
     {
       "name": "V. Suneel Kumar",
-      "department": "Economics Department",
+      "department": "Economics Faculty",
       "photo": "/media/faculty/v-suneel-kumar.webp"
     },
     {
       "name": "Dr. R Ramu",
-      "department": "Economics Department",
+      "department": "Economics Faculty",
       "photo": "/media/faculty/dr-r-ramu.webp"
     },
     {
@@ -87,7 +87,7 @@
     },
     {
       "name": "V. Yasodha",
-      "department": "Civics Department - VIP Campus",
+      "department": "Civics Faculty - VIP Campus",
       "photo": "/media/faculty/v-yasodha-portrait.webp"
     },
     {
