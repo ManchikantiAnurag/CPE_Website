@@ -45,3 +45,9 @@ const copy = await getSection("contactForm");
         <Button variant="accent" size="lg">{copy.submit_label}</Button>
     </div>
 </form>
+
+<style>
+    form :global(label) {
+        display: block;
+    }
+</style>
