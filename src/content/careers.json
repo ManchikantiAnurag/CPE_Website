@@ -33,6 +33,14 @@
       "name": "BBA"
     },
     {
+      "id": "business-analytics",
+      "name": "Business Analytics"
+    },
+    {
+      "id": "ca-and-cma",
+      "name": "CA & CMA"
+    },
+    {
       "id": "chartered-accountancy",
       "name": "Chartered Accountancy"
     },
@@ -134,7 +142,7 @@
     },
     {
       "id": "integrated-law-degrees",
-      "name": "5-year integrated B.A. LL.B. / B.B.A. LL.B."
+      "name": "5-year integrated B.A. LL.B./B.B.A. LL.B."
     },
     {
       "id": "integrated-management-programmes",
@@ -157,12 +165,20 @@
       "name": "Judicial Services"
     },
     {
+      "id": "judiciary",
+      "name": "Judiciary"
+    },
+    {
       "id": "law",
       "name": "Law"
     },
     {
       "id": "law-at-national-law-universities",
       "name": "Law at National Law Universities"
+    },
+    {
+      "id": "legal-consultancy",
+      "name": "Legal Consultancy"
     },
     {
       "id": "legal-consulting",

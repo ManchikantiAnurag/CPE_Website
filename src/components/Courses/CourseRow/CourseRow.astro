@@ -22,9 +22,14 @@ const {
     href,
 } = Astro.props;
 
+// Reads as a sentence, e.g. "Law, Commerce and Management."
+const careerList = careers.length
+    ? `${new Intl.ListFormat("en-GB", { style: "long", type: "conjunction" }).format(careers)}.`
+    : "";
+
 const details = [
     { term: "Eligibility", description: eligibility },
-    { term: "Career Opportunities", description: careers.join(", ") },
+    { term: "Career Opportunities", description: careerList },
 ].filter((detail) => Boolean(detail.description));
 ---
 
