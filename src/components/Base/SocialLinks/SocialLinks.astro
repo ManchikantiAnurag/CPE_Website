@@ -4,7 +4,7 @@ import { Icon } from "astro-icon/components";
 interface Props {
     links: { platform: string; label: string; url: string }[];
     /** "inverse" sits on the navy footer, "light" on a white card. */
-    variant?: "light" | "inverse" | "header";
+    variant?: "light" | "inverse" | "header" | "footer";
     class?: string;
 }
 
@@ -15,12 +15,14 @@ const styles = {
     light: "border border-border p-2.5 text-primary hover:border-accent hover:text-accent",
     inverse:
         "rounded border border-primary-foreground/20 p-2 hover:border-accent hover:text-accent",
+    footer:
+        "flex h-9 w-9 items-center justify-center rounded border border-[#334155]/60 bg-[#132035] text-[#cbd5e1] transition-colors hover:border-accent hover:bg-accent hover:text-white",
 };
 ---
 
 {
     links.length > 0 && (
-        <div class:list={["flex", variant === "header" ? "gap-2.5" : "gap-3", className]}>
+        <div class:list={["flex", variant === "header" || variant === "footer" ? "gap-2.5" : "gap-3", className]}>
             {links.map((link) => (
                 <a
                     href={link.url}

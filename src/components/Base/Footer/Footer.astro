@@ -1,60 +1,65 @@
 ---
-import { Icon } from "astro-icon/components";
 import Logo from "../Logo/Logo.astro";
 import SocialLinks from "../SocialLinks/SocialLinks.astro";
+import FooterColumn from "./FooterColumn.astro";
 import FooterContact from "./FooterContact.astro";
-import { getContactDetails, getFooterNoteLinks, getSiteSettings, getSection } from "../../../lib/site";
+import {
+    getContactDetails,
+    getCourseLinks,
+    getFooterNoteLinks,
+    getPrimaryNavigation,
+    getSection,
+    getSiteSettings,
+} from "../../../lib/site";
+
 const site = await getSiteSettings();
 const contact = await getContactDetails();
 const footer = await getSection("footer");
-const networkLinks = footer.network_links;
+const quickLinks = await getPrimaryNavigation();
+const courses = await getCourseLinks();
 const noteLinks = await getFooterNoteLinks();
 const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter((line): line is string => Boolean(line));
 const year = new Date().getFullYear();
 ---
-<footer>
-    <div class="footer-main bg-hero">
-        <div class="footer-layout">
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
             <div class="footer-brand">
-                <Logo src={site.logo} alt={site.logo_alt} fallbackText={site.college_name} class="h-16" />
+                <!-- The logo has dark lettering on a transparent PNG, so it needs a light tile on the black footer. -->
+                <div class="rounded-sm bg-white p-1.5 text-black">
+                    <Logo src={site.logo} alt={site.logo_alt} fallbackText={site.college_name} class="h-[63px]" />
+                </div>
                 <p>{footer.description}</p>
-                <SocialLinks links={contact.social_links} variant="header" class="footer-socials" />
+                <SocialLinks links={contact.social_links} variant="footer" class="pt-1" />
             </div>
-            <div class="footer-network">
-                <h4>{footer.network_title}</h4>
-                <ul>{networkLinks.map(link => <li><Icon name="lucide:chevron-right" class="h-4 w-4 text-accent" aria-hidden="true" /><a href={link.href}>{link.label}</a></li>)}</ul>
-            </div>
+            <FooterColumn title="Quick Links" links={quickLinks} />
+            <FooterColumn title="Courses" links={courses} joinDescription gap="gap-3" />
             <FooterContact title={footer.contact_title} addressLines={addressLines} phones={contact.phone_numbers} emails={contact.emails} />
         </div>
-    </div>
-    <div class="footer-bottom">
-        <div>
+        <div class="footer-bottom">
             <p>© {year} {site.college_name}, {site.institution_name}. {footer.copyright_notice}</p>
             <p>Affiliated to {site.affiliation}{noteLinks.map(link => <>{" · "}<a href={link.href}>{link.label}</a></>)}</p>
         </div>
     </div>
 </footer>
 <style>
-    .footer-main { min-height: 337px; padding: 64px 24px; background-size: 100% auto; background-repeat: no-repeat; color: #334155; }
-    .footer-layout { max-width: 1280px; margin-inline: auto; display: grid; grid-template-columns: 1.5fr 1fr 1.1fr; gap: 50px; }
-    .footer-brand { padding-right: 24px; }
-    .footer-brand p { max-width: 480px; margin-top: 24px; font-size: 14px; line-height: 20px; }
-    .footer-brand :global(.footer-socials) { margin-top: 24px; gap: 10px; }
-    .footer-brand :global(.footer-socials a) { height: 24px; width: 24px; }
-    .footer-layout > :global(:not(:first-child)) { border-left: 1px solid #0005; padding-left: 50px; }
-    h4, .footer-layout :global(h4) { font: 16px/24px var(--font-display); color: #0f172a; text-transform: uppercase; letter-spacing: 0; }
-    ul { margin-top: 16px; display: grid; gap: 12px; font-size: 14px; line-height: 20px; }
-    li { display: flex; align-items: center; gap: 8px; }
-    a:hover { color: #d92228; }
-    .footer-layout :global(h4 + ul) { margin-top: 16px; opacity: 1; }
-    .footer-layout :global(h4 + ul svg) { height: 20px; width: 20px; }
-    .footer-bottom { background: #000; color: #ffffffbf; font-size: 12px; line-height: 16px; padding: 16px 24px; }
-    .footer-bottom > div { max-width: 1280px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .site-footer { background: #000; border-top: 1px solid #1e293b; padding: 64px 32px 32px; color: #cbd5e1; }
+    .footer-container { max-width: 1280px; margin-inline: auto; }
+    /* Design columns: 400 / 180 / 290 / 290 px with 40px gutters at 1280px. */
+    .footer-grid { display: grid; grid-template-columns: minmax(0, 40fr) minmax(0, 18fr) minmax(0, 29fr) minmax(0, 29fr); column-gap: 40px; row-gap: 48px; padding-bottom: 64px; }
+    /* Shared by FooterColumn and FooterContact. */
+    .site-footer :global(.footer-heading) { font: 400 14px/20px var(--font-display); letter-spacing: 0.7px; text-transform: uppercase; color: #fff; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-brand p { max-width: 384px; color: #94a3b8; font-size: 14px; line-height: 20px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid #1e293b; padding-top: 32px; color: #94a3b8; font-size: 12px; line-height: 16px; }
+    .footer-bottom a:hover { color: #fff; }
     @media (max-width: 1023px) {
-        .footer-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
+        .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .footer-brand { grid-column: 1 / -1; }
-        .footer-layout > :global(:not(:first-child)) { padding-left: 0; border-left: 0; }
-        .footer-bottom > div { flex-direction: column; align-items: start; gap: 12px; }
+        .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
     }
-    @media (max-width: 639px) { .footer-layout { grid-template-columns: 1fr; } .footer-main { padding-block: 48px; background-size: cover; } }
+    @media (max-width: 639px) {
+        .site-footer { padding: 48px 24px 32px; }
+        .footer-grid { grid-template-columns: minmax(0, 1fr); }
+    }
 </style>
