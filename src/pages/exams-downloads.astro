@@ -10,7 +10,7 @@ const downloads = await getSection("downloadsPage");
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description}>
-    <PageHero eyebrow={hero.eyebrow} title={hero.title} description={hero.intro} />
+    <PageHero slot="hero" eyebrow={hero.eyebrow} title={hero.title} description={hero.intro} />
     <Section>
         {downloads.items.length ? (
             <ul class="grid gap-6 md:grid-cols-2">

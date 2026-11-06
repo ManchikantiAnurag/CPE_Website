@@ -22,7 +22,7 @@ const banner = await getSection("aboutAdmissionsBanner");
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
-    <Section id="about-hero" padded={false} background="hero" class="about-hero py-16 md:pt-16 md:pb-[88px] [&>div]:max-w-[1298px]">
+    <Section slot="hero" id="about-hero" padded={false} background="none" class="about-hero py-16 md:pt-16 md:pb-[88px] [&>div]:max-w-[1298px]">
         <Reveal immediate>
             <p class="text-xs font-semibold uppercase leading-4 tracking-[1.2px] text-[#DC2626]">{hero.eyebrow}</p>
             <h1 class="mt-8 max-w-[1000px] font-display text-4xl font-normal leading-[1.35] tracking-normal text-black md:text-[60px] md:leading-[72px]">{hero.title}</h1>

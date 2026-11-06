@@ -16,7 +16,7 @@ const fullSizeImage = (src: string) => media[`../assets${src}`]?.default.src ?? 
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
-    <section class="achievements-hero bg-hero">
+    <section slot="hero" class="achievements-hero">
         <div class="hero-content page-container">
             <p class="eyebrow">{content.eyebrow}</p>
             <h1>{content.title}</h1>

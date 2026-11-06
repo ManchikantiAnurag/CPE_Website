@@ -32,7 +32,7 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
         provider: { "@id": new URL("/#organization", Astro.site).href },
     }}
 >
-    <PageHero
+    <PageHero slot="hero"
         eyebrow={course.display_code || course.code}
         title={course.title}
         description={course.tagline}

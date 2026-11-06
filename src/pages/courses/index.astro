@@ -21,7 +21,7 @@ const courses = await Promise.all(
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
-    <Section background="hero" padded={false} class="courses-hero pt-12 pb-16 md:pt-16 md:pb-[100px] [&>div]:max-w-[1298px]">
+    <Section slot="hero" background="none" padded={false} class="courses-hero pt-12 pb-16 md:pt-16 md:pb-[100px] [&>div]:max-w-[1298px]">
         <Reveal immediate stagger={90}>
             <p class="eyebrow">{hero.eyebrow}</p>
             <h1 class="mt-6 max-w-[800px] font-display text-4xl font-normal leading-tight text-black md:text-[56px] md:leading-[56px]">
