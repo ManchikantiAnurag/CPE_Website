@@ -9,8 +9,8 @@ const seo = await getSection("achievementsSeo");
 const content = await getSection("achievementsPage");
 const { academics, categories } = content;
 const tabs = [{ id: "academics", label: academics.label }, ...categories];
-const requestedCategory = Astro.url.searchParams.get("category");
-const activeCategory = tabs.some(tab => tab.id === requestedCategory) ? requestedCategory : "academics";
+// The page is prerendered; the script below selects ?category= on load.
+const activeCategory = "academics";
 const media = import.meta.glob<{ default: ImageMetadata }>("../assets/media/**/*", { eager: true });
 const fullSizeImage = (src: string) => media[`../assets${src}`]?.default.src ?? src;
 ---
@@ -177,5 +177,7 @@ const fullSizeImage = (src: string) => media[`../assets${src}`]?.default.src ?? 
             selectCategory(tab.dataset.categoryTab ?? null);
         });
     });
-    window.addEventListener("popstate", () => selectCategory(new URLSearchParams(location.search).get("category")));
+    const selectFromUrl = () => selectCategory(new URLSearchParams(location.search).get("category"));
+    window.addEventListener("popstate", selectFromUrl);
+    selectFromUrl();
 </script>

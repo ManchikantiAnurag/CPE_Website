@@ -1,10 +1,9 @@
 import assert from "node:assert/strict";
-import { readFile, readdir } from "node:fs/promises";
+import { readdir } from "node:fs/promises";
 
-const base = "http://localhost:3000";
-const manifest = JSON.parse(await readFile(".amplify-hosting/deploy-manifest.json", "utf8"));
-assert.equal(manifest.computeResources[0].runtime, "nodejs22.x");
-for (const path of ["/", "/about", "/admissions", "/campus-life", "/contact", "/courses", "/gallery", "/news", "/admin/index.html", "/admin/config.yml", "/favicon.svg"]) {
+// Run against `pnpm preview` (the Worker running locally in workerd).
+const base = process.env.DEPLOY_TEST_URL ?? "http://localhost:4321";
+for (const path of ["/", "/about", "/achievements", "/admissions", "/campus-life", "/contact", "/courses", "/gallery", "/news", "/admin/config.yml", "/favicon.svg"]) {
   assert.equal((await fetch(base + path)).status, 200, path);
 }
 for (const collection of ["courses", "events"]) {
@@ -16,15 +15,24 @@ for (const collection of ["courses", "events"]) {
   }
   assert.equal((await fetch(`${base}/${route}/not-a-real-slug`)).status, 404);
 }
+
+// Prerendered pages reference images optimized at build time, served as
+// immutable static assets rather than transformed per request.
 const home = await (await fetch(base)).text();
-const image = home.match(/src="([^"]*\/_image\?[^"]+)"/);
-assert.ok(image, "SSR image URL");
-const imageResponse = await fetch(new URL(image[1].replaceAll("&amp;", "&"), base));
+const image = home.match(/src="(\/_astro\/[^"]+\.webp)"/);
+assert.ok(image, "build-time optimized image");
+const imageResponse = await fetch(base + image[1]);
 assert.equal(imageResponse.status, 200, "optimized image");
-assert.match(imageResponse.headers.get("content-type"), /^image\//);
+assert.equal(imageResponse.headers.get("content-type"), "image/webp");
+assert.match(imageResponse.headers.get("cache-control") ?? "", /immutable/);
+
+// Static assets serve the CMS (public/admin/index.html) at /admin.
 const admin = await fetch(`${base}/admin`, { redirect: "manual" });
-assert.equal(admin.status, 302);
-assert.equal(admin.headers.get("location"), "/admin/index.html");
+assert.equal(admin.status, 200);
+assert.match(await admin.text(), /sveltia-cms/);
+const slash = await fetch(`${base}/about/`, { redirect: "manual" });
+assert.equal(slash.status, 307);
+assert.equal(new URL(slash.headers.get("location"), base).pathname, "/about");
 for (const page of ["contact", "admissions"]) {
   for (const json of [true, false]) {
     const response = await fetch(`${base}/api/form`, {
@@ -37,13 +45,5 @@ for (const page of ["contact", "admissions"]) {
     if (json) assert.deepEqual(await response.json(), { ok: true });
     else assert.equal(response.headers.get("location"), `${base}/${page}`);
   }
-}
-for (const origin of [process.env.SITE_URL ?? "https://cpecollege.com", "https://main.deployment-check.amplifyapp.com"]) {
-  const response = await fetch(`${base}/api/form`, {
-    method: "POST",
-    body: new URLSearchParams({ name: "Deployment check" }),
-    headers: { accept: "application/json", origin, "x-forwarded-host": new URL(origin).host, "x-forwarded-proto": "https" },
-  });
-  assert.equal(response.status, 200, `forwarded origin: ${origin}`);
 }
 console.log("Deployment checks passed.");

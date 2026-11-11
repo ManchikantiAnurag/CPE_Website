@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-const base = process.env.SEO_TEST_URL ?? "http://localhost:3000";
+const base = process.env.SEO_TEST_URL ?? "http://localhost:4321";
 const site = process.env.SITE_URL ?? "https://cpecollege.com";
 const sitemap = await fetch(`${base}/sitemap.xml`);
 assert.equal(sitemap.status, 200);

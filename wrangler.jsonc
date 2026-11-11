@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cpe-website",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-10-06",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    // Serve about/index.html at /about and redirect /about/ there.
+    "html_handling": "drop-trailing-slash"
+  },
+  // Cloudflare Images: resizes images requested at runtime (`/_image`).
+  // Prerendered pages use images optimized at build time instead.
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
