@@ -1,13 +1,8 @@
 ---
+import { Icon } from "astro-icon/components";
 import Button from "../../Base/Button/Button.astro";
-import Figure from "../../Base/Figure/Figure.astro";
-import Reveal from "../../Base/Reveal/Reveal.astro";
-
-interface Link {
-    label: string;
-    href: string;
-}
-
+import OptimizedImage from "../../Base/OptimizedImage.astro";
+interface Link { label: string; href: string; }
 interface Props {
     eyebrow: string;
     title: string;
@@ -18,86 +13,64 @@ interface Props {
     image?: string;
     imageAlt: string;
     badge?: string;
+    courseShortcuts: { label: string; href: string; icon: string }[];
 }
+const { eyebrow, title, intro, primaryCta, secondaryCta, stats, image, imageAlt, badge, courseShortcuts } = Astro.props;
 
-const {
-    eyebrow,
-    title,
-    intro,
-    primaryCta,
-    secondaryCta,
-    stats,
-    image,
-    imageAlt,
-    badge,
-} = Astro.props;
 ---
-
-<section class="relative overflow-hidden bg-hero">
-    <div
-        class="mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_1fr] lg:py-24"
-    >
-        <Reveal immediate stagger={90} duration={800}>
+<section class="home-hero">
+    <div class="hero-layout">
+        <div>
             <p class="eyebrow">{eyebrow}</p>
-            <h1
-                class="mt-5 text-4xl leading-[1.08] text-black md:text-5xl lg:text-[3.4rem]"
-            >
-                {title}
-            </h1>
-            <p
-                class="mt-6 max-w-xl text-base leading-relaxed text-black md:text-lg"
-            >
-                {intro}
-            </p>
-
-            <div class="mt-9 flex flex-wrap gap-3">
-                <Button href={primaryCta.href} variant="accent" size="lg">
-                    {primaryCta.label}
-                </Button>
-                <Button
-                    href={secondaryCta.href}
-                    variant="outline"
-                    size="lg"
-                    class="border-accent! text-accent! hover:text-accent-foreground! [--fill-color:var(--color-accent)]!"
-                >
-                    {secondaryCta.label}
-                </Button>
+            <h1>{title}</h1>
+            <p class="hero-intro">{intro}</p>
+            <div class="hero-actions">
+                <Button href={primaryCta.href} variant="accent" size="lg">{primaryCta.label}</Button>
+                <Button href={secondaryCta.href} variant="outline" size="lg" class="border-accent! text-accent! hover:text-accent-foreground! [--fill-color:var(--color-accent)]!">{secondaryCta.label}</Button>
             </div>
-
-            {
-                stats.length > 0 && (
-                    <dl class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-black/20 pt-8">
-                        {stats.map((stat) => (
-                            <div>
-                                <dt class="text-[11px] uppercase tracking-widest text-black">
-                                    {stat.label}
-                                </dt>
-                                <dd class="mt-1 font-display text-2xl text-black">
-                                    {stat.value}
-                                </dd>
-                            </div>
-                        ))}
-                    </dl>
-                )
-            }
-        </Reveal>
-
-        <Reveal variant="right" immediate delay={220} class="relative">
-            <Figure
-                src={image}
-                alt={imageAlt}
-                width={1600}
-                height={1104}
-                loading="eager"
-                class="shadow-lift"
-            />
-            {
-                badge && (
-                    <div class="absolute -bottom-px left-0 hidden bg-accent px-6 py-4 text-accent-foreground sm:block">
-                        <p class="font-display text-lg leading-none">{badge}</p>
-                    </div>
-                )
-            }
-        </Reveal>
+            <nav class="course-shortcuts" aria-label="Course shortcuts">
+                {courseShortcuts.map((course, index) => (
+                    <a href={course.href} class:list={[index === 0 && "highlighted"]}>
+                        <Icon name={course.icon} class="h-4 w-4" aria-hidden="true" />{course.label}
+                    </a>
+                ))}
+            </nav>
+            {stats.length > 0 && <dl class="hero-stats">{stats.map(stat => <div><dt>{stat.label}</dt><dd>{stat.value}</dd></div>)}</dl>}
+        </div>
+        <div class="hero-visual">
+            {image && <OptimizedImage src={image} alt={imageAlt} width={1200} loading="eager" sizes="(min-width: 1024px) 600px, 100vw" class="hero-image" />}
+            {badge && <div class="hero-badge">{badge}</div>}
+        </div>
     </div>
 </section>
+<style>
+    .home-hero { overflow: hidden; color: #000; background-size: 100% 100%; }
+    .hero-layout { max-width: 1280px; margin-inline: auto; padding: 40px 12px 60px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 78px; min-height: 622px; }
+    .eyebrow { font-size: 12px; line-height: 16px; letter-spacing: 1.2px; }
+    h1 { margin-top: 28px; font-size: 56px; line-height: 70px; white-space: pre-line; }
+    .hero-intro { margin-top: 28px; font-size: 18px; line-height: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+    .hero-actions :global(a) { height: 44px; min-width: 166px; border-radius: 4px; }
+    .course-shortcuts { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+    .course-shortcuts a { display: inline-flex; flex: 1; min-width: 90px; align-items: center; justify-content: center; gap: 10px; border: 1px solid #f5b414; border-radius: 4px; height: 44px; font-size: 14px; font-weight: 500; }
+    .course-shortcuts a:hover { background: #ffd23b; }
+    .course-shortcuts .highlighted { flex-grow: 1.4; background: #eeb300; }
+    .hero-stats { margin-top: 28px; border-top: 1px solid #0003; padding: 28px 30px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    dt { font-size: 11px; line-height: 16px; letter-spacing: .6px; text-transform: uppercase; }
+    dd { margin-top: 6px; font: 28px/32px var(--font-display); }
+    .hero-visual { position: relative; width: 100%; aspect-ratio: 600 / 438; overflow: hidden; border-radius: 8px; box-shadow: 0 25px 50px -12px #0004; }
+    .hero-visual :global(.hero-image) { height: 100%; width: 100%; object-fit: fill; }
+    .hero-badge { position: absolute; bottom: 0; left: 0; background: #d92228; color: white; padding: 10px 24px; font: italic 18px/28px var(--font-display); letter-spacing: .45px; }
+    @media (min-width: 1024px) { .hero-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); gap: 78px; } }
+    @media (max-width: 1340px) { .hero-layout { margin-inline: 24px; padding-inline: 0; gap: 48px; } .course-shortcuts { gap: 10px; } .course-shortcuts a { min-width: 78px; } }
+    @media (max-width: 1023px) { .hero-layout { grid-template-columns: 1fr; min-height: auto; padding-top: 40px; padding-bottom: 56px; gap: 40px; } .hero-visual { max-width: 600px; } }
+    @media (max-width: 639px) {
+        .home-hero { background-size: cover; }
+        h1 { font-size: clamp(32px, 9.8vw, 42px); line-height: 1.2; margin-top: 20px; }
+        .hero-intro { font-size: 16px; line-height: 26px; margin-top: 24px; }
+        .hero-actions, .course-shortcuts { margin-top: 28px; }
+        .hero-actions { gap: 12px; } .hero-actions :global(a) { min-width: 0; padding-inline: 20px; }
+        .course-shortcuts a { flex: 0 0 auto; padding-inline: 14px; }
+        .hero-stats { padding: 24px 0 0; gap: 16px; } dd { font-size: 23px; white-space: nowrap; }
+    }
+</style>

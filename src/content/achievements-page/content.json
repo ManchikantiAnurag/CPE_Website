@@ -1,0 +1,151 @@
+{
+  "eyebrow": "Achievements",
+  "title": "Celebrating our moments",
+  "intro": "Achievements in academics, sports, chess and co-curricular activities at CPE Junior College.",
+  "academics": {
+    "label": "Academics",
+    "stats": [
+      {
+        "icon": "lucide:trophy",
+        "value": "495/500",
+        "label": "Highest MEC Score",
+        "detail": "IPE Results 2026"
+      },
+      {
+        "icon": "lucide:medal",
+        "value": "AIR 47",
+        "label": "CMA Inter",
+        "detail": "June 2026"
+      },
+      {
+        "icon": "lucide:star",
+        "value": "AIR 8",
+        "label": "CMA Final",
+        "detail": "June 2026"
+      },
+      {
+        "icon": "lucide:chart-no-axes-combined",
+        "value": "981/1000",
+        "label": "Intermediate results",
+        "detail": "2025–26"
+      }
+    ],
+    "toppers_title": "Our Academic Toppers",
+    "toppers": [
+      {
+        "name": "Bali Sridhar",
+        "subtitle": "MEC Group",
+        "result": "495/500",
+        "detail": "IPE Results 2026",
+        "image": "/media/achievements/bali-sridhar.png",
+        "image_alt": "Bali Sridhar, MEC academic topper"
+      },
+      {
+        "name": "P. Jugeendra Sainandha Rao",
+        "subtitle": "All India Rank",
+        "result": "8",
+        "detail": "CMA Final, June 2026",
+        "image": "/media/achievements/jugeendra-sainandha-rao.png",
+        "image_alt": "P. Jugeendra Sainandha Rao, CMA Final All India Rank 8"
+      },
+      {
+        "name": "Lakshmi Pujitha Vuppala",
+        "subtitle": "All India Rank",
+        "result": "47",
+        "detail": "CMA Inter, June 2026",
+        "image": "/media/achievements/lakshmi-pujitha-vuppala.png",
+        "image_alt": "Lakshmi Pujitha Vuppala, CMA Inter All India Rank 47"
+      }
+    ],
+    "posters_title": "Our Students, Our Pride",
+    "posters": [
+      {
+        "caption": "Junior Inter 2025–26",
+        "image": "/media/achievements/junior-inter-2025-26.png",
+        "image_alt": "CPE Junior Inter 2025–26 results poster showing MEC and CEC student marks",
+        "inset": false
+      },
+      {
+        "caption": "Senior Inter 2025–26",
+        "image": "/media/achievements/senior-inter-2025-26.png",
+        "image_alt": "CPE Senior Inter 2025–26 results poster, led by two students scoring 981 out of 1000",
+        "inset": true
+      }
+    ]
+  },
+  "categories": [
+    {
+      "id": "sports-day",
+      "label": "Sports Day",
+      "title": "Annual Sports Day",
+      "paragraphs": [
+        "Our Annual Sports Day was a grand celebration of energy, teamwork and sportsmanship. Students participated with great enthusiasm in various track and field events showcasing their talent and determination."
+      ],
+      "highlights": [
+        "Track & Field Events",
+        "Team Games",
+        "Prize Distribution",
+        "Best Performer Awards"
+      ],
+      "date": "2025-01-12",
+      "date_label": "Held on: 12th January 2025",
+      "image": "/media/achievements/annual-sports-day.png",
+      "image_alt": "Students competing in a sprint on the running track at Sports Day"
+    },
+    {
+      "id": "cultural-events",
+      "label": "Cultural Events",
+      "title": "19th Annual Day Celebrations",
+      "paragraphs": [
+        "Students, parents, faculty and management came together to celebrate academic excellence, achievement and student talent at CPE’s 19th Annual Day.",
+        "Dance, music, singing and skits brought the college community together on stage."
+      ],
+      "highlights": [
+        "Classical & Group Dance",
+        "Music & Singing",
+        "Student Anchoring",
+        "Celebrating Student Talent"
+      ],
+      "date": "2025-07-15",
+      "date_label": "Held on: 15th July 2025",
+      "image": "/media/annual-day-stage.jpg",
+      "image_alt": "CPE faculty together on the Annual Day stage"
+    },
+    {
+      "id": "co-curricular",
+      "label": "Co-Curricular",
+      "title": "Talent beyond the classroom",
+      "paragraphs": [
+        "Music, performance and student-led activities give students opportunities to express themselves beyond their academic studies.",
+        "From playing tabla to anchoring on stage, CPE students take an active part in college life."
+      ],
+      "highlights": [
+        "Instrumental Music",
+        "Student Anchoring",
+        "Group Singing",
+        "Stage Performances"
+      ],
+      "date": "",
+      "date_label": "",
+      "image": "/media/events/19th-annual-day/student-tabla-performance.webp",
+      "image_alt": "A CPE student performing on tabla during Annual Day"
+    },
+    {
+      "id": "other-school-events",
+      "label": "Other School Events",
+      "title": "Moments that bring us together",
+      "paragraphs": [
+        "College life at CPE brings students and faculty together to celebrate progress, recognise effort and share memorable moments."
+      ],
+      "highlights": [
+        "Student Celebrations",
+        "Faculty & Student Gatherings",
+        "Recognition & Felicitation"
+      ],
+      "date": "",
+      "date_label": "",
+      "image": "/media/students-cake.jpg",
+      "image_alt": "CPE students celebrating together"
+    }
+  ]
+}

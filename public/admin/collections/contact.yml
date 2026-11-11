@@ -1,8 +1,7 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# The contact page. The address, phone, email and social cards render from
-# Contact details, and the message form is fixed in code, so only the page
-# headings are editable here.
+# Contact page headings and form copy. Contact information is managed
+# separately under Contact details.
 
 collections:
   - name: contact
@@ -54,3 +53,39 @@ collections:
             name: map_title
             widget: string
             hint: Read aloud by screen readers in place of the map.
+
+      - name: form
+        label: Message Form
+        file: src/content/contact/form.json
+        fields:
+          - label: Heading
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Submit Button
+            name: submit_label
+            widget: string
+          - label: Success Message
+            name: success_message
+            widget: text
+          - label: Field Labels
+            name: labels
+            widget: object
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Mobile Number
+                name: mobile
+                widget: string
+              - label: Email
+                name: email
+                widget: string
+              - label: Subject
+                name: subject
+                widget: string
+              - label: Message
+                name: message
+                widget: string

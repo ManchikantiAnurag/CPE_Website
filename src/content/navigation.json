@@ -20,8 +20,12 @@
           "href": "/about#vision-mission"
         },
         {
-          "label": "Leadership",
-          "href": "/about#leadership"
+          "label": "Campus Life",
+          "href": "/campus-life"
+        },
+        {
+          "label": "Exams & Downloads",
+          "href": "/exams-downloads"
         }
       ]
     },
@@ -32,26 +36,26 @@
       "children": []
     },
     {
-      "label": "Campus Life",
-      "href": "/campus-life",
-      "children_source": "none",
-      "children": []
-    },
-    {
       "label": "Gallery",
       "href": "/gallery",
       "children_source": "none",
       "children": []
     },
     {
-      "label": "Admissions",
-      "href": "/admissions",
+      "label": "Faculty",
+      "href": "/faculty",
       "children_source": "none",
       "children": []
     },
     {
-      "label": "News & Events",
+      "label": "What's Trending",
       "href": "/news",
+      "children_source": "none",
+      "children": []
+    },
+    {
+      "label": "Achievements",
+      "href": "/achievements",
       "children_source": "none",
       "children": []
     },

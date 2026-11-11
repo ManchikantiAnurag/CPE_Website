@@ -13,14 +13,14 @@ interface Props {
 const { eyebrow, title, description, items } = Astro.props;
 ---
 
-<div class="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+<div class="grid gap-12 lg:grid-cols-[1fr_1.35fr]">
     <SectionHeading
         eyebrow={eyebrow}
         title={title}
         description={description}
     />
 
-    <Reveal stagger={90} class="grid gap-x-8 gap-y-10 sm:grid-cols-2">
+    <Reveal stagger={90} class="grid gap-x-8 gap-y-8 sm:grid-cols-2">
         {
             items.map((item) => (
                 <FeatureTile
@@ -34,3 +34,9 @@ const { eyebrow, title, description, items } = Astro.props;
         }
     </Reveal>
 </div>
+
+<style>
+    :global(.career-section h2) { margin-top: 20px; }
+    :global(.career-section h3) { margin-top: 14px; }
+    :global(.career-section .grid > div > p) { line-height: 22px; }
+</style>

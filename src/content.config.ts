@@ -130,6 +130,8 @@ const events = defineCollection({
         tagline: z.string(),
         venue: z.string(),
         participants: z.string(),
+        card_image: z.string().default(""),
+        card_image_alt: z.string().default(""),
         about_title: z.string().default("About the Event"),
         about_image: z.string(),
         about_image_alt: z.string(),
@@ -207,7 +209,7 @@ const siteSettings = defineCollection({
         logo: z.string().default(""),
         logo_alt: z.string().default(""),
         description: z.string(),
-        cta_label: z.string().default("Apply Now"),
+        cta_label: z.string().default("Enquire Now"),
         cta_href: z.string().default("/admissions"),
     }),
 });
@@ -248,6 +250,7 @@ const homeHero = section(
                 .array(z.object({ label: z.string(), value: z.string() }))
                 .default([]),
             badge: z.string().default(""),
+            course_shortcuts: z.array(z.object({ label: z.string(), href: z.string(), icon: z.string() })).default([]),
         })
         .merge(image),
 );
@@ -308,7 +311,19 @@ const homeLeadership = section(
     z.object({
         eyebrow: z.string(),
         title: z.string(),
-        cta: cta,
+        image: z.string(),
+        image_alt: z.string(),
+        paragraphs: z.array(z.string()),
+        quote: z.string(),
+        messages: z.array(z.object({
+            title: z.string(),
+            name: z.string(),
+            greeting: z.string(),
+            sign_off: z.string(),
+            paragraphs: z.array(z.string()),
+            image: z.string().default(""),
+            image_alt: z.string(),
+        })),
     }),
 );
 
@@ -432,8 +447,12 @@ const admissionsEnquiry = section(
         form_title: z.string(),
         form_description: z.string(),
         submit_label: z.string(),
-        // Where the form posts. Empty until a handler is configured.
+        // Empty uses the built-in /api/form handler.
         form_endpoint: z.string().default(""),
+        success_message: z.string(),
+        labels: z.object({ student_name: z.string(), parent_name: z.string(), mobile: z.string(), email: z.string(), course: z.string(), message: z.string() }),
+        course_placeholder: z.string(),
+        course_page_placeholder: z.string(),
         footnote: z.object({
             text: z.string(),
             link_label: z.string(),
@@ -566,6 +585,33 @@ const listPageHero = z.object({
     empty_message: z.string(),
 });
 
+const achievementsSeo = section("src/content/achievements-page/seo.json", seo);
+const achievementsPage = section(
+    "src/content/achievements-page/content.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        intro: z.string(),
+        academics: z.object({
+            label: z.string(),
+            stats: z.array(z.object({ icon: z.string(), value: z.string(), label: z.string(), detail: z.string() })),
+            toppers_title: z.string(),
+            toppers: z.array(z.object({ name: z.string(), subtitle: z.string(), result: z.string(), detail: z.string() }).merge(image)),
+            posters_title: z.string(),
+            posters: z.array(z.object({ caption: z.string(), inset: z.boolean().default(false) }).merge(image)),
+        }),
+        categories: z.array(z.object({
+            id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+            label: z.string(),
+            title: z.string(),
+            paragraphs: z.array(z.string()),
+            highlights: z.array(z.string()),
+            date: z.string().default(""),
+            date_label: z.string().default(""),
+        }).merge(image)),
+    }),
+);
+
 const gallerySeo = section("src/content/gallery-page/seo.json", seo);
 const galleryHero = section("src/content/gallery-page/hero.json", listPageHero);
 
@@ -650,7 +696,48 @@ const contactLocation = section(
     }),
 );
 
+/* ------------------------------------------------------ faculty and downloads */
+
+const facultySeo = section("src/content/faculty-page/seo.json", seo);
+const facultyPage = section("src/content/faculty-page/content.json", z.object({
+    eyebrow: z.string(),
+    title: z.string(),
+    intro: z.string(),
+    directory_label: z.string(),
+    empty_message: z.string(),
+    members: z.array(z.object({ name: z.string(), department: z.string(), photo: z.string() })).default([]),
+}));
+
+const downloadsSeo = section("src/content/exams-downloads/seo.json", seo);
+const downloadsHero = section("src/content/exams-downloads/hero.json", z.object({
+    eyebrow: z.string(), title: z.string(), intro: z.string(),
+}));
+const downloadsPage = section("src/content/exams-downloads/downloads.json", z.object({
+    empty_message: z.string(),
+    items: z.array(z.object({ title: z.string(), description: z.string().default(""), file: z.string() })).default([]),
+}));
+
+const footer = section("src/content/footer.json", z.object({
+    description: z.string(),
+    network_title: z.string(),
+    network_links: z.array(link).default([]),
+    contact_title: z.string(),
+    copyright_notice: z.string(),
+}));
+
+const contactForm = section("src/content/contact/form.json", z.object({
+    title: z.string(), description: z.string(), submit_label: z.string(), success_message: z.string(),
+    labels: z.object({ name: z.string(), mobile: z.string(), email: z.string(), subject: z.string(), message: z.string() }),
+}));
+
 export const collections = {
+    facultySeo,
+    facultyPage,
+    downloadsSeo,
+    downloadsHero,
+    downloadsPage,
+    footer,
+    contactForm,
     courses,
     gallery,
     galleryCategories,
@@ -706,6 +793,8 @@ export const collections = {
     campusLifeOnCampus,
     campusLifeAcademics,
 
+    achievementsSeo,
+    achievementsPage,
     gallerySeo,
     galleryHero,
     newsSeo,

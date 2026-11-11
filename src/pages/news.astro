@@ -24,7 +24,7 @@ const events = (await getCollection("events"))
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
-    <PageHero
+    <PageHero slot="hero"
         eyebrow={hero.eyebrow}
         title={hero.title}
         description={hero.intro}
@@ -39,8 +39,8 @@ const events = (await getCollection("events"))
                     <EventCard
                         title={event.title}
                         summary={event.summary}
-                        image={event.image}
-                        imageAlt={event.image_alt}
+                        image={event.card_image || event.image}
+                        imageAlt={event.card_image ? event.card_image_alt : event.image_alt}
                         href={`/news/${id}`}
                     />
                 ))}

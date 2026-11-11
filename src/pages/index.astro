@@ -2,40 +2,30 @@
 import Layout from "../layouts/Layout.astro";
 import Section from "../components/Base/Section/Section.astro";
 import HomeHero from "../components/Home/HomeHero/HomeHero.astro";
-import MediaText from "../components/Base/MediaText/MediaText.astro";
+import OptimizedImage from "../components/Base/OptimizedImage.astro";
 import Button from "../components/Base/Button/Button.astro";
 import { Icon } from "astro-icon/components";
-import CoursesGrid from "../components/Home/CoursesGrid/CoursesGrid.astro";
 import WhyChoose from "../components/Home/WhyChoose/WhyChoose.astro";
 import CareerFocus from "../components/Home/CareerFocus/CareerFocus.astro";
 import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.astro";
-import EmptyStateSection from "../components/Home/EmptyStateSection/EmptyStateSection.astro";
 import Testimonials from "../components/Base/Testimonials/Testimonials.astro";
-import ContactCards from "../components/Home/ContactCards/ContactCards.astro";
 import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
 import { getContactDetails, getSection, resolvePhones } from "../lib/site";
 
 const seo = await getSection("homeSeo");
 const hero = await getSection("homeHero");
-const about = await getSection("homeAbout");
-const courses = await getSection("homeCourses");
 const whyChoose = await getSection("homeWhyChoose");
 const careerFocus = await getSection("homeCareerFocus");
 const leadership = await getSection("homeLeadership");
 const campusLife = await getSection("homeCampusLife");
-const achievements = await getSection("homeAchievements");
 const banner = await getSection("homeAdmissionsBanner");
-const news = await getSection("homeNews");
 const testimonials = await getSection("homeTestimonials");
-const contactCards = await getSection("homeContactCards");
-
 const contact = await getContactDetails();
-const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter(Boolean) as string[];
 const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
 ---
 
-<Layout title={seo.meta_title} description={seo.meta_description}>
-    <HomeHero
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
+    <HomeHero slot="hero"
         eyebrow={hero.eyebrow}
         title={hero.title}
         intro={hero.intro}
@@ -45,127 +35,64 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
         image={hero.image}
         imageAlt={hero.image_alt}
         badge={hero.badge}
+        courseShortcuts={hero.course_shortcuts}
     />
 
-    <Section>
-        <MediaText
-            eyebrow={about.eyebrow}
-            title={about.title}
-            paragraphs={about.paragraphs}
-            image={about.image}
-            imageAlt={about.image_alt}
-            imagePosition="start"
-        >
-            <Button slot="actions" href={about.cta.href} variant="outline">
-                {about.cta.label}
-                <Icon
-                    name="lucide:arrow-right"
-                    class="h-4 w-4"
-                    aria-hidden="true"
-                />
-            </Button>
-        </MediaText>
+    <Section class="home-section">
+        <WhyChoose eyebrow={whyChoose.eyebrow} title={whyChoose.title} items={whyChoose.items} />
     </Section>
 
-    <Section id="courses" background="surface">
-        <CoursesGrid
-            eyebrow={courses.eyebrow}
-            title={courses.title}
-            description={courses.description}
-            cta={courses.cta}
-        />
+    <Section background="hero" class="home-section career-section">
+        <CareerFocus {...careerFocus} />
     </Section>
 
-    <Section>
-        <WhyChoose
-            eyebrow={whyChoose.eyebrow}
-            title={whyChoose.title}
-            items={whyChoose.items}
-        />
+    <Section class="home-section campus-section">
+        <div class="campus-layout">
+            <div>
+                <p class="eyebrow">{campusLife.eyebrow}</p>
+                <h2>{campusLife.title}</h2>
+                <p class="campus-description">{campusLife.description}</p>
+                <div class="mt-8 flex flex-wrap items-center gap-4">
+                    <Button href={campusLife.primary_cta.href} variant="outline">{campusLife.primary_cta.label}</Button>
+                    <Button href={campusLife.secondary_cta.href} variant="ghost">
+                        {campusLife.secondary_cta.label}
+                        <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+                    </Button>
+                </div>
+            </div>
+            <OptimizedImage src={campusLife.image} alt={campusLife.image_alt} width={1440} sizes="(min-width: 1024px) 720px, 100vw" class="campus-image" />
+        </div>
     </Section>
 
-    <Section background="hero">
-        <CareerFocus
-            eyebrow={careerFocus.eyebrow}
-            title={careerFocus.title}
-            description={careerFocus.description}
-            items={careerFocus.items}
-        />
+    <Section background="surface" class="home-section leadership-section">
+        <LeadershipGrid {...leadership} />
     </Section>
 
-    <Section>
-        <MediaText
-            eyebrow={campusLife.eyebrow}
-            title={campusLife.title}
-            paragraphs={[campusLife.description]}
-            image={campusLife.image}
-            imageAlt={campusLife.image_alt}
-        >
-            <Fragment slot="actions">
-                <Button href={campusLife.primary_cta.href} variant="outline">
-                    {campusLife.primary_cta.label}
-                </Button>
-                <Button href={campusLife.secondary_cta.href} variant="ghost">
-                    {campusLife.secondary_cta.label}
-                    <Icon
-                        name="lucide:arrow-right"
-                        class="h-4 w-4"
-                        aria-hidden="true"
-                    />
-                </Button>
-            </Fragment>
-        </MediaText>
-    </Section>
+    <CtaBanner kicker={banner.kicker} title={banner.title} description={banner.description} phones={bannerPhones} cta={banner.cta} />
 
-    <Section background="surface">
-        <LeadershipGrid
-            eyebrow={leadership.eyebrow}
-            title={leadership.title}
-            cta={leadership.cta}
-        />
-    </Section>
-
-    <Section>
-        <EmptyStateSection
-            eyebrow={achievements.eyebrow}
-            title={achievements.title}
-            description={achievements.description}
-            cta={achievements.cta}
-            emptyMessage={achievements.empty_message}
-        />
-    </Section>
-
-    <Section background="surface">
-        <EmptyStateSection
-            eyebrow={news.eyebrow}
-            title={news.title}
-            description={news.description}
-            cta={news.cta}
-            emptyMessage={news.empty_message}
-        />
-    </Section>
-    <CtaBanner
-        kicker={banner.kicker}
-        title={banner.title}
-        description={banner.description}
-        phones={bannerPhones}
-        cta={banner.cta}
-    />
-
-    <Section>
-        <Testimonials
-            eyebrow={testimonials.eyebrow}
-            title={testimonials.title}
-            items={testimonials.items}
-        />
-    </Section>
-
-    <Section background="surface">
-        <ContactCards
-            titles={contactCards.cards}
-            addressLines={addressLines}
-            phones={contact.phone_numbers}
-            email={contact.emails[0]}
-        />
+    <Section class="home-section testimonials-section">
+        <Testimonials eyebrow={testimonials.eyebrow} title={testimonials.title} items={testimonials.items} />
     </Section>
 </Layout>
+
+<style>
+    :global(.home-section) { padding-block: 80px; }
+    :global(.home-section > div) { max-width: 1280px; padding-inline: 0; }
+    :global(.home-section h2) { font-size: 36px; line-height: 40px; }
+    :global(.home-section .eyebrow) { font-size: 12px; line-height: 16px; letter-spacing: .6px; }
+    :global(.career-section) { padding-block: 64px; background-size: 100% auto; }
+    :global(.testimonials-section) { padding-bottom: 88px; min-height: 590px; }
+    .campus-layout { display: grid; grid-template-columns: 500fr 720fr; align-items: center; gap: 60px; }
+    .campus-layout h2 { margin-top: 28px; }
+    .campus-description { margin-top: 24px; font-size: 16px; line-height: 24px; color: #64748b; }
+    .campus-layout :global(.campus-image) { width: 100%; aspect-ratio: 720 / 431; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 4px #0003; }
+    @media (max-width: 1340px) { :global(.home-section > div) { padding-inline: 24px; } }
+    @media (max-width: 1023px) { .campus-layout { grid-template-columns: 1fr; gap: 32px; } }
+    @media (max-width: 767px) {
+        :global(.career-section) { background-size: cover; background-repeat: no-repeat; }
+    }
+    @media (max-width: 639px) {
+        :global(.home-section) { padding-block: 56px; }
+        :global(.home-section h2) { font-size: 30px; line-height: 36px; }
+    }
+</style>

@@ -31,6 +31,8 @@ collections:
       - { label: Participants, name: participants, widget: string }
       - { label: Cover Image, name: image, widget: image }
       - { label: Cover Image Alt Text, name: image_alt, widget: string }
+      - { label: News Card Image, name: card_image, widget: image, required: false, hint: Defaults to the cover image when empty. }
+      - { label: News Card Image Alt Text, name: card_image_alt, widget: string, required: false }
       - { label: About Heading, name: about_title, widget: string, default: About the Event }
       - { label: About Image, name: about_image, widget: image }
       - { label: About Image Alt Text, name: about_image_alt, widget: string }

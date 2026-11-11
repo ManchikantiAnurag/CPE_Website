@@ -1,0 +1,165 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getSection } from "../lib/site";
+import OptimizedImage from "../components/Base/OptimizedImage.astro";
+
+const seo = await getSection("facultySeo");
+const content = await getSection("facultyPage");
+const faculty = content.members;
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
+    <section slot="hero" class="faculty-hero" aria-labelledby="faculty-title">
+        <div class="faculty-container">
+            <p class="eyebrow">{content.eyebrow}</p>
+            <h1 id="faculty-title">{content.title}</h1>
+            <p class="faculty-intro">{content.intro}</p>
+        </div>
+    </section>
+
+    <section class="faculty-directory" aria-label={content.directory_label}>
+        <div class="faculty-container faculty-grid">
+            {faculty.length === 0 && <p class="col-span-full text-center">{content.empty_message}</p>}
+            {faculty.map((member, index) => (
+                <article class="faculty-card">
+                    <div class="faculty-photo">
+                        <OptimizedImage
+                            src={member.photo}
+                            alt={member.name}
+                            width={1200}
+                            sizes="(min-width: 1304px) 403px, (min-width: 1024px) 32vw, (min-width: 640px) 48vw, 100vw"
+                            loading={index < 3 ? "eager" : "lazy"}
+                        />
+                    </div>
+                    <div class="faculty-info">
+                        <h2>{member.name}</h2>
+                        <p>{member.department}</p>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .faculty-container {
+        max-width: 1304px;
+        margin-inline: auto;
+        padding-inline: 24px;
+    }
+
+    .faculty-hero {
+        min-height: 400px;
+        padding-block: 64px 68px;
+        background-size: 100% 504px;
+        background-position: center -96px;
+    }
+
+    .eyebrow {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 1.2px;
+        color: #ef4444;
+    }
+
+    h1 {
+        white-space: pre-line;
+        margin-top: 22px;
+        color: #000;
+        font-size: 56px;
+        line-height: 56px;
+    }
+
+    .faculty-intro {
+        max-width: 1017px;
+        margin-top: 28px;
+        color: #000;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .faculty-directory {
+        padding-block: 102px 156px;
+    }
+
+    .faculty-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 29px 23px;
+    }
+
+    .faculty-card {
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        background: #fffce7;
+    }
+
+    .faculty-photo {
+        aspect-ratio: 400.67 / 311;
+        overflow: hidden;
+        background: #f1f5f9;
+    }
+
+    .faculty-photo :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .faculty-info {
+        min-height: 83px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #111827;
+        font-family: var(--font-hero);
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 26px;
+    }
+
+    .faculty-info p {
+        margin-top: 8px;
+        color: #0f172a;
+        font-size: 12px;
+        line-height: 16px;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 1023px) {
+        .faculty-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 639px) {
+        .faculty-hero {
+            min-height: 0;
+            padding-block: 40px 48px;
+            background-size: auto 100%;
+            background-position: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            line-height: 40px;
+        }
+
+        .faculty-intro {
+            font-size: 16px;
+            line-height: 26px;
+        }
+
+        .faculty-directory {
+            padding-block: 48px 64px;
+        }
+
+        .faculty-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 24px;
+        }
+    }
+</style>

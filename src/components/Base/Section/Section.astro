@@ -1,5 +1,6 @@
 ---
-type Background = "background" | "surface" | "navy" | "accent" | "hero";
+/** `none` leaves the section transparent, e.g. inside Layout's hero slot. */
+type Background = "background" | "surface" | "navy" | "accent" | "hero" | "none";
 
 interface Props {
     id?: string;
@@ -24,6 +25,7 @@ const backgrounds: Record<Background, string> = {
     navy: "bg-navy-deep text-primary-foreground",
     accent: "bg-accent text-accent-foreground",
     hero: "bg-hero",
+    none: "",
 };
 ---
 

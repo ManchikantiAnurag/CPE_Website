@@ -4,7 +4,7 @@ import AnnouncementBar from "../AnnouncementBar/AnnouncementBar.astro";
 import Logo from "../Logo/Logo.astro";
 import Navigation from "../Navigation/Navigation.astro";
 import MobileNav from "../Navigation/MobileNav.astro";
-import Button from "../Button/Button.astro";
+import SocialLinks from "../SocialLinks/SocialLinks.astro";
 import {
     getContactDetails,
     getCourseLinks,
@@ -16,7 +16,6 @@ interface Props {
     background?: "default" | "hero";
 }
 
-const { background = "default" } = Astro.props;
 const site = await getSiteSettings();
 const contact = await getContactDetails();
 const items = await getPrimaryNavigation();
@@ -30,46 +29,34 @@ const announcement = [
 ].join(" · ");
 ---
 
-<header class="sticky top-0 z-50 w-full">
+<header class="relative z-50 w-full">
     <AnnouncementBar
         message={announcement}
         phone={contact.phone_numbers[0]}
         email={contact.emails[0]}
     />
 
-    <div class:list={[
-        background === "hero" ? "hero-navigation bg-hero" : "border-b border-border bg-background/95 backdrop-blur",
-    ]}>
+    <div class="header-navigation">
         <div
-            class:list={[
-                "mx-auto flex items-center justify-between gap-4 px-6",
-                background === "hero" ? "max-w-[1328px] py-6" : "max-w-7xl py-3",
-            ]}
+            class="mx-auto flex min-h-20 max-w-[1344px] items-center justify-between gap-2 px-6 py-[14px] sm:px-8 xl:gap-10"
         >
             <a href="/" class="flex shrink-0 items-center">
                 <Logo
                     src={site.logo}
                     alt={site.logo_alt}
                     fallbackText={site.college_name}
-                    class="h-12 md:h-14"
+                    class="h-[50px] w-[100px] object-contain"
                 />
             </a>
 
             <Navigation items={items} currentPath={currentPath} />
 
-            <div class="flex items-center gap-2">
-                <Button
-                    href={site.cta_href}
-                    variant="accent"
-                    size={background === "hero" ? "lg" : "sm"}
-                    class={background === "hero" ? "hidden! rounded-sm px-5 sm:inline-flex!" : "hidden! sm:inline-flex!"}
-                >
-                    {site.cta_label}
-                </Button>
+            <div class="flex shrink-0 flex-wrap items-center justify-end gap-2 max-xl:max-w-[calc(100%-116px)]">
+                <SocialLinks links={contact.social_links} variant="header" />
                 <button
                     type="button"
                     id="mobile-nav-toggle"
-                    class="rounded-md border border-border p-2 lg:hidden"
+                    class="rounded-md border border-border p-2 xl:hidden"
                     aria-label="Toggle navigation"
                     aria-controls="mobile-nav"
                     aria-expanded="false"
@@ -94,16 +81,13 @@ const announcement = [
             items={items}
             courses={courses}
             currentPath={currentPath}
-            ctaLabel={site.cta_label}
-            ctaHref={site.cta_href}
         />
     </div>
 </header>
 
 <style>
-    .hero-navigation {
-        background-size: 100% 820px;
-        background-position: center -160px;
+    .header-navigation {
+        background: transparent;
     }
 </style>
 

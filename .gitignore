@@ -3,6 +3,7 @@ dist/
 .amplify-hosting/
 public/og/
 .npm/
+.pnpm-store/
 
 # generated types
 .astro/

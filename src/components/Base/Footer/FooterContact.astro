@@ -13,17 +13,17 @@ const { title, addressLines, phones, emails } = Astro.props;
 ---
 
 <div>
-    <h4 class="text-sm font-semibold uppercase tracking-[0.14em]">{title}</h4>
-    <ul class="mt-5 space-y-4 text-sm opacity-80">
+    <h4 class="footer-heading">{title}</h4>
+    <ul class="mt-4 flex flex-col gap-4 text-sm leading-5 text-[#cbd5e1]">
         {
             addressLines.length > 0 && (
                 <li class="flex gap-3">
                     <Icon
                         name="lucide:map-pin"
-                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-[#ef4444]"
                         aria-hidden="true"
                     />
-                    <span>{addressLines.join(", ")}</span>
+                    <span class="leading-[23px]">{addressLines.join(", ")}</span>
                 </li>
             )
         }
@@ -32,7 +32,7 @@ const { title, addressLines, phones, emails } = Astro.props;
                 <li class="flex gap-3">
                     <Icon
                         name="lucide:phone"
-                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-[#ef4444]"
                         aria-hidden="true"
                     />
                     <span class="flex flex-col">
@@ -41,7 +41,7 @@ const { title, addressLines, phones, emails } = Astro.props;
                                 type="phone"
                                 value={phone}
                                 showIcon={false}
-                                class="hover:text-accent"
+                                class="transition-colors hover:text-white"
                             />
                         ))}
                     </span>
@@ -50,17 +50,17 @@ const { title, addressLines, phones, emails } = Astro.props;
         }
         {
             emails.map((email) => (
-                <li class="flex gap-3">
+                <li class="flex items-center gap-3">
                     <Icon
                         name="lucide:mail"
-                        class="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                        class="h-4 w-4 shrink-0 text-[#ef4444]"
                         aria-hidden="true"
                     />
                     <ContactLink
                         type="email"
                         value={email}
                         showIcon={false}
-                        class="break-all hover:text-accent"
+                        class="break-all transition-colors hover:text-white"
                     />
                 </li>
             ))

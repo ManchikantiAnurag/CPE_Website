@@ -1,0 +1,13 @@
+customHeaders:
+  - pattern: '/_astro/*'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=31556952, immutable'
+  - pattern: '/*.html'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, must-revalidate'
+  - pattern: '/og/*'
+    headers:
+      - key: Cache-Control
+        value: 'public, max-age=0, must-revalidate'

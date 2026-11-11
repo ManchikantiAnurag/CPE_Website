@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+collections:
+  - name: achievements-page
+    label: Achievements page
+    icon: emoji_events
+    files:
+      - name: seo
+        label: Search & Social
+        file: src/content/achievements-page/seo.json
+        fields:
+          - { label: Meta Title, name: meta_title, widget: string }
+          - { label: Meta Description, name: meta_description, widget: text }
+      - name: content
+        label: Results & Events
+        file: src/content/achievements-page/content.json
+        fields:
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Introduction, name: intro, widget: text }
+          - label: Academics
+            name: academics
+            widget: object
+            fields:
+              - { label: Tab Label, name: label, widget: string }
+              - label: Results Summary
+                name: stats
+                widget: list
+                summary: "{{fields.value}} — {{fields.label}}"
+                fields:
+                  - { label: Icon, name: icon, widget: string }
+                  - { label: Value, name: value, widget: string }
+                  - { label: Label, name: label, widget: string }
+                  - { label: Detail, name: detail, widget: string }
+              - { label: Toppers Heading, name: toppers_title, widget: string }
+              - label: Academic Toppers
+                name: toppers
+                widget: list
+                summary: "{{fields.name}}"
+                fields:
+                  - { label: Name, name: name, widget: string }
+                  - { label: Subtitle, name: subtitle, widget: string }
+                  - { label: Score or Rank, name: result, widget: string }
+                  - { label: Exam Details, name: detail, widget: string }
+                  - { label: Portrait, name: image, widget: image }
+                  - { label: Portrait Alt Text, name: image_alt, widget: string }
+              - { label: Posters Heading, name: posters_title, widget: string }
+              - label: Results Posters
+                name: posters
+                widget: list
+                summary: "{{fields.caption}}"
+                fields:
+                  - { label: Caption, name: caption, widget: string }
+                  - { label: Image, name: image, widget: image }
+                  - { label: Image Alt Text, name: image_alt, widget: string }
+                  - { label: Inset Image, name: inset, widget: boolean, default: false }
+          - label: Event Categories
+            name: categories
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Category ID, name: id, widget: string, pattern: ['^[a-z][a-z0-9-]*$', 'Use lowercase letters, numbers and hyphens.'] }
+              - { label: Tab Label, name: label, widget: string }
+              - { label: Heading, name: title, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: paragraph, widget: text }
+              - label: Highlights
+                name: highlights
+                widget: list
+                field: { label: Highlight, name: highlight, widget: string }
+              - { label: Event Date (YYYY-MM-DD), name: date, widget: string, required: false }
+              - { label: Date Caption, name: date_label, widget: string, required: false }
+              - { label: Image, name: image, widget: image }
+              - { label: Image Alt Text, name: image_alt, widget: string }

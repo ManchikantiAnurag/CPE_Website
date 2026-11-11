@@ -39,45 +39,10 @@ const { footnote } = enquiry;
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description}>
-    <PageHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.intro}
-    />
-
-    <AdmissionsCallout title={callout.title} phones={phones} />
-
-    <Section>
-        <div class="grid gap-12 lg:grid-cols-2">
-            <AdmissionsProcess
-                eyebrow={process.eyebrow}
-                title={process.title}
-                steps={process.steps}
-            />
-
-            <Reveal variant="right" stagger={120} class="space-y-10">
-                <AdmissionsChecklist
-                    icon="lucide:user-check"
-                    title={eligibility.title}
-                    items={eligibility.items}
-                />
-                <AdmissionsChecklist
-                    icon="lucide:list-checks"
-                    title={documents.title}
-                    items={documents.items}
-                />
-                <AdmissionsDates title={dates.title} items={dates.items} />
-                <AdmissionsProspectus
-                    title={prospectus.title}
-                    description={prospectus.description}
-                />
-            </Reveal>
-        </div>
-    </Section>
-
     <Section id="enquiry" background="surface">
         <div class="mx-auto max-w-3xl">
             <SectionHeading
+                as="h1"
                 eyebrow={enquiry.eyebrow}
                 title={enquiry.title}
                 description={enquiry.description}

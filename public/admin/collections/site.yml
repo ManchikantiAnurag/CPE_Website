@@ -42,12 +42,12 @@ singletons:
       - label: Description
         name: description
         widget: text
-        hint: Footer blurb, also the default meta description.
+        hint: Default page meta description. The footer blurb is managed under Footer.
 
       - label: Call To Action Label
         name: cta_label
         widget: string
-        hint: Header button text, e.g. Apply Now.
+        hint: Header button text, e.g. Enquire Now.
 
       - label: Call To Action Link
         name: cta_href

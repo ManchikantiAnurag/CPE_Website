@@ -1,23 +1,13 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
 import Layout from "../../layouts/Layout.astro";
 import OptimizedImage from "../../components/Base/OptimizedImage.astro";
 import Reveal from "../../components/Base/Reveal/Reveal.astro";
 
-export async function getStaticPaths() {
-    const events = await getCollection("events");
-    return events.map((event) => ({
-        params: { slug: event.id },
-        props: { event },
-    }));
-}
-
-interface Props {
-    event: CollectionEntry<"events">;
-}
-
-const { event: { data: event } } = Astro.props;
+const entry = await getEntry("events", Astro.params.slug!);
+if (!entry) return new Response(null, { status: 404 });
+const event = entry.data;
 const details = [
     { icon: "lucide:calendar-days", label: "Event", value: event.title.replace(/ Celebrations$/, "") },
     { icon: "lucide:map-pin", label: "Venue", value: event.venue },
@@ -26,7 +16,7 @@ const details = [
 ---
 
 <Layout title={event.title} description={event.tagline} headerBackground="hero">
-    <section class="event-hero bg-hero">
+    <section slot="hero" class="event-hero">
         <div class="event-container event-hero-columns">
             <div>
                 <a href="/news" class="eyebrow event-back-link">News & Events</a>
@@ -170,6 +160,11 @@ const details = [
         gap: 10px;
     }
 
+    .event-detail + .event-detail {
+        border-left: 1px solid #00000040;
+        padding-left: 16px;
+    }
+
     dt {
         font-size: 14px;
         font-weight: 700;
@@ -306,6 +301,13 @@ const details = [
         .event-details {
             grid-template-columns: minmax(0, 1fr);
             gap: 16px;
+        }
+
+        .event-detail + .event-detail {
+            border-left: 0;
+            border-top: 1px solid #00000040;
+            padding-left: 0;
+            padding-top: 16px;
         }
 
         dd {
