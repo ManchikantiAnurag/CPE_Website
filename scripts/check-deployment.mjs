@@ -3,7 +3,7 @@ import { readdir } from "node:fs/promises";
 
 // Run against `pnpm preview` (the Worker running locally in workerd).
 const base = process.env.DEPLOY_TEST_URL ?? "http://localhost:4321";
-for (const path of ["/", "/about", "/achievements", "/admissions", "/campus-life", "/contact", "/courses", "/gallery", "/news", "/admin/config.yml", "/favicon.svg"]) {
+for (const path of ["/", "/about", "/achievements", "/admissions", "/campus-life", "/contact", "/courses", "/gallery", "/news", "/admin/config.yml", "/favicon.ico", "/favicon.png"]) {
   assert.equal((await fetch(base + path)).status, 200, path);
 }
 for (const collection of ["courses", "events"]) {
