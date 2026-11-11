@@ -1,6 +1,5 @@
 # build output
 dist/
-.amplify-hosting/
 public/og/
 .npm/
 

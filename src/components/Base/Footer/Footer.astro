@@ -8,74 +8,58 @@ import {
     getCourseLinks,
     getFooterNoteLinks,
     getPrimaryNavigation,
+    getSection,
     getSiteSettings,
 } from "../../../lib/site";
 
 const site = await getSiteSettings();
 const contact = await getContactDetails();
+const footer = await getSection("footer");
 const quickLinks = await getPrimaryNavigation();
 const courses = await getCourseLinks();
 const noteLinks = await getFooterNoteLinks();
-
-const addressLines = [
-    contact.address.line1,
-    contact.address.line2,
-    contact.address.line3,
-].filter((line): line is string => Boolean(line));
-
+const addressLines = [contact.address.line1, contact.address.line2, contact.address.line3].filter((line): line is string => Boolean(line));
 const year = new Date().getFullYear();
 ---
-
-<footer class="bg-navy-deep text-primary-foreground">
-    <div
-        class="mx-auto grid max-w-[1328px] gap-10 px-6 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_1.1fr_1.1fr]"
-    >
-        <div>
-            <div class="inline-block rounded bg-background p-3 text-primary">
-                <Logo
-                    src={site.logo}
-                    alt={site.logo_alt}
-                    fallbackText={site.college_name}
-                    class="h-14"
-                />
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <!-- The logo has dark lettering on a transparent PNG, so it needs a light tile on the black footer. -->
+                <div class="rounded-sm bg-white p-1.5 text-black">
+                    <Logo src={site.logo} alt={site.logo_alt} fallbackText={site.college_name} class="h-[63px]" />
+                </div>
+                <p>{footer.description}</p>
+                <SocialLinks links={contact.social_links} variant="footer" class="pt-1" />
             </div>
-            <p class="mt-5 max-w-xs text-sm leading-relaxed opacity-75">
-                {site.description}
-            </p>
-            <SocialLinks links={contact.social_links} class="mt-5" />
+            <FooterColumn title="Quick Links" links={quickLinks} />
+            <FooterColumn title="Courses" links={courses} joinDescription gap="gap-3" />
+            <FooterContact title={footer.contact_title} addressLines={addressLines} phones={contact.phone_numbers} emails={contact.emails} />
         </div>
-
-        <FooterColumn title="Quick Links" links={quickLinks} />
-        <FooterColumn title="Courses" links={courses} joinDescription />
-        <FooterContact
-            title="Contact"
-            addressLines={addressLines}
-            phones={contact.phone_numbers}
-            emails={contact.emails}
-        />
-    </div>
-
-    <div class="border-t border-primary-foreground/10">
-        <div
-            class="mx-auto flex max-w-[1328px] flex-col gap-2 px-6 py-5 text-xs opacity-70 md:flex-row md:items-center md:justify-between"
-        >
-            <p>
-                © {year} {site.college_name}, {site.institution_name}. All rights
-                reserved.
-            </p>
-            <p>
-                Affiliated to {site.affiliation}
-                {
-                    noteLinks.map((link) => (
-                        <>
-                            {" · "}
-                            <a href={link.href} class="hover:text-accent">
-                                {link.label}
-                            </a>
-                        </>
-                    ))
-                }
-            </p>
+        <div class="footer-bottom">
+            <p>© {year} {site.college_name}, {site.institution_name}. {footer.copyright_notice}</p>
+            <p>Affiliated to {site.affiliation}{noteLinks.map(link => <>{" · "}<a href={link.href}>{link.label}</a></>)}</p>
         </div>
     </div>
 </footer>
+<style>
+    .site-footer { background: #000; border-top: 1px solid #1e293b; padding: 64px 32px 32px; color: #cbd5e1; }
+    .footer-container { max-width: 1280px; margin-inline: auto; }
+    /* Design columns: 400 / 180 / 290 / 290 px with 40px gutters at 1280px. */
+    .footer-grid { display: grid; grid-template-columns: minmax(0, 40fr) minmax(0, 18fr) minmax(0, 29fr) minmax(0, 29fr); column-gap: 40px; row-gap: 48px; padding-bottom: 64px; }
+    /* Shared by FooterColumn and FooterContact. */
+    .site-footer :global(.footer-heading) { font: 400 14px/20px var(--font-display); letter-spacing: 0.7px; text-transform: uppercase; color: #fff; }
+    .footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+    .footer-brand p { max-width: 384px; color: #94a3b8; font-size: 14px; line-height: 20px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid #1e293b; padding-top: 32px; color: #94a3b8; font-size: 12px; line-height: 16px; }
+    .footer-bottom a:hover { color: #fff; }
+    @media (max-width: 1023px) {
+        .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .footer-brand { grid-column: 1 / -1; }
+        .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+    @media (max-width: 639px) {
+        .site-footer { padding: 48px 24px 32px; }
+        .footer-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+</style>

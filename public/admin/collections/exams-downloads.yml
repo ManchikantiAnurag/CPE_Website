@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+collections:
+  - name: exams-downloads
+    label: Exams & Downloads page
+    icon: download
+    files:
+      - name: seo
+        label: Search & Social
+        fields:
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+        file: src/content/exams-downloads/seo.json
+      - name: hero
+        label: Hero
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Page Title
+            name: title
+            widget: string
+          - label: Introduction
+            name: intro
+            widget: text
+        file: src/content/exams-downloads/hero.json
+      - name: downloads
+        label: Downloads
+        fields:
+          - label: Empty Message
+            name: empty_message
+            widget: text
+          - label: Documents
+            name: items
+            widget: list
+            required: false
+            summary: "{{fields.title}}"
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: Description
+                name: description
+                widget: text
+                required: false
+              - label: Document
+                name: file
+                widget: file
+                media_folder: public/downloads
+                public_folder: /downloads
+                hint: Upload a PDF or other downloadable document. Files are served from
+                  /downloads/.
+        file: src/content/exams-downloads/downloads.json

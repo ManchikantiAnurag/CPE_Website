@@ -1,5 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content";
+import type { InferGetStaticPropsType } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import PageHero from "../../components/Base/PageHero/PageHero.astro";
 import CourseOverview from "../../components/Courses/CourseOverview/CourseOverview.astro";
@@ -10,10 +11,12 @@ import { getCourseLinks, getSection } from "../../lib/site";
 
 export async function getStaticPaths() {
     const courses = await getCollection("courses");
-    return courses.map(({ id }) => ({ params: { slug: id } }));
+    return courses.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
-const entry = await getEntry("courses", Astro.params.slug!);
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry } = Astro.props;
 const course = entry.data;
 
 const contactDetails = await getEntry("contactDetails", "contact-details");
@@ -27,8 +30,16 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
 }));
 ---
 
-<Layout title={course.title} description={course.tagline} headerBackground="hero">
-    <PageHero
+<Layout title={course.title} description={course.tagline} headerBackground="hero"
+    structuredData={{
+        "@type": "Course",
+        name: course.title,
+        description: course.tagline,
+        url: new URL(Astro.url.pathname, Astro.site).href,
+        provider: { "@id": new URL("/#organization", Astro.site).href },
+    }}
+>
+    <PageHero slot="hero"
         eyebrow={course.display_code || course.code}
         title={course.title}
         description={course.tagline}
@@ -49,6 +60,7 @@ const courseOptions = (await getCourseLinks()).map((item) => ({
                     eligibility={course.eligibility}
                     board={course.board}
                     phones={phones}
+                    emails={course.enquiry_emails.length ? course.enquiry_emails : (contactDetails?.data.emails ?? [])}
                 />
             </Reveal>
         </div>

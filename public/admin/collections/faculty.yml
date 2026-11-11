@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+collections:
+  - name: faculty-page
+    label: Faculty page
+    icon: groups
+    files:
+      - name: seo
+        label: Search & Social
+        fields:
+          - label: Meta Title
+            name: meta_title
+            widget: string
+          - label: Meta Description
+            name: meta_description
+            widget: text
+        file: src/content/faculty-page/seo.json
+      - name: content
+        label: Faculty Directory
+        fields:
+          - label: Eyebrow
+            name: eyebrow
+            widget: string
+          - label: Title
+            name: title
+            widget: text
+            hint: Line breaks are preserved in the heading.
+          - label: Introduction
+            name: intro
+            widget: text
+          - label: Directory Accessible Label
+            name: directory_label
+            widget: string
+          - label: Empty Message
+            name: empty_message
+            widget: text
+          - label: Faculty Members
+            name: members
+            widget: list
+            required: false
+            label_singular: Faculty Member
+            summary: "{{fields.name}} — {{fields.department}}"
+            hint: Drag members to change their display order.
+            fields:
+              - label: Name
+                name: name
+                widget: string
+              - label: Department / Campus
+                name: department
+                widget: string
+              - label: Portrait
+                name: photo
+                widget: image
+                hint: Use a cropped landscape portrait, approximately 400 × 311 pixels, keeping
+                  the full face visible.
+        file: src/content/faculty-page/content.json

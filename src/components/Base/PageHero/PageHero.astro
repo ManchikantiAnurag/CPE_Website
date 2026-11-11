@@ -11,7 +11,7 @@ interface Props {
 const { eyebrow, title, description, variant = "default" } = Astro.props;
 ---
 
-<section class:list={["bg-hero", variant === "course" ? "course-hero" : "py-16 md:py-20"]}>
+<section class:list={[variant === "course" ? "course-hero" : "py-16 md:py-20"]}>
     <div class:list={["mx-auto px-6", variant === "course" ? "max-w-[1302px]" : "max-w-7xl"]}>
         <Reveal immediate stagger={90} duration={800}>
             {eyebrow && <p class="eyebrow">{eyebrow}</p>}

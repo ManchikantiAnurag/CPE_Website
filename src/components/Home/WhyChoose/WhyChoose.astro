@@ -1,31 +1,32 @@
 ---
-import FeatureTile from "../../Base/FeatureTile/FeatureTile.astro";
+import { Icon } from "astro-icon/components";
 import SectionHeading from "../../Base/SectionHeading/SectionHeading.astro";
-import Reveal from "../../Base/Reveal/Reveal.astro";
-
 interface Props {
     eyebrow: string;
     title: string;
     items: { icon: string; title: string; description: string }[];
 }
-
 const { eyebrow, title, items } = Astro.props;
 ---
-
 <SectionHeading eyebrow={eyebrow} title={title} />
-
-<!-- gap-px over a bordered background draws the hairline grid between tiles. -->
-<Reveal
-    stagger={90}
-    class="mt-12 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4"
->
-    {
-        items.map((item) => (
-            <FeatureTile
-                icon={item.icon}
-                title={item.title}
-                description={item.description}
-            />
-        ))
-    }
-</Reveal>
+<div class="feature-grid">
+    {items.map((item, index) => (
+        <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <div class="feature-icon"><Icon name={item.icon} class="h-5 w-5" aria-hidden="true" /></div>
+            <h3>{item.title}</h3>
+            <ul>{item.description.split("\n").filter(Boolean).map(line => <li>{line}</li>)}</ul>
+        </article>
+    ))}
+</div>
+<style>
+    .feature-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .feature-card { position: relative; min-height: 267px; border: 1px solid #cbd5e1; border-radius: 4px; padding: 31px; }
+    .feature-number { position: absolute; right: 18px; top: 12px; color: #fdd2d3; font: 32px/40px var(--font-display); letter-spacing: 1px; }
+    .feature-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #ff3038; background: #fce8e9; }
+    h3 { margin-top: 20px; font-size: 18px; line-height: 24px; }
+    h3::after { content: ""; display: block; width: 45px; height: 1px; background: #ff3038; margin-top: 8px; }
+    ul { margin-top: 16px; padding-left: 24px; list-style: disc; max-width: 300px; color: #64748b; font-size: 16px; line-height: 23px; }
+    @media (max-width: 1023px) { .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 639px) { .feature-grid { grid-template-columns: 1fr; gap: 20px; } .feature-card { min-height: 240px; padding: 24px; } }
+</style>

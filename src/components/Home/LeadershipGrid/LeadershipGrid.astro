@@ -1,26 +1,65 @@
 ---
-import { Icon } from "astro-icon/components";
-import Button from "../../Base/Button/Button.astro";
-import PeopleGrid from "../../Base/PeopleGrid/PeopleGrid.astro";
-import SectionHeadingRow from "../../Base/SectionHeadingRow/SectionHeadingRow.astro";
-import { getLeadership } from "../../../lib/site";
-
+import OptimizedImage from "../../Base/OptimizedImage.astro";
 interface Props {
     eyebrow: string;
     title: string;
-    cta: { label: string; href: string };
+    image: string;
+    image_alt: string;
+    paragraphs: string[];
+    quote: string;
+    messages: { title: string; name: string; greeting: string; sign_off: string; paragraphs: string[]; image: string; image_alt: string }[];
 }
-
-const { eyebrow, title, cta } = Astro.props;
-
-const people = await getLeadership();
+const { eyebrow, title, image, image_alt, paragraphs, quote, messages } = Astro.props;
 ---
-
-<SectionHeadingRow eyebrow={eyebrow} title={title}>
-    <Button slot="action" href={cta.href} variant="outline">
-        {cta.label}
-        <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
-    </Button>
-</SectionHeadingRow>
-
-<PeopleGrid people={people} class="mt-12" />
+<div class="leadership">
+    <article class="chairman">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+        <OptimizedImage src={image} alt={image_alt} width={1200} sizes="(min-width: 1024px) 1006px, 100vw" class="chairman-image" />
+        <div class="chairman-copy">
+            {paragraphs.map(paragraph => <p>{paragraph}</p>)}
+            <p class="font-semibold">{quote}</p>
+        </div>
+    </article>
+    {messages.map((message, index) => (
+        <article class="message">
+            <p class="eyebrow">{eyebrow}</p>
+            <h2>{message.title}</h2>
+            <div class:list={["message-layout", index % 2 === 1 && "portrait-right"]}>
+                <figure>
+                    {message.image ? <OptimizedImage src={message.image} alt={message.image_alt} width={620} class="message-image" /> : <div class="portrait-placeholder" aria-hidden="true" />}
+                    <figcaption><span>{message.sign_off}</span><strong>{message.name}</strong></figcaption>
+                </figure>
+                <div class="message-copy">
+                    <p><strong>{message.greeting}</strong></p>
+                    {message.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+                </div>
+            </div>
+        </article>
+    ))}
+</div>
+<style>
+    .leadership { max-width: 1006px; margin-inline: auto; color: #475569; }
+    h2 { margin-top: 12px; color: #0f172a; }
+    .chairman { text-align: center; }
+    .chairman :global(.chairman-image) { margin-top: 48px; width: 100%; height: 492px; object-fit: contain; background: #303744; }
+    .chairman-copy { margin-top: 32px; font-size: 16px; line-height: 24px; }
+    .chairman-copy p + p { margin-top: 24px; }
+    .message { margin-top: 70px; }
+    .message-layout { margin-top: 40px; display: grid; grid-template-columns: 310px minmax(0, 1fr); gap: 40px; align-items: start; }
+    figure { margin: 0; }
+    .portrait-placeholder, figure :global(.message-image) { width: 100%; height: 362px; object-fit: cover; background: #fff3c2; }
+    figcaption { background: #fff; padding: 10px; text-align: center; font-size: 12px; line-height: 18px; letter-spacing: .3px; }
+    figcaption strong { display: block; margin-top: 2px; font-size: 14px; text-transform: uppercase; color: #ff3038; }
+    .message-copy { font-size: 16px; line-height: 24px; }
+    .portrait-right { grid-template-columns: minmax(0, 1fr) 310px; }
+    .portrait-right figure { grid-column: 2; grid-row: 1; }
+    .portrait-right .message-copy { grid-column: 1; grid-row: 1; }
+    @media (max-width: 767px) {
+        .chairman :global(.chairman-image) { height: auto; max-height: 492px; margin-top: 32px; }
+        .message-layout, .portrait-right { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; }
+        .message-layout figure { width: min(310px, 100%); margin-inline: auto; grid-column: auto; grid-row: auto; }
+        .portrait-right .message-copy { grid-column: auto; grid-row: auto; }
+        .message { margin-top: 56px; }
+    }
+</style>

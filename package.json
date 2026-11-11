@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "cpe-website",
   "type": "module",
   "version": "0.0.1",
   "packageManager": "pnpm@12.8.1",
@@ -12,16 +12,17 @@
     "preview": "astro preview",
     "deploy": "pnpm build && wrangler deploy",
     "test:deployment": "node scripts/check-deployment.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "test:cms": "node scripts/check-cms.mjs"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.128",
+    "@astrojs/cloudflare": "^14.4.6",
+    "@iconify-json/lucide": "^1.2.147",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.10",
-    "@astrojs/cloudflare": "^14.3.3",
+    "astro": "^7.4.2",
     "astro-icon": "^1.2.0",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
-    "wrangler": "^4.145.0"
+    "wrangler": "^4.160.0"
   }
 }

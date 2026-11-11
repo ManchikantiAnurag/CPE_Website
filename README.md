@@ -1,49 +1,77 @@
 # CPE Website
 
-Astro website with Sveltia CMS, deployed to AWS Amplify Hosting using
-`astro-aws-amplify`. Pages and `/api/form` run on Node.js 22; assets are served
-from Amplify's static hosting.
+Astro website with Sveltia CMS, deployed to Cloudflare Workers using
+`@astrojs/cloudflare`. Pages are prerendered and served as static assets; only
+`/api/form` and on-demand image transforms run in the Worker.
 
 ## Development
 
-Use Node.js 22.12 or newer and npm:
+Use Node.js 22.12 or newer and pnpm 12.8.1:
 
 ```sh
-npm ci
-npm run dev -- --background
-npm run astro -- dev status
-npm run astro -- dev logs
-npm run astro -- dev stop
+pnpm install --frozen-lockfile
+pnpm dev --background
+pnpm astro dev status
+pnpm astro dev logs
+pnpm astro dev stop
 ```
 
-## Deploy to AWS Amplify
+## Deploy to Cloudflare Workers
 
-1. Connect this repository and your deployment branch in Amplify Hosting.
-2. Use the Amazon Linux 2023 build image and enable SSR hosting
-   (`WEB_COMPUTE` if configuring the app through the AWS CLI).
-3. Use the checked-in `amplify.yml`. It selects Node.js 22, installs from the
-   lockfile, builds, and packages dependencies into the compute bundle.
-4. Remove any default SPA rewrite to `/index.html`; Astro handles page routing.
-5. Deploy. The artifact directory is `.amplify-hosting`, not `dist`.
+`wrangler.jsonc` defines the `cpe-website` Worker. Either:
 
-The CMS is available at `/admin` (redirecting to `/admin/index.html`). Its GitHub
-backend remains configured in `public/admin/config.yml`; publishing commits to
-the connected branch triggers Amplify rebuilds.
+- **Workers Builds (Git-connected):** in the Cloudflare dashboard, connect this
+  repository to the Worker with build command `pnpm build` and deploy command
+  `npx wrangler deploy`. Pushes to the production branch deploy automatically.
+- **Manual:** `pnpm deploy` (runs `wrangler login` first if needed).
 
-The contact and admissions endpoint currently **only logs submissions**. This
-migration preserves that behavior; email delivery and database storage are not
-configured. No environment variables are currently required.
+Attach `cpecollege.com` to the Worker under **Settings → Domains & Routes**
+(the zone's DNS is already on Cloudflare). Set the optional build variable
+`SITE_URL` to override `https://cpecollege.com` for canonical URLs and social
+metadata.
+
+`public/_headers` sets cache headers for built assets and OG images. URLs have
+no trailing slash: `/about` serves `about/index.html` and `/about/` redirects.
+
+### Images
+
+Everything here stays within Cloudflare's free allowances:
+
+- **Build time:** images on prerendered pages are resized to WebP during
+  `pnpm build` and served from `/_astro/` as immutable static assets. This uses
+  no Cloudflare Images transformations and does not invoke the Worker.
+- **Edge:** images transformed on demand (`/_image`) use the Cloudflare Images
+  binding (`IMAGES`). Each result is stored in the Workers cache with a
+  one-year immutable header, so repeat requests are served from cache instead
+  of being transformed again. The free plan includes 5,000 unique
+  transformations a month. The Workers cache only applies on the custom domain,
+  not on `*.workers.dev`.
+
+The CMS keeps uploads in `src/assets/media` in the repository.
+
+The CMS is available at `/admin`. Its GitHub backend is configured in
+`public/admin/config.yml`; publishing commits to `main` triggers a rebuild when
+Workers Builds is connected to `main`. For an independent deployment branch,
+set the CMS backend branch to that same branch before publishing content there.
+
+The contact and admissions endpoint currently **only logs submissions** (visible
+in Workers Logs); email delivery and database storage are not configured. No
+environment variables or secrets are required.
 
 ## Verify locally
 
 ```sh
-npm run build
-node .amplify-hosting/compute/default/entry.mjs
+pnpm build
+pnpm preview --background
+pnpm test:deployment
+node scripts/check-seo.mjs
+pnpm astro preview stop
 ```
 
-In another terminal, run `npm run test:deployment`. The production server listens
-on port 3000. Stop it with Ctrl+C after checking. The Amplify adapter does not
-support `astro preview`.
+`pnpm preview` runs the built Worker locally in workerd on port 4321.
+`DEPLOY_TEST_URL` and `SEO_TEST_URL` override the test server URL. Run
+`pnpm test:cms` to validate CMS configuration and content.
 
-References: [Astro on AWS](https://docs.astro.build/en/guides/deploy/aws/),
-[Amplify deployment specification](https://docs.aws.amazon.com/amplify/latest/userguide/ssr-deployment-specification.html).
+References: [Astro on Cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare/),
+[Workers static assets](https://developers.cloudflare.com/workers/static-assets/),
+[Cloudflare Images binding](https://developers.cloudflare.com/images/transform-images/bindings/).

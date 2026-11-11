@@ -30,7 +30,8 @@ collections:
             widget: string
           - label: Title
             name: title
-            widget: string
+            widget: text
+            hint: Line breaks are preserved in the hero heading.
           - label: Intro
             name: intro
             widget: text
@@ -79,6 +80,23 @@ collections:
             widget: string
             required: false
             hint: Small accent caption over the bottom of the hero image.
+
+          - label: Course Shortcuts
+            name: course_shortcuts
+            widget: list
+            required: false
+            summary: "{{fields.label}}"
+            fields:
+              - label: Label
+                name: label
+                widget: string
+              - label: Link
+                name: href
+                widget: string
+              - label: Lucide Icon
+                name: icon
+                widget: string
+                hint: For example lucide:calculator.
 
       - name: about
         label: "About the College"
@@ -144,7 +162,7 @@ collections:
                 widget: string
 
       - name: why-choose
-        label: "Why Choose CPE"
+        label: "Why CPE"
         file: src/content/home/why-choose.json
         icon: star
         fields:
@@ -172,12 +190,18 @@ collections:
                   - lucide:award
                   - lucide:clock
                   - lucide:building-2
+                  - lucide:tv
+                  - lucide:clipboard-check
+                  - lucide:laptop
+                  - lucide:contact
+                  - lucide:calendar-check
               - label: Title
                 name: title
                 widget: string
               - label: Description
                 name: description
                 widget: text
+                hint: Put each bullet point on its own line.
 
       - name: career-focus
         label: "Career-Focused Learning"
@@ -207,27 +231,34 @@ collections:
                 widget: text
 
       - name: leadership
-        label: "Leadership"
+        label: "Leadership Messages"
         file: src/content/home/leadership.json
         icon: groups
         fields:
-          - label: Eyebrow
-            name: eyebrow
-            widget: string
-          - label: Title
-            name: title
-            widget: string
-            hint: The people themselves are managed under the Leadership singleton.
-          - label: Button
-            name: cta
-            widget: object
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Chairman Heading, name: title, widget: string }
+          - { label: Chairman Image, name: image, widget: image }
+          - { label: Chairman Image Alt Text, name: image_alt, widget: string }
+          - label: Chairman Paragraphs
+            name: paragraphs
+            widget: list
+            field: { label: Paragraph, name: paragraph, widget: text }
+          - { label: Chairman Quote, name: quote, widget: text }
+          - label: Messages
+            name: messages
+            widget: list
+            summary: "{{fields.title}}"
             fields:
-              - label: Label
-                name: label
-                widget: string
-              - label: Link
-                name: href
-                widget: string
+              - { label: Heading, name: title, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Greeting, name: greeting, widget: string }
+              - { label: Sign-off, name: sign_off, widget: string }
+              - label: Paragraphs
+                name: paragraphs
+                widget: list
+                field: { label: Paragraph, name: paragraph, widget: text }
+              - { label: Portrait, name: image, widget: image, required: false }
+              - { label: Portrait Alt Text, name: image_alt, widget: string }
 
       - name: campus-life
         label: "Campus and Student Life"
@@ -402,6 +433,8 @@ collections:
         icon: contact_mail
         hint: The address, phone numbers and email come from Contact Details.
         fields:
+          - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+          - { label: Title, name: title, widget: string }
           - label: Card titles
             name: cards
             widget: object

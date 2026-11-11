@@ -1,45 +1,53 @@
 ---
+import { getSection } from "../../../lib/site";
 import Button from "../../Base/Button/Button.astro";
 import Field from "../../Base/Field/Field.astro";
 import Input from "../../Base/Input/Input.astro";
 import Textarea from "../../Base/Textarea/Textarea.astro";
 
+const copy = await getSection("contactForm");
 ---
 
 <form
     method="post"
     action="/api/form"
-    data-toast="Thank you. Your message has been sent — we usually respond within one working day."
+    data-toast={copy.success_message}
     class="grid gap-6 rounded-[20px] border border-border bg-card p-8 md:grid-cols-2 md:p-10"
 >
     <div class="md:col-span-2">
-        <h2 class="text-3xl text-primary md:text-[32px]">Send us a message</h2>
+        <h2 class="text-3xl text-primary md:text-[32px]">{copy.title}</h2>
         <p class="mt-1 text-sm text-muted-foreground">
-            We usually respond within one working day.
+            {copy.description}
         </p>
     </div>
 
-    <Field label="Name" for="name" required>
+    <Field label={copy.labels.name} for="name" required>
         <Input id="name" maxlength={100} required />
     </Field>
 
-    <Field label="Mobile Number" for="mobile" required>
+    <Field label={copy.labels.mobile} for="mobile" required>
         <Input id="mobile" type="tel" maxlength={15} required />
     </Field>
 
-    <Field label="Email" for="email">
+    <Field label={copy.labels.email} for="email">
         <Input id="email" type="email" maxlength={255} />
     </Field>
 
-    <Field label="Subject" for="subject">
+    <Field label={copy.labels.subject} for="subject">
         <Input id="subject" maxlength={150} />
     </Field>
 
-    <Field label="Message" for="message" required full>
+    <Field label={copy.labels.message} for="message" required full>
         <Textarea id="message" maxlength={1000} required />
     </Field>
 
     <div class="md:col-span-2">
-        <Button variant="accent" size="lg">Send Message</Button>
+        <Button variant="accent" size="lg">{copy.submit_label}</Button>
     </div>
 </form>
+
+<style>
+    form :global(label) {
+        display: block;
+    }
+</style>

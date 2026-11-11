@@ -1,0 +1,183 @@
+---
+import Layout from "../layouts/Layout.astro";
+import OptimizedImage from "../components/Base/OptimizedImage.astro";
+import { Icon } from "astro-icon/components";
+import { getSection } from "../lib/site";
+import type { ImageMetadata } from "astro";
+
+const seo = await getSection("achievementsSeo");
+const content = await getSection("achievementsPage");
+const { academics, categories } = content;
+const tabs = [{ id: "academics", label: academics.label }, ...categories];
+// The page is prerendered; the script below selects ?category= on load.
+const activeCategory = "academics";
+const media = import.meta.glob<{ default: ImageMetadata }>("../assets/media/**/*", { eager: true });
+const fullSizeImage = (src: string) => media[`../assets${src}`]?.default.src ?? src;
+---
+
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
+    <section slot="hero" class="achievements-hero">
+        <div class="hero-content page-container">
+            <p class="eyebrow">{content.eyebrow}</p>
+            <h1>{content.title}</h1>
+            <p class="hero-description">{content.intro}</p>
+            <nav class="category-tabs" aria-label="Achievement categories">
+                {tabs.map(tab => (
+                    <a href={`?category=${tab.id}`} data-category-tab={tab.id} aria-current={activeCategory === tab.id ? "true" : undefined} aria-controls={`panel-${tab.id}`}>{tab.label}</a>
+                ))}
+            </nav>
+        </div>
+    </section>
+
+    <section id="panel-academics" data-achievement-panel="academics" hidden={activeCategory !== "academics"} class="academics page-container" aria-label={academics.label}>
+        <div class="results-stats">
+            {academics.stats.map(stat => (
+                <div class="stat-card">
+                    <Icon name={stat.icon} class="stat-icon" aria-hidden="true" />
+                    <p class="stat-value">{stat.value}</p>
+                    <p class="stat-label">{stat.label}</p>
+                    <p class="stat-label">{stat.detail}</p>
+                </div>
+            ))}
+        </div>
+        <h2 class="section-title">{academics.toppers_title}</h2>
+        <div class="toppers-grid">
+            {academics.toppers.map(topper => (
+                <article class="topper-card">
+                    <OptimizedImage src={topper.image} alt={topper.image_alt} width={1000} sizes="(min-width: 1024px) 403px, (min-width: 640px) 45vw, 100vw" class="topper-image" />
+                    <div class="topper-info">
+                        <h3>{topper.name}</h3>
+                        <p class="topper-subtitle">{topper.subtitle}</p>
+                        <p class="topper-result">{topper.result}</p>
+                        <p class="topper-detail">{topper.detail}</p>
+                    </div>
+                </article>
+            ))}
+        </div>
+        <h2 class="section-title">{academics.posters_title}</h2>
+        <div class="results-posters">
+            {academics.posters.map(poster => (
+                <figure class:list={["poster", poster.inset && "poster-inset"]}>
+                    <a class="poster-link" href={fullSizeImage(poster.image)} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${poster.caption} results (opens in a new tab)`}>
+                        <OptimizedImage src={poster.image} alt={poster.image_alt} width={2560} sizes="(min-width: 1440px) 1256px, 100vw" class="poster-image" />
+                    </a>
+                    <figcaption>{poster.caption}</figcaption>
+                </figure>
+            ))}
+        </div>
+    </section>
+
+    {categories.map(category => (
+        <section id={`panel-${category.id}`} data-achievement-panel={category.id} hidden={activeCategory !== category.id} class="event-panel page-container" aria-label={category.label}>
+            <div class="event-layout">
+                <OptimizedImage src={category.image} alt={category.image_alt} width={1200} sizes="(min-width: 1024px) 601px, 100vw" class="event-image" />
+                <div class="event-copy">
+                    <p class="eyebrow">{category.label}</p>
+                    <h2>{category.title}</h2>
+                    <div class="event-description">{category.paragraphs.map(paragraph => <p>{paragraph}</p>)}</div>
+                    <ul>{category.highlights.map(highlight => <li>{highlight}</li>)}</ul>
+                    {category.date && <div class="event-date"><Icon name="lucide:calendar" class="h-5 w-5 text-accent" aria-hidden="true" /><time datetime={category.date}>{category.date_label}</time></div>}
+                </div>
+            </div>
+        </section>
+    ))}
+</Layout>
+
+<style>
+    .page-container { width: min(1256px, calc(100% - 48px)); margin-inline: auto; }
+    .achievements-hero { min-height: 440px; color: #000; background-size: cover; }
+    .hero-content { padding-top: 140px; padding-bottom: 68px; }
+    .hero-content .eyebrow { font-size: 12px; line-height: 16px; letter-spacing: 1.2px; color: #ef4444; }
+    h1 { margin-top: 22px; font-size: 56px; line-height: 56px; }
+    .hero-description { margin-top: 28px; font-size: 18px; line-height: 28px; }
+    .category-tabs { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 39px; }
+    .category-tabs a { display: inline-flex; justify-content: center; align-items: center; padding: 10px 16px; border: 1px solid #0f172a; border-radius: 5px; font-size: 16px; line-height: 22px; color: #0f172a; transition: background-color .15s, color .15s; }
+    .category-tabs a[aria-current] { background: #e51f26; border-color: #e51f26; color: white; }
+    .category-tabs a:hover { background: #000; border-color: #000; color: #fff; }
+    a:focus-visible { outline: 2px solid #d92228; outline-offset: 5px; }
+    [hidden] { display: none !important; }
+    .academics { padding-top: 68px; padding-bottom: 108px; }
+    .results-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 36px; }
+    .stat-card { min-height: 188px; border: 1px solid #e2e8f0; border-radius: 8px; padding: 26px 16px 20px; text-align: center; }
+    .stat-card :global(.stat-icon) { width: 44px; height: 44px; margin-inline: auto; color: #e51f26; stroke-width: 2; }
+    .stat-value { margin-top: 14px; font-size: 30px; font-weight: 700; line-height: 36px; color: #1f2937; }
+    .stat-label { font-size: 14px; line-height: 22px; color: #64748b; }
+    .stat-value + .stat-label { margin-top: 5px; }
+    .section-title { margin-top: 64px; text-align: center; font-size: 36px; line-height: 40px; color: #0f172a; }
+    .toppers-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 44px; }
+    .topper-card { overflow: hidden; border: 1px solid #cbd5e1; border-radius: 10px; background: #fffce7; text-align: center; }
+    .topper-card :global(.topper-image) { width: 100%; aspect-ratio: 1611 / 1244; object-fit: cover; }
+    .topper-info { min-height: 158px; padding: 16px 12px; color: #0f172a; }
+    .topper-info h3 { font-family: var(--font-sans); font-weight: 700; font-size: 22px; line-height: 28px; letter-spacing: -.5px; }
+    .topper-subtitle, .topper-detail { font-size: 12px; line-height: 20px; }
+    .topper-result { margin-block: 10px; font-size: 36px; line-height: 44px; font-weight: 700; color: #e51f26; }
+    .results-posters { display: grid; gap: 44px; margin-top: 44px; }
+    .poster { overflow: hidden; border: 1px solid #cbd5e1; border-radius: 10px; background: #fff; }
+    .poster-link { display: block; }
+    .poster :global(.poster-image) { width: 100%; height: auto; }
+    .poster-inset .poster-link { margin-inline: 24px; }
+    figcaption { padding: 20px; background: #fffce7; text-align: center; font-size: 22px; line-height: 30px; font-weight: 700; color: #0f172a; }
+    .event-panel { padding-block: 96px; }
+    .event-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .event-layout :global(.event-image) { width: 100%; aspect-ratio: 601 / 605; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px #0002; }
+    .event-copy .eyebrow { font-size: 12px; line-height: 16px; letter-spacing: .6px; }
+    .event-copy h2 { margin-top: 28px; font-size: 36px; line-height: 40px; color: #0f172a; }
+    .event-description { margin-top: 28px; font-size: 16px; line-height: 24px; color: #475569; }
+    .event-description p + p { margin-top: 16px; }
+    .event-copy ul { margin-top: 32px; padding-left: 24px; list-style: disc; display: grid; gap: 12px; color: #475569; font-size: 16px; line-height: 22px; }
+    .event-date { display: flex; align-items: center; gap: 12px; padding: 12px 20px; margin-top: 28px; background: #f9f6ed; color: #475569; font-size: 16px; line-height: 20px; }
+    @media (max-width: 1023px) {
+        .results-stats { gap: 20px; }
+        .toppers-grid { gap: 16px; }
+        .topper-info h3 { font-size: 18px; line-height: 24px; }
+        .event-layout { grid-template-columns: 1fr; gap: 40px; }
+        .event-layout :global(.event-image) { max-height: 605px; }
+    }
+    @media (max-width: 639px) {
+        .hero-content { padding-top: 128px; padding-bottom: 48px; }
+        h1 { font-size: 40px; line-height: 46px; }
+        .hero-description { font-size: 16px; line-height: 26px; margin-top: 24px; }
+        .category-tabs { gap: 12px; margin-top: 28px; }
+        .category-tabs a { padding: 10px 12px; font-size: 14px; }
+        .results-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+        .stat-card { padding-inline: 8px; min-height: 180px; }
+        .stat-value { font-size: 26px; }
+        .stat-label { font-size: 12px; }
+        .academics { padding-block: 48px 64px; }
+        .section-title { font-size: 30px; line-height: 36px; margin-top: 48px; }
+        .toppers-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
+        .topper-info h3 { font-size: 22px; line-height: 28px; }
+        .results-posters { gap: 28px; margin-top: 28px; }
+        .poster-inset .poster-link { margin-inline: 6px; }
+        figcaption { padding: 16px; font-size: 18px; line-height: 24px; }
+        .event-panel { padding-block: 48px 64px; }
+        .event-copy h2 { font-size: 30px; line-height: 36px; margin-top: 20px; }
+        .event-date { padding-inline: 12px; font-size: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .category-tabs a { transition: none; } }
+</style>
+
+<script>
+    const tabs = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-category-tab]"));
+    const panels = document.querySelectorAll<HTMLElement>("[data-achievement-panel]");
+    const selectCategory = (id: string | null) => {
+        const active = tabs.find(tab => tab.dataset.categoryTab === id)?.dataset.categoryTab ?? "academics";
+        tabs.forEach(tab => {
+            if (tab.dataset.categoryTab === active) tab.setAttribute("aria-current", "true");
+            else tab.removeAttribute("aria-current");
+        });
+        panels.forEach(panel => { panel.hidden = panel.dataset.achievementPanel !== active; });
+    };
+    tabs.forEach(tab => {
+        tab.addEventListener("click", event => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+            event.preventDefault();
+            const url = new URL(tab.href);
+            history.pushState(null, "", url);
+            selectCategory(tab.dataset.categoryTab ?? null);
+        });
+    });
+    const selectFromUrl = () => selectCategory(new URLSearchParams(location.search).get("category"));
+    window.addEventListener("popstate", selectFromUrl);
+    selectFromUrl();
+</script>
