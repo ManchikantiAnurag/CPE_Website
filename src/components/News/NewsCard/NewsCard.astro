@@ -59,3 +59,24 @@ const formattedDate = new Intl.DateTimeFormat("en-IN", {
         }
     </div>
 </article>
+
+<style>
+    article {
+        position: relative;
+    }
+
+    a::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+    }
+
+    a:focus-visible {
+        outline: none;
+    }
+
+    a:focus-visible::after {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+    }
+</style>

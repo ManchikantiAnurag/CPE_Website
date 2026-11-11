@@ -49,10 +49,22 @@ const listSection = z.object({
 
 /* -------------------------------------------------------------- site-wide */
 
+const courseContent = z.object({
+    paragraphs: z.array(z.string()).default([]),
+    items: z.array(z.union([
+        z.string(),
+        z.object({ text: z.string(), children: z.array(z.string()).default([]) }),
+    ])).default([]),
+    closing_paragraphs: z.array(z.string()).default([]),
+});
+
+const courseSubsection = courseContent.extend({ heading: z.string() });
+
 const courses = defineCollection({
     loader: glob({ base: "src/content/courses", pattern: "**/*.json" }),
     schema: z.object({
         code: z.string(),
+        display_code: z.string().trim().optional(),
         title: z.string(),
         tagline: z.string(),
         order: z.number(),
@@ -66,10 +78,9 @@ const courses = defineCollection({
         board: z.string().optional(),
         sections: z
             .array(
-                z.object({
+                courseContent.extend({
                     heading: z.string(),
-                    paragraphs: z.array(z.string()).default([]),
-                    items: z.array(z.string()).default([]),
+                    subsections: z.array(courseSubsection).default([]),
                 }),
             )
             .default([]),
@@ -107,6 +118,26 @@ const news = defineCollection({
         summary: z.string(),
         /** Optional link out to a notice, form or full article. */
         link: cta.partial().default({}),
+    }).merge(image),
+});
+
+const events = defineCollection({
+    loader: glob({ base: "src/content/events", pattern: "**/*.json" }),
+    schema: z.object({
+        title: z.string(),
+        date: z.string(),
+        summary: z.string(),
+        tagline: z.string(),
+        venue: z.string(),
+        participants: z.string(),
+        about_title: z.string().default("About the Event"),
+        about_image: z.string(),
+        about_image_alt: z.string(),
+        paragraphs: z.array(z.string()),
+        activities_title: z.string().default("Celebrating Student Talent"),
+        activities: z.array(z.object({ title: z.string(), icon: z.string() })).default([]),
+        gallery_title: z.string().default("Event Gallery"),
+        gallery: z.array(image).default([]),
     }).merge(image),
 });
 
@@ -487,7 +518,21 @@ const aboutVisionMission = section(
                     .default([]),
             })
             .default({ eyebrow: "Core Values", items: [] }),
+    }).merge(image),
+);
+
+const aboutImpact = section(
+    "src/content/about/impact.json",
+    z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        items: z.array(z.object({ icon: z.string(), value: z.string(), label: z.string() })),
     }),
+);
+
+const aboutAdmissionsBanner = section(
+    "src/content/about/admissions-banner.json",
+    z.object({ kicker: z.string(), title: z.string(), description: z.string(), cta }),
 );
 
 const aboutWhyChoose = section(
@@ -495,7 +540,9 @@ const aboutWhyChoose = section(
     z.object({
         eyebrow: z.string(),
         title: z.string(),
-        items: z.array(z.string()).default([]),
+        items: z
+            .array(z.object({ title: z.string(), description: z.string() }))
+            .default([]),
     }),
 );
 
@@ -505,6 +552,7 @@ const aboutLeadership = section(
         eyebrow: z.string(),
         title: z.string(),
         description: z.string(),
+        cta,
     }),
 );
 
@@ -522,7 +570,10 @@ const gallerySeo = section("src/content/gallery-page/seo.json", seo);
 const galleryHero = section("src/content/gallery-page/hero.json", listPageHero);
 
 const newsSeo = section("src/content/news-page/seo.json", seo);
-const newsHero = section("src/content/news-page/hero.json", listPageHero);
+const newsHero = section(
+    "src/content/news-page/hero.json",
+    listPageHero.extend({ events_title: z.string().default("Our Events") }),
+);
 
 /* ------------------------------------------------------- campus life page */
 
@@ -604,6 +655,7 @@ export const collections = {
     gallery,
     galleryCategories,
     news,
+    events,
     newsCategories,
     careers,
     leadership,
@@ -643,6 +695,8 @@ export const collections = {
     aboutCpe,
     aboutHistory,
     aboutVisionMission,
+    aboutImpact,
+    aboutAdmissionsBanner,
     aboutWhyChoose,
     aboutLeadership,
 

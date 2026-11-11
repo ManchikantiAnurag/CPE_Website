@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+    src: string;
+    alt: string;
+    width?: number;
+    height?: number;
+    sizes?: string;
+    loading?: "eager" | "lazy";
+    class?: string;
+}
+
+const {
+    src,
+    alt,
+    width,
+    height,
+    sizes = "100vw",
+    loading = "lazy",
+    class: className,
+} = Astro.props;
+
+const media = import.meta.glob<{ default: ImageMetadata }>("../../assets/media/**/*", {
+    eager: true,
+});
+const image = src.startsWith("/media/")
+    ? media[`../../assets${src}`]?.default
+    : undefined;
+if (src.startsWith("/media/") && !image) throw new Error(`Missing image: ${src}`);
+
+const targetWidth = width ?? image?.width ?? 800;
+const widths = image
+    ? [...new Set([400, 800, 1200, targetWidth, image.width])]
+          .filter((candidate) => candidate <= Math.min(targetWidth, image.width))
+          .sort((a, b) => a - b)
+    : [];
+---
+
+{
+    image ? (
+        <Image
+            src={image}
+            alt={alt}
+            widths={widths}
+            sizes={sizes}
+            format="webp"
+            loading={loading}
+            fetchpriority={loading === "eager" ? "high" : undefined}
+            class={className}
+        />
+    ) : (
+        <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            loading={loading}
+            class={className}
+        />
+    )
+}

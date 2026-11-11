@@ -1,0 +1,50 @@
+---
+import Reveal from "../../Base/Reveal/Reveal.astro";
+
+interface Props {
+    eyebrow: string;
+    title: string;
+    items: { title: string; description: string }[];
+}
+
+const { eyebrow, title, items } = Astro.props;
+const columnLength = Math.ceil(items.length / 2);
+const columns = [items.slice(0, columnLength), items.slice(columnLength)];
+---
+
+<Reveal>
+    <div class="mx-auto flex max-w-[650px] flex-col items-center gap-6 text-center">
+        <p class="font-sans text-xs font-bold uppercase leading-4 tracking-[0.6px] text-[#DC2626]">
+            {eyebrow}
+        </p>
+        <h2 class="font-display text-[30px] font-normal capitalize leading-10 tracking-normal text-[#0F172A] md:text-4xl md:leading-10">
+            {title}
+        </h2>
+    </div>
+</Reveal>
+
+<div class="mt-12 grid gap-8 md:mt-[85px] md:grid-cols-2 md:gap-x-[clamp(48px,9.375vw,135px)]">
+    {
+        columns.map((column, columnIndex) => (
+            <Reveal variant="fade">
+                <ol start={columnIndex * columnLength + 1} role="list" class="flex flex-col gap-8">
+                    {column.map((item, index) => (
+                        <li class="flex items-start gap-[18px] font-sans text-[#475569]">
+                            <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#DC2626] text-lg font-semibold leading-6 text-white">
+                                {columnIndex * columnLength + index + 1}
+                            </span>
+                            <div class="flex min-w-0 flex-1 flex-col gap-3">
+                                <h3 class="font-sans text-lg font-semibold leading-6 tracking-normal">
+                                    {item.title}
+                                </h3>
+                                <p class="whitespace-pre-line text-base font-normal leading-6">
+                                    {item.description}
+                                </p>
+                            </div>
+                        </li>
+                    ))}
+                </ol>
+            </Reveal>
+        ))
+    }
+</div>

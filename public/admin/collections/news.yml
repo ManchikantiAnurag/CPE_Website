@@ -1,9 +1,65 @@
 # yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
 
-# One file per update, so publishing is a single "New News Item". The page
-# copy and the category chips live below.
-
 collections:
+  - name: events
+    label: Events
+    label_singular: Event
+    description: Events with their own detail page and photo gallery, shown under Our Events.
+    folder: src/content/events
+    extension: json
+    format: json
+    create: true
+    identifier_field: title
+    summary: '{{title}} — {{date}}'
+    sortable_fields:
+      fields: [date, title]
+      default:
+        field: date
+        direction: descending
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Date
+        name: date
+        widget: datetime
+        time_format: false
+        format: 'yyyy-MM-dd'
+        date_format: 'dd MMM yyyy'
+        hint: Used to show the newest events first.
+      - { label: Card Summary, name: summary, widget: text }
+      - { label: Intro, name: tagline, widget: text }
+      - { label: Venue, name: venue, widget: string }
+      - { label: Participants, name: participants, widget: string }
+      - { label: Cover Image, name: image, widget: image }
+      - { label: Cover Image Alt Text, name: image_alt, widget: string }
+      - { label: About Heading, name: about_title, widget: string, default: About the Event }
+      - { label: About Image, name: about_image, widget: image }
+      - { label: About Image Alt Text, name: about_image_alt, widget: string }
+      - label: About Paragraphs
+        name: paragraphs
+        widget: list
+        field: { label: Paragraph, name: paragraph, widget: text }
+      - { label: Activities Heading, name: activities_title, widget: string, default: Celebrating Student Talent }
+      - label: Activities
+        name: activities
+        widget: list
+        required: false
+        summary: '{{fields.title}}'
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: Icon
+            name: icon
+            widget: string
+            hint: 'Lucide icon name, for example lucide:music or lucide:medal.'
+      - { label: Gallery Heading, name: gallery_title, widget: string, default: Event Gallery }
+      - label: Gallery Photos
+        name: gallery
+        widget: list
+        required: false
+        summary: '{{fields.image_alt}}'
+        fields:
+          - { label: Image, name: image, widget: image }
+          - { label: Image Alt Text, name: image_alt, widget: string }
+
   - name: news
     label: News & Events items
     label_singular: News Item
@@ -111,6 +167,10 @@ collections:
           - label: Intro
             name: intro
             widget: text
+          - label: Events Heading
+            name: events_title
+            widget: string
+            default: Our Events
           - label: Empty Message
             name: empty_message
             widget: text

@@ -4,25 +4,28 @@
   "tagline": "MEC combines Intermediate studies with CA/CMA Foundation coaching, preparing students for accounting and finance careers.",
   "order": 1,
   "duration": "2 Years (1st Year & 2nd Year Intermediate)",
-  "eligibility": "Pass in Class 10 (SSC) or equivalent from a recognised board.",
+  "eligibility": "Pass in Class 10 (SSC / CBSE / ICSE or equivalent).",
   "board": "Board of Intermediate Education, Andhra Pradesh",
   "overview": "The MEC group (Mathematics, Economics, Commerce) is the natural launch-pad for a career in accounting and finance. In this integrated programme, students complete the regular two-year Intermediate course (Part I English, Part II Second Language, Part III Mathematics, Economics, Commerce) while receiving structured coaching for the CA Foundation or CMA Foundation examination, so that they are exam-ready by the time they finish Second Year.",
   "highlights": [
-    "Mathematics-driven analytical training",
-    "Integrated CA / CMA foundation coaching",
-    "IPMAT and aptitude preparation",
-    "Regular problem-solving workshops"
+    "Mathematics, Economics and Commerce foundation",
+    "Integrated CA / CMA Foundation coaching",
+    "Accounting and quantitative aptitude practice",
+    "Regular assessments and problem-solving workshops"
   ],
   "careers": [
     "chartered-accountancy",
     "cost-and-management-accountancy",
-    "investment-banking",
-    "data-and-business-analytics",
-    "actuarial-science",
-    "iim-indore-ipm",
-    "b-com-hons",
-    "bba",
-    "economics-honours"
+    "accounting-and-finance",
+    "auditing-and-taxation",
+    "corporate-finance",
+    "banking-and-financial-services",
+    "cost-management",
+    "financial-analysis",
+    "corporate-compliance",
+    "government-services",
+    "higher-education",
+    "entrepreneurship"
   ],
   "enquiry_phones": [
     "9666829555",
@@ -37,45 +40,161 @@
       "paragraphs": [
         "Pass in Class 10 (SSC / CBSE / ICSE or equivalent). Students register with ICAI (for CA) or ICMAI (for CMA) at the Foundation level after Class 10; they can appear for the Foundation examination only after appearing for / passing Class 12 (Intermediate)."
       ],
-      "items": []
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "CA Course Structure & Examination Pattern",
       "paragraphs": [],
-      "items": [
-        "Stage 1 — CA Foundation: entry-level examination conducted by ICAI, held three times a year. Four papers of 100 marks each: Accounting, Business Laws, Quantitative Aptitude, Business Economics. Papers 3 and 4 are objective with negative marking (0.25 mark per wrong answer). Pass with minimum 40% in each paper and 50% aggregate in one sitting.",
-        "Stage 2 — CA Intermediate: six papers in two groups (each paper 100 marks), held three times a year. Students may attempt one group at a time or both together. ICITSS must be completed before articleship.",
-        "Stage 3 — Articleship: two years of practical training under a practising Chartered Accountant, with a stipend as per ICAI norms.",
-        "Stage 4 — CA Final: six papers in two groups, plus the self-paced online modules and Advanced ICITSS. On passing and completing training, the student becomes a member of ICAI — a Chartered Accountant.",
-        "Students who later complete a commerce degree with 55% (or non-commerce with 60%) can enter CA Intermediate directly without the Foundation (Direct Entry route)."
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": [
+        {
+          "heading": "Stage 1 — CA Foundation",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Entry-level examination conducted by the Institute of Chartered Accountants of India (ICAI). It is held three times a year, in January, May/June and September.",
+              "children": []
+            },
+            {
+              "text": "Four papers of 100 marks each (total 400):",
+              "children": [
+                "Paper 1: Accounting (descriptive, 3 hours)",
+                "Paper 2: Business Laws (descriptive, 3 hours)",
+                "Paper 3: Quantitative Aptitude — Business Mathematics, Logical Reasoning and Statistics (objective, 2 hours)",
+                "Paper 4: Business Economics (objective, 2 hours)"
+              ]
+            },
+            {
+              "text": "Papers 3 and 4 are objective and carry negative marking (0.25 mark per wrong answer).",
+              "children": []
+            },
+            {
+              "text": "To pass: minimum 40% in each paper and 50% aggregate in one sitting. Verify the current passing rules at icai.org.",
+              "children": []
+            },
+            {
+              "text": "Students who later complete a commerce degree with 55% (or non-commerce with 60%) can enter CA Intermediate directly without the Foundation (Direct Entry route).",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "Stage 2 — CA Intermediate",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Six papers in two groups (each paper 100 marks):",
+              "children": [
+                "Group I: Advanced Accounting; Corporate and Other Laws; Taxation (Income-tax Law and GST)",
+                "Group II: Cost and Management Accounting; Auditing and Ethics; Financial Management and Strategic Management"
+              ]
+            },
+            {
+              "text": "Students may attempt one group at a time or both together. Held three times a year.",
+              "children": []
+            },
+            {
+              "text": "Integrated Course on Information Technology and Soft Skills (ICITSS) must be completed before starting articleship.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "Stage 3 — Articleship (Practical Training)",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Two years of practical training under a practising Chartered Accountant after passing both groups of CA Intermediate and completing ICITSS.",
+              "children": []
+            },
+            {
+              "text": "This is where students learn real audit, taxation and accounting work; a stipend is paid as per ICAI norms.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "Stage 4 — CA Final",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Six papers in two groups:",
+              "children": [
+                "Group I: Financial Reporting; Advanced Financial Management; Advanced Auditing, Assurance and Professional Ethics",
+                "Group II: Direct Tax Laws and International Taxation; Indirect Tax Laws; Integrated Business Solutions (multidisciplinary case study)"
+              ]
+            },
+            {
+              "text": "Applicable Self-Paced Online Modules and the Advanced ICITSS must also be cleared.",
+              "children": []
+            },
+            {
+              "text": "On passing CA Final and completing training, the student becomes a member of ICAI — a Chartered Accountant.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        }
       ]
     },
     {
       "heading": "CMA Course Structure & Examination Pattern",
-      "paragraphs": [
-        "Conducted by the Institute of Cost Accountants of India (ICMAI). Examinations are held in June and December.",
-        "CMA specialises in cost control, management accounting, costing systems and performance management — highly valued in manufacturing, infrastructure, PSUs and consulting."
-      ],
+      "paragraphs": [],
       "items": [
-        "CMA Foundation: four papers — Fundamentals of Business Laws and Business Communication; Fundamentals of Financial and Cost Accounting; Fundamentals of Business Mathematics and Statistics; Fundamentals of Business Economics and Management.",
-        "CMA Intermediate: eight papers in two groups.",
-        "CMA Final: eight papers in two groups, plus mandatory practical training (approximately 15 months) before qualifying."
-      ]
+        {
+          "text": "Conducted by the Institute of Cost Accountants of India (ICMAI). Examinations are held in June and December.",
+          "children": []
+        },
+        {
+          "text": "CMA Foundation: four papers — Fundamentals of Business Laws and Business Communication; Fundamentals of Financial and Cost Accounting; Fundamentals of Business Mathematics and Statistics; Fundamentals of Business Economics and Management.",
+          "children": []
+        },
+        {
+          "text": "CMA Intermediate: eight papers in two groups.",
+          "children": []
+        },
+        {
+          "text": "CMA Final: eight papers in two groups, plus mandatory practical training (approximately 15 months) before qualifying.",
+          "children": []
+        },
+        {
+          "text": "CMA specialises in cost control, management accounting, costing systems and performance management — highly valued in manufacturing, infrastructure, PSUs and consulting.",
+          "children": []
+        }
+      ],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "Specializations",
       "paragraphs": [
         "CA Foundation track / CMA Foundation track (students choose one; the Intermediate MEC syllabus is common to both)."
       ],
-      "items": []
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "Admission requirements",
       "paragraphs": [],
       "items": [
-        "Class 10 marks memo / pass certificate",
-        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs"
-      ]
+        {
+          "text": "Class 10 marks memo / pass certificate",
+          "children": []
+        },
+        {
+          "text": "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs",
+          "children": []
+        }
+      ],
+      "closing_paragraphs": [],
+      "subsections": []
     }
   ]
 }

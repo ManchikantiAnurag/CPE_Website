@@ -23,7 +23,13 @@ collections:
       - label: Course Code
         name: code
         widget: string
-        hint: Short code shown on course cards, e.g. MEC. Also becomes the filename.
+        hint: Stable course identifier, e.g. MEC or CEC. Used for new filenames.
+
+      - label: Display Code
+        name: display_code
+        widget: string
+        required: false
+        hint: Optional label for cards, navigation and enquiry forms, e.g. MEC / CEC. Leave empty to use the course code.
 
       - label: Course Title
         name: title
@@ -42,8 +48,6 @@ collections:
         min: 1
         hint: Position on the All Courses page. Lower numbers appear first.
 
-      # Shown in the "Course Details" panel on the course page. Each row is
-      # hidden when left empty.
       - label: Duration
         name: duration
         widget: string
@@ -64,7 +68,7 @@ collections:
 
       - label: Programme Overview
         name: overview
-        widget: markdown
+        widget: text
         hint: The longer description shown on the course detail page.
 
       - label: Programme Highlights
@@ -82,12 +86,13 @@ collections:
         required: false
         label_singular: Section
         summary: "{{fields.heading}}"
-        hint: Extra headings on the course page, such as course structure or admission requirements.
+        hint: Main headings with optional subsections for examination patterns and course stages.
         fields:
           - label: Heading
             name: heading
             widget: string
-          - label: Paragraphs
+          - &course-paragraphs
+            label: Paragraphs
             name: paragraphs
             widget: list
             required: false
@@ -95,16 +100,47 @@ collections:
               label: Paragraph
               name: paragraph
               widget: text
-          - label: Bullet points
+          - &course-items
+            label: Bullet points
             name: items
             widget: list
             required: false
+            summary: "{{fields.text}}"
+            fields:
+              - label: Point
+                name: text
+                widget: text
+              - label: Indented points
+                name: children
+                widget: list
+                required: false
+                field:
+                  label: Point
+                  name: item
+                  widget: text
+          - &course-closing-paragraphs
+            label: Closing paragraphs
+            name: closing_paragraphs
+            widget: list
+            required: false
+            hint: Paragraphs displayed after the bullet points.
             field:
-              label: Point
-              name: item
+              label: Paragraph
+              name: paragraph
               widget: text
+          - label: Subsections
+            name: subsections
+            widget: list
+            required: false
+            summary: "{{fields.heading}}"
+            fields:
+              - label: Heading
+                name: heading
+                widget: string
+              - *course-paragraphs
+              - *course-items
+              - *course-closing-paragraphs
 
-      # Repeating data -> referenced, not retyped.
       - label: Career Opportunities
         name: careers
         widget: relation
@@ -146,7 +182,6 @@ collections:
           - emails.*
         hint: Managed under Contact details.
 
-  # The All Courses page itself. The course rows come from the collection above.
   - name: courses-page
     label: Courses page
     icon: menu_book

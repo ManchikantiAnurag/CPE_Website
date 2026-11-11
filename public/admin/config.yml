@@ -8,7 +8,7 @@ backend:
   repo: HEITS-PVT-LTD/CPE_Website
   branch: main
 
-media_folder: public/media
+media_folder: src/assets/media
 public_folder: /media
 
 output:

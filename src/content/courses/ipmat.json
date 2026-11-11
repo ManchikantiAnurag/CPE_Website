@@ -1,7 +1,7 @@
 {
   "code": "IPMAT",
   "title": "Intermediate MEC with IPMAT Integration",
-  "tagline": "Designed for students aiming to enter IIMs directly after Class 12, without a degree or CAT.",
+  "tagline": "Combine your Intermediate MEC education with structured IPMAT preparation and build the skills needed for a successful management career.",
   "order": 2,
   "overview": "This programme is designed for students who want to enter the Indian Institutes of Management (IIMs) straight after Class 12, without waiting for a degree and the CAT examination.",
   "highlights": [
@@ -11,12 +11,14 @@
     "Written ability test and interview practice"
   ],
   "careers": [
-    "iim-indore-ipm",
-    "iim-rohtak-ipm",
-    "integrated-management-programmes",
-    "bba",
+    "iims-and-mba",
+    "management",
     "consulting",
-    "product-management"
+    "finance",
+    "banking",
+    "data-and-business-analytics",
+    "entrepreneurship",
+    "corporate-careers"
   ],
   "enquiry_phones": [
     "9666829555",
@@ -25,61 +27,184 @@
   "enquiry_emails": [
     "cpejuniorcollege@gmail.com"
   ],
-  "duration": "Integrated with 2 years of Intermediate",
+  "duration": "2 Years (1st Year & 2nd Year Intermediate)",
   "eligibility": "Class 10 pass with at least 60% marks. Age eligibility varies each year—check the latest IIM notification.",
   "board": "Board of Intermediate Education, Andhra Pradesh",
   "sections": [
     {
+      "heading": "Eligibility",
+      "paragraphs": [
+        "Pass in Class 10 with a minimum of 60% marks. IIM eligibility requirements differ by institute and admission year, including Class 10 and Class 12 marks, category relaxations and age limits. Verify the exact requirements in each IIM’s current admission notification."
+      ],
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
+    },
+    {
       "heading": "What is IPMAT?",
       "paragraphs": [
-        "The Integrated Programme in Management Aptitude Test (IPMAT) is the entrance examination for the five-year Integrated Programme in Management (IPM) offered by IIM Indore and IIM Rohtak. The IPM combines a three-year undergraduate degree with a two-year MBA. Students in the IPM enter the same MBA classroom as regular PGP students in the final two years."
+        "The Integrated Programme in Management Aptitude Test (IPMAT) is the entrance examination for the five-year Integrated Programme in Management (IPM) offered by IIM Indore and IIM Rohtak. The IPM combines a three-year undergraduate degree with a two-year MBA. At IIM Indore, students who exit after three years receive a BA (Foundations of Management); those who continue receive the MBA. Students in the IPM enter the same MBA classroom as regular PGP students in the final two years."
       ],
-      "items": []
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "IPMAT Course Structure & Examination Pattern",
       "paragraphs": [],
-      "items": [
-        "IPMAT Indore: computer-based test of 120 minutes, usually held in early May. Three sections of 40 minutes each — Quantitative Ability (MCQ, 30 questions), Quantitative Ability (Short Answer, 15 questions) and Verbal Ability (MCQ, 45 questions). +4 for a correct answer, −1 for a wrong MCQ; no negative marking for Short Answer. 90 questions, 360 marks. Shortlisted candidates appear for a Personal Assessment / Interview.",
-        "IPMAT Rohtak: computer-based test, 120 questions in 120 minutes, in three sections of 40 questions — Quantitative Ability, Logical Reasoning, Verbal Ability. +4 / −1; all MCQs. Followed by a Personal Interview.",
-        "JIPMAT: conducted by the NTA for the five-year IPM at IIM Bodh Gaya and IIM Jammu. 100 questions in 150 minutes: Quantitative Aptitude (33), Data Interpretation and Logical Reasoning (33), Verbal Ability and Reading Comprehension (34). +4 / −1, no sectional time limit."
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": [
+        {
+          "heading": "IPMAT Indore (IIM Indore)",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Computer-based test, 120 minutes, usually held in early May (IPMAT 2026 was held on 4 May 2026).",
+              "children": []
+            },
+            {
+              "text": "Three sections with a fixed 40 minutes each:",
+              "children": [
+                "Quantitative Ability (MCQ) — 30 questions",
+                "Quantitative Ability (Short Answer) — 15 questions",
+                "Verbal Ability (MCQ) — 45 questions"
+              ]
+            },
+            {
+              "text": "Marking: +4 for a correct answer, −1 for a wrong MCQ answer; no negative marking for Short Answer questions. Total 90 questions, 360 marks.",
+              "children": []
+            },
+            {
+              "text": "Shortlisted candidates appear for a Personal Interview; final selection is based on a composite score.",
+              "children": []
+            },
+            {
+              "text": "Preparation covers Number System, Algebra, Geometry, Arithmetic (Percentages, Profit and Loss, Time–Speed–Distance, Time and Work), Permutations and Combinations, Probability, Sets, Functions, Logarithms, Matrices, Data Interpretation; Reading Comprehension, Grammar, Vocabulary, Para-jumbles and Sentence Correction.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "IPMAT Rohtak (IIM Rohtak)",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Computer-based test, 120 questions in 120 minutes, usually held in May.",
+              "children": []
+            },
+            {
+              "text": "Three sections of 40 questions each: Quantitative Ability, Logical Reasoning, Verbal Ability.",
+              "children": []
+            },
+            {
+              "text": "Marking: +4 / −1; all MCQs.",
+              "children": []
+            },
+            {
+              "text": "Followed by a Personal Interview. Final selection weightage (as published for 2026): Aptitude Test 55%, Interview 15%, Class 10 marks 10%, Class 12 marks 20%.",
+              "children": []
+            },
+            {
+              "text": "Note the extra Logical Reasoning section, which is absent in IPMAT Indore.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "JIPMAT (Joint Integrated Programme in Management Admission Test)",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "Conducted by the National Testing Agency (NTA) for the five-year IPM at IIM Bodh Gaya and IIM Jammu.",
+              "children": []
+            },
+            {
+              "text": "100 questions, 150 minutes: Quantitative Aptitude (33), Data Interpretation and Logical Reasoning (33), Verbal Ability and Reading Comprehension (34).",
+              "children": []
+            },
+            {
+              "text": "Marking: +4 / −1. No sectional time limit.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "Major institutions reached through these exams",
+          "paragraphs": [],
+          "items": [
+            {
+              "text": "IIM Indore — IPM (via IPMAT Indore)",
+              "children": []
+            },
+            {
+              "text": "IIM Rohtak — IPM (via IPMAT Rohtak)",
+              "children": []
+            },
+            {
+              "text": "IIM Ranchi — IPM (accepts IPMAT Indore scores)",
+              "children": []
+            },
+            {
+              "text": "IIM Bodh Gaya and IIM Jammu — IPM (via JIPMAT)",
+              "children": []
+            },
+            {
+              "text": "T. A. Pai Management Institute (TAPMI), Manipal — accepts IPMAT scores; check its current programme-specific admission criteria.",
+              "children": []
+            },
+            {
+              "text": "Several other institutions, including IIFT, NIRMA and IIMs that have recently launched undergraduate programmes, accept IPMAT scores; this list changes every year.",
+              "children": []
+            },
+            {
+              "text": "The same preparation also covers other BBA entrance tests such as NPAT (NMIMS), SET (Symbiosis), CUET-UG (central universities such as Delhi University and BHU) and Christ University entrance.",
+              "children": []
+            }
+          ],
+          "closing_paragraphs": []
+        },
+        {
+          "heading": "Why MEC for IPMAT?",
+          "paragraphs": [
+            "The Quantitative Ability sections lean heavily on Class 11–12 Mathematics (functions, logarithms, matrices, P&C, probability). Studying Mathematics in Intermediate gives MEC students a clear edge over CEC students in these exams."
+          ],
+          "items": [],
+          "closing_paragraphs": []
+        }
       ]
-    },
-    {
-      "heading": "Major institutions reached through these exams",
-      "paragraphs": [
-        "The same preparation also covers other BBA entrance tests such as NPAT (NMIMS), SET (Symbiosis), CUET-UG and Christ University entrance."
-      ],
-      "items": [
-        "IIM Indore — IPM (via IPMAT Indore)",
-        "IIM Rohtak — IPM (via IPMAT Rohtak)",
-        "IIM Ranchi — IPM (accepts IPMAT Indore scores)",
-        "IIM Bodh Gaya and IIM Jammu — IPM (via JIPMAT)",
-        "T. A. Pai Management Institute (TAPMI), Manipal — accepts IPMAT Rohtak scores"
-      ]
-    },
-    {
-      "heading": "Why MEC for IPMAT?",
-      "paragraphs": [
-        "The Quantitative Ability sections lean heavily on Class 11–12 Mathematics (functions, logarithms, matrices, P&C, probability). Studying Mathematics in Intermediate gives MEC students a clear edge over CEC students in these exams."
-      ],
-      "items": []
     },
     {
       "heading": "Specializations",
       "paragraphs": [
         "IPMAT Indore focus / IPMAT Rohtak–JIPMAT focus / general BBA-entrance track (CUET, NPAT, SET)."
       ],
-      "items": []
+      "items": [],
+      "closing_paragraphs": [],
+      "subsections": []
     },
     {
       "heading": "Admission requirements",
       "paragraphs": [],
       "items": [
-        "Class 10 marks memo / pass certificate",
-        "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs",
-        "Minimum 60% in Class 10."
-      ]
+        {
+          "text": "Class 10 marks memo / pass certificate",
+          "children": []
+        },
+        {
+          "text": "Transfer certificate, study certificate, caste certificate (if applicable), Aadhaar, passport-size photographs",
+          "children": []
+        },
+        {
+          "text": "Minimum 60% in Class 10.",
+          "children": []
+        }
+      ],
+      "closing_paragraphs": [],
+      "subsections": []
     }
   ]
 }

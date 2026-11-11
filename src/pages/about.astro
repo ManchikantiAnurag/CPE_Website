@@ -1,16 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
-import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
-import MediaText from "../components/Base/MediaText/MediaText.astro";
-import BulletGrid from "../components/Base/BulletGrid/BulletGrid.astro";
+import SectionHeadingRow from "../components/Base/SectionHeadingRow/SectionHeadingRow.astro";
+import OptimizedImage from "../components/Base/OptimizedImage.astro";
+import Reveal from "../components/Base/Reveal/Reveal.astro";
+import { Icon } from "astro-icon/components";
+import AboutReasons from "../components/About/AboutReasons/AboutReasons.astro";
 import PeopleGrid from "../components/Base/PeopleGrid/PeopleGrid.astro";
 import AboutHistory from "../components/About/AboutHistory/AboutHistory.astro";
 import VisionMission from "../components/About/VisionMission/VisionMission.astro";
 import Button from "../components/Base/Button/Button.astro";
-import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
-import { getContactDetails, getLeadership, getSection, resolvePhones } from "../lib/site";
+import { getLeadership, getSection } from "../lib/site";
 
 const seo = await getSection("aboutSeo");
 const hero = await getSection("aboutHero");
@@ -19,71 +19,136 @@ const history = await getSection("aboutHistory");
 const visionMission = await getSection("aboutVisionMission");
 const whyChoose = await getSection("aboutWhyChoose");
 const leadership = await getSection("aboutLeadership");
-
-const banner = await getSection("homeAdmissionsBanner");
-const contact = await getContactDetails();
-const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
+const impact = await getSection("aboutImpact");
+const banner = await getSection("aboutAdmissionsBanner");
 
 const people = await getLeadership();
 ---
 
-<Layout title={seo.meta_title} description={seo.meta_description}>
-    <PageHero
-        eyebrow={hero.eyebrow}
-        title={hero.title}
-        description={hero.intro}
-    />
-
-    <Section id="about-cpe">
-        <MediaText
-            eyebrow={aboutCpe.eyebrow}
-            title={aboutCpe.title}
-            paragraphs={aboutCpe.paragraphs}
-            image={aboutCpe.image}
-            imageAlt={aboutCpe.image_alt}
-            imagePosition="start"
-        >
-            <Fragment slot="actions">
-                <Button href="#history" variant="outline">Our Milestones</Button>
-            </Fragment>
-        </MediaText>
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
+    <Section id="about-hero" padded={false} background="hero" class="about-hero py-16 md:pt-16 md:pb-[88px] [&>div]:max-w-[1298px]">
+        <Reveal immediate>
+            <p class="text-xs font-semibold uppercase leading-4 tracking-[1.2px] text-[#DC2626]">{hero.eyebrow}</p>
+            <h1 class="mt-8 max-w-[1000px] font-display text-4xl font-normal leading-tight tracking-normal text-black md:text-[60px] md:leading-[56px]">{hero.title}</h1>
+            <p class="mt-8 max-w-[1100px] text-base leading-7 text-black md:text-lg">{hero.intro}</p>
+        </Reveal>
     </Section>
 
-    <Section id="history">
-        <AboutHistory
-            eyebrow={history.eyebrow}
-            title={history.title}
-            items={history.items}
-        />
+    <Section id="about-cpe" padded={false} class="py-16 md:py-20 [&>div]:max-w-[1298px]">
+        <div class="grid items-stretch gap-12 lg:grid-cols-2">
+            <Reveal variant="left">
+                <OptimizedImage
+                    src={aboutCpe.image}
+                    alt={aboutCpe.image_alt}
+                    width={1200}
+                    sizes="(min-width: 1024px) 42vw, 100vw"
+                    class="h-full min-h-[360px] w-full rounded-lg object-cover shadow-sm lg:aspect-[601/578]"
+                />
+            </Reveal>
+            <Reveal variant="right">
+                <p class="text-xs font-bold uppercase leading-4 tracking-[0.6px] text-[#DC2626]">{aboutCpe.eyebrow}</p>
+                <h2 class="mt-7 text-3xl leading-10 text-[#0F172A] md:text-4xl">{aboutCpe.title}</h2>
+                <div class="mt-6 space-y-6 text-base leading-6 text-[#475569]">
+                    {aboutCpe.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+                </div>
+                <Button href="#history" variant="outline" class="mt-8 h-[42px] rounded-sm border-[#CBD5E1] px-5">
+                    Our Milestones
+                    <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+                </Button>
+            </Reveal>
+        </div>
     </Section>
 
-    <Section id="vision-mission" background="surface">
+    <Section id="vision-mission" padded={false} background="surface" class="py-16 md:pt-[70px] md:pb-[50px] [&>div]:max-w-[1298px]">
         <VisionMission
             vision={visionMission.vision}
             mission={visionMission.mission}
             coreValues={visionMission.core_values}
+            image={visionMission.image}
+            imageAlt={visionMission.image_alt}
         />
     </Section>
 
-    <Section>
-        <SectionHeading eyebrow={whyChoose.eyebrow} title={whyChoose.title} />
-        <BulletGrid items={whyChoose.items} class="mt-10" />
+    <Section id="history" padded={false} class="history-section py-16 md:py-20 [&>div]:max-w-[1298px]">
+        <AboutHistory eyebrow={history.eyebrow} title={history.title} items={history.items} />
     </Section>
 
-    <CtaBanner
-        kicker={banner.kicker}
-        title={banner.title}
-        description={banner.description}
-        phones={bannerPhones}
-        cta={banner.cta}
-    />
+    <Section id="impact" padded={false} background="hero" class="py-14 md:py-16 [&>div]:max-w-[1298px]">
+        <Reveal>
+            <p class="text-xs font-bold uppercase leading-4 tracking-[0.6px] text-[#DC2626]">{impact.eyebrow}</p>
+            <h2 class="mt-6 text-3xl leading-10 text-[#0F172A] md:text-4xl">{impact.title}</h2>
+            <dl class="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
+                {impact.items.map(item => (
+                    <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-6">
+                        <Icon name={item.icon} class="h-11 w-11 shrink-0 text-[#DC2626]" aria-hidden="true" />
+                        <div class="flex flex-col">
+                            <dt class="order-2 mt-2 text-sm leading-5 text-[#475569]">{item.label}</dt>
+                            <dd class="font-display text-[28px] leading-10 text-[#0F172A] sm:text-4xl">{item.value}</dd>
+                        </div>
+                    </div>
+                ))}
+            </dl>
+        </Reveal>
+    </Section>
 
-    <Section id="leadership" background="surface">
-        <SectionHeading
+    <Section id="why-choose-cpe" class="[&>div]:max-w-[1313px]">
+        <AboutReasons
+            eyebrow={whyChoose.eyebrow}
+            title={whyChoose.title}
+            items={whyChoose.items}
+        />
+    </Section>
+
+    <Section padded={false} background="accent" class="bg-[#DC1921] py-14 [&>div]:max-w-[1328px]">
+        <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+            <Reveal variant="left" class="max-w-2xl">
+                <p class="text-xs font-bold uppercase leading-4 tracking-[1.2px] text-white">{banner.kicker}</p>
+                <h2 class="mt-3 text-3xl leading-tight text-white md:text-[40px]">{banner.title}</h2>
+                <p class="mt-3 text-base leading-6 text-white">{banner.description}</p>
+            </Reveal>
+            <Button href={banner.cta.href} variant="primary" size="lg" class="shrink-0 rounded-sm bg-[#0F172A] px-6">
+                {banner.cta.label}
+                <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+            </Button>
+        </div>
+    </Section>
+
+    <Section id="leadership" padded={false} class="py-20 [&>div]:max-w-[1328px]">
+        <SectionHeadingRow
             eyebrow={leadership.eyebrow}
             title={leadership.title}
             description={leadership.description}
-        />
-        <PeopleGrid people={people} class="mt-12" />
+        >
+            <Button slot="action" href={leadership.cta.href} variant="outline" class="h-[42px] rounded-sm border-[#CBD5E1]">
+                {leadership.cta.label}
+                <Icon name="lucide:arrow-right" class="h-4 w-4" aria-hidden="true" />
+            </Button>
+        </SectionHeadingRow>
+        <div id="leadership-cards" class="mt-12 scroll-mt-40">
+            <PeopleGrid people={people} />
+        </div>
     </Section>
 </Layout>
+
+<style>
+    :global(.about-hero) {
+        background-size: 100% 820px;
+        background-position: center -264px;
+    }
+
+    :global(.history-section) {
+        background-image: url("/images/world-map.svg");
+        background-repeat: no-repeat;
+        background-position: center 140px;
+        background-size: 100% 1040px;
+        background-blend-mode: screen;
+        background-color: rgb(255 255 255 / 88%);
+    }
+
+    @media (max-width: 767px) {
+        :global(.about-hero) {
+            background-size: cover;
+            background-position: center;
+        }
+    }
+</style>

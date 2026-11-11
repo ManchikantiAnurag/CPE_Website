@@ -1,0 +1,120 @@
+{
+  "title": "19th Annual Day Celebrations",
+  "date": "2025-07-15",
+  "summary": "CPE Junior College celebrated its 19th Annual Day with great enthusiasm, bringing together students, parents, faculty, and management to celebrate a year of academic excellence, achievements, and talent.",
+  "tagline": "Celebrating achievement, excellence, talent, and the spirit of the CPE family.",
+  "venue": "CPE Junior College",
+  "participants": "Students, Parents, Faculty and management",
+  "image": "/media/events/19th-annual-day/guest-welcome.webp",
+  "image_alt": "A CPE student welcoming a guest with a bouquet at the 19th Annual Day celebrations",
+  "about_title": "About the Event",
+  "about_image": "/media/annual-day-stage.jpg",
+  "about_image_alt": "Students and faculty together on the decorated stage at CPE's Annual Day celebrations",
+  "paragraphs": [
+    "CPE Junior College celebrated its 19th Annual Day with great enthusiasm, bringing together students, parents, faculty, and management to celebrate a year of academic excellence, achievements, and talent.",
+    "A special highlight of the occasion was the felicitation of the proud parents of All India CA & CMA Rankers, recognising their invaluable support and encouragement behind these outstanding achievements. Cash awards were presented to CA & CMA Rankers in recognition of their exceptional performance.",
+    "Continuing its annual tradition of recognising academic excellence, CPE also presented cash cheques of ₹5,000 each to all first-year students who secured 480+ marks out of 500, acknowledging their dedication and outstanding academic performance."
+  ],
+  "activities_title": "Celebrating Student Talent",
+  "activities": [
+    {
+      "title": "Anchoring",
+      "icon": "lucide:user-round"
+    },
+    {
+      "title": "Dance Performances",
+      "icon": "lucide:sparkles"
+    },
+    {
+      "title": "Music",
+      "icon": "lucide:music"
+    },
+    {
+      "title": "Singing",
+      "icon": "lucide:mic-vocal"
+    },
+    {
+      "title": "Skits",
+      "icon": "lucide:drama"
+    },
+    {
+      "title": "Games",
+      "icon": "lucide:medal"
+    }
+  ],
+  "gallery_title": "Event Gallery",
+  "gallery": [
+    {
+      "image": "/media/events/19th-annual-day/ca-ranker-cash-award.webp",
+      "image_alt": "CPE presenting a cash award to an All India Rank 25 achiever and family"
+    },
+    {
+      "image": "/media/events/19th-annual-day/guest-felicitation.webp",
+      "image_alt": "A student presenting a bouquet to a guest on the Annual Day stage"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-group-singing.webp",
+      "image_alt": "Three students singing together during the Annual Day celebrations"
+    },
+    {
+      "image": "/media/events/19th-annual-day/bharatanatyam-performance.webp",
+      "image_alt": "A student performing Bharatanatyam on the decorated Annual Day stage"
+    },
+    {
+      "image": "/media/events/19th-annual-day/students-in-audience.webp",
+      "image_alt": "CPE students enjoying the Annual Day performances from the auditorium"
+    },
+    {
+      "image": "/media/events/19th-annual-day/traditional-group-dance.webp",
+      "image_alt": "Students performing a group dance in traditional attire"
+    },
+    {
+      "image": "/media/events/19th-annual-day/boys-group-dance.webp",
+      "image_alt": "CPE students performing an energetic group dance"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-tabla-performance.webp",
+      "image_alt": "A CPE student playing tabla during the Annual Day celebrations"
+    },
+    {
+      "image": "/media/events/19th-annual-day/academic-topper-cash-award.webp",
+      "image_alt": "An academic topper receiving a ₹5,000 cheque for scoring over 480 marks"
+    },
+    {
+      "image": "/media/events/19th-annual-day/faculty-address.webp",
+      "image_alt": "A faculty member addressing the Annual Day audience at the podium"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-academic-award.webp",
+      "image_alt": "A student receiving an academic achievement memento and gift"
+    },
+    {
+      "image": "/media/events/19th-annual-day/audience-celebrations.webp",
+      "image_alt": "Students cheering and recording the Annual Day performances"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-gift-presentation.webp",
+      "image_alt": "A student receiving a gift from a faculty member"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-band-performance.webp",
+      "image_alt": "Students performing vocals and guitar as part of the Annual Day programme"
+    },
+    {
+      "image": "/media/events/19th-annual-day/ca-inter-ranker-felicitation.webp",
+      "image_alt": "A CA Inter All India Rank 25 achiever being felicitated with a parent"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-group-dance.webp",
+      "image_alt": "Students in colourful gowns performing together on the Annual Day stage"
+    },
+    {
+      "image": "/media/events/19th-annual-day/student-anchoring.webp",
+      "image_alt": "A student anchoring the Annual Day programme with a microphone"
+    },
+    {
+      "image": "/media/events/19th-annual-day/auditorium-audience.webp",
+      "image_alt": "Parents, students, and faculty watching the celebrations in the auditorium"
+    }
+  ]
+}

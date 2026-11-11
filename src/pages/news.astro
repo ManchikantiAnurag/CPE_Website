@@ -5,6 +5,7 @@ import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
 import CategoryFilter from "../components/Base/CategoryFilter/CategoryFilter.astro";
 import NewsCard from "../components/News/NewsCard/NewsCard.astro";
+import EventCard from "../components/Events/EventCard/EventCard.astro";
 import { getSection } from "../lib/site";
 
 const seo = await getSection("newsSeo");
@@ -15,20 +16,40 @@ const categories = (await getCollection("newsCategories"))
     .sort((a, b) => a.order - b.order);
 const categoryNames = new Map(categories.map((c) => [c.id, c.name]));
 
-/** Newest first; `date` is an ISO string, so it sorts as text. */
 const items = (await getCollection("news"))
     .map((item) => item.data)
     .sort((a, b) => b.date.localeCompare(a.date));
+const events = (await getCollection("events"))
+    .sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
 
-<Layout title={seo.meta_title} description={seo.meta_description}>
+<Layout title={seo.meta_title} description={seo.meta_description} headerBackground="hero">
     <PageHero
         eyebrow={hero.eyebrow}
         title={hero.title}
         description={hero.intro}
+        variant="course"
     />
 
-    <Section>
+    <section class="events-section" aria-labelledby="events-heading">
+        <div class="events-container">
+            <h2 id="events-heading">{hero.events_title}</h2>
+            <div class="events-grid">
+                {events.map(({ id, data: event }) => (
+                    <EventCard
+                        title={event.title}
+                        summary={event.summary}
+                        image={event.image}
+                        imageAlt={event.image_alt}
+                        href={`/news/${id}`}
+                    />
+                ))}
+            </div>
+            {events.length === 0 && <p class="mt-8 text-muted-foreground">{hero.empty_message}</p>}
+        </div>
+    </section>
+
+    {items.length > 0 && <Section>
         <CategoryFilter
             categories={categories}
             emptyMessage={hero.empty_message}
@@ -52,5 +73,46 @@ const items = (await getCollection("news"))
                 ))
             }
         </CategoryFilter>
-    </Section>
+    </Section>}
 </Layout>
+
+<style>
+    .events-section {
+        padding-block: 64px 190px;
+    }
+
+    .events-container {
+        width: min(100% - 48px, 1254px);
+        margin-inline: auto;
+    }
+
+    h2 {
+        color: #0f172a;
+        font-size: 42px;
+        line-height: 58px;
+    }
+
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+        margin-top: 34px;
+    }
+
+    @media (max-width: 767px) {
+        .events-section {
+            padding-block: 48px 64px;
+        }
+
+        h2 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        .events-grid {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 32px;
+            margin-top: 28px;
+        }
+    }
+</style>

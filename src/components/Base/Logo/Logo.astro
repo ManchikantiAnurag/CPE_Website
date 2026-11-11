@@ -1,8 +1,9 @@
 ---
+import OptimizedImage from "../OptimizedImage.astro";
+
 interface Props {
     src?: string;
     alt: string;
-    /** Shown when no logo image has been uploaded in the CMS yet. */
     fallbackText: string;
     class?: string;
 }
@@ -12,7 +13,14 @@ const { src, alt, fallbackText, class: className } = Astro.props;
 
 {
     src ? (
-        <img src={src} alt={alt} class:list={["w-auto", className]} />
+        <OptimizedImage
+            src={src}
+            alt={alt}
+            width={400}
+            sizes="200px"
+            loading="eager"
+            class:list={["w-auto", className]}
+        />
     ) : (
         <span class="font-display text-xl font-semibold tracking-tight">
             {fallbackText}

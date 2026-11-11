@@ -2,11 +2,45 @@
   "eyebrow": "Why Choose CPE",
   "title": "Reasons parents and students choose us",
   "items": [
-    "Two intermediate streams — MEC and CEC — taught by subject specialists.",
-    "Integrated CA, CMA, IPMAT and CLAT preparation within college hours.",
-    "Individual mentoring and structured doubt-clearing for every student.",
-    "Regular assessment cycles with transparent parent communication.",
-    "A disciplined, respectful campus culture focused on consistency.",
-    "Career guidance from the first year, not the final term."
+    {
+      "title": "A Legacy Built on Professional Education",
+      "description": "CPE's journey began in 2007 with CA education and has evolved through nearly two decades of academic expansion."
+    },
+    {
+      "title": "Proven All India Rank Legacy",
+      "description": "CPE's history includes repeated CA All India Ranks, including AIR 5 and the later multiple-AIR milestone."
+    },
+    {
+      "title": "Commerce Is Our Core Strength",
+      "description": "CPE is not trying to be everything to everyone. Its academic identity is strongly rooted in commerce, finance, accounting, economics and professional education."
+    },
+    {
+      "title": "One Ecosystem, Multiple Pathways",
+      "description": "A student can explore:\nIntermediate → CA / CMA / IIM / Law / Degree Education\nrather than having to navigate completely separate institutions for every stage."
+    },
+    {
+      "title": "Strong Professional-Course Orientation",
+      "description": "CPE's CA and CMA ecosystem gives students early exposure to the expectations of professional examinations."
+    },
+    {
+      "title": "Individual Attention",
+      "description": "CPE itself highlights its record of achieving All India Ranks with a limited number of students and a single campus."
+    },
+    {
+      "title": "Integrated Competitive Preparation",
+      "description": "CPE has incorporated IPMAT and CLAT preparation into its broader academic offering, allowing students to prepare for competitive pathways alongside their education."
+    },
+    {
+      "title": "Academic + Personal Development",
+      "description": "CPE's student experience is not limited to classroom teaching. Its documented activities include industrial visits, Yoga Day, blood donation, cultural activities and other experiential programmes."
+    },
+    {
+      "title": "Mentoring Beyond Marks",
+      "description": "CPE's testimonials specifically mention support with goal setting, stress management, confidence, communication and personality development, alongside academic preparation."
+    },
+    {
+      "title": "A Long-Term Educational Relationship",
+      "description": "CPE does not merely prepare students for their next examination. It aims to accompany them across multiple stages of their educational and professional journey."
+    }
   ]
 }

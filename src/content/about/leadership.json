@@ -1,5 +1,9 @@
 {
   "eyebrow": "Leadership",
-  "title": "Founder, Management and Principal",
-  "description": "The people responsible for academic direction, campus standards and student welfare."
+  "title": "Guided by experienced educators",
+  "description": "",
+  "cta": {
+    "label": "Meet the Leadership",
+    "href": "#leadership-cards"
+  }
 }
