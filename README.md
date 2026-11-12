@@ -22,7 +22,9 @@ pnpm astro dev stop
 
 - **Workers Builds (Git-connected):** in the Cloudflare dashboard, connect this
   repository to the Worker with build command `pnpm build` and deploy command
-  `npx wrangler deploy`. Pushes to the production branch deploy automatically.
+  `npx wrangler deploy`. Pushes to the production branch deploy automatically;
+  Workers Builds is connected to `main`, and a push is live within a few
+  minutes.
 - **Manual:** `pnpm deploy` (runs `wrangler login` first if needed).
 
 Attach `cpecollege.com` to the Worker under **Settings → Domains & Routes**
