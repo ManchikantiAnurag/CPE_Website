@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { file, glob } from "astro/loaders";
 
 /**
@@ -106,7 +107,7 @@ const gallery = defineCollection({
         date: z.string(),
         /** Set to link the tile out to a video instead of showing a photo. */
         video_url: z.string().default(""),
-    }).merge(image),
+    }).extend(image.shape),
 });
 
 const news = defineCollection({
@@ -118,7 +119,7 @@ const news = defineCollection({
         summary: z.string(),
         /** Optional link out to a notice, form or full article. */
         link: cta.partial().default({}),
-    }).merge(image),
+    }).extend(image.shape),
 });
 
 const events = defineCollection({
@@ -140,7 +141,7 @@ const events = defineCollection({
         activities: z.array(z.object({ title: z.string(), icon: z.string() })).default([]),
         gallery_title: z.string().default("Event Gallery"),
         gallery: z.array(image).default([]),
-    }).merge(image),
+    }).extend(image.shape),
 });
 
 const careers = defineCollection({
@@ -192,7 +193,7 @@ const contactDetails = defineCollection({
                         "linkedin",
                     ]),
                     label: z.string(),
-                    url: z.string().url(),
+                    url: z.url(),
                 }),
             )
             .default([]),
@@ -252,7 +253,7 @@ const homeHero = section(
             badge: z.string().default(""),
             course_shortcuts: z.array(z.object({ label: z.string(), href: z.string(), icon: z.string() })).default([]),
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 const homeAbout = section(
@@ -264,7 +265,7 @@ const homeAbout = section(
             paragraphs: z.array(z.string()).default([]),
             cta: cta,
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 const homeCourses = section(
@@ -337,7 +338,7 @@ const homeCampusLife = section(
             primary_cta: cta,
             secondary_cta: cta,
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 const homeAchievements = section(
@@ -496,7 +497,7 @@ const aboutCpe = section(
             title: z.string(),
             paragraphs: z.array(z.string()).default([]),
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 const aboutHistory = section(
@@ -537,7 +538,7 @@ const aboutVisionMission = section(
                     .default([]),
             })
             .default({ eyebrow: "Core Values", items: [] }),
-    }).merge(image),
+    }).extend(image.shape),
 );
 
 const aboutImpact = section(
@@ -596,9 +597,9 @@ const achievementsPage = section(
             label: z.string(),
             stats: z.array(z.object({ icon: z.string(), value: z.string(), label: z.string(), detail: z.string() })),
             toppers_title: z.string(),
-            toppers: z.array(z.object({ name: z.string(), subtitle: z.string(), result: z.string(), detail: z.string() }).merge(image)),
+            toppers: z.array(z.object({ name: z.string(), subtitle: z.string(), result: z.string(), detail: z.string() }).extend(image.shape)),
             posters_title: z.string(),
-            posters: z.array(z.object({ caption: z.string(), inset: z.boolean().default(false) }).merge(image)),
+            posters: z.array(z.object({ caption: z.string(), inset: z.boolean().default(false) }).extend(image.shape)),
         }),
         categories: z.array(z.object({
             id: z.string().regex(/^[a-z][a-z0-9-]*$/),
@@ -608,7 +609,7 @@ const achievementsPage = section(
             highlights: z.array(z.string()),
             date: z.string().default(""),
             date_label: z.string().default(""),
-        }).merge(image)),
+        }).extend(image.shape)),
     }),
 );
 
@@ -642,7 +643,7 @@ const campusLifeIntro = section(
             title: z.string(),
             paragraphs: z.array(z.string()).default([]),
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 const campusLifeOnCampus = section(
@@ -671,7 +672,7 @@ const campusLifeAcademics = section(
             paragraphs: z.array(z.string()).default([]),
             cta: cta,
         })
-        .merge(image),
+        .extend(image.shape),
 );
 
 /* ----------------------------------------------------------- contact page */

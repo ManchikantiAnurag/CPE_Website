@@ -1,4 +1,4 @@
-import { getCollection, getEntry, type DataEntryMap } from "astro:content";
+import { getCollection, getEntry, type CollectionEntry, type CollectionKey } from "astro:content";
 
 export interface NavLink {
     label: string;
@@ -33,12 +33,16 @@ export async function getCareerNames(ids: string[]): Promise<string[]> {
  * Reads one page-section collection. Every section document is stored under
  * the entry id "content", so pages name only the collection.
  */
-export async function getSection<C extends keyof DataEntryMap>(collection: C) {
+export async function getSection<C extends CollectionKey>(
+    collection: C,
+): Promise<CollectionEntry<C>["data"]> {
     const entry = await getEntry(collection, "content");
     if (!entry) {
         throw new Error(`Missing content for the "${String(collection)}" collection`);
     }
-    return entry.data;
+    // TypeScript widens `getEntry` on a generic collection to a single
+    // collection's type; the return annotation restores the per-call type.
+    return entry.data as CollectionEntry<C>["data"];
 }
 
 export async function getLeadership() {

@@ -1,4 +1,5 @@
 ---
+import type { HTMLTag } from "astro/types";
 /**
  * Wraps content in a scroll-triggered reveal. All the motion lives in
  * global.css; this only stamps the attributes and runs the observer.
@@ -13,7 +14,7 @@ interface Props {
     /** Reveal on load rather than on scroll, for content above the fold. */
     immediate?: boolean;
     /** Element to render; the default `div` is a block, so pick `span` inline. */
-    as?: string;
+    as?: HTMLTag;
     class?: string | (string | false | null | undefined)[];
 }
 
