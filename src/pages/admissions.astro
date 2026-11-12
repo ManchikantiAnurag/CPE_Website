@@ -1,34 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import PageHero from "../components/Base/PageHero/PageHero.astro";
 import Section from "../components/Base/Section/Section.astro";
 import Reveal from "../components/Base/Reveal/Reveal.astro";
 import SectionHeading from "../components/Base/SectionHeading/SectionHeading.astro";
-import AdmissionsCallout from "../components/Admissions/AdmissionsCallout/AdmissionsCallout.astro";
-import AdmissionsProcess from "../components/Admissions/AdmissionsProcess/AdmissionsProcess.astro";
-import AdmissionsChecklist from "../components/Admissions/AdmissionsChecklist/AdmissionsChecklist.astro";
-import AdmissionsDates from "../components/Admissions/AdmissionsDates/AdmissionsDates.astro";
-import AdmissionsProspectus from "../components/Admissions/AdmissionsProspectus/AdmissionsProspectus.astro";
 import EnquiryForm from "../components/Admissions/EnquiryForm/EnquiryForm.astro";
-import {
-    getContactDetails,
-    getCourseLinks,
-    getSection,
-    resolvePhones,
-} from "../lib/site";
+import { getContactDetails, getCourseLinks, getSection } from "../lib/site";
 
 const seo = await getSection("admissionsSeo");
-const hero = await getSection("admissionsHero");
-const callout = await getSection("admissionsCallout");
-const process = await getSection("admissionsProcess");
-const eligibility = await getSection("admissionsEligibility");
-const documents = await getSection("admissionsDocuments");
-const dates = await getSection("admissionsDates");
-const prospectus = await getSection("admissionsProspectus");
 const enquiry = await getSection("admissionsEnquiry");
 
 const contact = await getContactDetails();
-const phones = resolvePhones(callout.phones, contact.phone_numbers);
 
 const courseOptions = (await getCourseLinks()).map((course) => ({
     value: course.label,
