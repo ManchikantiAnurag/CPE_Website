@@ -16,13 +16,14 @@
     "test:cms": "node scripts/check-cms.mjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.4.6",
-    "@iconify-json/lucide": "^1.2.147",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.4.2",
+    "@astrojs/cloudflare": "^14.4.7",
+    "@iconify-json/lucide": "^1.2.153",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.10",
     "astro-icon": "^1.2.0",
+    "astro-seo": "^1.2.0",
     "sharp": "^0.35.5",
-    "tailwindcss": "^4.3.3",
+    "tailwindcss": "^4.3.5",
     "wrangler": "^4.160.0"
   }
 }
