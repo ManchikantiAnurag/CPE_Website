@@ -1,4 +1,10 @@
 {
   "empty_message": "Exam notices and downloads will be published here when available.",
-  "items": []
+  "items": [
+    {
+      "title": "Scholarship Test Flyer",
+      "description": "This is a flyer for scholarship Test on 26th-Nov-2026",
+      "file": "/downloads/Scholarship Test Flyer.pdf"
+    }
+  ]
 }
