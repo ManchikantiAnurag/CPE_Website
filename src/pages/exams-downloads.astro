@@ -7,17 +7,57 @@ import { getSection } from "../lib/site";
 const seo = await getSection("downloadsSeo");
 const hero = await getSection("downloadsHero");
 const downloads = await getSection("downloadsPage");
+
+const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "webp", "gif", "avif", "svg"];
+
+// Uploaded file names can contain spaces, so encode the path before using it as a URL.
+const items = downloads.items.map(item => {
+    const extension = item.file.split(".").pop()?.toLowerCase() ?? "";
+    const preview = extension === "pdf" ? "pdf" : IMAGE_EXTENSIONS.includes(extension) ? "image" : null;
+    return { ...item, url: encodeURI(item.file), preview };
+});
+
+const action = "inline-flex h-9 items-center justify-center rounded-md px-4 text-sm font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring";
 ---
 
 <Layout title={seo.meta_title} description={seo.meta_description}>
     <PageHero slot="hero" eyebrow={hero.eyebrow} title={hero.title} description={hero.intro} />
     <Section>
-        {downloads.items.length ? (
+        {items.length ? (
             <ul class="grid gap-6 md:grid-cols-2">
-                {downloads.items.map(item => (
-                    <li class="rounded-lg border border-border bg-surface p-6">
-                        <h2 class="text-2xl"><a href={item.file} class="underline decoration-accent underline-offset-4" download>{item.title}</a></h2>
-                        {item.description && <p class="mt-3 leading-relaxed">{item.description}</p>}
+                {items.map(item => (
+                    <li class="flex flex-col overflow-hidden rounded-lg border border-border bg-surface">
+                        {item.preview === "pdf" && (
+                            <div class="aspect-[3/4] w-full border-b border-border bg-secondary">
+                                <iframe
+                                    src={`${item.url}#toolbar=0&navpanes=0&view=FitH`}
+                                    title={`Preview of ${item.title}`}
+                                    loading="lazy"
+                                    class="h-full w-full"
+                                />
+                            </div>
+                        )}
+                        {item.preview === "image" && (
+                            <img
+                                src={item.url}
+                                alt={`Preview of ${item.title}`}
+                                loading="lazy"
+                                decoding="async"
+                                class="w-full border-b border-border bg-secondary object-contain"
+                            />
+                        )}
+                        <div class="flex flex-1 flex-col p-6">
+                            <h2 class="text-2xl">{item.title}</h2>
+                            {item.description && <p class="mt-3 leading-relaxed">{item.description}</p>}
+                            <div class="mt-auto flex flex-wrap gap-3 pt-6">
+                                <a href={item.url} target="_blank" rel="noopener" class:list={[action, "border border-primary/25 text-primary hover:bg-secondary"]}>
+                                    Open
+                                </a>
+                                <a href={item.url} download class:list={[action, "bg-primary text-primary-foreground hover:bg-primary/90"]}>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ul>
