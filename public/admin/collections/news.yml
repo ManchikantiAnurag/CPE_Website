@@ -50,8 +50,22 @@ collections:
           - { label: Title, name: title, widget: string }
           - label: Icon
             name: icon
-            widget: string
-            hint: 'Lucide icon name, for example lucide:music or lucide:medal.'
+            widget: select
+            options:
+              - lucide:user-round
+              - lucide:sparkles
+              - lucide:music
+              - lucide:mic-vocal
+              - lucide:drama
+              - lucide:medal
+              - lucide:trophy
+              - lucide:award
+              - lucide:star
+              - lucide:users
+              - lucide:palette
+              - lucide:camera
+              - lucide:presentation
+              - lucide:party-popper
       - { label: Gallery Heading, name: gallery_title, widget: string, default: Event Gallery }
       - label: Gallery Photos
         name: gallery

@@ -27,7 +27,20 @@ collections:
                 widget: list
                 summary: "{{fields.value}} — {{fields.label}}"
                 fields:
-                  - { label: Icon, name: icon, widget: string }
+                  - label: Icon
+                    name: icon
+                    widget: select
+                    options:
+                      - lucide:trophy
+                      - lucide:medal
+                      - lucide:star
+                      - lucide:chart-no-axes-combined
+                      - lucide:award
+                      - lucide:graduation-cap
+                      - lucide:users
+                      - lucide:target
+                      - lucide:book-open-check
+                      - lucide:percent
                   - { label: Value, name: value, widget: string }
                   - { label: Label, name: label, widget: string }
                   - { label: Detail, name: detail, widget: string }

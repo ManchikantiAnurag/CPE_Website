@@ -93,10 +93,18 @@ collections:
               - label: Link
                 name: href
                 widget: string
-              - label: Lucide Icon
+              - label: Icon
                 name: icon
-                widget: string
-                hint: For example lucide:calculator.
+                widget: select
+                options:
+                  - lucide:chart-no-axes-combined
+                  - lucide:graduation-cap
+                  - lucide:gavel
+                  - lucide:calculator
+                  - lucide:briefcase-business
+                  - lucide:scale
+                  - lucide:book-open
+                  - lucide:landmark
 
       - name: about
         label: "About the College"
