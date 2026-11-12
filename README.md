@@ -33,6 +33,10 @@ metadata.
 `public/_headers` sets cache headers for built assets and OG images. URLs have
 no trailing slash: `/about` serves `about/index.html` and `/about/` redirects.
 
+`robots.txt`, `sitemap.xml`, `llms.txt` and `agents.md` are static files in
+`public/`. The sitemap is not generated, so update it (and `llms.txt`) by hand
+when public pages, courses or news entries are added or removed.
+
 ### Images
 
 Everything here stays within Cloudflare's free allowances:
