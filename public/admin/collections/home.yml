@@ -340,6 +340,27 @@ collections:
             widget: text
             hint: Shown until achievements are published.
 
+      - name: announcement
+        label: "Announcement Popup"
+        file: src/content/home/announcement.json
+        icon: notification_important
+        fields:
+          - label: Show Popup
+            name: enabled
+            widget: boolean
+            default: false
+            hint: Opens over the home page on every visit until the visitor closes it.
+              Turn this off when the announcement is over.
+          - label: Image
+            name: image
+            widget: image
+            required: false
+            hint: The popup stays hidden while no image is set.
+          - label: Image Alt Text
+            name: image_alt
+            widget: text
+            hint: Write out the key details shown in the image for screen reader users.
+
       - name: admissions-banner
         label: "Admissions Banner"
         file: src/content/home/admissions-banner.json

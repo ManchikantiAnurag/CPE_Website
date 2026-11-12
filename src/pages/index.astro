@@ -10,6 +10,7 @@ import CareerFocus from "../components/Home/CareerFocus/CareerFocus.astro";
 import LeadershipGrid from "../components/Home/LeadershipGrid/LeadershipGrid.astro";
 import Testimonials from "../components/Base/Testimonials/Testimonials.astro";
 import CtaBanner from "../components/Home/CtaBanner/CtaBanner.astro";
+import AnnouncementModal from "../components/Home/AnnouncementModal/AnnouncementModal.astro";
 import { getContactDetails, getSection, resolvePhones } from "../lib/site";
 
 const seo = await getSection("homeSeo");
@@ -20,6 +21,7 @@ const leadership = await getSection("homeLeadership");
 const campusLife = await getSection("homeCampusLife");
 const banner = await getSection("homeAdmissionsBanner");
 const testimonials = await getSection("homeTestimonials");
+const announcement = await getSection("homeAnnouncement");
 const contact = await getContactDetails();
 const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
 ---
@@ -73,6 +75,10 @@ const bannerPhones = resolvePhones(banner.phones, contact.phone_numbers);
     <Section class="home-section testimonials-section">
         <Testimonials eyebrow={testimonials.eyebrow} title={testimonials.title} items={testimonials.items} />
     </Section>
+
+    {announcement.enabled && announcement.image && (
+        <AnnouncementModal image={announcement.image} imageAlt={announcement.image_alt} />
+    )}
 </Layout>
 
 <style>

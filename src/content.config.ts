@@ -358,6 +358,12 @@ const homeAdmissionsBanner = section(
     }),
 );
 
+/** Popup shown over the home page on load until the visitor closes it. */
+const homeAnnouncement = section(
+    "src/content/home/announcement.json",
+    z.object({ enabled: z.boolean().default(false) }).extend(image.shape),
+);
+
 const homeNews = section("src/content/home/news.json", emptyStateSection);
 
 const homeTestimonials = section(
@@ -761,6 +767,7 @@ export const collections = {
     homeCampusLife,
     homeAchievements,
     homeAdmissionsBanner,
+    homeAnnouncement,
     homeNews,
     homeTestimonials,
     homeContactCards,

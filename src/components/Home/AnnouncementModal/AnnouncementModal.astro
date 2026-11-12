@@ -1,0 +1,75 @@
+---
+import { Icon } from "astro-icon/components";
+import OptimizedImage from "../../Base/OptimizedImage.astro";
+
+interface Props {
+    image: string;
+    imageAlt: string;
+}
+
+const { image, imageAlt } = Astro.props;
+---
+
+{/*
+  A modal <dialog> opened on page load. showModal() makes the rest of the page
+  inert, so visitors can only continue once they close it with the button or
+  Escape. Clicking the backdrop does nothing. Without JS it never opens and the
+  page stays usable.
+*/}
+<dialog id="announcement-modal" aria-label="Announcement" class="announcement-modal">
+    <div class="relative">
+        <OptimizedImage
+            src={image}
+            alt={imageAlt}
+            width={827}
+            sizes="min(827px, 100vw)"
+            loading="eager"
+            class="announcement-image"
+        />
+        <form method="dialog">
+            <button
+                type="submit"
+                aria-label="Close announcement"
+                class="absolute -right-3 -top-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white text-slate-900 shadow-lg ring-1 ring-black/10 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+                <Icon name="lucide:x" class="h-5 w-5" aria-hidden="true" />
+            </button>
+        </form>
+    </div>
+</dialog>
+
+<script>
+    const modal = document.getElementById("announcement-modal");
+    if (modal instanceof HTMLDialogElement && !modal.open) modal.showModal();
+</script>
+
+<style>
+    .announcement-modal {
+        margin: auto;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        overflow: visible;
+        max-width: calc(100vw - 2rem);
+        max-height: calc(100dvh - 2rem);
+    }
+
+    .announcement-modal::backdrop {
+        background: rgb(15 23 42 / 0.75);
+    }
+
+    .announcement-modal :global(.announcement-image) {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: calc(100vw - 2rem);
+        max-height: calc(100dvh - 3rem);
+        border-radius: 8px;
+        box-shadow: 0 24px 48px rgb(0 0 0 / 0.35);
+    }
+
+    /* Stop the page behind from scrolling while the modal is open. */
+    :global(html:has(.announcement-modal[open])) {
+        overflow: hidden;
+    }
+</style>
