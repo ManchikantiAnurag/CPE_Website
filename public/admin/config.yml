@@ -5,7 +5,7 @@
 
 backend:
   name: github
-  repo: HEITS-PVT-LTD/CPE_Website
+  repo: ManchikantiAnurag/CPE_Website
   branch: main
 
 media_folder: src/assets/media
