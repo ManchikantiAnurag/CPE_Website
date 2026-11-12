@@ -349,8 +349,9 @@ collections:
             name: enabled
             widget: boolean
             default: false
-            hint: Opens over the home page on every visit until the visitor closes it.
-              Turn this off when the announcement is over.
+            hint: Opens over the home page when a visitor first lands on it or refreshes
+              it, not when they come back from another page. Turn this off when the
+              announcement is over.
           - label: Image
             name: image
             widget: image

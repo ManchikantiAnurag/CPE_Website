@@ -11,10 +11,11 @@ const { image, imageAlt } = Astro.props;
 ---
 
 {/*
-  A modal <dialog> opened on page load. showModal() makes the rest of the page
-  inert, so visitors can only continue once they close it with the button or
-  Escape. Clicking the backdrop does nothing. Without JS it never opens and the
-  page stays usable.
+  A modal <dialog> opened when the home page is first loaded or refreshed, but
+  not when the visitor comes back to it from another page. showModal() makes
+  the rest of the page inert, so visitors can only continue once they close it
+  with the button or Escape. Clicking the backdrop does nothing. Without JS it
+  never opens and the page stays usable.
 */}
 <dialog id="announcement-modal" aria-label="Announcement" class="announcement-modal">
     <div class="relative">
@@ -39,8 +40,21 @@ const { image, imageAlt } = Astro.props;
 </dialog>
 
 <script>
+    // Show on a fresh visit or a refresh, not when arriving from another page
+    // of this site (a link, or Back/Forward).
+    function arrivedFromThisSite() {
+        const [entry] = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[];
+        if (entry?.type === "reload") return false;
+        if (entry?.type === "back_forward") return true;
+        try {
+            return new URL(document.referrer).origin === location.origin;
+        } catch {
+            return false; // No referrer: typed URL, bookmark or new tab.
+        }
+    }
+
     const modal = document.getElementById("announcement-modal");
-    if (modal instanceof HTMLDialogElement && !modal.open) modal.showModal();
+    if (modal instanceof HTMLDialogElement && !modal.open && !arrivedFromThisSite()) modal.showModal();
 </script>
 
 <style>
