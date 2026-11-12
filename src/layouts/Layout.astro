@@ -13,6 +13,8 @@ interface Props {
     transition?: "fade" | "lift" | "slide";
     headerBackground?: "default" | "hero";
     structuredData?: Record<string, unknown>;
+    /** Keeps the page out of search results, e.g. the 404 page. */
+    noindex?: boolean;
 }
 
 const site = await getSiteSettings();
@@ -23,12 +25,14 @@ const {
     transition = "lift",
     headerBackground = "default",
     structuredData,
+    noindex = false,
 } = Astro.props;
 const pageTitle = title?.includes(site.college_name)
     ? title
     : title ? `${title} | ${site.college_name}` : site.college_name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogName = Astro.url.pathname === "/"
+// Unindexed pages have no generated OG image of their own.
+const ogName = Astro.url.pathname === "/" || noindex
     ? "home"
     : Astro.url.pathname.replace(/^\/+|\/+$/g, "").replaceAll("/", "-");
 const ogImage = new URL(`/og/${ogName}.png`, Astro.site);
@@ -81,7 +85,8 @@ const schema = {
         <SEO
             title={pageTitle}
             description={description}
-            canonical={canonical}
+            canonical={noindex ? null : canonical}
+            noindex={noindex}
             openGraph={{
                 basic: {
                     title: pageTitle,

@@ -1,0 +1,61 @@
+---
+import { Icon } from "astro-icon/components";
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/Base/PageHero/PageHero.astro";
+import Section from "../components/Base/Section/Section.astro";
+import Reveal from "../components/Base/Reveal/Reveal.astro";
+import Button from "../components/Base/Button/Button.astro";
+import { getPrimaryNavigation } from "../lib/site";
+
+// Prerendered; the Cloudflare adapter serves it with a 404 status for any
+// URL that matches neither a route nor a static asset.
+const links = (await getPrimaryNavigation()).filter((item) => item.href !== "/");
+---
+
+<Layout
+    title="Page not found"
+    description="The page you were looking for doesn't exist or has moved."
+    headerBackground="hero"
+    noindex
+>
+    <PageHero slot="hero"
+        eyebrow="Error 404"
+        title="We couldn't find that page"
+        description="The link may be broken, or the page may have moved. Try one of the sections below, or head back to the home page."
+    />
+
+    <Section>
+        <Reveal>
+            <div class="flex flex-wrap gap-3">
+                <Button href="/" variant="primary" size="lg" class="rounded-sm">
+                    <Icon name="lucide:house" class="h-4 w-4" aria-hidden="true" />
+                    Back to home
+                </Button>
+                <Button href="/contact" variant="outline" size="lg" class="rounded-sm">
+                    Contact us
+                </Button>
+            </div>
+        </Reveal>
+
+        <Reveal delay={120} class="mt-14">
+            <h2 class="text-2xl text-black">Popular pages</h2>
+            <ul class="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+                {links.map((link) => (
+                    <li class="border-b border-border">
+                        <a
+                            href={link.href}
+                            class="group flex items-center justify-between py-4 text-base font-medium text-foreground transition-colors hover:text-accent"
+                        >
+                            {link.label}
+                            <Icon
+                                name="lucide:arrow-right"
+                                class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                                aria-hidden="true"
+                            />
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </Reveal>
+    </Section>
+</Layout>
