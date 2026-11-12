@@ -1,0 +1,54 @@
+# robots.txt for CPE Junior College
+# Canonical host: https://www.cpecollege.com/
+# Public pages and static assets remain crawlable.
+# robots.txt is not a security mechanism.
+
+User-agent: *
+Allow: /
+
+# Exclude non-public application areas only.
+Disallow: /admin/
+Disallow: /administrator/
+Disallow: /login/
+Disallow: /dashboard/
+Disallow: /account/
+Disallow: /api/
+Disallow: /preview/
+Disallow: /staging/
+
+# XML sitemap
+Sitemap: https://www.cpecollege.com/sitemap.xml
+
+# Major search and AI discovery crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
