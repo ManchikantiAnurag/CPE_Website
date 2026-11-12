@@ -50,7 +50,8 @@ collections:
               - label: Document
                 name: file
                 widget: file
-                media_folder: public/downloads
+                # Leading slash: relative to the repository root, not the entry file.
+                media_folder: /public/downloads
                 public_folder: /downloads
                 hint: Upload a PDF or other downloadable document. Files are served from
                   /downloads/.
